@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/07 14:37:27 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/07 16:14:07 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ typedef struct	s_vm
 
 
 /* init.c */
+void	init_champion(t_champion *champion);
 void	init_vm(t_vm *vm);
+
+/* parse.c */
+void	parse(int argc, char **argv, t_vm *vm);
 
 #endif
