@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_main.c                                     :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/07 15:31:18 by akilk            ###   ########.fr       */
+/*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
+/*   Updated: 2022/11/07 16:56:09 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-int	main(int argc, char **argv)
+void	parse(int argc, char **argv, t_vm *vm)
 {
-	t_vm	vm;
+	t_champion	*list;
 
-	if (argc >= 2)
+	list = NULL;
+	while (argc > 1)
 	{
-		init_vm(&vm);
-		parse(argc, argv, &vm);
+		printf("s:%s\n", argv[argc-1]);
+		argc--;
 	}
-	/*
-	else
-		print usage
-	*/
-	return (0);
 }
