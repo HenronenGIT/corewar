@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/07 13:39:34 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/07 14:37:27 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 # define COREWAR_H
 
+#include <stdlib.h>
 #include "../../includes/op.h"
+#include "../../libft/libft.h"
 #include <stdio.h> // remove
 
 /*
