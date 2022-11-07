@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/07 14:00:22 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/07 14:31:34 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	init_vm(t_vm *vm)
 {
 	t_vm	*new_vm;
 
-	// new_vm->arena = malloc
-	// if (!new_vm->arena)
-	// 	exit (1);
-	// new_vm->champions =
+	new_vm = (t_vm *)ft_memalloc(sizeof (t_vm));
+	if (!new_vm)
+		exit (1);
 }
