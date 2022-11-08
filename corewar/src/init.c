@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/07 15:28:09 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/08 07:15:23 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,13 @@ void	init_champion(t_champion *champion)
 
 	new_champion = (t_champion *)ft_memalloc(sizeof (t_champion));
 	if (!new_champion)
-		exit (1);
+		exit (1); //add error msg?
 }
 
 void	init_vm(t_vm *vm)
 {
-	t_vm	*new_vm;
-
-	new_vm = (t_vm *)ft_memalloc(sizeof (t_vm));
-	if (!new_vm)
-		exit (1);
-
+	vm = (t_vm *)ft_memalloc(sizeof (t_vm));
+	if (!vm)
+		exit (1); //add error msg?
+	vm->champions_num = 0;
 }
