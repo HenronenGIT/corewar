@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_main.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 10:23:10 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/08 15:56:19 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
+
+#include <stdio.h>
 
 int	error(char **str, char *msg)
 {
@@ -20,18 +22,23 @@ int	error(char **str, char *msg)
 	exit (1);
 }
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	t_vm	*vm;
 
-	if (argc >= 2)
+	if (ac >= 2 && ac <= MAX_PLAYERS)
 	{
-		vm = init_vm();
-		parse(argc, argv, vm);
+		//get number of players
+		//get other info, name comments etc
+		//copy exec code to designated location in memory
+		parse(ac, av, &vm);
+		//-->init_data
+		//-->init carriages
+		//-->announce players
+		//--->play_game
 	}
-	/*
 	else
-		print usage
-	*/
+	//make exit type function
+		printf("TEST USAGE\n");
 	return (0);
 }
