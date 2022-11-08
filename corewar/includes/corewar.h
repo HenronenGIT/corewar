@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/07 16:14:07 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/08 07:12:40 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ typedef struct s_champion
 	champions - list of champions
 */
 
-
-
 typedef struct	s_vm
 {
 	char		arena[MEM_SIZE];
 	t_champion	champions[MAX_PLAYERS];
+	int			champions_num;
 }	t_vm;
 
 
