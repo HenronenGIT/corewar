@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 14:59:42 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/08 15:54:53 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_champion
 	champions - list of champions
 */
 
+
 typedef struct	s_vm
 {
 	char		arena[MEM_SIZE];
@@ -50,7 +51,6 @@ typedef struct	s_vm
 	int			champions_num;
 }	t_vm;
 
-///WILL STUFF
 
 typedef struct s_data
 {

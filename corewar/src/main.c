@@ -6,13 +6,13 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 14:59:45 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/08 15:54:52 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-#include<stdio.h>
+#include <stdio.h>
 
 int	error(char **str, char *msg)
 {
@@ -32,12 +32,10 @@ int	main(int ac, char **av)
 		//get other info, name comments etc
 		//copy exec code to designated location in memory
 		parse(ac, av, &vm);
+		//-->init_data
 		//-->init carriages
 		//-->announce players
 		//--->play_game
-
-
-
 	}
 	else
 	//make exit type function
