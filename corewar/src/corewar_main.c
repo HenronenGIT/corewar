@@ -6,21 +6,28 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 07:16:21 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/08 10:23:10 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
+int	error(char **str, char *msg)
+{
+	if (str)
+		ft_strdel(str);
+	ft_putendl_fd(msg, 2);
+	exit (1);
+}
+
 int	main(int argc, char **argv)
 {
-	t_vm	vm;
+	t_vm	*vm;
 
 	if (argc >= 2)
 	{
-		init_vm(&vm);
-		printf("num1:%d\n", vm.champions_num);
-		parse(argc, argv, &vm);
+		vm = init_vm();
+		parse(argc, argv, vm);
 	}
 	/*
 	else

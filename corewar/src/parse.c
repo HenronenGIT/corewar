@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 07:08:33 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/08 10:28:24 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ int	is_file(char *file)
 /* Parsing champions name, codesize, comment */
 void	parse_champions(char *name, t_vm *vm)
 {
+	int	fd;
+
 	printf("s:%s\n", name);
 	vm->champions_num++;
+	fd = open(name, O_RDONLY);
+	if (fd < 0)
+		error(NULL, "Wrong file");
+
 }
 
 /* Parsing arguments */
@@ -55,5 +61,6 @@ void	parse(int argc, char **argv, t_vm *vm)
 		argv++;
 		argc--;
 	}
-	printf("num:%d\n", vm->champions_num);
+	if (vm->champions_num < 1 || vm->champions_num > MAX_PLAYERS)
+		exit (1); // add error msg?
 }
