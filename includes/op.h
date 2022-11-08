@@ -20,6 +20,7 @@
 
 #define IND_SIZE				2
 #define REG_SIZE				4
+
 #define DIR_SIZE				REG_SIZE
 
 
@@ -77,3 +78,11 @@ typedef struct		header_s
   unsigned int		prog_size;
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
+
+typedef struct s_tokens
+{
+	/* data */
+	char	*label;
+	char	*statement;
+	
+}				t_tokens;
