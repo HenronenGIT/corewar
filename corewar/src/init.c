@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 10:27:34 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/08 14:59:45 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
+/*
 void	init_champion(t_champion *champion)
 {
 	t_champion	*new_champion;
@@ -20,7 +21,7 @@ void	init_champion(t_champion *champion)
 	if (!new_champion)
 		error(NULL, "Allocation failed in init_champion()");
 }
-
+*/
 t_vm	*init_vm(void)
 {
 	t_vm	*vm;

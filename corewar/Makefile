@@ -3,28 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
+#    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/11/07 16:55:33 by akilk            ###   ########.fr        #
+#    Updated: 2022/11/08 11:42:42 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CYELLOW=\033[0;33m
-CEND=\033[0m
-CGREEN=\033[0;32m
-
 NAME = corewar
 CC = gcc
-FLAGS = #-Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = ./src/
-SRC_FILES = corewar_main.c\
-		init.c\
-		parse.c
-
+SRC_FILES = main.c init.c parse.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
-
 OBJ_DIR = ./obj/
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
@@ -36,13 +28,17 @@ INC = $(addprefix $(INC_DIR), $(INC_FILES))
 LIBFTDIR = ../libft/
 LIBFT = ../libft/libft.a
 
+CYELLOW=\033[0;33m
+CEND=\033[0m
+CGREEN=\033[0;32m
+
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	gcc $(FLAGS) -o $(NAME) $(SRC) -I $(INC) -L. $(LIBFT)
+	$(CC) $(FLAGS) -o $(NAME) $(SRC) -I $(INC) -L. $(LIBFT)
 
 $(LIBFT):
-	make -C $(LIBFTDIR)
+	make -sC $(LIBFTDIR)
 
 $(OBJ): $(SRC)
 	@mkdir -p $(OBJ_DIR)

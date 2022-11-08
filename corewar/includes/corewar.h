@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 10:23:50 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/08 14:59:42 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 # define COREWAR_H
 
 #include <stdlib.h>
+#include <stdbool.h>
+#include <stdint.h>
+
 #include "../../includes/op.h"
 #include "../../libft/libft.h"
 #include <stdio.h> // remove
@@ -46,6 +49,31 @@ typedef struct	s_vm
 	t_champion	champions[MAX_PLAYERS];
 	int			champions_num;
 }	t_vm;
+
+///WILL STUFF
+
+typedef struct s_data
+{
+	int last_alive_player;
+	int cycles_passed;
+	int num_live_statements;
+	int cycles_to_die;
+	int num_checks_performed;
+
+}				t_data;
+
+typedef struct s_carriage
+{
+	int id;
+	bool carry;
+	//The statement code on which the carriage stands:
+	//Prior to the battle, the value of this variable is not set.
+	int last_live;
+	int cycles_remaining;
+	int current_position; //memory address
+	int byte_jump_size;
+	int8_t registeries[REG_NUMBER];
+}				t_carriage;
 
 /* corewar_main.c */
 int	error(char **str, char *msg);
