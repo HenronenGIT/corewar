@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/07 16:14:07 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/08 10:23:50 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,20 @@ typedef struct s_champion
 	champions - list of champions
 */
 
-
-
 typedef struct	s_vm
 {
 	char		arena[MEM_SIZE];
 	t_champion	champions[MAX_PLAYERS];
+	int			champions_num;
 }	t_vm;
 
+/* corewar_main.c */
+int	error(char **str, char *msg);
+int	main(int argc, char **argv);
 
 /* init.c */
 void	init_champion(t_champion *champion);
-void	init_vm(t_vm *vm);
+t_vm	*init_vm(void);
 
 /* parse.c */
 void	parse(int argc, char **argv, t_vm *vm);
