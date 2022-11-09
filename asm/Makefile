@@ -33,16 +33,17 @@ INC = $(addprefix $(INC_DIR), $(INC_FILES))
 
 LIBFT_DIR = ../libft/
 LIBFT_LIB = libft.a
-LIBFT = $(addprefix $(LIBPRINT_DIR), $(LIBPRINT_LIB))
+LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "$(CYELLOW)Compiling $(NAME)$(CEND)"
-	@$(CC) -o $(NAME) $(FLAGS) $(SRC) -I $(INC)
-	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
-	@echo "$(CGREEN)OK$(CEND)"
+	@echo "$(CYELLOW)Compiling $(NAME) program$(CEND)"
+#	@$(CC) -o $(NAME) $(FLAGS) $(SRC) -I $(INC) -L. $(LIBFT)
+	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I $(INC) $(LIBFT)
 
+#	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
+	@echo "$(CGREEN)OK$(CEND)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
@@ -54,7 +55,7 @@ clean:
 	@echo "$(CGREEN)OK$(CEND)"
 
 fclean: clean
-	@echo "$(CYELLOW)Removing $(NAME)$(CEND)"
+	@echo "$(CYELLOW)Removing $(NAME) program$(CEND)"
 	@rm -rf $(NAME)
 	@echo "$(CGREEN)OK$(CEND)"
 
