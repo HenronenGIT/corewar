@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/11/08 11:14:03 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/11/17 13:38:08 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-void	read_source(char *input)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	// while ()
-	// {
-// 
-	// }
-}
+	int	i;
 
-int main (int argc, char *argv[]) {
-
-	if (argc != 2)
-		exit(1);
-	read_source(argv[1]);
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
-	return (0);
+	i = 0;
+	if (!s1 && !s2)
+		return (0);
+	if (!s1 && s2)
+		return ((unsigned char)s2[i] * -1);
+	if (s1 && !s2)
+		return ((unsigned char)s1[i]);
+	while (s1[i] == s2[i] && s2 [i] != '\0' && s1[i] != '\0')
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

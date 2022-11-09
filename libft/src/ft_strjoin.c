@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/11/18 11:57:13 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/11/18 13:36:45 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-void	read_source(char *input)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	// while ()
-	// {
-// 
-	// }
-}
+	char	*new_str;
+	int		len;
+	int		i;
 
-int main (int argc, char *argv[]) {
-
-	if (argc != 2)
-		exit(1);
-	read_source(argv[1]);
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
-	return (0);
+	i = 0;
+	if (s1 == 0 || s2 == 0)
+		return (NULL);
+	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	new_str = ft_strnew(len);
+	if (new_str == NULL)
+		return (NULL);
+	ft_strcpy(new_str, s1);
+	ft_strcat(new_str, s2);
+	while (new_str[i] != 0)
+		i++;
+	new_str[i] = '\0';
+	return (new_str);
 }

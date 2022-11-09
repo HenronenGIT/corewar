@@ -17,7 +17,9 @@ CGREEN=\033[0;32m
 CC = gcc
 FLAGS = -Wall -Wextra #-Werror
 
-SUBDIRS = ./src/asm
+ASM_DIR = ./asm
+
+# VM_DIR = ./corewar
 
 #SRC_DIR = ./src/
 SRC_FILES = main.c
@@ -32,12 +34,13 @@ INC_DIR = ./includes/
 INC_FILES = op.h
 INC = $(addprefix $(INC_DIR), $(INC_FILES))
 
-LIBPRINT_DIR = libft/
-#LIBPRINT_LIB = libft.a
-#LIBPRINT = $(addprefix $(LIBPRINT_DIR), $(LIBPRINT_LIB))
+LIBFT_DIR = ./libft/
+LIBFT_LIB = ./libft.a
+LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
-all :
-	make -C ./asm
+all: $(LIBFT) 
+	@make -C $(ASM_DIR)
+#	make -C $(VM_DIR)
 
 #	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBPRINT)
 #	@echo "$(CGREEN)OK$(CEND)"
@@ -46,16 +49,22 @@ all :
 # 	@mkdir -p $(OBJ_DIR)
 # 	@$(CC) $(FLAGS) -c $< -o $@
 
-# clean :
-# 	@make -C $(LIBPRINT_DIR) clean
-# 	@echo "$(CYELLOW)Removing $(NAME) object folder$(CEND)"
-# 	@rm -rf $(OBJ_DIR)
-# 	@echo "$(CGREEN)OK$(CEND)"
+$(LIBFT):
+	@make -C $(LIBFT_DIR) all
 
-# fclean : clean
-# 	@make -C $(LIBPRINT_DIR) fclean
-# 	@echo "$(CYELLOW)Removing $(NAME)$(CEND)"
-# 	@rm -rf $(NAME)
-# 	@echo "$(CGREEN)OK$(CEND)"
+clean:
+	@make -C $(LIBFT_DIR) clean
+	@echo "$(CYELLOW)Removing $(NAME) object folder$(CEND)"
+	@rm -rf $(OBJ_DIR)
+	@echo "$(CGREEN)OK$(CEND)"
+	@make -C $(ASM_DIR) clean
+
+fclean: clean
+	@echo "$(CYELLOW)Removing $(NAME)$(CEND)"
+	@make -C $(LIBFT_DIR) fclean
+	@echo "$(CGREEN)OK$(CEND)"
+	@echo "$(CYELLOW)Removing asm binary$(CEND)"
+	make -C $(ASM_DIR) fclean
+
 
 # re : fclean all clean all

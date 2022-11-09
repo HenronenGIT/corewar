@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_arrnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2022/01/24 11:50:14 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/01/24 11:50:16 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-void	read_source(char *input)
+char	**ft_arrnew(size_t str_count, size_t str_len)
 {
-	// while ()
-	// {
-// 
-	// }
-}
+	char	**arr;
+	int		i;
 
-int main (int argc, char *argv[]) {
-
-	if (argc != 2)
-		exit(1);
-	read_source(argv[1]);
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
-	return (0);
+	i = -1;
+	arr = (char **)malloc(sizeof(char *) * (str_count + 1));
+	if (!arr)
+		return (NULL);
+	arr[str_count] = NULL;
+	while (++i != (int)str_count)
+	{
+		arr[i] = ft_strnew(str_len);
+		if (!arr[i])
+			return (NULL);
+		ft_bzero(arr[i], str_len);
+	}
+	return (arr);
 }

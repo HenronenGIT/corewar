@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_nbr_in_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2022/07/15 16:05:10 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/07/15 16:05:11 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-void	read_source(char *input)
+int	ft_nbr_in_array(int number, int *array, int array_size)
 {
-	// while ()
-	// {
-// 
-	// }
-}
+	int	i;
 
-int main (int argc, char *argv[]) {
-
-	if (argc != 2)
-		exit(1);
-	read_source(argv[1]);
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
+	i = 0;
+	if (array == NULL)
+		return (0);
+	while (i < array_size)
+	{
+		if (number == array[i])
+			return (1);
+		i += 1;
+	}
 	return (0);
 }

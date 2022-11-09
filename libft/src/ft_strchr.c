@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/11/05 12:37:58 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/11/17 13:29:02 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-void	read_source(char *input)
+char	*ft_strchr(const char *str, int c)
 {
-	// while ()
-	// {
-// 
-	// }
-}
+	int		i;
 
-int main (int argc, char *argv[]) {
-
-	if (argc != 2)
-		exit(1);
-	read_source(argv[1]);
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
+	i = 0;
+	while (str[i] != 0)
+	{
+		if (str[i] == (unsigned char)c)
+			return ((char *) &str[i]);
+		i++;
+	}
+	if (c == '\0')
+		return ((char *)&str[i]);
 	return (0);
 }
