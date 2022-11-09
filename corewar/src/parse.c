@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/09 11:17:38 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/09 12:02:46 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,9 @@ void	parse_champions(char *file, t_vm *vm)
 		error(NULL, "No NULL after comment");
 	champion->code = parse_data(fd, champion->code_size);
 	/* Testing decimals: */
-	printf("s:%s\n", champion->name);
-	printf("s:%s\n", champion->comment);
-	printf("s:%s\n", champion->code);
+	printf("name:%s\n", champion->name);
+	printf("comment:%s\n", champion->comment);
+	printf("bytecode:%02x\n", champion->code);
 }
 
 /* Parsing arguments */
