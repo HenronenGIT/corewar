@@ -17,7 +17,8 @@
 
 typedef struct s_input
 {
-	char	**statement;	//2d array of statement with every argument in its own index | HENRI
+	int		statement;		//statement for any given instruction given as corresponding int found in the header | HENRI
+	char	**arguments;	//2d array of every argument in its own index | HENRI
 	int		is_label;		// HENRI
 	int		byte_size;		//full size of every statement as bytes. 0 for labels | HENRI
 	int		arg_1_size;		//is size of arg1 in bytes | HENRI
