@@ -68,5 +68,7 @@ fclean: clean
 
 # temp
 run:
-	./asm/asm
+	./asm/asm test.s
+original:
+	./eval_tests/asm test.s
 # re : fclean all clean all

@@ -14,26 +14,58 @@
 # define ASM_H
 
 # include <stdio.h>
+# include <fcntl.h>
 # include "../../libft/includes/libft.h"
 
+/*---------- Error codes ----------*/
+# define OPEN_ERR -1
+# define ARG_ERR -2
+
+# define PROG_NAME_LENGTH		(128)
+# define COMMENT_LENGTH			(2048)
+# define COREWAR_EXEC_MAGIC		0xea83f3
+
+//! This is copied fromo op.h header
+/*---------- Header Struct ----------*/
+typedef struct		s_header
+{
+	unsigned int	magic;
+	char			prog_name[PROG_NAME_LENGTH + 1];
+	unsigned int	prog_size;
+	char			comment[COMMENT_LENGTH + 1];
+}					t_header;
+
+typedef struct		s_symbol
+{
+	//name
+	//type
+	//attribute
+
+}					t_symbol;
+
+/*---------- Main data struct ----------*/
 typedef struct s_input
 {
-	char	**statement;	//2d array of statement with every argument in its own index | HENRI
-	int		is_label;		// HENRI
-	int		byte_size;		//full size of every statement as bytes. 0 for labels | HENRI
-	int		arg_1_size;		//is size of arg1 in bytes | HENRI
-	int		arg_2_size;		//is size of arg2 in bytes | HENRI
-	int		arg_3_size;		//is size of arg3 in bytes | HENRI
-	int		arg_1_type;		//is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-	int		arg_2_type;		//is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-	int		arg_3_type;		// is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+	char		**statement;	//2d array of statement with every argument in its own index | HENRI
+	int			is_label;		// HENRI
+	int			byte_size;		//full size of every statement as bytes. 0 for labels | HENRI
+	int			arg_1_size;		//is size of arg1 in bytes | HENRI
+	int			arg_2_size;		//is size of arg2 in bytes | HENRI
+	int			arg_3_size;		//is size of arg3 in bytes | HENRI
+	int			arg_1_type;		//is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+	int			arg_2_type;		//is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+	int			arg_3_type;		// is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
 
-	char	*statement_code;		//statement code in hexadecimal | OTTO
-	char	*argument_type_code;	//argument type code in hexadecimal | OTTO
-	char	*arg_1_hex;				//arg 1 code in hexadecimal | OTTO
-	char	*arg_2_hex;				//arg 2 code in hexadecimal | OTTO
-	char	*arg_3_hex;				//arg 3 code in hexadecimal | OTTO
-	char	*final;					//final bytecode for current statement | OTTO
+	char		*statement_code;		//statement code in hexadecimal | OTTO
+	char		*argument_type_code;	//argument type code in hexadecimal | OTTO
+	char		*arg_1_hex;				//arg 1 code in hexadecimal | OTTO
+	char		*arg_2_hex;				//arg 2 code in hexadecimal | OTTO
+	char		*arg_3_hex;				//arg 3 code in hexadecimal | OTTO
+	char		*final;		
+	struct s_header	header;		//final bytecode for current statement | OTTO
 }	t_input;
+
+void	error(int error_number);
+
 
 #endif
