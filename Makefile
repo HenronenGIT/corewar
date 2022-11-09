@@ -39,7 +39,7 @@ LIBFT_LIB = ./libft.a
 LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all: $(LIBFT) 
-	@make -C $(ASM_DIR)
+	@make -C $(ASM_DIR) 
 #	make -C $(VM_DIR)
 
 #	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBPRINT)
@@ -64,7 +64,9 @@ fclean: clean
 	@make -C $(LIBFT_DIR) fclean
 	@echo "$(CGREEN)OK$(CEND)"
 	@echo "$(CYELLOW)Removing asm binary$(CEND)"
-	make -C $(ASM_DIR) fclean
+	@make -C $(ASM_DIR) fclean
 
-
+# temp
+run:
+	./asm/asm
 # re : fclean all clean all
