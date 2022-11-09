@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/09 12:16:36 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/09 15:44:06 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,30 @@
 	code - champion's executable code
 */
 
-typedef struct s_champion
+typedef struct			s_champion
 {
-	int32_t	*id;
-	char	*name;
-	char	*comment;
-	int32_t	code_size;
-	char	*code;
-
-}	t_champion;
+	int32_t				*id;
+	char				*name;
+	char				*comment;
+	int32_t				code_size;
+	char				*code;
+	struct s_champion	*next;
+}						t_champion;
 
 /*
 	Virtual arena:
 
 	arena - initialized space in memory
-	champions - list of champions
+	champions_num - number of champions
+	champions - list of champions(max 4)
 */
 
 typedef struct	s_vm
 {
 	char		arena[MEM_SIZE];
-	t_champion	champions[MAX_PLAYERS];
 	int			champions_num;
-}	t_vm;
+	t_champion	*champions[MAX_PLAYERS];
+}				t_vm;
 
 /* corewar_main.c */
 int	error(char **str, char *msg);
@@ -59,6 +60,7 @@ int	main(int argc, char **argv);
 /* init.c */
 t_champion	*init_champion(int id);
 void	init_vm(t_vm *vm);
+void	load_arena(t_vm *vm);
 
 /* parse.c */
 void	parse(int argc, char **argv, t_vm *vm);

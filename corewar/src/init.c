@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/09 08:26:27 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/09 17:02:44 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,20 @@ void	init_vm(t_vm *vm)
 {
 	vm->champions_num = 0;
 }
+
+void	load_arena(t_vm *vm)
+{
+	int	current;
+	int	start;
+
+	current = 0;
+	start = 0;
+	while (current < vm->champions_num)
+	{
+		start = (current * MEM_SIZE) / vm->champions_num;
+		ft_memcpy(&(vm->arena[start]), vm->champions[current]->code, vm->champions[current]->code_size);
+		current++;
+	}
+}
+/* to check addresses */
+// 		printf("addr: %p, %d\n", start, vm->champions[current]->code_size);

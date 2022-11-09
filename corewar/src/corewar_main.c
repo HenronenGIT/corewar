@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/09 08:24:42 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/09 14:24:34 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 	{
 		init_vm(&vm);
 		parse(argc, argv, &vm);
+		load_arena(&vm);
 	}
 	/*
 	else

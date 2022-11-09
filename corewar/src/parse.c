@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/09 12:02:46 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/09 16:48:04 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,10 @@ static char	*parse_data(int fd, int32_t size)
 	last part - champion's code.
  */
 
-void	parse_champions(char *file, t_vm *vm)
+static void	parse_champions(char *file, t_vm *vm, t_champion *champion)
 {
 	int	fd;
-	t_champion	*champion;
 
-	vm->champions_num++;
-	champion = init_champion(vm->champions_num);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		error(NULL, "Wrong file");
@@ -121,44 +118,75 @@ void	parse_champions(char *file, t_vm *vm)
 	if (parse_bytes(fd) != 0)
 		error(NULL, "No NULL after name");
 	champion->code_size = parse_bytes(fd);
-	printf("size:%d\n", champion->code_size);
-	printf("max:%d\n", CHAMP_MAX_SIZE);
 	if (champion->code_size < 0 || champion->code_size > CHAMP_MAX_SIZE)
 		error(NULL, "Invalid champion's code size");
 	champion->comment = parse_data(fd, COMMENT_LENGTH);
 	if (parse_bytes(fd) != 0)
 		error(NULL, "No NULL after comment");
 	champion->code = parse_data(fd, champion->code_size);
-	/* Testing decimals: */
+	if (close(fd) == -1)
+		exit (1);
+	/* Testing output: */
 	printf("name:%s\n", champion->name);
 	printf("comment:%s\n", champion->comment);
-	printf("bytecode:%02x\n", champion->code);
+	printf("size:%d\n", champion->code_size);
+	// printf("bytecode:%02x\n", champion->code);
+
+}
+
+static void	add_champion(t_champion **list, t_champion *champion)
+{
+	t_champion	*curr;
+
+	if (*list)
+	{
+		curr = *list;
+		while (curr->next)
+			curr = curr->next;
+		curr->next = champion;
+	}
+	else
+		*list = champion;
 }
 
 /* Parsing arguments */
 
-void	parse(int argc, char **argv, t_vm *vm)
+void	parse(int ac, char **av, t_vm *vm)
 {
+	t_champion	*champion;
 	t_champion	*list;
 
+	av++;
 	list = NULL;
-	argv++;
-	while (argc > 1)
+	while (ac > 1)
 	{
-		/* if (!ft_strcmp(*argv, "-dump")
+		/* if (!ft_strcmp(*av, "-dump")
 			parse_dump();
 		*/
-		/* else if (!ft_strcmp(*argv, "-n")
+		/* else if (!ft_strcmp(*av, "-n")
 			parse_n_flag();
 		*/
-		if (is_cor_file(*argv))
+		if (is_cor_file(*av))
 		{
-			parse_champions(*argv, vm);
+			vm->champions_num++;
+			champion = init_champion(vm->champions_num);
+			parse_champions(*av, vm, champion);
+			vm->champions[vm->champions_num - 1] = champion;
 		}
-		// printf("s:%s\n", *argv);
-		argv++;
-		argc--;
+		av++;
+		ac--;
 	}
 	if (vm->champions_num < 1 || vm->champions_num > MAX_PLAYERS)
 		error(NULL, "Champions amount should be between 1 and 4");
 }
+	// while (list)
+	// {
+	// 	printf("listed names: %s\n", list->name);
+	// 	list = list->next;
+	// }
+
+	// /* test list */
+	// for (size_t i = 0; i < vm->champions_num; i++)
+	// {
+	// 	printf("champ[%zu]:%s\n",i, vm->champions[i]->name);
+	// }
