@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/11/10 10:28:52 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/11/11 17:17:41 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-int main (int argc, char *argv[]) {
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t	i;
 
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
-	return (0);
+	if (dst == 0 && src == 0)
+		return (0);
+	i = 0;
+	while (i != n)
+	{
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return ((void *)dst);
 }

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/11/29 11:00:12 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/11/29 11:22:07 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-int main (int argc, char *argv[]) {
+/* Iterates the list lst and applies the function f to each link. */
 
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
-	return (0);
+void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+{
+	while (lst)
+	{
+		f(lst);
+		lst = lst->next;
+	}	
 }

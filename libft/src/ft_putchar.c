@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hmaronen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/10/28 10:23:05 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/11/03 17:52:56 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-int main (int argc, char *argv[]) {
-
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
-	return (0);
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
 }

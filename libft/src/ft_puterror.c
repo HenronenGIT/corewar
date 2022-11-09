@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_puterror.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2022/07/15 11:33:51 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/07/15 11:33:53 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-int main (int argc, char *argv[]) {
-
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
-	return (0);
+void	ft_puterror(char *error_msg)
+{
+	if (error_msg == NULL)
+		return ;
+	while (*error_msg)
+	{
+		write(2, &(*error_msg), 1);
+		error_msg++;
+	}
 }

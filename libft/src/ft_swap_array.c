@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_swap_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/12/11 15:07:47 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/12/11 15:08:49 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-int main (int argc, char *argv[]) {
+void	ft_swap_array(char **argv1, char **argv2)
+{
+	char	*temp;
 
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
-	return (0);
+	temp = *argv1;
+	*argv1 = *argv2;
+	*argv2 = temp;
 }

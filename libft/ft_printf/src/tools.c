@@ -1,23 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2022/05/11 14:26:28 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/05/11 14:26:39 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "ft_printf.h"
 
-int main (int argc, char *argv[]) {
+void	put_ptr(uintptr_t addr)
+{
+	if (addr >= 16)
+	{
+		put_ptr(addr / 16);
+		put_ptr(addr % 16);
+	}
+	else
+	{
+		if (addr < 10)
+			ft_putchar(addr + 48);
+		else
+			ft_putchar(addr + 87);
+	}
+}
 
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
+int	put_padding(int width, char ch)
+{
+	int	i;
 
-	return (0);
+	i = -1;
+	while (++i < width)
+		ft_putchar(ch);
+	return (i);
 }

@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/12/09 13:12:49 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/12/09 13:12:50 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 1000
+# define MAX_FD 4096
+# define FD_DONT_EXIST -1
+# define L_FOUND 1
+# define L_NOT_FOUND 0
+# define NOT_FOUND 0
 
-int main (int argc, char *argv[]) {
+# include "libft.h"
 
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
+int	get_next_line(const int fd, char **line);
 
-	return (0);
-}
+#endif

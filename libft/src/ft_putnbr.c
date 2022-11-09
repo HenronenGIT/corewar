@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/11/18 16:31:46 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/11/18 17:17:19 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-int main (int argc, char *argv[]) {
-
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
-	return (0);
+void	ft_putnbr(int n)
+{
+	if (n == -2147483648)
+	{
+		ft_putchar('-');
+		ft_putchar('2');
+		n = 147483648;
+	}
+	if (n < 0)
+	{
+		n = n * -1;
+		ft_putchar('-');
+	}
+	if (n > 9)
+		ft_putnbr(n / 10);
+	ft_putchar((n % 10) + 48);
 }

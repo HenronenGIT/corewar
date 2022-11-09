@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/11/17 10:45:57 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/11/23 12:45:58 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
-int main (int argc, char *argv[]) {
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	char			*new_str;
+	unsigned int	i;
 
-	// Lexical analysis
-		// Read byte by byte
-		// Make tokens
-		// 
-
-	return (0);
+	i = 0;
+	if (!s)
+		return (NULL);
+	new_str = ft_strnew(ft_strlen((char *)s));
+	if (new_str != 0)
+	{
+		while (s[i] != 0)
+		{
+			new_str[i] = f(i, s[i]);
+			i++;
+		}
+	}
+	return (new_str);
 }

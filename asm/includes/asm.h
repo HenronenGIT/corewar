@@ -14,6 +14,7 @@
 # define ASM_H
 
 # include <stdio.h>
+# include "../../libft/includes/libft.h"
 
 typedef struct s_input
 {
