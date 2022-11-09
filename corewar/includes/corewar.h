@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/09 08:25:47 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/09 11:16:13 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_champion
 	char	*name;
 	char	*comment;
 	int32_t	code_size;
-	uint8_t	*code;
+	char	*code;
 
 }	t_champion;
 

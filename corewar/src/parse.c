@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/09 10:56:49 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/09 11:17:38 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,17 @@ static int32_t parse_bytes(int fd)
 
 /* Parsing champions name and comment */
 
-static char	*parse_str(int fd, int len)
+static char	*parse_data(int fd, int32_t size)
 {
 	char	*str;
 	ssize_t	ret;
 
-	str = ft_strnew(len);
+	str = ft_strnew(size);
 	if(!str)
-		error(NULL, "Allocation failed in parse_str()");
-	ret = read(fd, str, len);
-	if (ret <(ssize_t)len)
-		error (&str, "Invalid file in parse_str()");
+		error(NULL, "Allocation failed in parse_data()");
+	ret = read(fd, str, size);
+	if (ret < (ssize_t)size)
+		error (&str, "Invalid file in parse_data()");
 	return (str);
 }
 
@@ -117,7 +117,7 @@ void	parse_champions(char *file, t_vm *vm)
 		error(NULL, "Wrong file");
 	if (parse_bytes(fd) != COREWAR_EXEC_MAGIC)
 		error(NULL, "Wrong magic number");
-	champion->name = parse_str(fd, PROG_NAME_LENGTH);
+	champion->name = parse_data(fd, PROG_NAME_LENGTH);
 	if (parse_bytes(fd) != 0)
 		error(NULL, "No NULL after name");
 	champion->code_size = parse_bytes(fd);
@@ -125,12 +125,14 @@ void	parse_champions(char *file, t_vm *vm)
 	printf("max:%d\n", CHAMP_MAX_SIZE);
 	if (champion->code_size < 0 || champion->code_size > CHAMP_MAX_SIZE)
 		error(NULL, "Invalid champion's code size");
-	champion->comment = parse_str(fd, COMMENT_LENGTH);
+	champion->comment = parse_data(fd, COMMENT_LENGTH);
 	if (parse_bytes(fd) != 0)
 		error(NULL, "No NULL after comment");
+	champion->code = parse_data(fd, champion->code_size);
 	/* Testing decimals: */
 	printf("s:%s\n", champion->name);
 	printf("s:%s\n", champion->comment);
+	printf("s:%s\n", champion->code);
 }
 
 /* Parsing arguments */
