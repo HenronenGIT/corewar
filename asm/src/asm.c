@@ -12,8 +12,19 @@
 
 #include "../includes/asm.h"
 
+void	read_source(char *input)
+{
+	// while ()
+	// {
+// 
+	// }
+}
+
 int main (int argc, char *argv[]) {
 
+	if (argc != 2)
+		exit(1);
+	read_source(argv[1]);
 	// Lexical analysis
 		// Read byte by byte
 		// Make tokens
