@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 13:45:32 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/09 08:26:27 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,7 @@ t_champion	*init_champion(int id)
 	return (new_champion);
 }
 
-t_vm	*init_vm(void)
+void	init_vm(t_vm *vm)
 {
-	t_vm	*vm;
-
-	vm = (t_vm *)ft_memalloc(sizeof (t_vm));
-	if (!vm)
-		error(NULL, "Allocation failed in init_vm()");
 	vm->champions_num = 0;
-	return (vm);
 }

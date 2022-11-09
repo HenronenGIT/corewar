@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 13:43:41 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/09 08:25:47 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, char **argv);
 
 /* init.c */
 t_champion	*init_champion(int id);
-t_vm	*init_vm(void);
+void	init_vm(t_vm *vm);
 
 /* parse.c */
 void	parse(int argc, char **argv, t_vm *vm);

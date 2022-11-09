@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 15:11:34 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/09 10:56:49 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,45 +24,58 @@ static int	is_cor_file(char *file)
 		return (0);
 }
 
-/* parsing first 4 bytes to check magic header */
+/*
+** Converting bytes to signed integer using bitwise operators.
+** If signed bit is 1, apply masking.
+*/
 
-static int32_t	bytecode2int(uint8_t *bytecode, size_t size)
+/*
+  Bitwise    Logical
++----------+---------+
+|  a & b   |  a && b |
++----------+---------+
+| a ^ b    |  a != b |
++----------+---------+
+|    ~a    |   !a    |
++----------+---------+
+*/
+
+static int32_t	bytes2int(uint8_t *byte_value, size_t size)
 {
-	int32_t	result;
-	int		sign;
-	int		i;
+	int		signbit;
+	int		n;
+	int32_t	decimal;
 
-	result = 0;
-	sign = 0;
-	/* If first bit of first byte is 0x80*/
-	if (bytecode[0] & 0x80)
-		sign = 1;
-	i = 0;
+	decimal = 0;
+	signbit = 0;
+	if (byte_value[0] & 0x80)
+		signbit = 1;
+	n = 0;
 	while (size)
 	{
-		if (sign)
-			result += ((bytecode[size - 1] ^ 0xFF) << (i++ * 8));
+		if (signbit)
+			decimal += ((byte_value[size - 1] ^ 0xFF) << (n * 8));
 		else
-			result += bytecode[size - 1] << (i++ * 8);
+			decimal += byte_value[size - 1] << (n * 8);
+		n++;
 		size--;
 	}
-	if (sign)
-		result = ~(result);
-	printf("res:%d\n", result);
-	return (result);
+	if (signbit)
+		decimal = ~(decimal);
+	return (decimal);
 }
 
-static int32_t parse_bytecode(int fd)
+static int32_t parse_bytes(int fd)
 {
 	ssize_t	ret;
-	uint8_t	buffer[4];
+	uint8_t	byte_value[4];
 
-	ret = read(fd, &buffer, 4);
+	ret = read(fd, &byte_value, 4);
 	if (ret == -1)
 		error(NULL, "Error reading file");
 	if (ret < 4)
 		error(NULL, "Invalid file");
-	return (bytecode2int(buffer, ret));
+	return (bytes2int(byte_value, ret));
 }
 
 /* Parsing champions name and comment */
@@ -102,16 +115,20 @@ void	parse_champions(char *file, t_vm *vm)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		error(NULL, "Wrong file");
-	if (parse_bytecode(fd) != COREWAR_EXEC_MAGIC)
+	if (parse_bytes(fd) != COREWAR_EXEC_MAGIC)
 		error(NULL, "Wrong magic number");
 	champion->name = parse_str(fd, PROG_NAME_LENGTH);
-	if (parse_bytecode(fd) != 0)
+	if (parse_bytes(fd) != 0)
 		error(NULL, "No NULL after name");
-	//add code_size
+	champion->code_size = parse_bytes(fd);
+	printf("size:%d\n", champion->code_size);
+	printf("max:%d\n", CHAMP_MAX_SIZE);
+	if (champion->code_size < 0 || champion->code_size > CHAMP_MAX_SIZE)
+		error(NULL, "Invalid champion's code size");
 	champion->comment = parse_str(fd, COMMENT_LENGTH);
-	if (parse_bytecode(fd) != 0)
+	if (parse_bytes(fd) != 0)
 		error(NULL, "No NULL after comment");
-	/* Testing outputs: */
+	/* Testing decimals: */
 	printf("s:%s\n", champion->name);
 	printf("s:%s\n", champion->comment);
 }
