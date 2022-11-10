@@ -6,13 +6,13 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/11/10 15:09:24 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/11/10 15:17:05 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall # -Wextra -Werror
 
 SRC_DIR = ./src/
 SRC_FILES = main.c init.c parse.c data.c carriage.c play_game.c

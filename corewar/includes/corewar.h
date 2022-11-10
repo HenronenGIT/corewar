@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 15:06:00 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:16:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct			s_champion
 	char				*comment;
 	int32_t				code_size;
 	char				*code;
-	//char				*start_addr;
+	int					start_addr;
 	struct s_champion	*next;
 }						t_champion;
 
@@ -48,6 +48,9 @@ typedef struct			s_champion
 	arena - initialized space in memory
 	champions_num - number of champions
 	champions - list of champions(max 4)
+	dump_cycles - after this number of executions,
+	dump the memory on the standard output and quit the game.
+
 */
 
 //game paramaters
@@ -58,6 +61,8 @@ typedef struct s_data
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
 	struct s_champion *last_alive;
+	int			dump_cycles;
+	int			last_alive_player;
 	int			cycles_passed;
 	int			num_live_statements;
 	int			cycles_to_die;

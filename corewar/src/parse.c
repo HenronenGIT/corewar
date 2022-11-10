@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 12:36:20 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/10 15:04:58 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static char	*parse_data(int fd, int32_t size)
 	last part - champion's code.
  */
 
-static void	parse_champions(char *file, t_data *data, t_champion *champion)
+static void	parse_champions(char *file, t_champion *champion)
 {
 	int	fd;
 
@@ -160,9 +160,12 @@ void	parse(int ac, char **av, t_data *data)
 	list = NULL;
 	while (ac > 1)
 	{
-		/* if (!ft_strcmp(*av, "-dump")
-			parse_dump();
-		*/
+		// if (!ft_strcmp(*av, "-dump")
+		// {
+		// 	parse_dump(data);
+		// 	av++;
+		// 	ac--;
+		// }
 		/* else if (!ft_strcmp(*av, "-n")
 			parse_n_flag();
 		*/
@@ -170,7 +173,7 @@ void	parse(int ac, char **av, t_data *data)
 		{
 			data->champions_num++;
 			champion = init_champion(data->champions_num);
-			parse_champions(*av, data, champion);
+			parse_champions(*av, champion);
 			data->champions[data->champions_num - 1] = champion;
 		}
 		av++;
