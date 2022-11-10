@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 15:16:59 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:31:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,16 @@ int	error(char **str, char *msg)
 int	main(int ac, char **av)
 {
 	t_data	data;
-	t_carriage *carriages;
+	t_carriage *head;
 
-	carriages = NULL;
-	if (ac >= 2 && ac <= MAX_PLAYERS)
+	head = NULL;
+	if (ac >= 2)
 	{
-		data.champions_num = 0; // add to init_data
 		parse(ac, av, &data);
 		load_arena(&data);
 		init_data(&data);
-		create_carriages(&data, &carriages);
-		play_game();
+		create_carriages(&data, &head);
+		play_game(&data, head);
 	}
 	else
 	//make exit type function

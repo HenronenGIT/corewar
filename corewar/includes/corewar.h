@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 15:16:44 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:24:25 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct			s_champion
 
 typedef struct s_data
 {
-	int8_t		arena[MEM_SIZE];
+	int32_t		arena[MEM_SIZE];
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
 	struct s_champion *last_alive;
@@ -98,5 +98,8 @@ void	create_carriages(t_data *data, t_carriage **head);
 
 /* parse.c */
 void	parse(int argc, char **argv, t_data *data);
+
+/* play */
+void	play_game(t_data *data, t_carriage *head);
 
 #endif
