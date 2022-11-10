@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 14:14:35 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:09:46 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av)
 		load_arena(&data);
 		init_data(&data);
 		create_carriages(&data, &carriages);
-		//play_game();
+		play_game();
 	}
 	else
 	//make exit type function
