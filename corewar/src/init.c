@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 15:06:47 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/10 16:26:42 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	load_arena(t_data *data)
 					data->champions[current]->code_size);
 		current++;
 	}
-
+	parse_dump(data, 0);
 }
 /* to check addresses */
 // 		printf("addr: %p, %d\n", start, data->champions[current]->code_size);

@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 15:04:58 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/10 15:25:05 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,12 +160,12 @@ void	parse(int ac, char **av, t_data *data)
 	list = NULL;
 	while (ac > 1)
 	{
-		// if (!ft_strcmp(*av, "-dump")
-		// {
-		// 	parse_dump(data);
-		// 	av++;
-		// 	ac--;
-		// }
+		if (!ft_strcmp(*av, "-dump"))
+		{
+			parse_dump(data, *(av + 1));
+			av++;
+			ac--;
+		}
 		/* else if (!ft_strcmp(*av, "-n")
 			parse_n_flag();
 		*/

@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 14:59:25 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/10 15:21:17 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_data
 	int8_t		arena[MEM_SIZE];
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
-	int			dump_cycles;
+	// int			dump_cycles;
 	int			last_alive_player;
 	int			cycles_passed;
 	int			num_live_statements;
@@ -90,5 +90,8 @@ void	load_arena(t_data *data);
 
 /* parse.c */
 void	parse(int argc, char **argv, t_data *data);
+
+/* parse_flags.c */
+void	parse_dump(t_data *data, char *cycles);
 
 #endif
