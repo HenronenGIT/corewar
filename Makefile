@@ -20,8 +20,6 @@ FLAGS = -Wall -Wextra #-Werror
 ASM_DIR = ./asm
 VM_DIR = ./corewar
 
-# VM_DIR = ./corewar
-
 #SRC_DIR = ./src/
 SRC_FILES = main.c
 
@@ -42,10 +40,6 @@ LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 all: $(LIBFT) 
 	@make -C $(ASM_DIR)
 	@make -C $(VM_DIR)
-#	make -C $(VM_DIR)
-
-#	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBPRINT)
-#	@echo "$(CGREEN)OK$(CEND)"
 
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 # 	@mkdir -p $(OBJ_DIR)
