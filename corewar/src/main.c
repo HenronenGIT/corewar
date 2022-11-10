@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 15:54:52 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 11:39:59 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	error(char **str, char *msg)
 int	main(int ac, char **av)
 {
 	t_vm	vm;
+	t_data	data;
+	t_carriage *carriages;
 
+	carriages = NULL;
 	if (ac >= 2 && ac <= MAX_PLAYERS)
 	{
 		//get number of players

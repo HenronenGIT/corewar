@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 15:54:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 11:15:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_champion
 	int32_t	*id;
 	char	*name;
 	char	*comment;
+	//add size of executable code in bytes
+	//add executable code
 }	t_champion;
 
 /*
@@ -51,10 +53,10 @@ typedef struct	s_vm
 	int			champions_num;
 }	t_vm;
 
-
+//game paramaters
 typedef struct s_data
 {
-	int last_alive_player;
+	struct s_champion *last_alive;
 	int cycles_passed;
 	int num_live_statements;
 	int cycles_to_die;
@@ -73,6 +75,7 @@ typedef struct s_carriage
 	int current_position; //memory address
 	int byte_jump_size;
 	int8_t registeries[REG_NUMBER];
+	struct s_carriage *next;
 }				t_carriage;
 
 /* corewar_main.c */
