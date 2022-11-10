@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 12:13:22 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/10 12:36:20 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static char	*parse_data(int fd, int32_t size)
 	last part - champion's code.
  */
 
-static void	parse_champions(char *file, t_vm *vm, t_champion *champion)
+static void	parse_champions(char *file, t_data *data, t_champion *champion)
 {
 	int	fd;
 
@@ -151,7 +151,7 @@ static void	add_champion(t_champion **list, t_champion *champion)
 
 /* Parsing arguments */
 
-void	parse(int ac, char **av, t_vm *vm)
+void	parse(int ac, char **av, t_data *data)
 {
 	t_champion	*champion;
 	t_champion	*list;
@@ -168,15 +168,15 @@ void	parse(int ac, char **av, t_vm *vm)
 		*/
 		if (is_cor_file(*av))
 		{
-			vm->champions_num++;
-			champion = init_champion(vm->champions_num);
-			parse_champions(*av, vm, champion);
-			vm->champions[vm->champions_num - 1] = champion;
+			data->champions_num++;
+			champion = init_champion(data->champions_num);
+			parse_champions(*av, data, champion);
+			data->champions[data->champions_num - 1] = champion;
 		}
 		av++;
 		ac--;
 	}
-	if (vm->champions_num < 1 || vm->champions_num > MAX_PLAYERS)
+	if (data->champions_num < 1 || data->champions_num > MAX_PLAYERS)
 		error(NULL, "Champions amount should be between 1 and 4");
 }
 	// while (list)
@@ -186,7 +186,7 @@ void	parse(int ac, char **av, t_vm *vm)
 	// }
 
 	// /* test list */
-	// for (size_t i = 0; i < vm->champions_num; i++)
+	// for (size_t i = 0; i < data->champions_num; i++)
 	// {
-	// 	printf("champ[%zu]:%s\n",i, vm->champions[i]->name);
+	// 	printf("champ[%zu]:%s\n",i, data->champions[i]->name);
 	// }

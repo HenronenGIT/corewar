@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 12:05:24 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/10 12:37:00 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@
 
 typedef struct			s_champion
 {
-	int32_t				*id;
+	int32_t				id;
 	char				*name;
 	char				*comment;
 	int32_t				code_size;
 	char				*code;
+	//char				*start_addr;
 	struct s_champion	*next;
 }						t_champion;
 
@@ -49,24 +50,16 @@ typedef struct			s_champion
 	champions - list of champions(max 4)
 */
 
-typedef struct	s_vm
+typedef struct s_data
 {
 	char		arena[MEM_SIZE];
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
-}				t_vm;
-
-/* corewar_main.c */
-int	error(char **str, char *msg);
-int	main(int argc, char **argv);
-
-typedef struct s_data
-{
-	int last_alive_player;
-	int cycles_passed;
-	int num_live_statements;
-	int cycles_to_die;
-	int num_checks_performed;
+	int			last_alive_player;
+	int			cycles_passed;
+	int			num_live_statements;
+	int			cycles_to_die;
+	int			num_checks_performed;
 
 }				t_data;
 
@@ -89,10 +82,10 @@ int	main(int argc, char **argv);
 
 /* init.c */
 t_champion	*init_champion(int id);
-void	init_vm(t_vm *vm);
-void	load_arena(t_vm *vm);
+void	init_data(t_data *data);
+void	load_arena(t_data *data);
 
 /* parse.c */
-void	parse(int argc, char **argv, t_vm *vm);
+void	parse(int argc, char **argv, t_data *data);
 
 #endif
