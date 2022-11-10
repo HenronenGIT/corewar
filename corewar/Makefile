@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
+#    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/11/10 12:38:23 by akilk            ###   ########.fr        #
+#    Updated: 2022/11/10 13:49:34 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = ./src/
-SRC_FILES = main.c init.c parse.c
+SRC_FILES = main.c init.c parse.c data.c carriage.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ_DIR = ./obj/
 OBJ_FILES = $(SRC_FILES:.c=.o)

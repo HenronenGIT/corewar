@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 12:37:00 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/10 13:49:52 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@
 
 typedef struct			s_champion
 {
-	int32_t				id;
-	char				*name;
-	char				*comment;
-	int32_t				code_size;
-	char				*code;
-	//char				*start_addr;
-	struct s_champion	*next;
-}						t_champion;
+	int32_t	*id;
+	char	*name;
+	char	*comment;
+	//add size of executable code in bytes
+	//add executable code
+}	t_champion;
 
 /*
 	Virtual arena:
@@ -60,6 +58,16 @@ typedef struct s_data
 	int			num_live_statements;
 	int			cycles_to_die;
 	int			num_checks_performed;
+}	t_vm;
+
+//game paramaters
+typedef struct s_data
+{
+	struct s_champion *last_alive;
+	int cycles_passed;
+	int num_live_statements;
+	int cycles_to_die;
+	int num_checks_performed;
 
 }				t_data;
 
@@ -74,6 +82,7 @@ typedef struct s_carriage
 	int current_position; //memory address
 	int byte_jump_size;
 	int8_t registeries[REG_NUMBER];
+	struct s_carriage *next;
 }				t_carriage;
 
 /* corewar_main.c */
