@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/08 15:56:19 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 12:07:24 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,13 @@ int	error(char **str, char *msg)
 
 int	main(int ac, char **av)
 {
-	t_vm	*vm;
+	t_vm	vm;
 
 	if (ac >= 2 && ac <= MAX_PLAYERS)
 	{
-		//get number of players
-		//get other info, name comments etc
-		//copy exec code to designated location in memory
+		init_vm(&vm);
 		parse(ac, av, &vm);
-		//-->init_data
-		//-->init carriages
-		//-->announce players
-		//--->play_game
+		load_arena(&vm);
 	}
 	else
 	//make exit type function
