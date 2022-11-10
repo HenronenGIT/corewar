@@ -21,9 +21,13 @@
 # define OPEN_ERR -1
 # define ARG_ERR -2
 
+//! This is copied from op.h header
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
+
+# define NAME_CMD_STRING			".name"
+# define COMMENT_CMD_STRING		".comment"
 
 //! This is copied fromo op.h header
 /*---------- Header Struct ----------*/

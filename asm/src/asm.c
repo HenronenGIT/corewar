@@ -22,6 +22,33 @@ void	error(int error_number)
 	exit(error_number);
 }
 
+// void	lexical_analysis(char *line)
+// {
+// 	static size_t	line_count;
+// 	size_t			i;
+
+// 	i = 0;
+// 	while (line[i] != '\0')
+// 	{
+// 		if (line[i] == '.')
+
+// 		i += 1;
+// 	}
+// }
+
+static void	read_header(int fd)
+{
+	char	*line;
+	size_t	i;
+
+	i = 0;
+	while (get_next_line(fd, &line) != 0)
+	{
+		if (line[i] != NAME_CMD_STRING[i])
+		i += 1;
+	}
+}
+
 static void	read_input(char *input)
 {
 	int		fd;
@@ -31,11 +58,12 @@ static void	read_input(char *input)
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
 		error(OPEN_ERR);
+	read_header(fd);
+	// loop for reading rest of the file
 	while (get_next_line(fd, &line) != 0)
 	{
-		// printf("%s\n", line);
-
-		//! Make line counter and column counter for error messages.
+		printf("%s\n", line);
+		// lexical_analysis(line);
 	}
 }
 
