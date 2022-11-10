@@ -6,13 +6,11 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 12:35:16 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/10 14:03:14 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
-
-#include <stdio.h>
 
 int	error(char **str, char *msg)
 {

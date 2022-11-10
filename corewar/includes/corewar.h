@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 12:37:00 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/10 14:59:25 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct			s_champion
 	char				*comment;
 	int32_t				code_size;
 	char				*code;
-	//char				*start_addr;
+	int					start_addr;
 	struct s_champion	*next;
 }						t_champion;
 
@@ -48,19 +48,22 @@ typedef struct			s_champion
 	arena - initialized space in memory
 	champions_num - number of champions
 	champions - list of champions(max 4)
+	dump_cycles - after this number of executions,
+	dump the memory on the standard output and quit the game.
+
 */
 
 typedef struct s_data
 {
-	char		arena[MEM_SIZE];
+	int8_t		arena[MEM_SIZE];
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
+	int			dump_cycles;
 	int			last_alive_player;
 	int			cycles_passed;
 	int			num_live_statements;
 	int			cycles_to_die;
 	int			num_checks_performed;
-
 }				t_data;
 
 typedef struct s_carriage
@@ -73,7 +76,7 @@ typedef struct s_carriage
 	int cycles_remaining;
 	int current_position; //memory address
 	int byte_jump_size;
-	int8_t registeries[REG_NUMBER];
+	int32_t registeries[REG_NUMBER];
 }				t_carriage;
 
 /* corewar_main.c */

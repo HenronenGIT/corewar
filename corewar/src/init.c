@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 12:34:44 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/10 15:06:47 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_champion	*init_champion(int id)
 	new_champion->comment = NULL;
 	new_champion->code_size = 0;
 	new_champion->code = 0;
+	new_champion->start_addr = 0;
 	return (new_champion);
 }
 
@@ -37,7 +38,8 @@ void	load_arena(t_data *data)
 	while (current < data->champions_num)
 	{
 		start = (current * MEM_SIZE) / data->champions_num;
-		// printf("addr: %p, %d\n", start, data->champions[current]->code_size);
+		data->champions[current]->start_addr = start;
+		printf("addr: %d, %d\n", start, data->champions[current]->code_size);
 		ft_memcpy(&(data->arena[start]), data->champions[current]->code,
 					data->champions[current]->code_size);
 		current++;
