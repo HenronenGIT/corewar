@@ -19,7 +19,7 @@ CC = gcc
 FLAGS = #-Wall -Wextra -Werror
 
 SRC_DIR = ./src/
-SRC_FILES = main.c
+SRC_FILES = asm.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
@@ -31,32 +31,31 @@ INC_DIR = ./includes/
 INC_FILES = asm.h
 INC = $(addprefix $(INC_DIR), $(INC_FILES))
 
-LIBPRINT_DIR = libft/
-#LIBPRINT_LIB = libft.a
-#LIBPRINT = $(addprefix $(LIBPRINT_DIR), $(LIBPRINT_LIB))
+LIBFT_DIR = ../libft/
+LIBFT_LIB = libft.a
+LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(FLAGS) $(SRC) -I $(INC)
-#	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBPRINT)
-#	@make -C $(LIBPRINT_DIR)
+	@echo "$(CYELLOW)Compiling $(NAME) program$(CEND)"
+#	@$(CC) -o $(NAME) $(FLAGS) $(SRC) -I $(INC) -L. $(LIBFT)
+	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I $(INC) $(LIBFT)
 
-#	@echo "$(CGREEN)OK$(CEND)"
+#	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
+	@echo "$(CGREEN)OK$(CEND)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	@make -C $(LIBPRINT_DIR) clean
 	@echo "$(CYELLOW)Removing $(NAME) object folder$(CEND)"
 	@rm -rf $(OBJ_DIR)
 	@echo "$(CGREEN)OK$(CEND)"
 
 fclean: clean
-	@make -C $(LIBPRINT_DIR) fclean
-	@echo "$(CYELLOW)Removing $(NAME)$(CEND)"
+	@echo "$(CYELLOW)Removing $(NAME) program$(CEND)"
 	@rm -rf $(NAME)
 	@echo "$(CGREEN)OK$(CEND)"
 
