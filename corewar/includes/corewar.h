@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 13:55:13 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:06:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@
 
 typedef struct			s_champion
 {
-	int		id;
-	char	*name;
-	char	*comment;
-	//add size of executable code in bytes
-	//add executable code
-}	t_champion;
+	int				id;
+	char				*name;
+	char				*comment;
+	int32_t				code_size;
+	char				*code;
+	//char				*start_addr;
+	struct s_champion	*next;
+}						t_champion;
 
 /*
 	Virtual arena:
@@ -52,7 +54,7 @@ typedef struct			s_champion
 
 typedef struct s_data
 {
-	char		arena[MEM_SIZE];
+	int8_t		arena[MEM_SIZE];
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
 	struct s_champion *last_alive;
@@ -70,11 +72,12 @@ typedef struct s_carriage
 	bool carry;
 	//The statement code on which the carriage stands:
 	//Prior to the battle, the value of this variable is not set.
+	int cursor;
 	int last_live;
 	int cycles_remaining;
 	int current_position; //memory address
 	int byte_jump_size;
-	int8_t registeries[REG_NUMBER];
+	int32_t registeries[REG_NUMBER];
 	struct s_carriage *next;
 }				t_carriage;
 
@@ -86,6 +89,7 @@ int	main(int argc, char **argv);
 t_champion	*init_champion(int id);
 void	init_data(t_data *data);
 void	load_arena(t_data *data);
+void	create_carriages(t_data *data, t_carriage **head);
 
 /* parse.c */
 void	parse(int argc, char **argv, t_data *data);

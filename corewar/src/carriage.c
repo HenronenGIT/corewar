@@ -6,13 +6,13 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:55:35 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/10 13:57:44 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:08:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-init_carriage_registries(int8_t *registeries, int i)
+static void init_carriage_registries(int32_t *registeries, int i)
 {
 	int n;
 
@@ -22,20 +22,19 @@ init_carriage_registries(int8_t *registeries, int i)
 		registeries[n] = 0;
 }
 
-static init_carriage_info(t_carriage *temp, int i)
+static void init_carriage(t_data *data, t_carriage *temp, int i)
 {
 	temp->id = i;
 	temp->carry = false;
 	//code pointer
+	temp->cursor = data->champions[i]->start_addr;
 	//last live  statement?
 	//cycles_remaining;
-	//current position pointer
 	//byte_jum_size
 	init_carriage_registries(temp->registeries, i);
-
 }
 
-static add_carriage(t_carriage *head, int i)
+static void add_carriage(t_data *data, t_carriage **head, int i)
 {
 	t_carriage *temp;
 
@@ -43,15 +42,15 @@ static add_carriage(t_carriage *head, int i)
 	if (!temp)
 		exit (0); //make error function?
 	
-	if (!head)
+	if (*head == NULL)
 		temp->next = NULL;
 	else
-		temp->next = head;
-	init_carriage_info(temp, i);
-	return (head = temp);
+		temp->next = *head;
+	init_carriage(data, temp, i);
+	*head = temp;
 }
 
-t_carriage *init_carriage(t_data *data, t_carriage *head)
+void create_carriages(t_data *data, t_carriage **head)
 {
 	int i;
 
@@ -59,9 +58,7 @@ t_carriage *init_carriage(t_data *data, t_carriage *head)
 	while (i <= data->champions_num)
 	{
 		//malloc carriage and add to list
-		head = add_carriage(head, i);
+		add_carriage(data, head, i);
 		i++;
 	}
-	return head;
-
 }

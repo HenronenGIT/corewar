@@ -6,13 +6,13 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:43:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/10 13:56:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:14:42 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-void	init_data(t_data *data, t_data *data)
+void	init_data(t_data *data)
 {
 	//init w/ pointer to champ with highest id
 	data->last_alive = (t_champion *)data->champions[data->champions_num - 1];
