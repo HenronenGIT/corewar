@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 13:49:52 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:55:13 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 typedef struct			s_champion
 {
-	int32_t	*id;
+	int		id;
 	char	*name;
 	char	*comment;
 	//add size of executable code in bytes
@@ -48,28 +48,21 @@ typedef struct			s_champion
 	champions - list of champions(max 4)
 */
 
+//game paramaters
+
 typedef struct s_data
 {
 	char		arena[MEM_SIZE];
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
-	int			last_alive_player;
+	struct s_champion *last_alive;
 	int			cycles_passed;
 	int			num_live_statements;
 	int			cycles_to_die;
 	int			num_checks_performed;
-}	t_vm;
+}	t_data;
 
-//game paramaters
-typedef struct s_data
-{
-	struct s_champion *last_alive;
-	int cycles_passed;
-	int num_live_statements;
-	int cycles_to_die;
-	int num_checks_performed;
 
-}				t_data;
 
 typedef struct s_carriage
 {

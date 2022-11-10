@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:55:35 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/10 11:39:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:57:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ static add_carriage(t_carriage *head, int i)
 	return (head = temp);
 }
 
-t_carriage *init_carriage(t_vm *vm, t_carriage *head)
+t_carriage *init_carriage(t_data *data, t_carriage *head)
 {
 	int i;
 
 	i = 1;
-	while (i <= vm->champions_num)
+	while (i <= data->champions_num)
 	{
 		//malloc carriage and add to list
 		head = add_carriage(head, i);
