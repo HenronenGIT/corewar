@@ -63,4 +63,4 @@ run:
 	./asm/asm test.s
 original:
 	./eval_tests/asm test.s
-# re : fclean all clean all
+re : fclean all clean all

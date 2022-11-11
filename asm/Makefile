@@ -19,7 +19,8 @@ CC = gcc
 FLAGS = #-Wall -Wextra -Werror
 
 SRC_DIR = ./src/
-SRC_FILES = asm.c
+SRC_FILES = asm.c \
+			validation.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

@@ -17,9 +17,13 @@
 # include <fcntl.h>
 # include "../../libft/includes/libft.h"
 
+# define PRINT(s) (printf("FILE: |%s| FUNC: |%s| LINE: |%d|\nValue:%s", __FILE__, __FUNCTION__, __LINE__, s))
+
 /*---------- Error codes ----------*/
 # define OPEN_ERR -1
 # define ARG_ERR -2
+# define TEMP_ERR -999
+
 
 //! This is copied from op.h header
 # define PROG_NAME_LENGTH		(128)
@@ -48,7 +52,7 @@ typedef struct		s_symbol
 }					t_symbol;
 
 /*---------- Main data struct ----------*/
-typedef struct s_input
+typedef struct s_data
 {
 	char		**statement;	//2d array of statement with every argument in its own index | HENRI
 	int			is_label;		// HENRI
@@ -66,10 +70,11 @@ typedef struct s_input
 	char		*arg_2_hex;				//arg 2 code in hexadecimal | OTTO
 	char		*arg_3_hex;				//arg 3 code in hexadecimal | OTTO
 	char		*final;		
-	struct s_header	header;		//final bytecode for current statement | OTTO
-}	t_input;
+	struct s_header	*header;		//final bytecode for current statement | OTTO
+}	t_data;
 
 void	error(int error_number);
 
+void	read_input(char *input, t_data *s_data);
 
 #endif
