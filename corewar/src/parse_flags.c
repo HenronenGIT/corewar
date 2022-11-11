@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:02:47 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 16:35:21 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/11 08:41:39 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ void	parse_dump(t_data *data, char *cycles)
 {
 	printf("cycles: %s\n", cycles);
 	int	i;
-	int	row;
 
 	i = 0;
-	row = 0;
 	while (i < MEM_SIZE)
 	{
 		printf("%.2x ", data->arena[i]);

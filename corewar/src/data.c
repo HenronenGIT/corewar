@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:43:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/10 15:30:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/11 08:42:20 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	init_data(t_data *data)
 {
-	data->champions_num = 0; // add to init_data
+	data->champions_num = 0;
 	//init w/ pointer to champ with highest id
-	data->last_alive = data->champions[data->champions_num - 1];
+	// data->last_alive = data->champions[data->champions_num - 1];
 	data->cycles_passed = 0;
 	data->num_live_statements = 0;
 	data->cycles_to_die = CYCLE_TO_DIE;

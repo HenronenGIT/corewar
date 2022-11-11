@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/11 08:28:37 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/11 08:49:27 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	main(int ac, char **av)
 	head = NULL;
 	if (ac >= 2)
 	{
+		init_data(&data);
 		parse(ac, av, &data);
 		load_arena(&data);
-		init_data(&data);
 		create_carriages(&data, &head);
-		play_game(&data, head);
+		// play_game(&data, head);
 	}
 	else
 	//make exit type function
