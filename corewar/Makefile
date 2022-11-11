@@ -6,16 +6,17 @@
 #    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/11/10 15:21:47 by akilk            ###   ########.fr        #
+#    Updated: 2022/11/11 08:33:30 by akilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 CC = gcc
-FLAGS = -Wall # -Wextra -Werror
+FLAGS = -Wall #-Wextra -Werror
 
 SRC_DIR = ./src/
-SRC_FILES = main.c init.c parse.c parse_flags.c
+SRC_FILES = main.c init.c parse.c data.c carriage.c play_game.c\
+			parse_flags.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ_DIR = ./obj/
 OBJ_FILES = $(SRC_FILES:.c=.o)
