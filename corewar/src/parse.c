@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/11 08:51:15 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/14 14:19:47 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,26 +127,133 @@ static void	parse_champions(char *file, t_champion *champion)
 	if (close(fd) == -1)
 		exit (1);
 	/* Testing output: */
-	printf("name:%s\n", champion->name);
-	printf("comment:%s\n", champion->comment);
-	printf("size:%d\n", champion->code_size);
+	// printf("name:%s\n", champion->name);
+	// printf("comment:%s\n", champion->comment);
+	// printf("size:%d\n", champion->code_size);
 	// printf("bytecode:%02x\n", champion->code);
 
 }
 
-static void	add_champion(t_champion **list, t_champion *champion)
-{
-	t_champion	*curr;
+/* Add champions to list. Do we need this? */
+// static void	add_champion(t_champion **list, t_champion *champion)
+// {
+// 	t_champion	*curr;
 
-	if (*list)
+// 	if (*list)
+// 	{
+// 		curr = *list;
+// 		while (curr->next)
+// 			curr = curr->next;
+// 		curr->next = champion;
+// 	}
+// 	else
+// 		*list = champion;
+// }
+
+/*
+** -n number
+** sets the number of the next player.
+** If non-existent, the player will have the next available number
+** in the order of the parameters.
+** The last player will have the first process in the order of execution.
+*/
+
+static bool	id_used(int id, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->champions_num)
 	{
-		curr = *list;
-		while (curr->next)
-			curr = curr->next;
-		curr->next = champion;
+		if (id == data->champions[i]->id)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+static void	parse_n(int *ac, char ***av, t_data *data, t_champion *champion)
+{
+	int		num;
+	char	*name;
+
+	if (*ac > 3 && !ft_strcmp(**av, "-n"))
+	{
+		num = ft_atoi(*(*av + 1));
+		name = *(*av + 2);
+		if (num < 1 || num > MAX_PLAYERS
+			|| !is_cor_file(name)
+			|| id_used(num, data))
+		{
+			printf("TEST USAGE\n");
+			error(NULL, "Wrong usage of -n flag");
+		}
+		champion->id = num;
+		parse_champions(name, champion);
+		(*ac) -= 3;
+		(*av) += 3;
+	}
+	else if (is_cor_file(**av))
+	{
+		parse_champions(**av, champion);
+		(*ac)--;
+		(*av)++;
 	}
 	else
-		*list = champion;
+	{
+		printf("TEST USAGE\n");
+		error(NULL, "It doesn't work that way");
+	}
+	data->champions_num++;
+	data->champions[data->champions_num - 1] = champion;
+}
+
+static void	sort_ids(t_champion **unlisted, t_champion **result, t_data *data)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (unlisted[k] != NULL && i < data->champions_num)
+	{
+		if (result[i] == NULL)
+		{
+			result[i] = unlisted[k++];
+			result[i]->id = i + 1;
+		}
+		i++;
+	}
+	i = -1;
+	while (++i < data->champions_num)
+		data->champions[i] = result[i];
+}
+
+static void	reset_ids(t_data *data)
+{
+	int			i;
+	int			k;
+	t_champion	*unlisted[MAX_PLAYERS];
+	t_champion	*result[MAX_PLAYERS];
+
+	i = 0;
+	k = 0;
+	ft_bzero(result, sizeof(result));
+	ft_bzero(unlisted, sizeof(unlisted));
+	while (i < data->champions_num)
+	{
+		if (data->champions[i]->id > data->champions_num)
+		{
+			printf("TEST USAGE\n");
+			error(NULL, "champion's number is not correct");
+		}
+		else if (data->champions[i]->id == 0)
+			unlisted[k++] = data->champions[i];
+		else
+			result[data->champions[i]->id - 1] =  data->champions[i];
+		i++;
+	}
+	sort_ids(unlisted, result, data);
 }
 
 /* Parsing arguments */
@@ -154,34 +261,35 @@ static void	add_champion(t_champion **list, t_champion *champion)
 void	parse(int ac, char **av, t_data *data)
 {
 	t_champion	*champion;
-	t_champion	*list;
+	// t_champion	*list;
 
 	av++;
-	list = NULL;
+	// list = NULL;
 	while (ac > 1)
 	{
 		if (!ft_strcmp(*av, "-dump"))
 		{
-			parse_dump(data, *(av + 1));
-			av++;
-			ac--;
+			parse_dump(&ac, &av, data);
+			data->dump_cycle = ft_atoi(*(av + 1));
+			printf("dump: %d\n", data->dump_cycle);// used during game to dump after this cycle
 		}
-		/* else if (!ft_strcmp(*av, "-n")
-			parse_n_flag();
-		*/
-		if (is_cor_file(*av))
+		else if (is_cor_file(*av) || !ft_strcmp(*av, "-n"))
 		{
-			data->champions_num++;
-			champion = init_champion(data->champions_num);
-			parse_champions(*av, champion);
-			data->champions[data->champions_num - 1] = champion;
+			champion = init_champion();
+			parse_n(&ac, &av, data, champion);
 		}
-		av++;
-		ac--;
 	}
 	if (data->champions_num < 1 || data->champions_num > MAX_PLAYERS)
 		error(NULL, "Champions amount should be between 1 and 4");
+	reset_ids(data);
+
+	//test id-s
+	for (int i = 0; i < data->champions_num; i++)
+	{
+		printf("id %d name %s\n", data->champions[i]->id, data->champions[i]->name);
+	}
 }
+
 	// while (list)
 	// {
 	// 	printf("listed names: %s\n", list->name);
@@ -192,4 +300,9 @@ void	parse(int ac, char **av, t_data *data)
 	// for (size_t i = 0; i < data->champions_num; i++)
 	// {
 	// 	printf("champ[%zu]:%s\n",i, data->champions[i]->name);
+	// }
+	// test id
+	// for (int i = 0; i < data->champions_num; i++)
+	// {
+	// 	printf("name: %s id: %d\n",data->champions[i]->name, data->champions[i]->id);
 	// }

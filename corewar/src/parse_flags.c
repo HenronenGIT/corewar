@@ -6,60 +6,34 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:02:47 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/11 08:41:39 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/12 16:18:31 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-// void	parse_dump_flag(int *argc, char ***argv, t_vm *vm)
-// {
-// 	if (!vm->dump_print_mode && *argc >= 2 && ft_isint(*(*argv + 1), true))
-// 	{
-// 		if ((vm->dump_cycle = ft_atoi(*(*argv + 1))) < 0)
-// 			vm->dump_cycle = -1;
-// 		if (!ft_strcmp(**argv, "-d"))
-// 			vm->dump_print_mode = 64;
-// 		else
-// 			vm->dump_print_mode = 32;
-// 		(*argc) -= 2;
-// 		(*argv) += 2;
-// 	}
-// 	else
-// 		print_help();
-// }
+/*
+-dump nbr_cycles
+at the end of nbr_cycles of executions, dump the memory
+on the standard output and quit the game.
+The memory must be dumped in the
+hexadecimal format with 32 octets per line.
+*/
 
-void	parse_dump(t_data *data, char *cycles)
+void	parse_dump(int *ac, char ***av, t_data *data)
 {
-	printf("cycles: %s\n", cycles);
 	int	i;
 
-	i = 0;
-	while (i < MEM_SIZE)
+	i = 1;
+	while (i <= MEM_SIZE)
 	{
-		printf("%.2x ", data->arena[i]);
-		i++;
+		printf("%.2x", data->arena[i]);
 		if (i % 32 == 0)
 			printf("\n");
+		else
+			printf(" ");
+		i++;
 	}
+	(*ac) -= 2;
+	(*av) += 2;
 }
-
-// void		print_arena(uint8_t *arena, int print_mode)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (i < MEM_SIZE)
-// 	{
-// 		ft_printf("%.4p : ", i);
-// 		j = 0;
-// 		while (j < print_mode)
-// 		{
-// 			ft_printf("%.2x ", arena[i + j]);
-// 			j++;
-// 		}
-// 		ft_printf("\n");
-// 		i += print_mode;
-// 	}
-// }

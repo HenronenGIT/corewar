@@ -6,20 +6,20 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/11 08:50:47 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/14 12:22:45 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-t_champion	*init_champion(int id)
+t_champion	*init_champion(void)
 {
 	t_champion	*new_champion;
 
 	new_champion = (t_champion *)ft_memalloc(sizeof (t_champion));
 	if (!new_champion)
 		error(NULL, "Allocation failed in init_champion()");
-	new_champion->id = id;
+	new_champion->id = 0;
 	new_champion->name = NULL;
 	new_champion->comment = NULL;
 	new_champion->code_size = 0;
@@ -32,6 +32,7 @@ void	load_arena(t_data *data)
 {
 	int	current;
 	int	start;
+
 	current = 0;
 	start = 0;
 	while (current < data->champions_num)

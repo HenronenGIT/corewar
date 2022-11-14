@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/11 08:35:11 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/14 12:23:48 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 typedef struct			s_champion
 {
-	int				id;
+	int					id;
 	char				*name;
 	char				*comment;
 	int32_t				code_size;
@@ -60,7 +60,7 @@ typedef struct s_data
 	int32_t		arena[MEM_SIZE];
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
-	// int			dump_cycles;
+	int			dump_cycle;
 	int			last_alive_player;
 	int			cycles_passed;
 	int			num_live_statements;
@@ -90,16 +90,16 @@ int	error(char **str, char *msg);
 int	main(int argc, char **argv);
 
 /* init.c */
-t_champion	*init_champion(int id);
+t_champion	*init_champion(void);
 void	init_data(t_data *data);
 void	load_arena(t_data *data);
 void	create_carriages(t_data *data, t_carriage **head);
 
 /* parse.c */
-void	parse(int argc, char **argv, t_data *data);
+void	parse(int ac, char **av, t_data *data);
 
 /* parse_flags.c */
-void	parse_dump(t_data *data, char *cycles);
+void	parse_dump(int *ac, char ***av, t_data *data);
 
 /* play */
 void	play_game(t_data *data, t_carriage *head);

@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:43:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/11 08:42:20 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/11 10:52:27 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	init_data(t_data *data)
 	data->num_live_statements = 0;
 	data->cycles_to_die = CYCLE_TO_DIE;
 	data->num_checks_performed = 0;
+	data->dump_cycle = -1;
 }
