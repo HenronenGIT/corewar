@@ -20,7 +20,9 @@ FLAGS = #-Wall -Wextra -Werror
 
 SRC_DIR = ./src/
 SRC_FILES = asm.c \
-			validation.c
+			validation.c \
+			vector.c \
+			is_functions.c 
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

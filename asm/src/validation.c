@@ -12,60 +12,61 @@
 
 #include "../includes/asm.h"
 
-static void	save_name(char *str, t_data *s_data)
+void	save_token(char *sub_string, t_type type)
 {
-	// printf("%s %d\n", __FUNCTION__, __LINE__);
-	PRINT(str);
+	// if (type == NAME)
+
+
 }
 
-static void	validate_name_or_comment(char *str, t_data *s_data)
+void lexical_scanner(char *line, t_data *data)
 {
-	// printf("%s\n", str);
-	
-	if (!ft_strncmp(str, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
-		save_name(str, s_data);
-	if (!ft_strncmp(str, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)))
-		//save comment
-	error(TEMP_ERR);
-}
+	unsigned int left;
+	unsigned int right;
+	int			len;
+	char		*sub_string;
 
-static void	read_header(int fd, t_data *s_data)
-{
-	char	*line;
-	size_t	column;
-	size_t	line_count;
-	size_t	i;
-
-	line_count = 1;
-	i = 0;
-	while (get_next_line(fd, &line) != 0)
+	left = 0;
+	right = 0;
+	len = ft_strlen(line);
+	sub_string = NULL;
+	while (right <= len && left <= right)
 	{
-		column = 0;
-		// if (ft_is_whitespace(line[column]))
-		while (ft_is_whitespace(line[column]))
-			column += 1;
-		if (line[column] == '.')
-			validate_name_or_comment(&line[column], s_data);
-		
-		// printf("%s", line);
-		line_count += 1;
+		if (is_delimiter(line[right]) == false)
+			right += 1;
+		if (is_delimiter(line[right] == true && left != right))
+		{
+			LOCATION;
+			sub_string = ft_strsub(line, left, right - left);
+			PRINT(sub_string);
+			if (!sub_string)
+				error(MALLOC_ERR);
+			if (ft_strcmp(sub_string, NAME_CMD_STRING) == 0)
+				save_token(sub_string, NAME);
+			else if (ft_strcmp(sub_string, COMMENT_CMD_STRING) == 0)
+				save_token(sub_string, COMMENT);
+			else if (is_statement(sub_string))
+				save_token(sub_string, STATEMENT);
+			else if (is_label(sub_string))
+				save_token(sub_string, LABEL);
+		}
 	}
 }
 
-void	read_input(char *input, t_data *s_data)
+/*
+Opens file descriptor for input reading.
+After that while loops starts reading file descriptor line by line.
+Every single line is sent to lexical_scanner function to be tokenized.
+*/
+void read_input(char *input, t_data *s_data)
 {
-	int		fd;
-	char	*line;
-	
+	int fd;
+	char *line;
+
 	fd = 0;
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
 		error(OPEN_ERR);
-	read_header(fd, s_data);
 	while (get_next_line(fd, &line) != 0)
-	{
-
-		// printf("%s\n", line);
-		// lexical_analysis(line);
-	}
+		lexical_scanner(line, s_data);
 }
