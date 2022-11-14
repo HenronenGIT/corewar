@@ -12,10 +12,8 @@
 
 #include "../includes/asm.h"
 
-void	save_token(char *sub_string, t_type type)
+void save_token(char *sub_string, t_type type)
 {
-	// if (type == NAME)
-
 
 }
 
@@ -23,8 +21,8 @@ void lexical_scanner(char *line, t_data *data)
 {
 	unsigned int left;
 	unsigned int right;
-	int			len;
-	char		*sub_string;
+	int len;
+	char *sub_string;
 
 	left = 0;
 	right = 0;
@@ -36,21 +34,34 @@ void lexical_scanner(char *line, t_data *data)
 			right += 1;
 		if (is_delimiter(line[right] == true && left != right))
 		{
-			LOCATION;
 			sub_string = ft_strsub(line, left, right - left);
-			PRINT(sub_string);
 			if (!sub_string)
 				error(MALLOC_ERR);
-			if (ft_strcmp(sub_string, NAME_CMD_STRING) == 0)
-				save_token(sub_string, NAME);
-			else if (ft_strcmp(sub_string, COMMENT_CMD_STRING) == 0)
-				save_token(sub_string, COMMENT);
-			else if (is_statement(sub_string))
+			// if (ft_strcmp(sub_string, NAME_CMD_STRING) == 0)
+			// 	save_token(sub_string, NAME);
+			// else if (ft_strcmp(sub_string, COMMENT_CMD_STRING) == 0)
+			// 	save_token(sub_string, COMMENT);
+			if (is_statement(sub_string))
 				save_token(sub_string, STATEMENT);
-			else if (is_label(sub_string))
+			else if (is_label(sub_string, data))
 				save_token(sub_string, LABEL);
 		}
 	}
+}
+
+/*
+Read header information: .name and .comment
+*/
+void	read_header(int fd, t_data *s_data)
+{
+	char	*line;
+
+	line = NULL;
+	while (get_next_line(fd, &line))
+	{
+
+	}
+
 }
 
 /*
@@ -67,6 +78,7 @@ void read_input(char *input, t_data *s_data)
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
 		error(OPEN_ERR);
+	read_header(fd, s_data);
 	while (get_next_line(fd, &line) != 0)
 		lexical_scanner(line, s_data);
 }

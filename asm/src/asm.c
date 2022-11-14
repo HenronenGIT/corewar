@@ -35,22 +35,33 @@ static void	init_vector(t_data *s_data)
 	vec_new_arr(s_data->vec_info, 2);
 }
 
-static void	init_structs(t_header *s_header, t_data *s_data)
+/*
+Initializes all structs from the stack memory.
+Then initializes pointers to those structs to t_data struct;
+*/
+static void	init_structs(t_data *s_data)
 {
+	t_header	s_header;
+	t_error_log	s_error_log;
+
+	s_header.magic = COREWAR_EXEC_MAGIC;
+	// s_header.prog_name = NULL;
+	// s_header.prog_size = ;
+	// s_header.comment = ;
+	s_error_log.line = 0;
+	s_error_log.column = 0;
 	s_data->vec_info = NULL;
-	// s_header->magic = COREWAR_EXEC_MAGIC;
-	//! init all zeros and nulls
-	// s_data->header = s_header;
+	s_data->s_header = &s_header;
+	s_data->s_error_log = &s_error_log;
 }
 
 int main (int argc, char *argv[])
 {
-	t_header	s_header;
-	t_data		s_data;
+	t_data			s_data;
 
 	if (argc != 2)
 		error(ARG_ERR);
-	init_structs(&s_header, &s_data);
+	init_structs(&s_data);
 	init_vector(&s_data);
 	read_input(argv[1], &s_data);
 	// Lexical analysis

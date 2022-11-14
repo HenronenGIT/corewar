@@ -22,7 +22,8 @@ SRC_DIR = ./src/
 SRC_FILES = asm.c \
 			validation.c \
 			vector.c \
-			is_functions.c 
+			is_functions.c \
+			lexical_error.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

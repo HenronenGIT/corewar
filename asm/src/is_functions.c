@@ -33,7 +33,7 @@ bool	is_statement(char *sub_string)
 		return (0);
 }
 
-bool	is_label(char *sub_string)
+bool	is_label(char *sub_string, t_data *data)
 {
 	char	*found_char;
 
@@ -42,7 +42,7 @@ bool	is_label(char *sub_string)
 	if (found_char == NULL)
 		return (false);
 	if ((found_char + 1) != '\0')
-		error();
+		lexical_error(data);
 	return (true);
 
 }

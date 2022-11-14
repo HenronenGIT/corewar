@@ -19,6 +19,7 @@
 #include "../../libft/includes/libft.h"
 
 #define PRINT(s) (printf("FILE: |%s| FUNC: |%s| LINE: |%d|\nValue:%s", __FILE__, __FUNCTION__, __LINE__, s))
+#define PRINT_D(d) (printf("FILE: |%s| FUNC: |%s| LINE: |%d|\nValue:%d", __FILE__, __FUNCTION__, __LINE__, d))
 #define LOCATION printf("FILE: |%s| FUNC: |%s| LINE: |%d|\n", __FILE__, __FUNCTION__, __LINE__)
 
 /*---------- Error codes ----------*/
@@ -38,6 +39,21 @@
 #define COMMENT_CMD_STRING ".comment"
 #define LABEL_CHAR ':'
 
+/*---------- Main data struct ----------*/
+typedef struct s_data
+{
+	struct s_vec		*vec_info;
+	struct s_error_log	*s_error_log;
+	struct s_header		*s_header;
+} t_data;
+
+typedef struct	s_error_log
+{
+	size_t	line;
+	size_t	column;
+}				t_error_log;
+
+
 /*---------- Dynamic array structure ----------*/
 typedef struct s_vec
 {
@@ -47,11 +63,6 @@ typedef struct s_vec
 	size_t space_taken;
 } t_vec;
 
-/*---------- Main data struct ----------*/
-typedef struct s_data
-{
-	t_vec *vec_info;
-} t_data;
 
 /*---------- Main data struct ----------*/
 typedef struct s_input
@@ -87,6 +98,7 @@ typedef struct s_header
 	char comment[COMMENT_LENGTH + 1];
 } t_header;
 
+
 typedef enum e_type
 {
 	NAME,
@@ -113,7 +125,7 @@ void vec_new_arr(t_vec *dst, size_t len);
 void vec_insert(t_vec *dst_vec, void *element);
 
 /*---------- Functions to validate Tokens ----------*/
-bool is_label(char *sub_string);
+bool	is_label(char *sub_string, t_data *data);
 bool is_statement(char *sub_string);
 bool is_delimiter(char c);
 
