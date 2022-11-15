@@ -12,12 +12,12 @@
 
 #include "../includes/asm.h"
 
-void save_token(char *sub_string, t_type type)
+void save_token(t_data *s_data, char *sub_string, t_type type)
 {
 
 }
 
-void lexical_scanner(char *line, t_data *data)
+void lexical_scanner(char *line, t_data *s_data)
 {
 	unsigned int left;
 	unsigned int right;
@@ -42,26 +42,11 @@ void lexical_scanner(char *line, t_data *data)
 			// else if (ft_strcmp(sub_string, COMMENT_CMD_STRING) == 0)
 			// 	save_token(sub_string, COMMENT);
 			if (is_statement(sub_string))
-				save_token(sub_string, STATEMENT);
-			else if (is_label(sub_string, data))
-				save_token(sub_string, LABEL);
+				save_token(s_data, sub_string, STATEMENT);
+			else if (is_label(sub_string, s_data))
+				save_token(s_data, sub_string, LABEL);
 		}
 	}
-}
-
-/*
-Read header information: .name and .comment
-*/
-void	read_header(int fd, t_data *s_data)
-{
-	char	*line;
-
-	line = NULL;
-	while (get_next_line(fd, &line))
-	{
-
-	}
-
 }
 
 /*

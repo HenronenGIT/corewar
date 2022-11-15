@@ -14,7 +14,7 @@
 
 bool	is_delimiter(char c)
 {
-	if (c == ' ')
+	if (c == ' ' || c == '\t')
 		return (true);
 	return (false);
 }

@@ -2,7 +2,7 @@
 
 
 
-   .name		  "zo"rk"			
+   .name		  zork"			
 
 	  .comment    "just a basic living prog"	
 		

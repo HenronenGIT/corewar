@@ -28,6 +28,9 @@
 #define MALLOC_ERR -3
 #define NULL_ERR -4
 #define INVALID_LABEL -5
+#define NAME_ERR -6
+
+#define TEMP_ERR -999 //! TEMP
 
 //! This is copied from op.h header
 #define PROG_NAME_LENGTH (128)
@@ -38,6 +41,8 @@
 #define NAME_CMD_STRING ".name"
 #define COMMENT_CMD_STRING ".comment"
 #define LABEL_CHAR ':'
+#define HEADER_CHAR '.'
+#define STRING_CHAR '"'
 
 /*---------- Main data struct ----------*/
 typedef struct s_data
@@ -52,7 +57,6 @@ typedef struct	s_error_log
 	size_t	line;
 	size_t	column;
 }				t_error_log;
-
 
 /*---------- Dynamic array structure ----------*/
 typedef struct s_vec
@@ -106,7 +110,6 @@ typedef enum e_type
 	STATEMENT,
 	OPERATOR,
 	LABEL,
-
 } t_type;
 
 /*---------- Token struct ----------*/
@@ -117,8 +120,10 @@ typedef struct s_token
 	/* data */
 } t_token;
 
-void error(int error_number);
-void read_input(char *input, t_data *s_data);
+void	error(int error_number);
+void	read_input(char *input, t_data *s_data);
+void	read_header(int fd, t_data *s_data);
+void	lexical_error(t_data *s_data, char *line, int error_number);
 
 /*---------- Dynamic 2D array ----------*/
 void vec_new_arr(t_vec *dst, size_t len);
