@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/15 13:21:35 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/15 14:52:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void play_game(t_data *data, t_process *head)
 {
 	t_process *temp;
 
-	while //some condition related to cycles
-	{
+	//while //some condition related to cycles
+	//{
 		temp = head;
 		while (temp)
 		{
@@ -26,5 +26,5 @@ void play_game(t_data *data, t_process *head)
 		}
 		//do whatever checks
 		data->cycles_passed++;
-	}
+	//}
 }
