@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/14 12:23:48 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/15 11:00:43 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct s_carriage
 }				t_carriage;
 
 /* corewar_main.c */
-int	error(char **str, char *msg);
+int	error(char **str, char *msg, int usage);
 int	main(int argc, char **argv);
 
 /* init.c */
@@ -97,9 +97,16 @@ void	create_carriages(t_data *data, t_carriage **head);
 
 /* parse.c */
 void	parse(int ac, char **av, t_data *data);
+void	parse_champions(char *file, t_champion *champion);
 
 /* parse_flags.c */
 void	parse_dump(int *ac, char ***av, t_data *data);
+void	reset_ids(t_data *data);
+void	parse_n(int *ac, char ***av, t_data *data, t_champion *champion);
+
+/* utils.c */
+bool	is_cor_file(char *file);
+int32_t	bytes2int(uint8_t *byte_value, size_t size);
 
 /* play */
 void	play_game(t_data *data, t_carriage *head);

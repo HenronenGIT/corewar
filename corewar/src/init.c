@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/14 12:22:45 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/15 11:05:14 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_champion	*init_champion(void)
 
 	new_champion = (t_champion *)ft_memalloc(sizeof (t_champion));
 	if (!new_champion)
-		error(NULL, "Allocation failed in init_champion()");
+		error(NULL, "Allocation failed in init_champion()", 0);
 	new_champion->id = 0;
 	new_champion->name = NULL;
 	new_champion->comment = NULL;

@@ -6,7 +6,7 @@
 #    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/11/11 08:40:35 by akilk            ###   ########.fr        #
+#    Updated: 2022/11/15 10:43:24 by akilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAGS = -Wall #-Wextra -Werror
 
 SRC_DIR = ./src/
 SRC_FILES = main.c init.c parse.c data.c carriage.c play_game.c\
-			parse_flags.c
+			parse_flags.c utils.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ_DIR = ./obj/
 OBJ_FILES = $(SRC_FILES:.c=.o)

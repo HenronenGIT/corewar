@@ -6,17 +6,19 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/12 16:47:34 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/15 11:10:04 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-int	error(char **str, char *msg)
+int	error(char **str, char *msg, int usage)
 {
 	if (str)
 		ft_strdel(str);
 	ft_putendl_fd(msg, 2);
+	if (usage)
+		printf("Usage: ./corewar [-dump <num>] [-n <num>] <champion.cor> <...>\n");
 	exit (1);
 }
 
