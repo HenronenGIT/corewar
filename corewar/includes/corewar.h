@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/15 11:00:43 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/15 13:17:14 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct			s_champion
 
 typedef struct s_data
 {
-	int32_t		arena[MEM_SIZE];
+	int8_t		arena[MEM_SIZE];
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
 	int			dump_cycle;
@@ -70,20 +70,19 @@ typedef struct s_data
 
 
 
-typedef struct s_carriage
+typedef struct s_process
 {
 	int id;
 	bool carry;
-	//The statement code on which the carriage stands:
+	//The statement code on which the process stands:
 	//Prior to the battle, the value of this variable is not set.
 	int cursor;
 	int last_live;
 	int cycles_remaining;
-	int current_position; //memory address
 	int byte_jump_size;
 	int32_t registeries[REG_NUMBER];
-	struct s_carriage *next;
-}				t_carriage;
+	struct s_process *next;
+}				t_process;
 
 /* corewar_main.c */
 int	error(char **str, char *msg, int usage);
@@ -93,7 +92,7 @@ int	main(int argc, char **argv);
 t_champion	*init_champion(void);
 void	init_data(t_data *data);
 void	load_arena(t_data *data);
-void	create_carriages(t_data *data, t_carriage **head);
+void	create_processes(t_data *data, t_process **head);
 
 /* parse.c */
 void	parse(int ac, char **av, t_data *data);
@@ -109,6 +108,6 @@ bool	is_cor_file(char *file);
 int32_t	bytes2int(uint8_t *byte_value, size_t size);
 
 /* play */
-void	play_game(t_data *data, t_carriage *head);
+void	play_game(t_data *data, t_process *head);
 
 #endif

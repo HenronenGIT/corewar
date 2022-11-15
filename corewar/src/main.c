@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/15 11:10:04 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/15 13:30:50 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,30 @@ int	error(char **str, char *msg, int usage)
 	exit (1);
 }
 
+//tester
+void print_arena(int8_t *arena)
+{
+	int i = 0;
+	int j;
+
+	printf("\nARENA--->>>\n");
+	while (i < MEM_SIZE)
+	{
+		j = 0;
+		while (j < 64)
+		{
+			printf("%X ", arena[i]);
+			i++;
+			j++;
+		}
+		printf("\n");
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
-	// t_carriage *head;
+	t_process *head;
 
 	// head = NULL;
 	if (ac >= 2)
@@ -33,8 +53,11 @@ int	main(int ac, char **av)
 		init_data(&data);
 		parse(ac, av, &data);
 		load_arena(&data);
-		// create_carriages(&data, &head);
-		// play_game(&data, head);
+
+		// print_arena(data.arena);
+		parse_dump(&ac, &av, &data);
+		create_processes(&data, &head);
+		//play_game(&data, head);
 	}
 	else
 	//make exit type function
