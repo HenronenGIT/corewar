@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/15 10:43:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/15 11:36:34 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct			s_champion
 
 typedef struct s_data
 {
-	int32_t		arena[MEM_SIZE];
+	int8_t		arena[MEM_SIZE];
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
 	struct s_champion *last_alive;

@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/11/10 16:09:17 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/11/15 11:01:33 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 FLAGS = -Wall #-Wextra -Werror
 
 SRC_DIR = ./src/
-SRC_FILES = main.c init.c parse.c data.c carriage.c play_game.c
+SRC_FILES = main.c init.c parse.c data.c process.c #play_game.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ_DIR = ./obj/
 OBJ_FILES = $(SRC_FILES:.c=.o)
