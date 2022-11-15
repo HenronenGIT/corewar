@@ -6,22 +6,22 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/10 15:58:52 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:51:26 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-void play_game(t_data *data, t_carriage *head)
+void play_game(t_data *data, t_process *head)
 {
-	t_carriage *temp;
+	t_process *temp;
 
 	while //some condition related to cycles
 	{
 		temp = head;
 		while (temp)
 		{
-			//execute current carriage 
+			//execute current process 
 			temp = temp->next;
 		}
 		//do whatever checks

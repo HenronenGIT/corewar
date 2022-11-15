@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/10 16:09:21 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:43:53 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ typedef struct s_data
 
 
 
-typedef struct s_carriage
+typedef struct s_process
 {
 	int id;
 	bool carry;
-	//The statement code on which the carriage stands:
+	//The statement code on which the process stands:
 	//Prior to the battle, the value of this variable is not set.
 	int cursor;
 	int last_live;
@@ -83,8 +83,8 @@ typedef struct s_carriage
 	int current_position; //memory address
 	int byte_jump_size;
 	int32_t registeries[REG_NUMBER];
-	struct s_carriage *next;
-}				t_carriage;
+	struct s_process *next;
+}				t_process;
 
 /* corewar_main.c */
 int	error(char **str, char *msg);
@@ -94,12 +94,12 @@ int	main(int argc, char **argv);
 t_champion	*init_champion(int id);
 void	init_data(t_data *data);
 void	load_arena(t_data *data);
-void	create_carriages(t_data *data, t_carriage **head);
+void	create_processes(t_data *data, t_process **head);
 
 /* parse.c */
 void	parse(int argc, char **argv, t_data *data);
 
 /* play */
-void	play_game(t_data *data, t_carriage *head);
+void	play_game(t_data *data, t_process *head);
 
 #endif
