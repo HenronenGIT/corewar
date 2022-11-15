@@ -22,7 +22,7 @@ For direct labels we must first find out what is the address of that
 given label and convert that number into hexadecimal and pad the number
 with the correct ammount of 0s depending on the size of the given argument.
 */
-char	*make_dir_hex(t_input *data, int curr, int curr_size)
+char	*make_dir_hex(t_input *data, int current)
 {
 	/**/
 }
@@ -34,9 +34,26 @@ given registry number into hexadecimal and adding 0x prefix and making
 sure we pad the number with the correct ammount of 0s depending on the
 size of the given argument.
 */
-char	*make_reg_hex(t_input *data, int curr, int curr_size)
+void	make_reg_hex(t_input *data, int current)
 {
+	char	*current_arg;
+	int		reg_num;
 
+	if (current == 0)
+		current_arg = data->arg_1;
+	else if (current == 1)
+		current_arg = data->arg_2;
+	else if (current = 2)
+		current_arg = data->arg_3;
+	else
+		return ;
+	reg_num = ft_atoi(&current_arg[1]);
+	if (current == 0)
+		data->arg_1_hex = ft_itoa_base(reg_num, 16);
+	else if (current == 1)
+		data->arg_2_hex = ft_itoa_base(reg_num, 16);
+	else
+		data->arg_3_hex = ft_itoa_base(reg_num, 16)
 }
 
 /*
@@ -50,25 +67,30 @@ For indirect labels we need to find the relative address of the given label
 and convert the "distance" into hexadecimal and of course pad the final
 result with the correct ammount of 0s depending on the size of the arg.
 */
-char	*make_ind_hex(t_input *data, int curr, int curr_size)
+char	*make_ind_hex(t_input *data, int current)
 {
 	/**/
 }
 
 /*
-function to find the different argument codes and fill them in the struct
+function to find the different argument codes and fill them in the struct.
+1 = T_REG
+2 = T_DIR
+3 = T_IND
 */
-char	*find_argument_codes(t_input *data, int curr_size, int curr_type, int curr)
+void	find_argument_codes(t_input *data)
 {
-	if (curr_arg_type)
+	int	i;
+
+	i = 0;
+	while (data->arg_size[i])
 	{
-		if (curr_type == 1)
-			return (make_dir_hex(data, curr, curr_size));
-		if (curr_type == 2)
-			return (make_reg_hex(data, curr, curr_size));
-		if (curr_type == 3)
-			return (make_ind_hex(data, curr, curr_size));
+		if (data->arg_type[i] == 1)
+			make_reg_hex(data, i);
+		if (data->arg_type[i] == 2)
+			make_dir_hex(data, i);
+		if (data->arg_type[i] == 3)
+			make_ind_hex(data, i);
+		i++;
 	}
-	else
-		return (NULL);
 }

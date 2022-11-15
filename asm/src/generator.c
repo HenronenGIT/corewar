@@ -28,7 +28,7 @@ hexadecimal including 0x prefix.
 */
 char	*conv_binary_to_hex(char *binary)
 {
-	/*string in binary to be coverted to hexadecimal with 0x prefix*/
+
 }
 
 /*
@@ -64,12 +64,11 @@ void	find_atc(t_input *data)
 	int		i;
 
 	i = 0;
-	temp = malloc(sizeof(char) * ((data->arg_1_size) * 2 + (data->arg_2_size) * 2 + (data->arg_3_size) * 2 + 3));
+	temp = malloc(sizeof(char) * ((data->arg_size[0]) * 2 + (data->arg_size[1]) * 2 + (data->arg_size[2]) * 2 + 3));
 	if (!temp)
 		error(1, "malloc error in find_atc");
-	temp = find_arg_type(data->arg_1_type, temp);
-	temp = find_arg_type(data->arg_2_type, temp);
-	temp = find_arg_type(data->arg_3_type, temp);
+	while (data->arg_type[i])
+		temp = find_arg_type(data->arg_type[i++], temp);
 	temp = find_arg_type(0, temp);
 	data->argument_type_code = conv_binary_to_hex(temp);
 	free (temp);
@@ -92,9 +91,7 @@ void	generate_code(t_input *data)
 {
 	find_statement_code(data);
 	find_atc(data);
-	data->arg_1_hex = find_argument_codes(data, data->arg_1_size, data->arg_1_type, 1);
-	data->arg_2_hex = find_argument_codes(data, data->arg_2_size, data->arg_2_type, 2);
-	data->arg_3_hex = find_argument_codes(data, data->arg_3_size ,data->arg_3_type, 3);
+	find_argument_codes();
 	make_final_hex(data);
 }
 
@@ -111,8 +108,7 @@ void	generator(t_input **data)
 	while (data[i])
 	{
 		if (!data[i]->is_label)
-		{
 			generate_input(data[i]);
-		}
+		i++;
 	}
 }

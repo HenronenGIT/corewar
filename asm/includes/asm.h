@@ -19,15 +19,13 @@
 typedef struct s_input
 {
 	int		statement;		//statement for any given instruction given as corresponding int found in the header | HENRI
-	char	**arguments;	//2d array of every argument in its own index | HENRI
+	char	*arg_1;
+	char	*arg_2;
+	char	*arg_3;
 	int		is_label;		// HENRI
 	int		byte_size;		//full size of every statement as bytes. 0 for labels | HENRI
-	int		arg_1_size;		//is size of arg1 in bytes | HENRI
-	int		arg_2_size;		//is size of arg2 in bytes | HENRI
-	int		arg_3_size;		//is size of arg3 in bytes | HENRI
-	int		arg_1_type;		//is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-	int		arg_2_type;		//is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-	int		arg_3_type;		// is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+	int		arg_size[4];		//is size of arg1 in bytes | HENRI
+	int		*arg_type[4];		// is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
 
 	char	*statement_code;		//statement code in hexadecimal | OTTO
 	char	*argument_type_code;	//argument type code in hexadecimal | OTTO
