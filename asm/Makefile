@@ -16,7 +16,7 @@ CGREEN=\033[0;32m
 
 NAME = asm
 CC = gcc
-FLAGS = #-Wall -Wextra -Werror
+FLAGS = -g#-Wall -Wextra -Werror
 
 SRC_DIR = ./src/
 SRC_FILES = asm.c \

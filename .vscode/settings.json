@@ -1,6 +1,9 @@
 {
 	"files.associations": {
 		"*.js": "javascriptreact",
-		"asm.h": "c"
-	}
+		"lem_in.h": "c",
+		"chrono": "c",
+		"locale": "c"
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

@@ -15,7 +15,7 @@ CEND=\033[0m
 CGREEN=\033[0;32m
 
 CC = gcc
-FLAGS = -Wall -Wextra #-Werror
+FLAGS = -Wall -Wextra -g#-Werror
 
 ASM_DIR = ./asm
 VM_DIR = ./corewar

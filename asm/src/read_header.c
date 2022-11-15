@@ -69,9 +69,10 @@ void read_header(int fd, t_data *s_data)
 		s_data->s_error_log->line += 1;
 		while (is_delimiter(line[i] == true) || line[i] == '\0')
 			i += 1;
-		if (line[i] == '\0' && line[i] != HEADER_CHAR) //! double check that works.
+		// printf("%s\n", line);
+		printf("%c\n", line[i]);
+		if (line[i] != HEADER_CHAR) //! double check that works.
 			lexical_error(s_data, line, TEMP_ERR);
-		LOCATION;
 		if (ft_strncmp(&line[i], NAME_CMD_STRING, name_len) == 0)
 			validate_name(s_data, &line[i + name_len]); //AAAAAA
 		// else if (ft_strncmp(&line[i + comment_len], COMMENT_CMD_STRING, comment_len) == 0)
