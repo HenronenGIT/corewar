@@ -12,6 +12,10 @@
 
 #include "../includes/libft.h"
 
+/*
+The strrchr() function is identical to strchr(),
+except it locates the last occurrence of c.
+*/
 char	*ft_strrchr(const char *str, int c)
 {
 	int		i;
