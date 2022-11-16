@@ -47,9 +47,9 @@ static void	init_structs(t_data *s_data)
 	t_error_log	s_error_log;
 
 	s_header.magic = COREWAR_EXEC_MAGIC;
-	// s_header.prog_name = NULL;
+	ft_bzero(s_header.prog_name, PROG_NAME_LENGTH);
 	// s_header.prog_size = ;
-	// s_header.comment = ;
+	ft_bzero(s_header.comment, COMMENT_LENGTH);
 	s_error_log.line = 0;
 	s_error_log.column = 0;
 	s_data->vec_info = NULL;

@@ -31,7 +31,6 @@
 #define NAME_ERR -6
 #define NAME_LEN_ERR -7
 
-
 #define TEMP_ERR -999 //! TEMP
 
 //! This is copied from op.h header
