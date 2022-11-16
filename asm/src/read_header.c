@@ -100,3 +100,5 @@ void read_header(int fd, t_data *s_data)
 		free(line);
 	}
 }
+
+//STOP READING WHEN NAME AND COMMNET IS SAVED.
