@@ -28,7 +28,7 @@ static void init_process(t_data *data, t_process *temp, int i)
 	temp->carry = false;
 	//code pointer
 	temp->cursor = data->champions[i - 1]->start_addr;
-	printf("cursor: %d\n", data->champions[i - 1]->start_addr);
+	//printf("cursor: %d\n", data->champions[i - 1]->start_addr);
 	//last live  statement?
 	//cycles_remaining;
 	//byte_jum_size
@@ -62,6 +62,7 @@ void create_processes(t_data *data, t_process **head)
 	while (i <= data->champions_num)
 	{
 		//malloc process and add to list
+		printf("HERERERER\n");
 		add_process(data, head, i);
 		i++;
 	}

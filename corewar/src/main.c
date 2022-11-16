@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/16 14:40:11 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:03:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av)
 	t_data	data;
 	t_process *head;
 
-	// head = NULL;
+	head = NULL;
 	if (ac >= 2)
 	{
 		init_data(&data);
@@ -73,5 +73,8 @@ int	main(int ac, char **av)
 	else
 	//make exit type function
 		printf("TEST USAGE\n");
+	
+	//free processes
+	//free champions
 	return (0);
 }
