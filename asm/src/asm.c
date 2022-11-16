@@ -41,29 +41,28 @@ static void	init_vector(t_data *s_data)
 Initializes all structs from the stack memory.
 Then initializes pointers to those structs to t_data struct;
 */
-static void	init_structs(t_data *s_data)
+static void	init_structs(t_data *data, t_header *header, t_error_log *error_log)
 {
-	t_header	s_header;
-	t_error_log	s_error_log;
-
-	s_header.magic = COREWAR_EXEC_MAGIC;
-	ft_bzero(s_header.prog_name, PROG_NAME_LENGTH);
+	header->magic = COREWAR_EXEC_MAGIC;
+	ft_bzero(header->prog_name, PROG_NAME_LENGTH);
 	// s_header.prog_size = ;
-	ft_bzero(s_header.comment, COMMENT_LENGTH);
-	s_error_log.line = 0;
-	s_error_log.column = 0;
-	s_data->vec_info = NULL;
-	s_data->s_header = &s_header;
-	s_data->s_error_log = &s_error_log;
+	ft_bzero(header->comment, COMMENT_LENGTH);
+	error_log->line = 0;
+	error_log->column = 0;
+	data->vec_info = NULL;
+	data->s_header = header;
+	data->s_error_log = error_log;
 }
 
 int main (int argc, char *argv[])
 {
 	t_data			s_data;
+	t_header	s_header;
+	t_error_log	s_error_log;
 
 	if (argc != 2)
 		error(ARG_ERR);
-	init_structs(&s_data);
+	init_structs(&s_data, &s_header, &s_error_log);
 	init_vector(&s_data);
 	read_input(argv[1], &s_data);
 	
