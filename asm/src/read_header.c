@@ -14,12 +14,12 @@
 
 // static char	*skip_white_spaces(char *str)
 // {
-	
+
 // }
 
-static void	find_quotes(char *line, size_t *first_quote, size_t *second_quote)
+static void find_quotes(char *line, size_t *first_quote, size_t *second_quote)
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
 	while (line[i] != '\0' && *second_quote == 0)
@@ -32,44 +32,34 @@ static void	find_quotes(char *line, size_t *first_quote, size_t *second_quote)
 	}
 }
 
-void validate_comment(t_data *s_data, char *line)
+void validate_string(t_data *s_data, char *line, int type)
 {
-	size_t	i;
-
-	i = COMMENT_CMD_LEN;
-	// find_quotes(&line[i], &first_quote, &second_quote);
-
-}
-
-static void validate_name(t_data *s_data, char *line)
-{
-	// check datatypes. is unsigned int good?
 	size_t i;
 	size_t first_quote;
 	size_t second_quote;
-	size_t name_len;
+	size_t str_len;
 
-	name_len = 0;
+	i = 0;
+	str_len = 0;
 	first_quote = 0;
 	second_quote = 0;
-	i = NAME_CMD_LEN;
 	find_quotes(&line[i], &first_quote, &second_quote);
 	if (second_quote == 0)
 		lexical_error(s_data, line, TEMP_ERR);
-	name_len = (second_quote - first_quote) - 1;
-	if (name_len > PROG_NAME_LENGTH)
+	str_len = (second_quote - first_quote) - 1;
+	if (type == NAME && str_len > PROG_NAME_LENGTH)
 		error(NAME_LEN_ERR);
-	first_quote += NAME_CMD_LEN;
-	second_quote += NAME_CMD_LEN + 1;
-	while (line[second_quote] != '\0')
+	else if (type == COMMENT && str_len > COMMENT_LENGTH)
+		error(COMMENT_LEN_ERR);
+	while (line[++second_quote] != '\0')
 	{
 		if (is_delimiter(line[second_quote]) == false)
 			lexical_error(s_data, line, TEMP_ERR);
-		second_quote += 1;
 	}
-	ft_strncpy(s_data->s_header->prog_name, &line[first_quote + 1], name_len);
-	// PRINT(s_data->s_header->prog_name);
-	printf("%s\n", s_data->s_header->prog_name);
+	if (type == NAME)
+		ft_strncpy(s_data->s_header->prog_name, &line[first_quote + 1], str_len);
+	else
+		ft_strncpy(s_data->s_header->comment, &line[first_quote + 1], str_len);
 }
 
 static void seek_header_keywords(t_data *s_data, char *line)
@@ -84,16 +74,15 @@ static void seek_header_keywords(t_data *s_data, char *line)
 		else if (is_delimiter(line[i]) == false)
 		{
 			if (ft_strncmp(&line[i], NAME_CMD_STRING, NAME_CMD_LEN) == 0)
-				validate_name(s_data, &line[i]);
+				validate_string(s_data, &line[i + NAME_CMD_LEN], NAME);
 			else if (ft_strncmp(&line[i], COMMENT_CMD_STRING, COMMENT_CMD_LEN) == 0)
-				validate_comment(s_data, &line[i]);
+				validate_string(s_data, &line[i + COMMENT_CMD_LEN], COMMENT);
 			else
 				lexical_error(s_data, line, TEMP_ERR);
 			break;
 		}
 		i += 1;
 	}
-	LOCATION;
 }
 
 /*

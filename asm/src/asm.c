@@ -26,6 +26,8 @@ void	error(int error_number)
 		ft_puterror("ERROR: Label contained invalid characters!\n");
 	if (error_number == NAME_LEN_ERR)
 		ft_puterror("ERROR: Champion name too long (Max length 128)\n");
+	if (error_number == COMMENT_LEN_ERR)
+		ft_puterror("ERROR: Champion comment too long (Max length 2048)\n");
 	exit(error_number);
 }
 

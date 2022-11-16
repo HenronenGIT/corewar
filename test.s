@@ -4,7 +4,7 @@
 
    .name		  "test_name"			
 
-	  .comment    "just a basic living prog"	
+	  .comment    "This is a comment!"	
 		
 l2:	sti	r1,%:live,%0
 	and	r1,%0,r1
