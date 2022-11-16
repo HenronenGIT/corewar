@@ -29,6 +29,8 @@
 #define NULL_ERR -4
 #define INVALID_LABEL -5
 #define NAME_ERR -6
+#define NAME_LEN_ERR -7
+
 
 #define TEMP_ERR -999 //! TEMP
 
@@ -39,7 +41,10 @@
 
 /*---------- Defines from op.h header ----------*/
 #define NAME_CMD_STRING ".name"
+#define NAME_CMD_LEN 5
 #define COMMENT_CMD_STRING ".comment"
+#define COMMENT_CMD_LEN 8
+
 #define LABEL_CHAR ':'
 #define HEADER_CHAR '.'
 #define STRING_CHAR '"'

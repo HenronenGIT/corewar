@@ -24,6 +24,8 @@ void	error(int error_number)
 		ft_puterror("ERROR: NULL was passed to the function!\n");
 	if (error_number == INVALID_LABEL)
 		ft_puterror("ERROR: Label contained invalid characters!\n");
+	if (error_number == NAME_LEN_ERR)
+		ft_puterror("ERROR: Champion name too long (Max length 128)\n");
 	exit(error_number);
 }
 
@@ -64,6 +66,7 @@ int main (int argc, char *argv[])
 	init_structs(&s_data);
 	init_vector(&s_data);
 	read_input(argv[1], &s_data);
+	
 	// Lexical analysis
 		// Read byte by byte
 		// Make tokens

@@ -2,7 +2,7 @@
 
 
 
-   .name		  "name"			d
+   .name		  "test_name"			
 
 	  .comment    "just a basic living prog"	
 		
