@@ -16,7 +16,8 @@
 
 #include <stdlib.h>
 #include "../../includes/op.h"
-#include "../../libft/libft.h"
+#include "../../libft/includes/libft.h"
+#include <fcntl.h>
 #include <stdio.h> // remove
 
 /*
