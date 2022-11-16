@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/15 13:30:50 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/16 14:33:26 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,20 @@ void print_arena(int8_t *arena)
 	while (i < MEM_SIZE)
 	{
 		j = 0;
-		while (j < 64)
+		while (j < 16)
 		{
-			printf("%X ", arena[i]);
+			//printf("%02X ", (uint8_t)arena[i]);
+			
+			printf("%c%c%c%c%c%c%c%c ",\
+				(arena[i] & 0x80 ? '1' : '0'), \
+				(arena[i] & 0x40 ? '1' : '0'), \
+				(arena[i] & 0x20 ? '1' : '0'), \
+				(arena[i] & 0x10 ? '1' : '0'), \
+				(arena[i] & 0x08 ? '1' : '0'), \
+				(arena[i] & 0x04 ? '1' : '0'), \
+				(arena[i] & 0x02 ? '1' : '0'), \
+				(arena[i] & 0x01 ? '1' : '0') );
+			
 			i++;
 			j++;
 		}
@@ -54,10 +65,10 @@ int	main(int ac, char **av)
 		parse(ac, av, &data);
 		load_arena(&data);
 
-		// print_arena(data.arena);
-		parse_dump(&ac, &av, &data);
+		//print_arena(data.arena);
+		//parse_dump(&ac, &av, &data);
 		create_processes(&data, &head);
-		//play_game(&data, head);
+		play_game(&data, head);
 	}
 	else
 	//make exit type function

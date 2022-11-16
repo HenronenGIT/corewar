@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:43:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/15 13:17:50 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/16 14:27:02 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void init_arena(int8_t *arena)
 	int i;
 
 	i = 0;
-	while (i  < MEM_SIZE)
+	while (i < MEM_SIZE)
 		arena[i++] = 0;
 }
 

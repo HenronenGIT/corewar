@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/15 13:17:14 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/16 14:02:45 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
-
 # define COREWAR_H
 
 #include <stdlib.h>
@@ -20,6 +19,7 @@
 
 #include "../../includes/op.h"
 #include "../../libft/includes/libft.h"
+#include "../../libft/includes/ft_printf.h"
 #include <fcntl.h>
 #include <stdio.h> // remove
 
