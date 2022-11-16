@@ -6,16 +6,36 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/11/16 14:30:01 by wdonnell         ###   ########.fr       */
-=======
-/*   Updated: 2022/11/15 14:52:11 by wdonnell         ###   ########.fr       */
->>>>>>> 6dd10a71479dcc9665ed89a2170ae37e550214aa
+/*   Updated: 2022/11/16 15:49:49 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include "../includes/op_table.h"
+
+//include for tester , pow()
+#include <math.h>
+
+//tester
+static void print_registers(t_process *temp)
+{
+	int i = 0;
+
+	printf("\nProcess %d Regristries--->\n", temp->id);
+	while (i < REG_NUMBER)
+	{
+		//int version
+		printf("reg %.2d: ", i + 1);
+		for (int j = 31; j >= 0; j--)
+		{
+			printf("%c", temp->registeries[i] & (int32_t)pow( 2, j) ? '1' : '0' );
+			if (j % 8 == 0)
+				printf(" ");
+		}
+		printf("\n");
+		i++;
+	}
+}
 
 static void execute(t_process *temp, t_data *data)
 {
@@ -37,6 +57,7 @@ void play_game(t_data *data, t_process *head)
 	temp = head;
 
 	execute(temp, data);
+	print_registers(temp);
 	/*
 	while //some condition related to cycles
 	{
