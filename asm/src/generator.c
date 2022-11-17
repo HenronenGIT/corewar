@@ -62,11 +62,15 @@ void	find_atc(t_input *data)
 {
 	char	*temp;
 	int		i;
+	int		j;
 
-	i = 0;
-	temp = malloc(sizeof(char) * ((data->arg_size[0]) * 2 + (data->arg_size[1]) * 2 + (data->arg_size[2]) * 2 + 3));
+	i = 1;
+	j = 0;
+	temp = malloc(sizeof(char) * 9);
 	if (!temp)
 		error(1, "malloc error in find_atc");
+	temp[8] = '\0';
+
 	while (data->arg_type[i])
 		temp = find_arg_type(data->arg_type[i++], temp);
 	temp = find_arg_type(0, temp);
@@ -87,28 +91,32 @@ void	find_statement_code(t_input *data)
 /*
 Function to generate all different hex codes and fill them in the struct.
 */
-void	generate_code(t_input *data)
+void	generate_code(t_input *data, int current_pos)
 {
 	find_statement_code(data);
 	find_atc(data);
-	find_argument_codes();
+	find_argument_codes(data, current_pos);
 	make_final_hex(data);
 }
 
 /*
 Initial function to parse through all statements and then join them
 together to generate the final hexcode (opcode or bytecode) for all
-statements in the array.
+statements in the array and keep track of which byte we are on currently.
 */
 void	generator(t_input **data)
 {
 	int	i;
+	int	current_pos;
 
 	i = 0;
+	current_pos = 0;
 	while (data[i])
 	{
+		data[i]->current_bytes = current_pos;
 		if (!data[i]->is_label)
-			generate_input(data[i]);
+			generate_input(data[i], current_pos);
 		i++;
+		current_pos += data[i]->byte_size;
 	}
 }

@@ -12,6 +12,24 @@
 
 #include "../includes/asm.h"
 
+int	is_direct_label(char *current)
+{
+	int	i;
+
+	i = 0;
+	while (current[i])
+	{
+		if (current[i] == '%')
+		{
+			if (current[i + 1] == ':')
+				return (1);
+		}
+		else
+			i++;
+	}
+	return (0);
+}
+
 /*
 Find argument codes for arguments of type T_DIR (direct)
 Hex codes for direct type arguments are made differently depending
@@ -22,9 +40,32 @@ For direct labels we must first find out what is the address of that
 given label and convert that number into hexadecimal and pad the number
 with the correct ammount of 0s depending on the size of the given argument.
 */
-char	*make_dir_hex(t_input *data, int current)
+char	*make_dir_hex(t_input *data, int current, int current_pos)
 {
-	/**/
+	int	dir_num;
+	int	i;
+
+	dir_num = 0;
+	i = 0;
+	if (is_label(data->arg[current]))
+	{
+		if(current_label_is_defined(data->arg[current]))
+		{
+			/**/
+		}
+		else
+		{
+			dir_num = find_label_address(data, data->arg[current]);
+			data->arg_hex[current] = ft_itoa_base(dir_num, 16);
+		}
+	}
+	else
+	{
+		while (!ft_isnum(data->arg[current][i]))
+			i++;
+		dir_num = ft_atoi(&data->arg[current][i]);
+		data->arg_hex[current] = ft_itoa_base(dir_num, 16);
+	}
 }
 
 /*
@@ -36,24 +77,29 @@ size of the given argument.
 */
 void	make_reg_hex(t_input *data, int current)
 {
-	char	*current_arg;
-	int		reg_num;
+	int	i;
+	int	reg_num;
 
-	if (current == 0)
-		current_arg = data->arg_1;
-	else if (current == 1)
-		current_arg = data->arg_2;
-	else if (current = 2)
-		current_arg = data->arg_3;
-	else
-		return ;
-	reg_num = ft_atoi(&current_arg[1]);
-	if (current == 0)
-		data->arg_1_hex = ft_itoa_base(reg_num, 16);
-	else if (current == 1)
-		data->arg_2_hex = ft_itoa_base(reg_num, 16);
-	else
-		data->arg_3_hex = ft_itoa_base(reg_num, 16)
+	i = 0;
+	reg_num = 0;
+	while (!ft_isnum(data->arg[current][i]))
+		i++;
+	reg_num = ft_atoi(&data->arg[current][i]);
+	data->arg_hex[current] = ft_itoa_base(reg_num, 16);
+}
+
+int	is_indirect_label(char *current)
+{
+	int	i;
+
+	i = 0;
+	while (current[i])
+	{
+		if (current[i] == ':')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 /*
@@ -67,9 +113,24 @@ For indirect labels we need to find the relative address of the given label
 and convert the "distance" into hexadecimal and of course pad the final
 result with the correct ammount of 0s depending on the size of the arg.
 */
-char	*make_ind_hex(t_input *data, int current)
+char	*make_ind_hex(t_input *data, int current, int current_pos)
 {
-	/**/
+	int	ind_num;
+	int	i;
+
+	ind_num = 0;
+	i = 0;
+	if (is_indirect_label(data->arg[current]))
+	{
+		
+	}
+	else
+	{
+		while (!ft_isnum(data->arg[current][i]))
+			i++;
+		ind_num = ft_atoi(data->arg[current][i]);
+		data->arg_hex[current] = ft_itoa_base(ind_num, 16);
+	}
 }
 
 /*
@@ -78,19 +139,19 @@ function to find the different argument codes and fill them in the struct.
 2 = T_DIR
 3 = T_IND
 */
-void	find_argument_codes(t_input *data)
+void	find_argument_codes(t_input *data, int current_pos)
 {
 	int	i;
 
-	i = 0;
-	while (data->arg_size[i])
+	i = 1;
+	while (data->arg[i])
 	{
 		if (data->arg_type[i] == 1)
 			make_reg_hex(data, i);
 		if (data->arg_type[i] == 2)
-			make_dir_hex(data, i);
+			make_dir_hex(data, i, current_pos);
 		if (data->arg_type[i] == 3)
-			make_ind_hex(data, i);
+			make_ind_hex(data, i, current_pos);
 		i++;
 	}
 }

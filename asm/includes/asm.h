@@ -19,9 +19,7 @@
 typedef struct s_input
 {
 	int		statement;		//statement for any given instruction given as corresponding int found in the header | HENRI
-	char	*arg_1;
-	char	*arg_2;
-	char	*arg_3;
+	char	**arg;
 	int		is_label;		// HENRI
 	int		byte_size;		//full size of every statement as bytes. 0 for labels | HENRI
 	int		arg_size[4];		//is size of arg1 in bytes | HENRI
@@ -29,10 +27,9 @@ typedef struct s_input
 
 	char	*statement_code;		//statement code in hexadecimal | OTTO
 	char	*argument_type_code;	//argument type code in hexadecimal | OTTO
-	char	*arg_1_hex;				//arg 1 code in hexadecimal | OTTO
-	char	*arg_2_hex;				//arg 2 code in hexadecimal | OTTO
-	char	*arg_3_hex;				//arg 3 code in hexadecimal | OTTO
+	char	**arg_hex;				//arg codes in hexadecimal | OTTO
 	char	*final;					//final bytecode for current statement | OTTO
+	int		current_bytes;
 }	t_input;
 
 #endif
