@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/16 14:46:52 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:07:06 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_process
 	int cycles_remaining;
 	int byte_jump_size;
 	int32_t registeries[REG_NUMBER];
+	int32_t args[3];
 	struct s_process *next;
 }				t_process;
 

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 12:48:22 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/17 12:59:45 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:07:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@
 
 typedef struct s_types
 {
-	int	t_arg1;
-	int	t_arg2;
-	int	t_arg3;
-	int	size_arg1;
-	int	size_arg2;
-	int	size_arg3;
+	int type_arg[3];
+	int size_arg[3];
 	int size_t_dir;
+	int num_args;
 
 }				t_types;
 
@@ -72,5 +69,6 @@ static const t_op g_dispatch[NUM_OPS] = {
 };
 
 void	get_types(int8_t byte, t_types *types);
+void	get_arg_values(t_process *cur_process, t_data *data, t_types *types);
 
 #endif
