@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/16 16:03:22 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:34:57 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int ac, char **av)
 		parse(ac, av, &data);
 		load_arena(&data);
 
-		//print_arena(data.arena);
+		print_arena(data.arena);
 		//parse_dump(&ac, &av, &data);
 		create_processes(&data, &head);
 		play_game(&data, head);

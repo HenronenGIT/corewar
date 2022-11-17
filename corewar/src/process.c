@@ -62,7 +62,6 @@ void create_processes(t_data *data, t_process **head)
 	while (i <= data->champions_num)
 	{
 		//malloc process and add to list
-		printf("HERERERER\n");
 		add_process(data, head, i);
 		i++;
 	}

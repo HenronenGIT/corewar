@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/16 15:57:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/17 11:24:15 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void execute(t_process *temp, t_data *data)
 	if (n < 16 && n >= 0)
 		g_dispatch[n](temp, data);
 	else
-		printf("invalid op code\n");
+		ft_printf("invalid op code\n");
 		//invalid op code
 
 }
@@ -66,7 +66,7 @@ void play_game(t_data *data, t_process *head)
 		{
 			//execute current process
 			execute(temp, data);
-			print_registers(temp);
+			//print_registers(temp);
 			temp = temp->next;
 		}
 		//do whatever checks
