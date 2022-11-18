@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/17 12:34:57 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/18 15:17:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ void print_arena(int8_t *arena)
 		j = 0;
 		while (j < 16)
 		{
-			//printf("%02X ", (uint8_t)arena[i]);
+			printf("%02X ", (uint8_t)arena[i]);
 			
+			/*
 			printf("%c%c%c%c%c%c%c%c ",\
 				(arena[i] & 0x80 ? '1' : '0'), \
 				(arena[i] & 0x40 ? '1' : '0'), \
@@ -45,7 +46,7 @@ void print_arena(int8_t *arena)
 				(arena[i] & 0x04 ? '1' : '0'), \
 				(arena[i] & 0x02 ? '1' : '0'), \
 				(arena[i] & 0x01 ? '1' : '0') );
-			
+			*/
 			i++;
 			j++;
 		}

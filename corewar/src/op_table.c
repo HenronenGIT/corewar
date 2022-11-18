@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:42:58 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/17 15:20:05 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/18 15:39:46 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	op_ldi(t_process *cur_process, t_data *data)
 {
 	printf("XXXXX");
 }
-
+/*
 //tester stuff
 static void print_arg_types(t_types *types)
 {
@@ -74,31 +74,47 @@ static void print_arg_types(t_types *types)
 	printf("t_arg3: %d\n", types->type_arg[2]);
 	printf("sizeof arg3: %d\n", types->size_arg[2]);
 }
+*/
+static void print_arg_values(t_process *cur_process)
+{
+	int i = 0;
+
+	while (i < 3)
+	{
+		printf("arg %d val: %d\n", i + 1, cur_process->args[i]);
+		i++;
+	}
+}
 
 void	op_sti(t_process *cur_process, t_data *data)
 {
 	int8_t val_to_be_copied;
 	int sum;
 	t_types types;
-	int num_args = 3;
 
 	//comment stuff probably part of verbose mode
 	ft_printf("process %d is on sti\n", cur_process->id);
 	//get arg types and sizes
 	types.size_t_dir = 2;
 	types.num_args = 3;
+	//only if arg type is 2nd byte
 	get_types(data->arena[cur_process->cursor + 1], &types);
+
 	//tester
 	//print_arg_types(&types);
-	get_arg_values(cur_process, data, &types);
+	
+	//set start depending on if argument code is 2nd byte
+	get_arg_values(cur_process, &data->arena[cur_process->cursor + 2], &types);
+	//test arg values
+	print_arg_values(cur_process);
 	//arg1
 	val_to_be_copied = cur_process->args[0];
 
+	//depending on game mechanics write above value to address:
+	// work for negative values??
+	//keep memory circular
+	//make write to memory function based on different sizes, not sure if this is needed or not
 
-
-
-	//write val_to_be_copied (first param) to address: cursor + ((arg2 + arg3) % IDX_MOD)
-	
 }
 
 void	op_fork(t_process *cur_process, t_data *data)

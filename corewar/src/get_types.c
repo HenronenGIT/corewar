@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:55:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/17 15:18:38 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:53:25 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void get_arg1(int8_t byte, t_types *types)
 {
-	if ((byte & ARG1_MASK )== 0x40)
+	if ((byte & ARG1_MASK)== 0x40)
 	{
 		types->type_arg[0]= T_REG;
 		types->size_arg[0] = 1;
@@ -71,7 +71,7 @@ static void get_arg3(int8_t byte, t_types *types)
 		types->size_arg[2] = 2;
 	}
 }
-
+//add else->is zero and hence an error
 void get_types(int8_t byte, t_types *types)
 {
 	get_arg1(byte, types);

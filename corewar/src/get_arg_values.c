@@ -6,40 +6,25 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:02:39 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/17 16:07:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/18 15:39:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include "../includes/op_table.h"
 
-//make ft_pow return 1 in case of zero pow
-static int32_t	read_bytes(t_data *data, int idx, int size)
-{
-	int32_t sum;
-	int32_t byte;
-
-	idx += 1;
-	sum = 0;
-	while (size)
-	{
-		byte = data->arena[idx - size];
-		sum += byte * ((int32_t)ft_pow(16, size))
-		size--;
-	}
-}
-
-void	get_arg_values(t_process *cur_process, t_data *data, t_types *types)
+void	get_arg_values(t_process *cur_process, int8_t *arena, t_types *types)
 {
 	int	i;
-	int	start;
+	size_t start;
 
-	start = cur_process->cursor + 1;
+	start = 0;
 	i = 0;
 	while (i < types->num_args)
 	{
+		//cur_process->args[i] = read_bytes(data,  types->size_arg[i]);
+		cur_process->args[i] = bytes2int((uint8_t*)&arena[start], types->size_arg[i]);
 		start += types->size_arg[i];
-		cur_process->args[i] = read_bytes(start, types->size_arg[i]);
 		i++;
 	}
 }
