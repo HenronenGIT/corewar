@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/15 13:30:50 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/16 10:03:41 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	error(char **str, char *msg, int usage)
 		ft_strdel(str);
 	ft_putendl_fd(msg, 2);
 	if (usage)
-		printf("Usage: ./corewar [-dump <num>] [-n <num>] <champion.cor> <...>\n");
+		ft_printf("Usage: ./corewar [-dump <num>] [-n <num>] <champion.cor> <...>\n");
 	exit (1);
 }
 
@@ -34,7 +34,7 @@ void print_arena(int8_t *arena)
 		j = 0;
 		while (j < 64)
 		{
-			printf("%X ", arena[i]);
+			printf("%02X ", (uint8_t)arena[i]);
 			i++;
 			j++;
 		}
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 	t_data	data;
 	t_process *head;
 
-	// head = NULL;
+	head = NULL;
 	if (ac >= 2)
 	{
 		init_data(&data);
