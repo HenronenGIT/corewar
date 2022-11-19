@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/18 15:11:41 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:34:12 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,7 @@ void	parse(int ac, char **av, t_data *data)
 	while (ac > 1)
 	{
 		if (!ft_strcmp(*av, "-dump"))
-		{
 			parse_dump(&ac, &av, data);
-			data->dump_cycle = ft_atoi(*(av + 1));
-			printf("dump: %d\n", data->dump_cycle);// used during game to dump after this cycle
-		}
 		else if (is_cor_file(*av) || !ft_strcmp(*av, "-n"))
 		{
 			champion = init_champion();

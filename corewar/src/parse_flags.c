@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:02:47 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/19 16:32:20 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/19 18:41:34 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,37 @@ on the standard output and quit the game.
 The memory must be dumped in the
 hexadecimal format with 32 octets per line.
 */
+static bool	valid_int(char *str)
+{
+	int	i;
+	double	num;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	num = ft_atol(str);
+	if (num < 0 || num > INT_MAX)
+		return (false);
+	return (true);
+}
 
 void	parse_dump(int *ac, char ***av, t_data *data)
 {
-	int	i;
+	int	num;
 
-	i = 1;
-	while (i <= MEM_SIZE)
+	if (*ac > 2 && valid_int(*(*av + 1)))
 	{
-		printf("%.2X", (uint8_t)data->arena[i]);
-		if (i % 32 == 0)
-			break ;
-			// printf("\n");
-		else
-			printf(" ");
-		i++;
+		num = ft_atoi(*(*av + 1));
+		data->dump_cycle = num;
+		(*ac) -= 2;
+		(*av) += 2;
 	}
-	(*ac) -= 2;
-	(*av) += 2;
+	else
+		error(NULL, "Error in parse_dump()", 1);
 }
 
 /*

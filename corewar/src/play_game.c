@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/18 15:18:10 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:48:40 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,22 @@ void play_game(t_data *data, t_process *head)
 
 	//execute(temp, data);
 	//print_registers(temp);
-	
+
 	//while //some condition related to cycles
 	//{
 		temp = head;
 		while (temp)
 		{
+			//print if -dump flag used
+			if (data->dump_cycle == data->cycles_passed)
+				print_data(data);
 			//execute current process
 			execute(temp, data);
-			//print_registers(temp);
+			print_registers(temp);
 			temp = temp->next;
 		}
 		//do whatever checks
 		data->cycles_passed++;
 	//}
-	
+
 }

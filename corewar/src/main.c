@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/19 16:31:58 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/19 17:36:20 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,24 @@ void print_arena(int8_t *arena)
 	}
 }
 
+/* single-cycle version of print_arena. Used for -dump flag */
+void	print_data(t_data *data)
+{
+	int	i;
+
+	i = 1;
+	while (i <= MEM_SIZE)
+	{
+		printf("%.2x", (uint8_t)data->arena[i]);
+		if (i % 32 == 0)
+			printf("\n");
+		else
+			printf(" ");
+		i++;
+	}
+	exit (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -66,14 +84,14 @@ int	main(int ac, char **av)
 		parse(ac, av, &data);
 		load_arena(&data);
 
-		print_arena(data.arena);
+		// print_arena(data.arena);
 		//parse_dump(&ac, &av, &data);
 		create_processes(&data, &head);
 		play_game(&data, head);
 	}
 	else
 	//make exit type function
-		printf("TEST USAGE\n");
+		error(NULL, "Bad input", 1);
 
 	//free processes
 	//free champions

@@ -32,7 +32,7 @@ static void init_process(t_data *data, t_process *temp, int i)
 	//last live  statement?
 	//cycles_remaining;
 	//byte_jump_size
-	
+
 	init_process_registries(temp->registeries, i);
 }
 
@@ -42,8 +42,8 @@ static void add_process(t_data *data, t_process **head, int i)
 
 	temp = malloc(sizeof(t_process));
 	if (!temp)
-		exit (0); //make error function?
-	
+		error(NULL, "Allocation failed in add_process", 0);
+
 	if (*head == NULL)
 		temp->next = NULL;
 	else

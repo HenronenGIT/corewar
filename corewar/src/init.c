@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/16 14:26:58 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:23:26 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	load_arena(t_data *data)
 					data->champions[current]->code_size);
 		current++;
 	}
-	// parse_dump(data, 0); //dump for debugging purpose after champions allocatin on arena
 }
 /* to check addresses */
 // 		printf("addr: %p, %d\n", start, data->champions[current]->code_size);

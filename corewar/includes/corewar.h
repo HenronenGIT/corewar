@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/18 15:11:58 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:30:47 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_process
 /* corewar_main.c */
 int	error(char **str, char *msg, int usage);
 int	main(int argc, char **argv);
+void	print_data(t_data *data);
 
 /* init.c */
 t_champion	*init_champion(void);
