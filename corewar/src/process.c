@@ -28,13 +28,12 @@ static void init_process(t_data *data, t_process *temp, int i)
 	temp->carry = false;
 	//code pointer
 	temp->cursor = data->champions[i - 1]->start_addr;
-	printf("cursor: %d\n", data->champions[i - 1]->start_addr);
+	//printf("cursor: %d\n", data->champions[i - 1]->start_addr);
 	//last live  statement?
 	//cycles_remaining;
-	//byte_jum_size
+	//byte_jump_size
 	
 	init_process_registries(temp->registeries, i);
-	
 }
 
 static void add_process(t_data *data, t_process **head, int i)

@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.c                                             :+:      :+:    :+:   */
+/*   get_arg_values.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 10:43:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/16 14:27:02 by wdonnell         ###   ########.fr       */
+/*   Created: 2022/11/17 15:02:39 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/11/18 15:39:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
+#include "../includes/op_table.h"
 
-static void init_arena(int8_t *arena)
+void	get_arg_values(t_process *cur_process, int8_t *arena, t_types *types)
 {
-	int i;
+	int	i;
+	size_t start;
 
+	start = 0;
 	i = 0;
-	while (i < MEM_SIZE)
-		arena[i++] = 0;
-}
-
-void	init_data(t_data *data)
-{
-	init_arena(data->arena);
-	data->champions_num = 0; // add to init_data
-	//init w/ pointer to champ with highest id
-	// data->last_alive = data->champions[data->champions_num - 1];
-	data->cycles_passed = 0;
-	data->num_live_statements = 0;
-	data->cycles_to_die = CYCLE_TO_DIE;
-	data->num_checks_performed = 0;
-	data->dump_cycle = -1;
+	while (i < types->num_args)
+	{
+		//cur_process->args[i] = read_bytes(data,  types->size_arg[i]);
+		cur_process->args[i] = bytes2int((uint8_t*)&arena[start], types->size_arg[i]);
+		start += types->size_arg[i];
+		i++;
+	}
 }
