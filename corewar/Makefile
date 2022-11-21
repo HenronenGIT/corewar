@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
+#    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/11/18 14:38:56 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/11/21 09:48:03 by akilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ FLAGS = -Wall #-Wextra -Werror
 SRC_DIR = ./src/
 SRC_FILES = main.c init.c parse.c data.c process.c \
 			parse_flags.c utils.c play_game.c op_table.c \
-			get_types.c get_arg_values.c
+			get_types.c get_arg_values.c check.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ_DIR = ./obj/
 OBJ_FILES = $(SRC_FILES:.c=.o)

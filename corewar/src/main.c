@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/19 17:36:20 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/20 09:40:46 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	main(int ac, char **av)
 
 		// print_arena(data.arena);
 		//parse_dump(&ac, &av, &data);
+		// to add: print_introduction(players, id)
 		create_processes(&data, &head);
 		play_game(&data, head);
 	}

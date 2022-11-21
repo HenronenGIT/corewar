@@ -29,7 +29,7 @@ static void init_process(t_data *data, t_process *temp, int i)
 	//code pointer
 	temp->cursor = data->champions[i - 1]->start_addr;
 	//printf("cursor: %d\n", data->champions[i - 1]->start_addr);
-	//last live  statement?
+	temp->last_live = 0;
 	//cycles_remaining;
 	//byte_jump_size
 
@@ -62,6 +62,7 @@ void create_processes(t_data *data, t_process **head)
 	{
 		//malloc process and add to list
 		add_process(data, head, i);
+		data->cursors_num++;
 		i++;
 	}
 }
