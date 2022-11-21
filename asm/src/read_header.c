@@ -91,14 +91,16 @@ Read header information: .name and .comment
 void read_header(int fd, t_data *s_data)
 {
 	char *line;
+	char *prog_name = s_data->s_header->prog_name;
+	char *comment = s_data->s_header->comment;
 
 	line = NULL;
 	while (get_next_line(fd, &line))
 	{
 		s_data->s_error_log->line += 1;
 		seek_header_keywords(s_data, line);
+		if (*(prog_name) != '\0' && *(comment) != '\0')
+			break;
 		free(line);
 	}
 }
-
-//STOP READING WHEN NAME AND COMMNET IS SAVED.

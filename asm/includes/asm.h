@@ -52,16 +52,17 @@
 /*---------- Main data struct ----------*/
 typedef struct s_data
 {
-	struct s_vec		*vec_info;
-	struct s_error_log	*s_error_log;
-	struct s_header		*s_header;
+	struct s_vec *vec_info;
+	struct s_vec *vec_tokens;
+	struct s_error_log *s_error_log;
+	struct s_header *s_header;
 } t_data;
 
-typedef struct	s_error_log
+typedef struct s_error_log
 {
-	size_t	line;
-	size_t	column;
-}				t_error_log;
+	size_t line;
+	size_t column;
+} t_error_log;
 
 /*---------- Dynamic array structure ----------*/
 typedef struct s_vec
@@ -72,15 +73,14 @@ typedef struct s_vec
 	size_t space_taken;
 } t_vec;
 
-
 /*---------- Main data struct ----------*/
-typedef struct s_input
+typedef struct s_data_cell
 {
+	bool is_label; // HENRI
 	int statement; // 2d array of statement with every argument in its own index | HENRI
 	char *arg_1;
 	char *arg_2;
 	char *arg_3;
-	int is_label;	// HENRI
 	int byte_size;	// full size of every statement as bytes. 0 for labels | HENRI
 	int arg_1_size; // is size of arg1 in bytes | HENRI
 	int arg_2_size; // is size of arg2 in bytes | HENRI
@@ -95,7 +95,7 @@ typedef struct s_input
 	char *arg_2_hex;		  // arg 2 code in hexadecimal | OTTO
 	char *arg_3_hex;		  // arg 3 code in hexadecimal | OTTO
 	char *final;
-} t_input;
+} t_data_cell;
 
 //! This is copied fromo op.h header
 /*---------- Header Struct ----------*/
@@ -107,14 +107,18 @@ typedef struct s_header
 	char comment[COMMENT_LENGTH + 1];
 } t_header;
 
+/*---------- enums for identifying type of token ----------*/
 
 typedef enum e_type
 {
 	NAME,
 	COMMENT,
-	STATEMENT,
-	OPERATOR,
 	LABEL,
+	STATEMENT,
+	SEPARATOR,
+	REGISTER,
+	DIRECT_LABEL,
+	DIRECT,
 } t_type;
 
 /*---------- Token struct ----------*/
@@ -122,20 +126,19 @@ typedef struct s_token
 {
 	t_type type;
 	char *content;
-	/* data */
 } t_token;
 
-void	error(int error_number);
-void	read_input(char *input, t_data *s_data);
-void	read_header(int fd, t_data *s_data);
-void	lexical_error(t_data *s_data, char *line, int error_number);
+void error(int error_number);
+void read_input(char *input, t_data *s_data);
+void read_header(int fd, t_data *s_data);
+void lexical_error(t_data *s_data, char *line, int error_number);
 
 /*---------- Dynamic 2D array ----------*/
 void vec_new_arr(t_vec *dst, size_t len);
 void vec_insert(t_vec *dst_vec, void *element);
 
 /*---------- Functions to validate Tokens ----------*/
-bool	is_label(char *sub_string, t_data *data);
+bool is_label(char *sub_string, t_data *data);
 bool is_statement(char *sub_string);
 bool is_delimiter(char c);
 
