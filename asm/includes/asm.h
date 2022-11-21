@@ -45,9 +45,13 @@
 #define COMMENT_CMD_STRING ".comment"
 #define COMMENT_CMD_LEN 8
 
+/*---------- Chars for identifying ----------*/
 #define LABEL_CHAR ':'
 #define HEADER_CHAR '.'
 #define STRING_CHAR '"'
+#define SEPARATOR_CHAR ','
+#define REGISTER_CHAR 'r'
+#define DIRECT_CHAR '%'
 
 /*---------- Main data struct ----------*/
 typedef struct s_data
@@ -76,26 +80,41 @@ typedef struct s_vec
 /*---------- Main data struct ----------*/
 typedef struct s_data_cell
 {
-	bool is_label; // HENRI
-	int statement; // 2d array of statement with every argument in its own index | HENRI
-	char *arg_1;
-	char *arg_2;
-	char *arg_3;
-	int byte_size;	// full size of every statement as bytes. 0 for labels | HENRI
-	int arg_1_size; // is size of arg1 in bytes | HENRI
-	int arg_2_size; // is size of arg2 in bytes | HENRI
-	int arg_3_size; // is size of arg3 in bytes | HENRI
-	int arg_1_type; // is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-	int arg_2_type; // is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-	int arg_3_type; // is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+    int        statement;            //statement for any given instruction given as corresponding int found in the header | HENRI
+    bool    is_label;            // HENRI
+    int        byte_size;            // full size of every statement as bytes. 0 for labels | HENRI
+    int        arg_size[3][1];        // is size of every arg in bytes | HENRI
+    int        arg_type[3][1];        // is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+    int        *args[3];
 
-	char *statement_code;	  // statement code in hexadecimal | OTTO
-	char *argument_type_code; // argument type code in hexadecimal | OTTO
-	char *arg_1_hex;		  // arg 1 code in hexadecimal | OTTO
-	char *arg_2_hex;		  // arg 2 code in hexadecimal | OTTO
-	char *arg_3_hex;		  // arg 3 code in hexadecimal | OTTO
-	char *final;
-} t_data_cell;
+    int        *argument_type_code;    //argument type code in hexadecimal | OTTO
+    int        *arg_values[3];            //arg codes in hexadecimal | OTTO
+    char    *final;                    //final bytecode for current statement | OTTO
+    int        current_bytes;            //current position for calculating distance to labels | OTTO
+}    t_data_cell;
+
+/* OLD */
+// typedef struct s_data_cell
+// {
+// 	bool is_label; // HENRI
+// 	int statement; // 2d array of statement with every argument in its own index | HENRI
+// 	char *arg_1;
+// 	char *arg_2;
+// 	char *arg_3;
+// 	int byte_size;	// full size of every statement as bytes. 0 for labels | HENRI
+// 	int arg_1_size; // is size of arg1 in bytes | HENRI
+// 	int arg_2_size; // is size of arg2 in bytes | HENRI
+// 	int arg_3_size; // is size of arg3 in bytes | HENRI
+// 	int arg_1_type; // is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+// 	int arg_2_type; // is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+// 	int arg_3_type; // is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+// 	char *statement_code;	  // statement code in hexadecimal | OTTO
+// 	char *argument_type_code; // argument type code in hexadecimal | OTTO
+// 	char *arg_1_hex;		  // arg 1 code in hexadecimal | OTTO
+// 	char *arg_2_hex;		  // arg 2 code in hexadecimal | OTTO
+// 	char *arg_3_hex;		  // arg 3 code in hexadecimal | OTTO
+// 	char *final;
+// } t_data_cell;
 
 //! This is copied fromo op.h header
 /*---------- Header Struct ----------*/
@@ -108,7 +127,6 @@ typedef struct s_header
 } t_header;
 
 /*---------- enums for identifying type of token ----------*/
-
 typedef enum e_type
 {
 	NAME,
@@ -128,18 +146,25 @@ typedef struct s_token
 	char *content;
 } t_token;
 
-void error(int error_number);
-void read_input(char *input, t_data *s_data);
-void read_header(int fd, t_data *s_data);
-void lexical_error(t_data *s_data, char *line, int error_number);
+void	error(int error_number);
+void	read_input(char *input, t_data *s_data);
+void	read_header(int fd, t_data *s_data);
+void	lexical_error(t_data *s_data, char *line, int error_number);
 
 /*---------- Dynamic 2D array ----------*/
-void vec_new_arr(t_vec *dst, size_t len);
-void vec_insert(t_vec *dst_vec, void *element);
+void	vec_new_arr(t_vec *dst, size_t len);
+void	vec_insert(t_vec *dst_vec, void *element);
 
 /*---------- Functions to validate Tokens ----------*/
-bool is_label(char *sub_string, t_data *data);
-bool is_statement(char *sub_string);
-bool is_delimiter(char c);
+bool	is_label(char *sub_string, t_data *data);
+bool	is_statement(char *sub_string);
+bool	is_delimiter(char c);
+bool	is_register(char *string);
+bool	is_separator(char c);
+bool	is_directlabel(char *string);
+bool	is_direct(char *string);
+
+/*---------- Printing / debug ----------*/
+void print_data(t_data *s_data);
 
 #endif
