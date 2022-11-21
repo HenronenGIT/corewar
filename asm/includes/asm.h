@@ -18,18 +18,17 @@
 
 typedef struct s_input
 {
-	int		statement;		//statement for any given instruction given as corresponding int found in the header | HENRI
-	char	**arg;
-	int		is_label;		// HENRI
-	int		byte_size;		//full size of every statement as bytes. 0 for labels | HENRI
-	int		arg_size[4];		//is size of arg1 in bytes | HENRI
-	int		*arg_type[4];		// is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+	int		statement;			//statement for any given instruction given as corresponding int found in the header | HENRI
+	bool	is_label;			// HENRI
+	int		byte_size;			// full size of every statement as bytes. 0 for labels | HENRI
+	int		*arg_size[3];		// is size of every arg in bytes | HENRI
+	int		*arg_type[3];		// is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+	int		*args[3];
 
-	char	*statement_code;		//statement code in hexadecimal | OTTO
-	char	*argument_type_code;	//argument type code in hexadecimal | OTTO
-	char	**arg_hex;				//arg codes in hexadecimal | OTTO
+	int		*argument_type_code;	//argument type code in hexadecimal | OTTO
+	int		*arg_values[3];			//arg codes in hexadecimal | OTTO
 	char	*final;					//final bytecode for current statement | OTTO
-	int		current_bytes;
+	int		current_bytes;			//current position for calculating distance to labels | OTTO
 }	t_input;
 
 #endif
