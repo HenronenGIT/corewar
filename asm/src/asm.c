@@ -51,8 +51,8 @@ static void init_structs(t_data *data, t_header *header, t_error_log *error_log)
 	ft_bzero(header->prog_name, PROG_NAME_LENGTH);
 	// s_header.prog_size = ;
 	ft_bzero(header->comment, COMMENT_LENGTH);
-	error_log->line = 0;
-	error_log->column = 0;
+	error_log->line = 1;
+	error_log->column = 1;
 	data->vec_info = NULL;
 	data->s_header = header;
 	data->s_error_log = error_log;

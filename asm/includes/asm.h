@@ -53,6 +53,7 @@
 #define REGISTER_CHAR 'r'
 #define DIRECT_CHAR '%'
 #define COMMENT_CHAR '#'
+#define LABEL_CHARS "abcdefghijklmnopqrstuvwxyz_0123456789"
 
 /*---------- Main data struct ----------*/
 typedef struct s_data
@@ -81,18 +82,18 @@ typedef struct s_vec
 /*---------- Main data struct ----------*/
 typedef struct s_data_cell
 {
-    int        statement;            //statement for any given instruction given as corresponding int found in the header | HENRI
-    bool    is_label;            // HENRI
-    int        byte_size;            // full size of every statement as bytes. 0 for labels | HENRI
-    int        arg_size[3][1];        // is size of every arg in bytes | HENRI
-    int        arg_type[3][1];        // is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-    int        *args[3];
+	int statement;		// statement for any given instruction given as corresponding int found in the header | HENRI
+	bool is_label;		// HENRI
+	int byte_size;		// full size of every statement as bytes. 0 for labels | HENRI
+	int arg_size[3][1]; // is size of every arg in bytes | HENRI
+	int arg_type[3][1]; // is NULL for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+	int *args[3];
 
-    int        *argument_type_code;    //argument type code in hexadecimal | OTTO
-    int        *arg_values[3];            //arg codes in hexadecimal | OTTO
-    char    *final;                    //final bytecode for current statement | OTTO
-    int        current_bytes;            //current position for calculating distance to labels | OTTO
-}    t_data_cell;
+	int *argument_type_code; // argument type code in hexadecimal | OTTO
+	int *arg_values[3];		 // arg codes in hexadecimal | OTTO
+	char *final;			 // final bytecode for current statement | OTTO
+	int current_bytes;		 // current position for calculating distance to labels | OTTO
+} t_data_cell;
 
 /* OLD */
 // typedef struct s_data_cell
@@ -148,29 +149,29 @@ typedef struct s_token
 	char *content;
 } t_token;
 
-void	error(int error_number);
-void	read_input(char *input, t_data *s_data);
-void	read_header(int fd, t_data *s_data);
-void	lexical_error(t_data *s_data, char *line, int error_number);
+void error(int error_number);
+void read_input(char *input, t_data *s_data);
+void read_header(int fd, t_data *s_data);
+void lexical_error(t_data *s_data, char *line, int error_number);
 
 /*---------- Dynamic 2D array ----------*/
-void	vec_new_arr(t_vec *dst, size_t len);
-void	vec_insert(t_vec *dst_vec, void *element);
+void vec_new_arr(t_vec *dst, size_t len);
+void vec_insert(t_vec *dst_vec, void *element);
 
 /*---------- Functions to validate Tokens ----------*/
-bool	is_label(char *sub_string, t_data *data);
-bool	is_statement(char *sub_string);
-bool	is_delimiter(char c);
-bool	is_register(char *string);
-bool	is_separator(char c);
-bool	is_directlabel(char *string);
-bool	is_direct(char *string);
+bool is_label(char *sub_string, t_data *data);
+bool is_statement(char *sub_string);
+bool is_delimiter(char c);
+bool is_register(char *string);
+bool is_separator(char c);
+bool is_directlabel(char *string);
+bool	is_direct(t_data *s_data, char *string);
 
 /*---------- Syntax Analyzer ----------*/
-void	syntax_analysis(t_data *s_data);
+void syntax_analysis(t_data *s_data);
 
 /*---------- Printing / debug ----------*/
 void print_data(t_data *s_data);
-void	print_tokens(t_vec *vec_tokens);
+void print_tokens(t_vec *vec_tokens);
 
 #endif

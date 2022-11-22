@@ -58,6 +58,7 @@ void lexical_scanner(char *line, t_data *s_data)
 	sub_string = NULL;
 	while (right <= len && left <= right)
 	{
+		s_data->s_error_log->column = left + 1;
 		if (line[right] == COMMENT_CHAR)
 			break;
 		if (is_separator(line[right]) && left == right)
@@ -75,27 +76,21 @@ void lexical_scanner(char *line, t_data *s_data)
 			sub_string = ft_strsub(line, left, right - left);
 			if (!sub_string)
 				error(MALLOC_ERR);
+			if (is_label(sub_string, s_data))
+				save_token(s_data, sub_string, LABEL);
 			else if (is_statement(sub_string))
 				save_token(s_data, sub_string, STATEMENT);
 			else if (is_directlabel(sub_string))
 				save_token(s_data, sub_string, DIRECT_LABEL);
-			else if (is_direct(sub_string))
+			else if (is_direct(s_data, sub_string))
 				save_token(s_data, sub_string, DIRECT);
-			else if (is_label(sub_string, s_data))
-				save_token(s_data, sub_string, LABEL);
 			else if (is_register(sub_string))
 				save_token(s_data, sub_string, REGISTER);
 			else
-			{
 				save_token(s_data, sub_string, INVALID);
-				// return (-1);
-			}
-
-				// invalid_token(sub_string);
 			left = right;
 		}
 	}
-	// return (0);
 }
 
 /*
@@ -117,6 +112,7 @@ void read_input(char *input, t_data *s_data)
 	{
 		lexical_scanner(line, s_data);
 		free(line);
+		s_data->s_error_log->line += 1;
 	}
 		print_data(s_data);
 }

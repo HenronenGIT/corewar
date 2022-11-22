@@ -12,11 +12,6 @@
 
 #include "../includes/asm.h"
 
-// static char	*skip_white_spaces(char *str)
-// {
-
-// }
-
 static void find_quotes(char *line, size_t *first_quote, size_t *second_quote)
 {
 	size_t i;
