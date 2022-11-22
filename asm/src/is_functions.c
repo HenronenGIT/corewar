@@ -37,7 +37,7 @@ bool is_label(char *sub_string, t_data *s_data)
 	if (*(found_colon + 1) != '\0')
 		return (false);
 	if (contains_invalid_characters(s_data, sub_string))
-		lexical_error(s_data, NULL, TEMP_ERR);
+		lexical_error(s_data, TEMP_ERR);
 	return (true);
 }
 
@@ -78,12 +78,19 @@ bool is_separator(char c)
 	return (false);
 }
 
-bool is_directlabel(char *string)
+bool is_directlabel(t_data *s_data, char *string)
 {
 	if (string[0] != DIRECT_CHAR)
 		return (false);
 	if (string[1] != LABEL_CHAR)
 		return (false);
+	string += 2;
+	while (*string != '\0')
+	{
+		if (ft_strchr(LABEL_CHARS, *string) == NULL)
+			lexical_error(s_data, TEMP_ERR);
+		string += 1;
+	}
 	return (true);
 }
 
@@ -91,15 +98,15 @@ bool is_direct(t_data *s_data, char *string)
 {
 	size_t i;
 
-	i = 2;
+	i = 1;
 	if (string[0] != DIRECT_CHAR)
 		return (false);
 	if (string[1] == LABEL_CHAR)
 		return (false);
 	while (string[i] != '\0')
 	{
-		if (ft_strchr(LABEL_CHARS, string[i]) == NULL)
-			lexical_error(s_data, NULL, TEMP_ERR);
+		if (!ft_isdigit(string[i]))
+			lexical_error(s_data, TEMP_ERR);
 		i += 1;
 	}
 	return (true);

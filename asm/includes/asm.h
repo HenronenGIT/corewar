@@ -152,7 +152,7 @@ typedef struct s_token
 void error(int error_number);
 void read_input(char *input, t_data *s_data);
 void read_header(int fd, t_data *s_data);
-void lexical_error(t_data *s_data, char *line, int error_number);
+void lexical_error(t_data *s_data, int error_number);
 
 /*---------- Dynamic 2D array ----------*/
 void vec_new_arr(t_vec *dst, size_t len);
@@ -164,7 +164,7 @@ bool is_statement(char *sub_string);
 bool is_delimiter(char c);
 bool is_register(char *string);
 bool is_separator(char c);
-bool is_directlabel(char *string);
+bool is_directlabel(t_data *s_data, char *string);
 bool	is_direct(t_data *s_data, char *string);
 
 /*---------- Syntax Analyzer ----------*/

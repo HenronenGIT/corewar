@@ -15,7 +15,7 @@
 /*
 Output error messages, and specify in which line that error happened.
 */
-void	lexical_error(t_data *s_data, char *line, int error_number)
+void	lexical_error(t_data *s_data, int error_number)
 {
 	size_t	line_count;
 	size_t	column_count;

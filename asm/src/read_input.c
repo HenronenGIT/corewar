@@ -12,11 +12,6 @@
 
 #include "../includes/asm.h"
 
-// void	invalid_token(char *sub_string, t_type type)
-// {
-// 	ft_printf("Invalid st")
-// }
-
 t_token	*allocate_token_struct(t_type type, char *content)
 {
 	t_token *s_token;
@@ -80,7 +75,7 @@ void lexical_scanner(char *line, t_data *s_data)
 				save_token(s_data, sub_string, LABEL);
 			else if (is_statement(sub_string))
 				save_token(s_data, sub_string, STATEMENT);
-			else if (is_directlabel(sub_string))
+			else if (is_directlabel(s_data, sub_string))
 				save_token(s_data, sub_string, DIRECT_LABEL);
 			else if (is_direct(s_data, sub_string))
 				save_token(s_data, sub_string, DIRECT);
