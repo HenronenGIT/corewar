@@ -62,7 +62,7 @@ void create_processes(t_data *data, t_process **head)
 	{
 		//malloc process and add to list
 		add_process(data, head, i);
-		data->cursors_num++;
+		data->num_processes++;
 		i++;
 	}
 }

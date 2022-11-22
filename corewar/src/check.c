@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:47:37 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/21 09:56:59 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/22 15:36:27 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	is_died(t_data *data, t_process *process)
 {
 	if (data->cycles_to_die <= 0 \
-		|| data->cycles_passed - process->last_live \
+		|| data->cycles_total - process->last_live \
 		>= data->cycles_to_die)
 		return (true);
 	return (false);
@@ -37,7 +37,7 @@ static	void	remove_died(t_data *data, t_process *head)
 		{
 			ft_printf("%d is died\n", curr->id);
 			remove = curr;
-			data->cursors_num--;
+			data->num_processes--;
 			curr = curr->next;
 			if (head == remove)
 				head = curr;

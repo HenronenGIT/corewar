@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/22 14:50:28 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:37:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@ static void read_statement_code(t_data *data, t_process *temp)
 		temp->cycles_remaining = cycles_remaining[n];
 	}
 	else
+	{
 		//invalid op code
 		//move cursor forward 1 byte and go to next process
+		temp->byte_jump_size = 0;
 		temp->cursor++;
+	}
+		
 
 }
 
@@ -85,8 +89,7 @@ static void	execute_processes(t_data *data, t_process *head)
 	t_process *temp;
 
 	temp = head;
-	
-	data->cycles_passed++;
+	data->cycles_total++;
 	data->cycles_after_check++;
 	while (temp)
 	{
@@ -101,10 +104,10 @@ static void	execute_processes(t_data *data, t_process *head)
 void play_game(t_data *data, t_process *head)
 {
 	/* outer cycle plays until there are processes left. */
-	while (data->cursors_num)
+	while (data->num_processes)
 	{
 		//print if -dump flag used
-		if (data->dump_cycle == data->cycles_passed)
+		if (data->dump_cycle == data->cycles_total)
 			print_data(data);
 		/* inner cycle plays every process in list */
 		execute_processes(data, head);

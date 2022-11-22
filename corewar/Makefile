@@ -3,20 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
+#    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/11/21 09:48:03 by akilk            ###   ########.fr        #
-=======
-#    Updated: 2022/11/22 12:46:02 by wdonnell         ###   ########.fr        #
->>>>>>> will
+#    Updated: 2022/11/22 14:51:49 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 CC = gcc
-FLAGS = -Wall #-Wextra -Werror
+#FLAGS = -Wall #-Wextra -Werror
 FLAGS = -Wall -fsanitize=address -g
 
 SRC_DIR = ./src/
