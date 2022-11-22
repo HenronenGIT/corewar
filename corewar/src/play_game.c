@@ -3,99 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   play_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/21 10:00:48 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/22 14:50:28 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include "../includes/op_table.h"
 
-//include for tester , pow()
-#include <math.h>
-
+/*
 //tester
 static void print_registers(t_process *temp)
 {
-	int i = 0;
+	int i;
+	int j;
 
-	printf("\nProcess %d Regristries--->\n", temp->id);
+	i = 0;
+	ft_printf("\nProcess %d Regristries--->\n", temp->id);
 	while (i < REG_NUMBER)
 	{
-		//int version
-		printf("reg %.2d: ", i + 1);
-		for (int j = 31; j >= 0; j--)
+		j = 31;
+		ft_printf("reg %.2d: ", i + 1);
+		while (j >= 0)
 		{
-			printf("%c", temp->registeries[i] & (int32_t)pow( 2, j) ? '1' : '0' );
+			ft_printf("%c", temp->registeries[i] & (int32_t)ft_pow( 2, j) ? '1' : '0' );
 			if (j % 8 == 0)
-				printf(" ");
+				ft_printf(" ");
+			j--;
 		}
-		printf("\n");
+		ft_printf("\n");
 		i++;
 	}
 }
-
-static void execute(t_process *temp, t_data *data)
+*/
+static void read_statement_code(t_data *data, t_process *temp)
 {
-	int n;
+	int cycles_remaining[16] = \
+	{10, 5, 5, 10, 10, 6, 6, 6, 20, 25, 25, 800, 10, 50, 1000, 2};
+	int8_t n;
 
+	//check if valid and set cycles remaining
 	n = data->arena[temp->cursor] - 1;
 	if (n < 16 && n >= 0)
-		g_dispatch[n](temp, data);
+	{
+		temp->statement_code = n;
+		temp->cycles_remaining = cycles_remaining[n];
+	}
 	else
-		ft_printf("invalid op code\n");
 		//invalid op code
+		//move cursor forward 1 byte and go to next process
+		temp->cursor++;
 
 }
 
-/*
-void play_game(t_data *data, t_process *head)
+static void check_process(t_data *data, t_process *temp)
 {
-	t_process *temp;
-
-	//temp = head;
-
-	//execute(temp, data);
-	//print_registers(temp);
-
-	//while //some condition related to cycles
-	//{
-		temp = head;
-		while (temp)
-		{
-			//print if -dump flag used
-			if (data->dump_cycle == data->cycles_passed)
-				print_data(data);
-			//execute current process
-			execute(temp, data);
-			print_registers(temp);
-			temp = temp->next;
-		}
-		//do whatever checks
-		data->cycles_passed++;
-	//}
+	if (temp->cycles_remaining == -1)
+	{
+		//move cursor to next position
+		temp->cursor = circular_mem(temp->cursor, temp->byte_jump_size);
+		read_statement_code(data, temp);
+	}
+	else if (temp->cycles_remaining == 0)
+		//execute temp->statement_code
+		g_dispatch[temp->statement_code](temp, data);
+		//inside functions
+		//set cycles remaing to -1
+		//set byte jump size
+	else if (temp->cycles_remaining)
+		//decrease cycles_remaining
+		temp->cycles_remaining--;
 }
-*/
 
 /* updated version */
+
 
 static void	execute_processes(t_data *data, t_process *head)
 {
 	t_process *temp;
 
 	temp = head;
+	
 	data->cycles_passed++;
 	data->cycles_after_check++;
 	while (temp)
 	{
-		//execute current process
-		execute(temp, data);
-		print_registers(temp);
+		check_process(data, temp);
+		printf("id: %d cyc rem: %d\n", temp->id, temp->cycles_remaining);
 		temp = temp->next;
 	}
+	
 }
+
 
 void play_game(t_data *data, t_process *head)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/21 09:50:44 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/22 14:50:49 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ typedef struct s_process
 {
 	int id;
 	bool carry;
-	//The statement code on which the process stands:
-	//Prior to the battle, the value of this variable is not set.
+	int8_t statement_code;
 	int cursor;
 	int last_live;
 	int cycles_remaining;
 	int byte_jump_size;
 	int32_t registeries[REG_NUMBER];
+	//does this need to be here?
 	int32_t args[3];
 	struct s_process *next;
 }				t_process;
@@ -119,6 +119,7 @@ void	parse_n(int *ac, char ***av, t_data *data, t_champion *champion);
 /* utils */
 bool	is_cor_file(char *file);
 int32_t	bytes2int(uint8_t *byte_value, size_t size);
+int		circular_mem(int pos, int change);
 
 /* play */
 void	play_game(t_data *data, t_process *head);

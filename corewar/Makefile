@@ -6,13 +6,18 @@
 #    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/11/21 09:48:03 by akilk            ###   ########.fr        #
+=======
+#    Updated: 2022/11/22 12:46:02 by wdonnell         ###   ########.fr        #
+>>>>>>> will
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 CC = gcc
 FLAGS = -Wall #-Wextra -Werror
+FLAGS = -Wall -fsanitize=address -g
 
 SRC_DIR = ./src/
 SRC_FILES = main.c init.c parse.c data.c process.c \

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:42:58 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/18 15:39:46 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:45:57 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ static void print_arg_values(t_process *cur_process)
 		i++;
 	}
 }
+	//inside functions
+	//set cycles remaing to -1
+	//set byte jump size
 
 void	op_sti(t_process *cur_process, t_data *data)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/20 09:40:46 by akilk            ###   ########.fr       */
+/*   Updated: 2022/11/22 14:50:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void	print_data(t_data *data)
 	i = 1;
 	while (i <= MEM_SIZE)
 	{
-		printf("%.2x", (uint8_t)data->arena[i]);
+		ft_printf("%.2x", (uint8_t)data->arena[i]);
 		if (i % 32 == 0)
-			printf("\n");
+			ft_printf("\n");
 		else
-			printf(" ");
+			ft_printf(" ");
 		i++;
 	}
 	exit (0);

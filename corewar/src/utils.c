@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:40:16 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/18 15:39:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:45:56 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,12 @@ int32_t	bytes2int(uint8_t *byte_value, size_t size)
 	if (signbit)
 		decimal = ~(decimal);
 	return (decimal);
+}
+
+int circular_mem(int pos, int change)
+{
+	if (pos + change < 0)
+		return (MEM_SIZE + (pos + change));
+	else
+		return ((pos + change) % MEM_SIZE);
 }
