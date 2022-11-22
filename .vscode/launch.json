@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C/C++: asm",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/asm/src/a.out", // Binary name
+            "args": [""],
+            // "args": ["fixed_tdc3.s"],
+            // "args": ["/Users/hmaronen/workspace/github/corewar/test.s"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "MIMode": "lldb",
+            "preLaunchTask": "C/C++: asm", // Task name
+            // "setupCommands": [
+				// /*---- PATH TO FILE ----*/
+                // {
+                    // "text": "settings set target.input-path /Users/hmaronen/workspace/github/corewar/test.s"
+                // }
+            // ]
+        }
+    ]
+}

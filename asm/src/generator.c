@@ -48,7 +48,7 @@ void	save_atc(t_input *data)
 		}
 		i++;
 	}
-//	data->argument_type_code = ft_btoi(temp);
+	data->argument_type_code = ft_btoi(temp);
 	free(temp);
 }
 
@@ -140,24 +140,26 @@ void	generator(t_input **data)
 
 int main(void)
 {
-	t_input *data[1];
+	t_input data;
+	t_input *array[2];
 
 //st r1, r2
-	data[0]->statement = 3;
-	data[0]->is_label = 0;
-	data[0]->label_addr = 0;
-	data[0]->label_name[0] = '\0';
-	data[0]->byte_size = 4;
-	data[0]->arg_size[0] = 1;
-	data[0]->arg_size[1] = 1;
-	data[0]->arg_size[2] = 0;
-	data[0]->arg_type[0] = 1;
-	data[0]->arg_type[1] = 1;
-	data[0]->arg_type[2] = 0;
-	data[0]->args[0][0] = 'r';
-	data[0]->args[0][1] = '1';
-	data[0]->args[1][0] = 'r';
-	data[0]->args[1][1] = '2';
-	generator(data);
+	data.statement = 3;
+	data.is_label = 0;
+	data.current_bytes = 0;
+	data.label_name[0] = '\0';
+	data.byte_size = 4;
+	data.arg_size[0] = 1;
+	data.arg_size[1] = 1;
+	data.arg_size[2] = 0;
+	data.arg_type[0] = 1;
+	data.arg_type[1] = 1;
+	data.arg_type[2] = 0;
+	data.args[0][0] = 'r';
+	data.args[0][1] = '1';
+	data.args[1][0] = 'r';
+	data.args[1][1] = '2';
+	array[0] = &data;
+	generator(array);
 	return (0);
 }

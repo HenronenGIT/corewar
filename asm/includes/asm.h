@@ -20,18 +20,19 @@ typedef struct s_input
 {
 	int		statement;			//statement for any given instruction given as corresponding int found in the header | HENRI
 	int		is_label;			// HENRI
-	int		label_addr;
+	int		current_bytes;
 	char	label_name[10];
 	int		byte_size;			// full size of every statement as bytes. 0 for labels | HENRI
 	int		arg_size[3];		// is size of every arg in bytes | HENRI
 	int		arg_type[3];		// is 0 for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
 	char	args[3][10];
 
-	int		argument_type_code[50];	//argument type code in hexadecimal | OTTO
-	int		arg_values[3];			//arg codes in hexadecimal | OTTO
+	int		argument_type_code;		//argument type code in int | OTTO
+	int		arg_values[3];			//arg codes in int | OTTO
 	char	*final;					//final bytecode for current statement | OTTO
-	int		current_bytes;			//current position for calculating distance to labels | OTTO
 }	t_input;
+
+int	ft_btoi(char *num);
 
 #define LOCATION printf("FILE: |%s| FUNC: |%s| LINE: |%d|\n", __FILE__, __FUNCTION__, __LINE__)
 #endif
