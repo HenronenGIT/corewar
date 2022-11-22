@@ -37,7 +37,7 @@ bool is_label(char *sub_string, t_data *s_data)
 	if (*(found_colon + 1) != '\0')
 		return (false);
 	if (contains_invalid_characters(s_data, sub_string))
-		lexical_error(s_data, TEMP_ERR);
+		lexical_error(s_data);
 	return (true);
 }
 
@@ -88,7 +88,7 @@ bool is_directlabel(t_data *s_data, char *string)
 	while (*string != '\0')
 	{
 		if (ft_strchr(LABEL_CHARS, *string) == NULL)
-			lexical_error(s_data, TEMP_ERR);
+			lexical_error(s_data);
 		string += 1;
 	}
 	return (true);
@@ -106,7 +106,7 @@ bool is_direct(t_data *s_data, char *string)
 	while (string[i] != '\0')
 	{
 		if (!ft_isdigit(string[i]))
-			lexical_error(s_data, TEMP_ERR);
+			lexical_error(s_data);
 		i += 1;
 	}
 	return (true);

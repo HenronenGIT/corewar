@@ -28,9 +28,9 @@
 #define MALLOC_ERR -3
 #define NULL_ERR -4
 #define INVALID_LABEL -5
-#define NAME_ERR -6
-#define NAME_LEN_ERR -7
-#define COMMENT_LEN_ERR -8
+#define NAME_LEN_ERR -6
+#define COMMENT_LEN_ERR -7
+#define LEXICAL_ERROR -8
 
 #define TEMP_ERR -999 //! TEMP
 
@@ -152,7 +152,7 @@ typedef struct s_token
 void error(int error_number);
 void read_input(char *input, t_data *s_data);
 void read_header(int fd, t_data *s_data);
-void lexical_error(t_data *s_data, int error_number);
+void	lexical_error(t_data *s_data);
 
 /*---------- Dynamic 2D array ----------*/
 void vec_new_arr(t_vec *dst, size_t len);
