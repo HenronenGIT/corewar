@@ -52,6 +52,7 @@
 #define SEPARATOR_CHAR ','
 #define REGISTER_CHAR 'r'
 #define DIRECT_CHAR '%'
+#define COMMENT_CHAR '#'
 
 /*---------- Main data struct ----------*/
 typedef struct s_data
@@ -137,6 +138,7 @@ typedef enum e_type
 	REGISTER,
 	DIRECT_LABEL,
 	DIRECT,
+	INVALID
 } t_type;
 
 /*---------- Token struct ----------*/
@@ -164,7 +166,11 @@ bool	is_separator(char c);
 bool	is_directlabel(char *string);
 bool	is_direct(char *string);
 
+/*---------- Syntax Analyzer ----------*/
+void	syntax_analysis(t_data *s_data);
+
 /*---------- Printing / debug ----------*/
 void print_data(t_data *s_data);
+void	print_tokens(t_vec *vec_tokens);
 
 #endif

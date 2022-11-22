@@ -26,6 +26,7 @@ SRC_FILES = asm.c \
 			read_input.c \
 			validation.c \
 			read_header.c \
+			syntax_analysis.c \
 			debug.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))

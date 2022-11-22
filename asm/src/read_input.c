@@ -12,6 +12,11 @@
 
 #include "../includes/asm.h"
 
+// void	invalid_token(char *sub_string, t_type type)
+// {
+// 	ft_printf("Invalid st")
+// }
+
 t_token	*allocate_token_struct(t_type type, char *content)
 {
 	t_token *s_token;
@@ -31,8 +36,15 @@ void save_token(t_data *s_data, char *sub_string, t_type type)
 	s_token = NULL;
 	s_token = allocate_token_struct(type, sub_string);
 	vec_insert(s_data->vec_tokens, s_token);
+	// print_tokens(s_data->vec_tokens);
 }
 
+/*
+Receives "line" as a parameter.
+lexical_scanner iterates what "line" byte by byte and tries to search tokens.
+When lexical analysis find string literal that matches to one of the types of token,
+it saves that to token to "t_token" struct.
+*/
 void lexical_scanner(char *line, t_data *s_data)
 {
 	unsigned int left;
@@ -46,6 +58,8 @@ void lexical_scanner(char *line, t_data *s_data)
 	sub_string = NULL;
 	while (right <= len && left <= right)
 	{
+		if (line[right] == COMMENT_CHAR)
+			break;
 		if (is_separator(line[right]) && left == right)
 			save_token(s_data, ft_strsub(&line[left], 0, 1), SEPARATOR);
 		if (is_delimiter(line[right]) == false)
@@ -66,18 +80,26 @@ void lexical_scanner(char *line, t_data *s_data)
 			else if (is_directlabel(sub_string))
 				save_token(s_data, sub_string, DIRECT_LABEL);
 			else if (is_direct(sub_string))
-				save_token(s_data, sub_string, DIRECT_LABEL);
+				save_token(s_data, sub_string, DIRECT);
 			else if (is_label(sub_string, s_data))
 				save_token(s_data, sub_string, LABEL);
 			else if (is_register(sub_string))
 				save_token(s_data, sub_string, REGISTER);
+			else
+			{
+				save_token(s_data, sub_string, INVALID);
+				// return (-1);
+			}
+
+				// invalid_token(sub_string);
 			left = right;
 		}
 	}
+	// return (0);
 }
 
 /*
-Opens file descriptor for input reading.
+Opens file descriptor for reading the input.
 After that while loops starts reading file descriptor line by line.
 Every single line is sent to lexical_scanner function to be tokenized.
 */

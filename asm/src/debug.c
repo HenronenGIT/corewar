@@ -18,7 +18,7 @@
 
 char	*get_type(t_type type)
 {
-	static char *types_arr[8] ={
+	static char *types_arr[9] ={
 	"NAME",
 	"COMMENT",
 	"LABEL",
@@ -27,6 +27,7 @@ char	*get_type(t_type type)
 	"REGISTER",
 	"DIRECT_LABEL",
 	"DIRECT",
+	"INVALID"
 	};
 
 	return (types_arr[type]);
@@ -43,15 +44,8 @@ void	print_tokens(t_vec *vec_tokens)
 
 	while (i < vec_tokens->space_taken)
 	{
-		// if (token_array[i]->type == LABEL)
-			// ft_printf("%sTYPE%s = LABEL\t", PINK, WHITE);
-
-
-		//!CHECK THAT GET_TYP() FUNC WORKS CORRECTLY
-
-
-		ft_printf("%sTYPE%s = %s\t", PINK, WHITE, get_type(token_array[i]->type));
-		ft_printf("%sTYPE%s = %s\t", PINK, WHITE, get_type(token_array[i]->type));
+		ft_printf("%s[%d]%s\t", GREEN, i, WHITE);
+		ft_printf("%sTYPE%s = %-10s\t", PINK, WHITE, get_type(token_array[i]->type));
 		ft_printf("%sCONTENT%s = %s\n", PINK, WHITE ,token_array[i]->content);
 		i += 1;
 	}
