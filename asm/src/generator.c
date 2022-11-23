@@ -87,7 +87,7 @@ void	find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_s
 		{
 			if (ft_strcmp(data[i]->label_name, current_arg))
 			{
-				data[curr_struct]->arg_values[curr_arg] = data[i]->label_addr - data[curr_struct]->current_bytes;
+				data[curr_struct]->arg_values[curr_arg] = data[i]->current_bytes - data[curr_struct]->current_bytes;
 				return ;
 			}
 		}
@@ -124,42 +124,44 @@ void	generate_input(t_input **original_data, t_input *data, int curr_struct)
 void	generator(t_input **data)
 {
 	int			i;
-	int			current_pos;
 
 	i = 0;
-	current_pos = 0;
-	while (data[i])
-	{
-		data[i]->current_bytes = current_pos;
-		if (!data[i]->is_label)
-			generate_input(data, data[i], i);
-		current_pos += data[i]->byte_size;
-		i++;
-	}
+	// while (data[i])
+	// {
+	// 	printf("dasdas");
+	// 	if (!data[i]->is_label)
+	// 		generate_input(data, data[i], i);
+	// 	i++;
+	// }
 }
 
 int main(void)
 {
-	t_input data;
-	t_input *array[2];
+	printf("asdasda");
+	t_input test;
+	t_input **array;
 
-//st r1, r2
-	data.statement = 3;
-	data.is_label = 0;
-	data.current_bytes = 0;
-	data.label_name[0] = '\0';
-	data.byte_size = 4;
-	data.arg_size[0] = 1;
-	data.arg_size[1] = 1;
-	data.arg_size[2] = 0;
-	data.arg_type[0] = 1;
-	data.arg_type[1] = 1;
-	data.arg_type[2] = 0;
-	data.args[0][0] = 'r';
-	data.args[0][1] = '1';
-	data.args[1][0] = 'r';
-	data.args[1][1] = '2';
-	array[0] = &data;
+	array = (t_input **)malloc(sizeof(t_input *) * 2);
+// //st r1, r2
+	test.statement = 3;
+	test.is_label = 0;
+	test.current_bytes = 0;
+	test.label_name[0] = '\0';
+	test.byte_size = 4;
+	test.arg_size[0] = 1;
+	test.arg_size[1] = 1;
+	test.arg_size[2] = 0;
+	test.arg_type[0] = 1;
+	test.arg_type[1] = 1;
+	test.arg_type[2] = 0;
+	test.args[0][0] = 'r';
+	test.args[0][1] = '1';
+	test.args[0][2] = '\0';
+	test.args[1][0] = 'r';
+	test.args[1][1] = '2';
+	test.args[1][2] = '\0';
+	array[0] = &test;
+	array[1] = NULL;
 	generator(array);
 	return (0);
 }
