@@ -6,11 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:40:16 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/22 15:10:35 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:04:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
+#include "../includes/op_table.h"
 
 /*
 ** Check if champion's filename is ending with extension .cor
@@ -65,10 +66,22 @@ int32_t	bytes2int(uint8_t *byte_value, size_t size)
 	return (decimal);
 }
 
-int circular_mem(int pos, int change)
+void	print_data(t_data *data)
 {
-	if (pos + change < 0)
-		return (MEM_SIZE + (pos + change));
-	else
-		return ((pos + change) % MEM_SIZE);
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		j = 0;
+		while (j < 32)
+		{
+			ft_printf("%.2x ", (uint8_t)data->arena[i]);
+			i++;
+			j++;
+		}
+		ft_printf("\n");
+	}
+	exit (0);
 }

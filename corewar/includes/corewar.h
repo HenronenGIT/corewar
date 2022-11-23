@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/22 15:38:54 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:03:17 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,13 @@ typedef struct s_process
 	int cycles_remaining;
 	int byte_jump_size;
 	int32_t registeries[REG_NUMBER];
-	//does this need to be here?
-	int32_t args[3];
 	struct s_process *next;
 }				t_process;
 
 /* corewar_main */
 int	error(char **str, char *msg, int usage);
 int	main(int argc, char **argv);
-void	print_data(t_data *data);
+
 
 /* init */
 t_champion	*init_champion(void);
@@ -119,7 +117,7 @@ void	parse_n(int *ac, char ***av, t_data *data, t_champion *champion);
 /* utils */
 bool	is_cor_file(char *file);
 int32_t	bytes2int(uint8_t *byte_value, size_t size);
-int		circular_mem(int pos, int change);
+void	print_data(t_data *data);
 
 /* play */
 void	play_game(t_data *data, t_process *head);

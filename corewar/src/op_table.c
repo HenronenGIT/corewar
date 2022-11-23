@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:42:58 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/22 15:10:47 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/23 14:54:59 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ static void print_arg_types(t_types *types)
 	printf("sizeof arg3: %d\n", types->size_arg[2]);
 }
 */
-static void print_arg_values(t_process *cur_process)
+static void print_arg_values(t_types *types)
 {
 	int i = 0;
 
 	while (i < 3)
 	{
-		printf("arg %d val: %d\n", i + 1, cur_process->args[i]);
+		ft_printf("arg %d val: %d\n", i + 1, types->val_arg[i]);
 		i++;
 	}
 }
@@ -91,31 +91,35 @@ static void print_arg_values(t_process *cur_process)
 
 void	op_sti(t_process *cur_process, t_data *data)
 {
-	int8_t val_to_be_copied;
-	int sum;
 	t_types types;
-
+	int change;
+	int idx;
+	
 	//comment stuff probably part of verbose mode
 	ft_printf("process %d is on sti\n", cur_process->id);
-	//get arg types and sizes
 	types.size_t_dir = 2;
 	types.num_args = 3;
-	//only if arg type is 2nd byte
-	get_types(data->arena[cur_process->cursor + 1], &types);
+	//only if arg type code is 2nd byte
+	get_types(data->arena[cur_process->cursor + 1], &types, 3);
+	//set regardless if incorrect types
+	cur_process->byte_jump_size = jump_size(&types, true);
+	if (types.type_arg[0] == T_REG && types.type_arg[2] != T_IND)
+	{
+		//correct args execute funtion
+		//set start depending on if argument code is 2nd byte, or first byte
+		get_arg_values(&data->arena[cur_process->cursor + 2], &types);
+		change = (types.val_arg[1] + types.val_arg[2]) % IDX_MOD;
+		idx = circular_mem(cur_process->cursor, change);
+		data->arena[idx] = types.val_arg[0];
+		ft_printf("executed sti----\nwrote %#.2x to pos: %d\n", types.val_arg[0], idx);
 
-	//tester
-	//print_arg_types(&types);
-	
-	//set start depending on if argument code is 2nd byte
-	get_arg_values(cur_process, &data->arena[cur_process->cursor + 2], &types);
+	}
+	cur_process->cycles_remaining = -1;
+
 	//test arg values
-	print_arg_values(cur_process);
-	//arg1
-	val_to_be_copied = cur_process->args[0];
+	//print_arg_values(cur_process);
 
-	//depending on game mechanics write above value to address:
 	// work for negative values??
-	//keep memory circular
 	//make write to memory function based on different sizes, not sure if this is needed or not
 
 }

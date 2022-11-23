@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/22 14:50:44 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:05:51 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	error(char **str, char *msg, int usage)
 	exit (1);
 }
 
+
 //tester
 void print_arena(int8_t *arena)
 {
@@ -32,7 +33,7 @@ void print_arena(int8_t *arena)
 	while (i < MEM_SIZE)
 	{
 		j = 0;
-		while (j < 16)
+		while (j < 32)
 		{
 			printf("%02X ", (uint8_t)arena[i]);
 
@@ -55,12 +56,14 @@ void print_arena(int8_t *arena)
 }
 
 /* single-cycle version of print_arena. Used for -dump flag */
+/*
 void	print_data(t_data *data)
 {
 	int	i;
 
-	i = 1;
-	while (i <= MEM_SIZE)
+	//i = 1; why?
+	i = 0;
+	while (i < MEM_SIZE)
 	{
 		ft_printf("%.2x", (uint8_t)data->arena[i]);
 		if (i % 32 == 0)
@@ -71,6 +74,7 @@ void	print_data(t_data *data)
 	}
 	exit (0);
 }
+*/
 
 int	main(int ac, char **av)
 {
@@ -84,7 +88,7 @@ int	main(int ac, char **av)
 		parse(ac, av, &data);
 		load_arena(&data);
 
-		// print_arena(data.arena);
+		 print_arena(data.arena);
 		//parse_dump(&ac, &av, &data);
 		// to add: print_introduction(players, id)
 		create_processes(&data, &head);

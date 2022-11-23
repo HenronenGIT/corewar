@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/11/22 14:51:49 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/11/23 14:44:09 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS = -Wall -fsanitize=address -g
 SRC_DIR = ./src/
 SRC_FILES = main.c init.c parse.c data.c process.c \
 			parse_flags.c utils.c play_game.c op_table.c \
-			get_types.c get_arg_values.c check.c
+			get_types.c get_arg_values.c check.c op_util.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ_DIR = ./obj/
 OBJ_FILES = $(SRC_FILES:.c=.o)

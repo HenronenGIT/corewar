@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_arg_values.c                                   :+:      :+:    :+:   */
+/*   op_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 15:02:39 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/23 14:43:36 by wdonnell         ###   ########.fr       */
+/*   Created: 2022/11/23 14:40:26 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/11/23 14:43:31 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include "../includes/op_table.h"
 
-void	get_arg_values(int8_t *arena, t_types *types)
+int circular_mem(int pos, int change)
 {
-	int	i;
-	size_t start;
+	if (pos + change < 0)
+		return (MEM_SIZE + (pos + change));
+	else
+		return ((pos + change) % MEM_SIZE);
+}
 
-	start = 0;
+size_t jump_size(t_types *types, bool arg_type_code)
+{
+	size_t n;
+	int i;
+
+	n = 0;
+	if (arg_type_code)
+		n++;
 	i = 0;
 	while (i < types->num_args)
-	{
-		types->val_arg[i] = bytes2int((uint8_t*)&arena[start], types->size_arg[i]);
-		start += types->size_arg[i];
-		i++;
-	}
+		n += types->size_arg[i++];
+	return (n);
 }
