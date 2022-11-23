@@ -13,7 +13,7 @@
 
 #include "../includes/asm.h"
 
-void	syntax_analysis(t_data *s_data)
+void	syntax_analysis(t_data *s_data, int expected)
 {
 	t_token **token_array;
 	size_t	i;
