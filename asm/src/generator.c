@@ -24,7 +24,7 @@ void	save_atc(t_input *data)
 	if (!temp)
 		exit(1);
 	temp[8] = '\0';
-	while (j < 9)
+	while (j < 8)
 	{
 		if (data->arg_type[i] == 1)
 		{
@@ -134,6 +134,25 @@ void	generator(t_input **data)
 	}
 }
 
+void	print_array(t_input *data)
+{
+ 	printf("statement: %d\n", data->statement);
+ 	printf("is_label: %d\n", data->is_label);
+ 	printf("a1 size: %d\n", data->arg_size[0]);
+ 	printf("a2 size: %d\n", data->arg_size[1]);
+ 	printf("a3 size: %d\n", data->arg_size[2]);
+ 	printf("a1 type: %d\n", data->arg_type[0]);
+ 	printf("a2 type: %d\n", data->arg_type[1]);
+ 	printf("a3 type: %d\n", data->arg_type[2]);
+ 	printf("arg1: %s\n", data->args[0]);
+ 	printf("arg2: %s\n", data->args[1]);
+	printf("arg3: %s\n", data->args[2]);
+ 	printf("atc: %d\n", data->argument_type_code);
+ 	printf("arg1_value: %d\n", data->arg_values[0]);
+ 	printf("arg2_value: %d\n", data->arg_values[1]);
+	printf("arg3_value: %d\n", data->arg_values[2]);
+}
+
 int main(void)
 {
 	t_input test;
@@ -160,5 +179,6 @@ int main(void)
 	array[0] = &test;
 	array[1] = NULL;
 	generator(array);
+	print_array(array[0]);
 	return (0);
 }
