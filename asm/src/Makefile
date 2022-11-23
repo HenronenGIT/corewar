@@ -11,4 +11,4 @@
 #******************************************************************************#
 
 all: 
-	gcc generator.c ft_btoi.c ../../libft/libft.a
+	gcc generator.c ft_btoi.c ../../libft/libft.a ft_itoh.c

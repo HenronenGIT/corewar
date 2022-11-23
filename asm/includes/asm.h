@@ -32,7 +32,8 @@ typedef struct s_input
 	char	*final;					//final bytecode for current statement | OTTO
 }	t_input;
 
-int	ft_btoi(char *num);
+int		ft_btoi(char *num);
+char	*ft_itoh(int num, int byte_size);
 
 #define LOCATION printf("FILE: |%s| FUNC: |%s| LINE: |%d|\n", __FILE__, __FUNCTION__, __LINE__)
 #endif

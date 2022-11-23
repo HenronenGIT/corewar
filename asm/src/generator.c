@@ -106,6 +106,11 @@ void	save_argument_values(t_input **original_data, t_input *data, int current_ar
 		data->arg_values[current_arg] = find_number(data->args[current_arg]);
 }
 
+void	make_final(t_input *data)
+{
+	printf("%s%s%s%s%s\n", ft_itoh(data->statement, 1), ft_itoh(data->argument_type_code, 1), ft_itoh(data->arg_values[0], data->arg_size[0]), ft_itoh(data->arg_values[1], data->arg_size[1]), ft_itoh(data->arg_values[2], data->arg_size[2]));
+}
+
 void	generate_input(t_input **original_data, t_input *data, int curr_struct)
 {
 	int	i;
@@ -117,6 +122,7 @@ void	generate_input(t_input **original_data, t_input *data, int curr_struct)
 		save_argument_values(original_data, data, i, curr_struct);
 		i++;
 	}
+	make_final(data);
 }
 
 
@@ -161,24 +167,24 @@ int main(void)
 	array = (t_input **)malloc(sizeof(t_input *) * 2);
 
 
-// //st r1, r2
-	test.statement = 3;
+// //and r1, %0, r1
+	test.statement = 6;
 	test.is_label = 0;
 	test.current_bytes = 0;
 	test.label_name[0] = '\0';
-	test.byte_size = 4;
+	test.byte_size = 8;
 	test.arg_size[0] = 1;
-	test.arg_size[1] = 1;
-	test.arg_size[2] = 0;
+	test.arg_size[1] = 4;
+	test.arg_size[2] = 1;
 	test.arg_type[0] = 1;
-	test.arg_type[1] = 1;
-	test.arg_type[2] = 0;
+	test.arg_type[1] = 2;
+	test.arg_type[2] = 1;
 	test.args[0] = ft_strdup("r1");
-	test.args[1] = ft_strdup("r2");
-	test.args[2] = NULL; 
+	test.args[1] = ft_strdup("%0");
+	test.args[2] = ft_strdup("r1");
 	array[0] = &test;
 	array[1] = NULL;
 	generator(array);
-	print_array(array[0]);
+//	print_array(array[0]);
 	return (0);
 }
