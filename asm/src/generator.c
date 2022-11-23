@@ -126,22 +126,22 @@ void	generator(t_input **data)
 	int			i;
 
 	i = 0;
-	// while (data[i])
-	// {
-	// 	printf("dasdas");
-	// 	if (!data[i]->is_label)
-	// 		generate_input(data, data[i], i);
-	// 	i++;
-	// }
+	while (data[i])
+	{
+		if (!data[i]->is_label)
+			generate_input(data, data[i], i);
+		i++;
+	}
 }
 
 int main(void)
 {
-	printf("asdasda");
 	t_input test;
 	t_input **array;
 
 	array = (t_input **)malloc(sizeof(t_input *) * 2);
+
+
 // //st r1, r2
 	test.statement = 3;
 	test.is_label = 0;
@@ -154,12 +154,9 @@ int main(void)
 	test.arg_type[0] = 1;
 	test.arg_type[1] = 1;
 	test.arg_type[2] = 0;
-	test.args[0][0] = 'r';
-	test.args[0][1] = '1';
-	test.args[0][2] = '\0';
-	test.args[1][0] = 'r';
-	test.args[1][1] = '2';
-	test.args[1][2] = '\0';
+	test.args[0] = ft_strdup("r1");
+	test.args[1] = ft_strdup("r2");
+	test.args[2] = NULL; 
 	array[0] = &test;
 	array[1] = NULL;
 	generator(array);
