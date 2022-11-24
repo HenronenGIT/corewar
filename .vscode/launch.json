@@ -8,8 +8,8 @@
             "name": "C/C++: asm",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/asm/src/a.out", // Binary name
-            "args": [""],
+            "program": "${workspaceFolder}/asm/asm", // Binary name
+            "args": ["test.s"],
             // "args": ["fixed_tdc3.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/test.s"],
             "stopAtEntry": false,

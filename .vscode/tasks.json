@@ -20,19 +20,16 @@
             "args": [
                "-fdiagnostics-color=always",
                "-g",
-			   "${workspaceFolder}/asm/src/generator.c",
-			   "${workspaceFolder}/asm/src/ft_btoi.c",
-			   "${workspaceFolder/libft/libft.a",
-//				"-L./libft",
-//				"-lft",
-				// "-I./libft/includes",
-				// "-I./asm/includes/",
-				// /* Debugging asm */
-				// "${workspaceFolder}/asm/src/*",
-				// // "${workspaceFolder}/libft/*.c", // For debugging lib functions
-				// // "${workspaceFolder}/srcs/*.c",
+				"-L./libft",
+				"-lft",
+				"-I./libft/includes",
+				"-I./asm/includes/",
+				/* Debugging asm */
+				"${workspaceFolder}/asm/src/*",
+				// "${workspaceFolder}/libft/*.c", // For debugging lib functions
+				// "${workspaceFolder}/srcs/*.c",
                "-o",
-               "a.out",
+               "asm",
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

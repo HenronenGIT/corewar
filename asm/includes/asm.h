@@ -64,6 +64,7 @@ typedef struct s_data
 	struct s_header *s_header;
 } t_data;
 
+/*---------- Collecting information about location ----------*/
 typedef struct s_error_log
 {
 	size_t line;
