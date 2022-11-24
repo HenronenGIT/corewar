@@ -12,6 +12,11 @@
 
 #include "../includes/asm.h"
 
+/*
+	generate agument type code by making an 8-bit binary number from types, where all
+	types have their own 2 bit code. T_REG = 01, T_DIR = 10, T_IND = 11.
+	empty spots will be 00. Saving code in decimal int form in data.
+*/
 void	save_atc(t_input *data)
 {
 	int		i;
@@ -52,6 +57,9 @@ void	save_atc(t_input *data)
 	free(temp);
 }
 
+/*
+	find numeric value in T_DIR, T_REG or T_IND type argument when argument also has characters
+*/
 int	find_number(char *current_arg)
 {
 	int	i;
@@ -76,6 +84,9 @@ int	is_label_call(char *current_arg)
 	return (0);
 }
 
+/*
+	find label address to use for calculation of realtive position of label address and current postition
+*/
 void	find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_struct)
 {
 	int	i;
@@ -97,7 +108,7 @@ void	find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_s
 
 
 /*
-	save values in int from 
+	save values in int form for all arguments
 */
 void	save_argument_values(t_input **original_data, t_input *data, int current_arg, int curr_struct)
 {
