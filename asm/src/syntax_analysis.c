@@ -13,17 +13,17 @@
 
 #include "../includes/asm.h"
 
-void	syntax_analysis(t_data *s_data, int expected)
-{
-	t_token **token_array;
-	size_t	i;
+// void	syntax_analysis(t_data *s_data, int expected)
+// {
+// 	t_token **token_array;
+// 	size_t	i;
 
-	i = 0;
+// 	i = 0;
 
-	token_array = (t_token **)s_data->vec_tokens->array;
-	while (i < s_data->vec_tokens->space_taken)
-	{
+// 	token_array = (t_token **)s_data->vec_tokens->array;
+// 	while (i < s_data->vec_tokens->space_taken)
+// 	{
 		
-		i += 1;
-	}
-}
+// 		i += 1;
+// 	}
+// }

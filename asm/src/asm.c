@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	init_structs(&s_data, &s_header, &s_error_log);
 	init_vectors(&s_data);
 	read_input(argv[1], &s_data);
-	syntax_analysis(&s_data, 0);
+	// syntax_analysis(&s_data, 0);
 	// exit(0);
 	return (0);
 }

@@ -56,6 +56,35 @@ void validate_string(t_data *s_data, char *line, int type)
 	else
 		ft_strncpy(s_data->s_header->comment, &line[first_quote + 1], str_len);
 }
+// void validate_string(t_data *s_data, char *line, int type)
+// {
+// 	size_t i;
+// 	size_t first_quote;
+// 	size_t second_quote;
+// 	size_t str_len;
+
+// 	i = 0;
+// 	str_len = 0;
+// 	first_quote = 0;
+// 	second_quote = 0;
+// 	find_quotes(&line[i], &first_quote, &second_quote);
+// 	if (second_quote == 0)
+// 		lexical_error(s_data);
+// 	str_len = (second_quote - first_quote) - 1;
+// 	if (type == NAME && str_len > PROG_NAME_LENGTH)
+// 		error(NAME_LEN_ERR);
+// 	else if (type == COMMENT && str_len > COMMENT_LENGTH)
+// 		error(COMMENT_LEN_ERR);
+// 	while (line[++second_quote] != '\0')
+// 	{
+// 		if (is_delimiter(line[second_quote]) == false)
+// 			lexical_error(s_data);
+// 	}
+// 	if (type == NAME)
+// 		ft_strncpy(s_data->s_header->prog_name, &line[first_quote + 1], str_len);
+// 	else
+// 		ft_strncpy(s_data->s_header->comment, &line[first_quote + 1], str_len);
+// }
 
 static void seek_header_keywords(t_data *s_data, char *line)
 {
@@ -92,7 +121,7 @@ void read_header(int fd, t_data *s_data)
 	line = NULL;
 	while (get_next_line(fd, &line))
 	{
-		s_data->s_error_log->line += 1;
+4		s_data->s_error_log->line += 1;
 		seek_header_keywords(s_data, line);
 		if (*(prog_name) != '\0' && *(comment) != '\0')
 			break;
