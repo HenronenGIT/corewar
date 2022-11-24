@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:02:39 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/24 12:26:38 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:30:31 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ bool	get_arg_values(int8_t *arena, t_types *types, t_process *cur_process)
 			//check regies
 			if (val < 1 || val > 16)
 				return (false);
-			//also is reg 1 as argument, the same as reg 0?
-			types->val_arg[i] = (int32_t)cur_process->registeries[val - 1];
+			//records only the number of the registry, the value found in the registry is calculated in the individual functions as needed
+			types->val_arg[i] = val;
 		}
 		else if (types->type_arg[i] == T_DIR)
 			types->val_arg[i] = val;

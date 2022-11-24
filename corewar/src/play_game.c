@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/23 14:43:36 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:08:46 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void read_statement_code(t_data *data, t_process *temp)
 	{
 		//invalid op code
 		//move cursor forward 1 byte and go to next process
+		//printf("in here?\n");
 		temp->byte_jump_size = 0;
 		temp->cursor++;
 	}
@@ -67,7 +68,8 @@ static void check_process(t_data *data, t_process *temp)
 	if (temp->cycles_remaining == -1)
 	{
 		//move cursor to next position
-		temp->cursor = circular_mem(temp->cursor, temp->byte_jump_size);
+		temp->cursor = circular_mem(temp->cursor, temp->byte_jump_size + 1);
+		printf("data @ temp->cursor: %d\n", data->arena[temp->cursor]);
 		read_statement_code(data, temp);
 	}
 	else if (temp->cycles_remaining == 0)
@@ -94,7 +96,8 @@ static void	execute_processes(t_data *data, t_process *head)
 	while (temp)
 	{
 		check_process(data, temp);
-		printf("id: %d cyc rem: %d\n", temp->id, temp->cycles_remaining);
+		//testing stuff
+		ft_printf("CYCLE: %d | id: %d | cyc rem: %d | cursor: %d\n",data->cycles_total, temp->id, temp->cycles_remaining, temp->cursor);
 		temp = temp->next;
 	}
 	

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/24 12:26:42 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:31:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,6 @@ void	play_game(t_data *data, t_process *head);
 /* check */
 void	check(t_data *data, t_process *head);
 
+//testing ONLY
+void print_arena(int8_t *arena);
 #endif
