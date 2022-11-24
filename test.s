@@ -12,7 +12,15 @@
    
    test_name"
 	
-	  .comment    "This is a comment!"	
+	  .comment    "This is a comment?
+
+	  #saved ?
+	  
+
+
+
+	  still saved?
+	  "	
 		
 
 l2:	sti	r1,%:live,%0

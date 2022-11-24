@@ -118,42 +118,69 @@ void validate_string(t_data *s_data, char *line, int type)
 // 		i += 1;
 // 	}
 // }
-static void copy_name(t_data *s_data, char *string, int fd)
+static void copy_name(t_data *s_data, char *string, int fd, t_type type)
 {
 	size_t i;
 	size_t j;
+	char *dst;
 
 	i = 0;
 	j = 0;
+	if (type == NAME)
+		dst = s_data->s_header->prog_name;
+	else if (type == COMMENT)
+		dst = s_data->s_header->comment;
 	while (string[i] != STRING_CHAR)
 	{
 		if (string[i] == '\0')
 		{
-			s_data->s_header->prog_name[j++] = '\n';
+			dst[j] = '\n';
 			get_next_line(fd, &string);
 			i = 0;
 		}
 		else
 		{
-			s_data->s_header->prog_name[j] = string[i];
+			dst[j] = string[i];
 			i += 1;
-			j += 1;
 		}
+		j += 1;
 	}
 }
 
-static void save_name(t_data *s_data, char *string, int fd)
+// static void save_name(t_data *s_data, char *string, int fd, int offset)
+// {
+// 	size_t i;
+// 	size_t j;
+
+// 	j = 0;
+// 	i = offset;
+// 	while (string[i] != '\0')
+// 	{
+// 		if (string[i] == STRING_CHAR)
+// 		{
+// 			copy_name(s_data, &string[i + 1], fd);
+// 			return;
+// 		}
+// 		if (is_delimiter(string[i]) == false)
+// 			lexical_error(s_data);
+// 		i += 1;
+// 	}
+// 	lexical_error(s_data);
+// }
+static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 {
 	size_t i;
-	size_t j;
 
-	j = 0;
-	i = NAME_CMD_LEN;
+	i = 0;
+	if (type == NAME)
+		i = NAME_CMD_LEN;
+	else if (type == COMMENT)
+		i = COMMENT_CMD_LEN;
 	while (string[i] != '\0')
 	{
 		if (string[i] == STRING_CHAR)
 		{
-			copy_name(s_data, &string[i + 1], fd);
+			copy_name(s_data, &string[i + 1], fd, type);
 			return;
 		}
 		if (is_delimiter(string[i]) == false)
@@ -163,26 +190,26 @@ static void save_name(t_data *s_data, char *string, int fd)
 	lexical_error(s_data);
 }
 
-static void save_comment(t_data *s_data, char *string, int fd)
-{
-	size_t i;
-	size_t j;
+// static void save_comment(t_data *s_data, char *string, int fd)
+// {
+// 	size_t i;
+// 	size_t j;
 
-	j = 0;
-	i = NAME_CMD_LEN;
-	while (string[i] != '\0')
-	{
-		if (string[i] == STRING_CHAR)
-		{
-			copy_name(s_data, &string[i + 1], fd);
-			return;
-		}
-		if (is_delimiter(string[i]) == false)
-			lexical_error(s_data);
-		i += 1;
-	}
-	lexical_error(s_data);
-}
+// 	j = 0;
+// 	i = NAME_CMD_LEN;
+// 	while (string[i] != '\0')
+// 	{
+// 		if (string[i] == STRING_CHAR)
+// 		{
+// 			copy_name(s_data, &string[i + 1], fd);
+// 			return;
+// 		}
+// 		if (is_delimiter(string[i]) == false)
+// 			lexical_error(s_data);
+// 		i += 1;
+// 	}
+// 	lexical_error(s_data);
+// }
 
 static void seek_header_keywords(t_data *s_data, char *line, int fd)
 {
@@ -200,9 +227,10 @@ static void seek_header_keywords(t_data *s_data, char *line, int fd)
 		else if (is_delimiter(line[right]) && line[left] == HEADER_CHAR)
 		{
 			if (ft_strncmp(&line[left], NAME_CMD_STRING, NAME_CMD_LEN) == 0)
-				save_name(s_data, &line[left], fd);
-			else if (ft_strncmp(&line[left], COMMENT_CMD_STRING, COMMENT_CMD_LEN))
-				save_comment(s_data, );
+				seek_quote(s_data, &line[left], fd, NAME);
+				// save_name(s_data, &line[left], fd);
+			else if (ft_strncmp(&line[left], COMMENT_CMD_STRING, COMMENT_CMD_LEN) == 0)
+				seek_quote(s_data, &line[left], fd, COMMENT);
 			return;
 		}
 		else
