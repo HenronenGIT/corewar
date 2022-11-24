@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:40:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/23 14:43:31 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:26:41 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,17 @@ size_t jump_size(t_types *types, bool arg_type_code)
 	while (i < types->num_args)
 		n += types->size_arg[i++];
 	return (n);
+}
+
+bool check_null(t_types *types)
+{
+	int num;
+
+	num = types->num_args;
+	while (--num)
+	{
+		if (types->type_arg[num] == T_NULL)
+			return (true);
+	}
+	return (false);
 }

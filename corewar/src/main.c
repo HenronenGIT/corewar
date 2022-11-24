@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/23 15:05:51 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/24 10:49:56 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,6 @@ void print_arena(int8_t *arena)
 	}
 }
 
-/* single-cycle version of print_arena. Used for -dump flag */
-/*
-void	print_data(t_data *data)
-{
-	int	i;
-
-	//i = 1; why?
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		ft_printf("%.2x", (uint8_t)data->arena[i]);
-		if (i % 32 == 0)
-			ft_printf("\n");
-		else
-			ft_printf(" ");
-		i++;
-	}
-	exit (0);
-}
-*/
-
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -88,7 +67,7 @@ int	main(int ac, char **av)
 		parse(ac, av, &data);
 		load_arena(&data);
 
-		 print_arena(data.arena);
+		print_arena(data.arena);
 		//parse_dump(&ac, &av, &data);
 		// to add: print_introduction(players, id)
 		create_processes(&data, &head);

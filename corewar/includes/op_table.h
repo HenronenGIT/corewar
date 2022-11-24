@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 12:48:22 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/23 14:43:33 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:26:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #define ARG1_MASK 0xC0 //11000000
 #define ARG2_MASK 0x30 //00110000
 #define ARG3_MASK 0xC //00001100
+
+#define T_NULL 0 //use if type is undetermined
 
 typedef struct s_types
 {
@@ -69,10 +71,11 @@ static const t_op g_dispatch[NUM_OPS] = {
 	op_aff
 };
 
-void	get_types(int8_t byte, t_types *types, int num_args);
-void	get_arg_values(int8_t *arena, t_types *types);
+void	get_types(int8_t byte, t_types *types);
+bool	get_arg_values(int8_t *arena, t_types *types, t_process *cur_process);
 /* op_util */
 int		circular_mem(int pos, int change);
 size_t	jump_size(t_types *types, bool arg_type_code);
+bool	check_null(t_types *types);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:55:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/23 14:43:37 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:26:35 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ static void get_arg1(int8_t byte, t_types *types)
 		types->size_arg[0]= 2;
 	}
 	else
-		types->size_arg[0]= 0;
+	{
+		types->type_arg[0] = T_NULL;
+		types->size_arg[0] = 0;
+	}
+		
 }
 
 static void get_arg2(int8_t byte, t_types *types)
@@ -54,7 +58,10 @@ static void get_arg2(int8_t byte, t_types *types)
 		types->size_arg[1] = 2;
 	}
 	else
-		types->size_arg[1]= 0;
+	{
+		types->type_arg[1] = T_NULL;
+		types->size_arg[1] = 0;
+	}
 }
 
 static void get_arg3(int8_t byte, t_types *types)
@@ -75,11 +82,18 @@ static void get_arg3(int8_t byte, t_types *types)
 		types->size_arg[2] = 2;
 	}
 	else
-		types->size_arg[2]= 0;
+	{
+		types->type_arg[2] = T_NULL;
+		types->size_arg[2] = 0;
+	}
 }
 //add else->is zero and hence an error
-void get_types(int8_t byte, t_types *types, int num_args)
+void get_types(int8_t byte, t_types *types)
 {
+	int	num_args;
+
+	num_args = types->num_args;
+
 	get_arg1(byte, types);
 	get_arg2(byte, types);
 	if (num_args == 3)

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:40:16 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/23 15:04:24 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:26:37 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,16 @@ int32_t	bytes2int(uint8_t *byte_value, size_t size)
 void	print_data(t_data *data)
 {
 	int	i;
-	int	j;
 
-	i = 0;
-	while (i < MEM_SIZE)
+	i = 1;
+	while (i <= MEM_SIZE)
 	{
-		j = 0;
-		while (j < 32)
-		{
-			ft_printf("%.2x ", (uint8_t)data->arena[i]);
-			i++;
-			j++;
-		}
-		ft_printf("\n");
+		ft_printf("%.2x", (uint8_t)data->arena[i - 1]);
+		if (i % 32 == 0)
+			ft_printf("\n");
+		else
+			ft_printf(" ");
+		i++;
 	}
 	exit (0);
 }
