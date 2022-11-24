@@ -16,7 +16,7 @@ CGREEN=\033[0;32m
 
 NAME = corewar
 CC = gcc
-FLAGS = #-Wall -Wextra -Werror
+FLAGS = -g#-Wall -Wextra -Werror
 
 SRC_DIR = ./src/
 SRC_FILES = corewar_main.c\
