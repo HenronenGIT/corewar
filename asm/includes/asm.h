@@ -82,22 +82,79 @@ typedef struct s_vec
 /*---------- Main data struct ----------*/
 typedef struct s_data_cell
 {
-	int		statement;			//statement for any given instruction given as corresponding int found in the header | HENRI
-	int		is_label;			// HENRI
-	int		current_bytes;
-	char	label_name[10];
-	int		byte_size;			// full size of every statement as bytes. 0 for labels | HENRI
-	int		arg_size[4];		// is size of every arg in bytes | HENRI
-	int		arg_type[4];		// is 0 for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-	char	*args[4];
+	int statement; // statement for any given instruction given as corresponding int found in the header | HENRI
+	int is_label;  // HENRI
+	int current_bytes;
+	char label_name[10];
+	int byte_size;	 // full size of every statement as bytes. 0 for labels | HENRI
+	int arg_size[4]; // is size of every arg in bytes | HENRI
+	int arg_type[4]; // is 0 for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
+	char *args[4];
 
-	int		argument_type_code;		//argument type code in int | OTTO
-	int		arg_values[4];			//arg codes in int | OTTO
-	char	*final;					//final bytecode for current statement | OTTO
-}	t_input;
+	int argument_type_code; // argument type code in int | OTTO
+	int arg_values[4];		// arg codes in int | OTTO
+	char *final;			// final bytecode for current statement | OTTO
+} t_input;
 
-int		ft_btoi(char *num);
-char	*ft_itoh(int num, int byte_size);
+//! This is copied fromo op.h header
+/*---------- Header Struct ----------*/
+typedef struct s_header
+{
+	unsigned int magic;
+	char prog_name[PROG_NAME_LENGTH + 1];
+	unsigned int prog_size;
+	char comment[COMMENT_LENGTH + 1];
+} t_header;
 
-#define LOCATION printf("FILE: |%s| FUNC: |%s| LINE: |%d|\n", __FILE__, __FUNCTION__, __LINE__)
+/*---------- enums for identifying type of token ----------*/
+typedef enum e_type
+{
+	NAME,
+	COMMENT,
+	LABEL,
+	STATEMENT,
+	SEPARATOR,
+	REGISTER,
+	DIRECT_LABEL,
+	DIRECT,
+	INVALID
+} t_type;
+
+/*---------- Token struct ----------*/
+typedef struct s_token
+{
+	t_type type;
+	char *content;
+} t_token;
+
+/* OTTO */
+int ft_btoi(char *num);
+char *ft_itoh(int num, int byte_size);
+
+/* HENRI */
+void error(int error_number);
+void read_input(char *input, t_data *s_data);
+void read_header(int fd, t_data *s_data);
+void lexical_error(t_data *s_data);
+
+/*---------- Dynamic 2D array ----------*/
+void vec_new_arr(t_vec *dst, size_t len);
+void vec_insert(t_vec *dst_vec, void *element);
+
+/*---------- Functions to validate Tokens ----------*/
+bool is_label(char *sub_string, t_data *data);
+bool is_statement(char *sub_string);
+bool is_delimiter(char c);
+bool is_register(char *string);
+bool is_separator(char c);
+bool is_directlabel(t_data *s_data, char *string);
+bool is_direct(t_data *s_data, char *string);
+
+/*---------- Syntax Analyzer ----------*/
+void syntax_analysis(t_data *s_data);
+
+/*---------- Printing / debug ----------*/
+void print_data(t_data *s_data);
+void print_tokens(t_vec *vec_tokens);
+
 #endif

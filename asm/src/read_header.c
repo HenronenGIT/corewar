@@ -121,7 +121,7 @@ void read_header(int fd, t_data *s_data)
 	line = NULL;
 	while (get_next_line(fd, &line))
 	{
-4		s_data->s_error_log->line += 1;
+		s_data->s_error_log->line += 1;
 		seek_header_keywords(s_data, line);
 		if (*(prog_name) != '\0' && *(comment) != '\0')
 			break;
