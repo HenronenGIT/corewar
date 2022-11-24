@@ -1,27 +1,29 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexical_error.c                                    :+:      :+:    :+:   */
+/*   syntax_analyzer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 15:20:46 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/14 15:20:47 by hmaronen         ###   ########.fr       */
+/*   Created: 2022/11/22 10:39:20 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/11/22 10:39:21 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-/*
-Output error messages, and specify in which line that error happened.
-*/
-void	lexical_error(t_data *s_data)
-{
-	size_t	line_count;
-	size_t	column_count;
+// void	syntax_analysis(t_data *s_data, int expected)
+// {
+// 	t_token **token_array;
+// 	size_t	i;
 
-	line_count = s_data->s_error_log->line;
-	column_count = s_data->s_error_log->column;
-	ft_printf("Lexical error at [%d:%d]\n", line_count, column_count);
-	error(LEXICAL_ERROR);
-}
+// 	i = 0;
+
+// 	token_array = (t_token **)s_data->vec_tokens->array;
+// 	while (i < s_data->vec_tokens->space_taken)
+// 	{
+		
+// 		i += 1;
+// 	}
+// }
