@@ -95,6 +95,10 @@ void	find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_s
 	}
 }
 
+
+/*
+	save values in int from 
+*/
 void	save_argument_values(t_input **original_data, t_input *data, int current_arg, int curr_struct)
 {
 	int	num;
@@ -111,6 +115,10 @@ void	make_final(t_input *data)
 	printf("%s%s%s%s%s\n", ft_itoh(data->statement, 1), ft_itoh(data->argument_type_code, 1), ft_itoh(data->arg_values[0], data->arg_size[0]), ft_itoh(data->arg_values[1], data->arg_size[1]), ft_itoh(data->arg_values[2], data->arg_size[2]));
 }
 
+/*
+	generate input value for argument type code and for different arguments of a
+	single statement
+*/
 void	generate_input(t_input **original_data, t_input *data, int curr_struct)
 {
 	int	i;
@@ -126,7 +134,10 @@ void	generate_input(t_input **original_data, t_input *data, int curr_struct)
 }
 
 
-
+/*
+	loop through all statements and labels and generate input for each
+	statement, skipping labels
+*/
 void	generator(t_input **data)
 {
 	int			i;
@@ -140,6 +151,10 @@ void	generator(t_input **data)
 	}
 }
 
+
+/*
+	test function
+*/
 void	print_array(t_input *data)
 {
  	printf("statement: %d\n", data->statement);
@@ -159,6 +174,9 @@ void	print_array(t_input *data)
 	printf("arg3_value: %d\n", data->arg_values[2]);
 }
 
+/*
+	test main
+*/
 int main(void)
 {
 	t_input test;
