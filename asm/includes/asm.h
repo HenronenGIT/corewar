@@ -28,9 +28,9 @@
 #define MALLOC_ERR -3
 #define NULL_ERR -4
 #define INVALID_LABEL -5
-#define NAME_ERR -6
-#define NAME_LEN_ERR -7
-#define COMMENT_LEN_ERR -8
+#define NAME_LEN_ERR -6
+#define COMMENT_LEN_ERR -7
+#define LEXICAL_ERROR -8
 
 #define TEMP_ERR -999 //! TEMP
 
@@ -45,23 +45,30 @@
 #define COMMENT_CMD_STRING ".comment"
 #define COMMENT_CMD_LEN 8
 
+/*---------- Chars for identifying ----------*/
 #define LABEL_CHAR ':'
 #define HEADER_CHAR '.'
 #define STRING_CHAR '"'
+#define SEPARATOR_CHAR ','
+#define REGISTER_CHAR 'r'
+#define DIRECT_CHAR '%'
+#define COMMENT_CHAR '#'
+#define LABEL_CHARS "abcdefghijklmnopqrstuvwxyz_0123456789"
 
 /*---------- Main data struct ----------*/
 typedef struct s_data
 {
-	struct s_vec		*vec_info;
-	struct s_error_log	*s_error_log;
-	struct s_header		*s_header;
+	struct s_vec *vec_info;
+	struct s_vec *vec_tokens;
+	struct s_error_log *s_error_log;
+	struct s_header *s_header;
 } t_data;
 
-typedef struct	s_error_log
+typedef struct s_error_log
 {
-	size_t	line;
-	size_t	column;
-}				t_error_log;
+	size_t line;
+	size_t column;
+} t_error_log;
 
 /*---------- Dynamic array structure ----------*/
 typedef struct s_vec
@@ -72,9 +79,8 @@ typedef struct s_vec
 	size_t space_taken;
 } t_vec;
 
-
 /*---------- Main data struct ----------*/
-typedef struct s_input
+typedef struct s_data_cell
 {
 	int		statement;			//statement for any given instruction given as corresponding int found in the header | HENRI
 	int		is_label;			// HENRI
