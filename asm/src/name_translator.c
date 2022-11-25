@@ -12,4 +12,4 @@
 
 #include "../includes/asm.h"
 
-void	name_translator()
+// void	name_translator()

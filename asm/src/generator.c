@@ -12,12 +12,12 @@
 
 #include "../includes/asm.h"
 
-void	save_atc(t_input *data)
+void save_atc(t_input *data)
 {
-	int		i;
-	char	*temp;
-	int		j;
-	
+	int i;
+	char *temp;
+	int j;
+
 	i = 0;
 	j = 0;
 	temp = (char *)malloc(sizeof(char) * 9);
@@ -52,9 +52,9 @@ void	save_atc(t_input *data)
 	free(temp);
 }
 
-int	find_number(char *current_arg)
+int find_number(char *current_arg)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (current_arg[0] == '%' || current_arg[0] == 'r')
@@ -62,9 +62,9 @@ int	find_number(char *current_arg)
 	return (ft_atoi(&current_arg[i]));
 }
 
-int	is_label_call(char *current_arg)
+int is_label_call(char *current_arg)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (current_arg[i])
@@ -76,9 +76,9 @@ int	is_label_call(char *current_arg)
 	return (0);
 }
 
-void	find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_struct)
+void find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_struct)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (data[i])
@@ -88,16 +88,16 @@ void	find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_s
 			if (ft_strcmp(data[i]->label_name, current_arg))
 			{
 				data[curr_struct]->arg_values[curr_arg] = data[i]->current_bytes - data[curr_struct]->current_bytes;
-				return ;
+				return;
 			}
 		}
 		i++;
 	}
 }
 
-void	save_argument_values(t_input **original_data, t_input *data, int current_arg, int curr_struct)
+void save_argument_values(t_input **original_data, t_input *data, int current_arg, int curr_struct)
 {
-	int	num;
+	int num;
 
 	num = 0;
 	if (is_label_call(data->args[current_arg]))
@@ -106,14 +106,14 @@ void	save_argument_values(t_input **original_data, t_input *data, int current_ar
 		data->arg_values[current_arg] = find_number(data->args[current_arg]);
 }
 
-void	make_final(t_input *data)
+void make_final(t_input *data)
 {
-	printf("%s%s%s%s%s\n", ft_itoh(data->statement, 1), ft_itoh(data->argument_type_code, 1), ft_itoh(data->arg_values[0], data->arg_size[0]), ft_itoh(data->arg_values[1], data->arg_size[1]), ft_itoh(data->arg_values[2], data->arg_size[2]));
+	printf("%s%s%s%s%s\n", ft_itoh(data->instruction, 1), ft_itoh(data->argument_type_code, 1), ft_itoh(data->arg_values[0], data->arg_size[0]), ft_itoh(data->arg_values[1], data->arg_size[1]), ft_itoh(data->arg_values[2], data->arg_size[2]));
 }
 
-void	generate_input(t_input **original_data, t_input *data, int curr_struct)
+void generate_input(t_input **original_data, t_input *data, int curr_struct)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	save_atc(data);
@@ -125,11 +125,9 @@ void	generate_input(t_input **original_data, t_input *data, int curr_struct)
 	make_final(data);
 }
 
-
-
-void	generator(t_input **data)
+void generator(t_input **data)
 {
-	int			i;
+	int i;
 
 	i = 0;
 	while (data[i])
@@ -140,22 +138,22 @@ void	generator(t_input **data)
 	}
 }
 
-void	print_array(t_input *data)
+void print_array(t_input *data)
 {
- 	printf("statement: %d\n", data->statement);
- 	printf("is_label: %d\n", data->is_label);
- 	printf("a1 size: %d\n", data->arg_size[0]);
- 	printf("a2 size: %d\n", data->arg_size[1]);
- 	printf("a3 size: %d\n", data->arg_size[2]);
- 	printf("a1 type: %d\n", data->arg_type[0]);
- 	printf("a2 type: %d\n", data->arg_type[1]);
- 	printf("a3 type: %d\n", data->arg_type[2]);
- 	printf("arg1: %s\n", data->args[0]);
- 	printf("arg2: %s\n", data->args[1]);
+	printf("instruction: %d\n", data->instruction);
+	printf("is_label: %d\n", data->is_label);
+	printf("a1 size: %d\n", data->arg_size[0]);
+	printf("a2 size: %d\n", data->arg_size[1]);
+	printf("a3 size: %d\n", data->arg_size[2]);
+	printf("a1 type: %d\n", data->arg_type[0]);
+	printf("a2 type: %d\n", data->arg_type[1]);
+	printf("a3 type: %d\n", data->arg_type[2]);
+	printf("arg1: %s\n", data->args[0]);
+	printf("arg2: %s\n", data->args[1]);
 	printf("arg3: %s\n", data->args[2]);
- 	printf("atc: %d\n", data->argument_type_code);
- 	printf("arg1_value: %d\n", data->arg_values[0]);
- 	printf("arg2_value: %d\n", data->arg_values[1]);
+	printf("atc: %d\n", data->argument_type_code);
+	printf("arg1_value: %d\n", data->arg_values[0]);
+	printf("arg2_value: %d\n", data->arg_values[1]);
 	printf("arg3_value: %d\n", data->arg_values[2]);
 }
 
@@ -166,9 +164,8 @@ int main(void)
 
 	array = (t_input **)malloc(sizeof(t_input *) * 2);
 
-
-// //and r1, %0, r1
-	test.statement = 6;
+	// //and r1, %0, r1
+	test.instruction = 6;
 	test.is_label = 0;
 	test.current_bytes = 0;
 	test.label_name[0] = '\0';
@@ -185,6 +182,6 @@ int main(void)
 	array[0] = &test;
 	array[1] = NULL;
 	generator(array);
-//	print_array(array[0]);
+	//	print_array(array[0]);
 	return (0);
 }

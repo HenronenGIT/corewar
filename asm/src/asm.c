@@ -33,11 +33,11 @@ void error(int error_number)
 
 static void init_vectors(t_data *s_data)
 {
-	s_data->vec_info = (t_vec *)malloc(sizeof(t_vec));
+	s_data->vec_input = (t_vec *)malloc(sizeof(t_vec));
 	s_data->vec_tokens = (t_vec *)malloc(sizeof(t_vec));
-	if (!s_data->vec_tokens || !s_data->vec_info)
+	if (!s_data->vec_tokens || !s_data->vec_input)
 		error(MALLOC_ERR);
-	vec_new_arr(s_data->vec_info, 2);
+	vec_new_arr(s_data->vec_input, 2);
 	vec_new_arr(s_data->vec_tokens, 2);
 }
 
@@ -53,7 +53,7 @@ static void init_structs(t_data *data, t_header *header, t_error_log *error_log)
 	ft_bzero(header->comment, COMMENT_LENGTH);
 	error_log->line = 1;
 	error_log->column = 1;
-	data->vec_info = NULL;
+	data->vec_input = NULL;
 	data->s_header = header;
 	data->s_error_log = error_log;
 }
@@ -69,7 +69,9 @@ int main(int argc, char *argv[])
 	init_structs(&s_data, &s_header, &s_error_log);
 	init_vectors(&s_data);
 	read_input(argv[1], &s_data);
-	// syntax_analysis(&s_data, 0);
+	syntax_analyzer(&s_data);
+	print_data(&s_data);
+
 	// exit(0);
 	return (0);
 }

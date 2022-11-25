@@ -74,7 +74,7 @@ void lexical_scanner(char *line, t_data *s_data)
 			if (is_label(sub_string, s_data))
 				save_token(s_data, sub_string, LABEL);
 			else if (is_statement(sub_string))
-				save_token(s_data, sub_string, STATEMENT);
+				save_token(s_data, sub_string, INSTRUCTION);
 			else if (is_directlabel(s_data, sub_string))
 				save_token(s_data, sub_string, DIRECT_LABEL);
 			else if (is_direct(s_data, sub_string))
@@ -109,5 +109,4 @@ void read_input(char *input, t_data *s_data)
 		free(line);
 		s_data->s_error_log->line += 1;
 	}
-		print_data(s_data);
 }

@@ -58,7 +58,7 @@
 /*---------- Main data struct ----------*/
 typedef struct s_data
 {
-	struct s_vec *vec_info;
+	struct s_vec *vec_input;
 	struct s_vec *vec_tokens;
 	struct s_error_log *s_error_log;
 	struct s_header *s_header;
@@ -80,17 +80,17 @@ typedef struct s_vec
 	size_t space_taken;
 } t_vec;
 
-/*---------- Main data struct ----------*/
+/*---------- One of these structs contains info from one statement ----------*/
 typedef struct s_data_cell
 {
-	int statement; // statement for any given instruction given as corresponding int found in the header | HENRI
-	int is_label;  // HENRI
-	int current_bytes;
-	char label_name[10];
+	bool is_label;	 // HENRI
+	int instruction; // Better name opcode ?
+	char *args[4];
+	char *label_name;
 	int byte_size;	 // full size of every statement as bytes. 0 for labels | HENRI
 	int arg_size[4]; // is size of every arg in bytes | HENRI
 	int arg_type[4]; // is 0 for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-	char *args[4];
+	int current_bytes;
 
 	int argument_type_code; // argument type code in int | OTTO
 	int arg_values[4];		// arg codes in int | OTTO
@@ -113,7 +113,7 @@ typedef enum e_type
 	NAME,
 	COMMENT,
 	LABEL,
-	STATEMENT,
+	INSTRUCTION,
 	SEPARATOR,
 	REGISTER,
 	DIRECT_LABEL,
@@ -126,6 +126,7 @@ typedef struct s_token
 {
 	t_type type;
 	char *content;
+	// location of the token can be saved
 } t_token;
 
 /* OTTO */
@@ -152,7 +153,7 @@ bool is_directlabel(t_data *s_data, char *string);
 bool is_direct(t_data *s_data, char *string);
 
 /*---------- Syntax Analyzer ----------*/
-void syntax_analysis(t_data *s_data);
+void syntax_analyzer(t_data *s_data);
 
 /*---------- Printing / debug ----------*/
 void print_data(t_data *s_data);
