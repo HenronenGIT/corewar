@@ -13,10 +13,53 @@
 
 #include "../includes/asm.h"
 
+int lookup(const char *string)
+{
+	// printf("%s\n", g_table[0].instruction);
+	size_t i;
+	// t_table *ptr;
+
+	i = 0;
+	// ptr = g_table[0];
+
+	// while (ptr->op_code != 0)
+	// {
+	// 	if (ft_strcmp(string, ptr->instruction) == 0)
+	// 		return (ptr->op_code);
+	// 	ptr += 1;
+	// }
+	while (g_table[i].instruction != NULL)
+	{
+		if (ft_strcmp(string, g_table[i].instruction) == 0)
+			return (g_table[i].op_code);
+		i += 1;
+	}
+	return (-1);
+
+	// 	t_op op_tab[17] =
+	// 		{
+	// 			{"live", 1, {T_DIR}},
+	// 			{"ld", 2, {T_DIR | T_IND, T_REG}},
+	// 			{"st", 3, {T_REG, T_IND | T_REG}},
+	// 			{"add", 4, {T_REG, T_REG, T_REG}},
+	// 			{"sub", 5, {T_REG, T_REG, T_REG}},
+	// 			{"and", 6, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}},
+	// 			{"or", 7, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}},
+	// 			{"xor", 8, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}},
+	// 			{"zjmp", 9, {T_DIR}},
+	// 			{"ldi", 10, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}},
+	// 			{"sti", 11, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}},
+	// 			{"fork", 12, {T_DIR}},
+	// 			{"lld", 13, {T_DIR | T_IND, T_REG}},
+	// 			{"lldi", 14, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}},
+	// 			{"lfork", 15, {T_DIR}},
+	// 			{"aff", 16, {T_REG}},
+	// 			{0, 0, {0}}};
+}
+
 static t_input *init_values(t_input *element)
 {
-	element->is_label = false;
-	element->instruction = 0;
+	element->op_code = 0;
 	element->args[0] = NULL;
 	element->args[1] = NULL;
 	element->args[2] = NULL;
@@ -40,31 +83,28 @@ static t_input *init_values(t_input *element)
 static void init_instruction(t_data *s_data, t_token *token)
 {
 	size_t newest_element;
+	t_input **input_array;
 
-	newest_element = s_data->vec_tokens->space_taken - 1;
+	input_array = (t_input **)s_data->vec_input->array;
+	newest_element = s_data->vec_input->space_taken - 1;
+	if (token->type == INSTRUCTION)
+		input_array[newest_element]->op_code = lookup(token->content);
+	// else if (token->type == )
+	else
+	{
+		input_array[newest_element]->args[0] = token->content;
+	}
+	
 }
 
 static void init_label(t_data *s_data, t_token *token)
 {
 	size_t newest_element;
-	t_input **input_array;
-	t_input *element;
-	t_input	**array;
+	t_input **array;
 
 	array = (t_input **)s_data->vec_input->array;
 	newest_element = s_data->vec_input->space_taken - 1;
-	// s_data->vec_input->array[newest_element]->label_name = token->content;
 	array[newest_element]->label_name = token->content;
-	// 1
-	// input_array = (t_input **)s_data->vec_input->array;
-	// newest_element = s_data->vec_input->space_taken - 1;
-	// input_array[newest_element]->label_name = token->content;
-
-	// 2
-	// newest_element = s_data->vec_input->space_taken - 1;
-	// element = s_data->vec_input->array[newest_element];
-	// element->label_name = ft_strdup(token->content);
-	// s_data->vec_input->array[newest_element] = element;
 }
 
 /*

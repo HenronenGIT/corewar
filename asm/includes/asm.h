@@ -83,8 +83,7 @@ typedef struct s_vec
 /*---------- One of these structs contains info from one statement ----------*/
 typedef struct s_data_cell
 {
-	bool is_label;	 // HENRI
-	int instruction; // Better name opcode ?
+	int op_code;
 	char *args[4];
 	char *label_name;
 	int byte_size;	 // full size of every statement as bytes. 0 for labels | HENRI
@@ -120,6 +119,44 @@ typedef enum e_type
 	DIRECT,
 	INVALID
 } t_type;
+
+// typedef enum e_type
+// {
+// 	T_REG,
+// 	T_DIR,
+// 	T_IND
+// } t_type;
+
+#define T_REG 1
+#define T_DIR 2
+#define T_IND 4
+#define T_LAB 8
+
+typedef struct s_table
+{
+	const char *instruction;
+	int op_code;
+} t_table;
+
+static const t_table g_table[] = {
+	{"live", 1},
+	{"ld", 2},
+	{"st", 3},
+	{"add", 4},
+	{"sub", 5},
+	{"and", 6},
+	{"or", 7},
+	{"xor", 8},
+	{"zjmp", 9},
+	{"ldi", 10},
+	{"sti", 11},
+	{"fork", 12},
+	{"lld", 13},
+	{"lldi", 14},
+	{"lfork", 15},
+	{"aff", 16},
+	{NULL, 0}
+};
 
 /*---------- Token struct ----------*/
 typedef struct s_token

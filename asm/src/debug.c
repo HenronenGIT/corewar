@@ -43,8 +43,13 @@ void print_temp_name(t_vec *vec_input)
 	while (i < vec_input->space_taken)
 	{
 		ft_printf("%s[%d]%s\t", GREEN, i, WHITE);
-		ft_printf("%sLABEL%s = %-10s\t", PINK, WHITE, input_array[i]->label_name);
-		ft_printf("%sINSTRUCTION%s = %-10s\n", PINK, WHITE, input_array[i]->instruction);
+		ft_printf("%slabel_name%s = %-10s\t", PINK, WHITE, input_array[i]->label_name);
+		ft_printf("%sop_code%s = %-10d", PINK, WHITE, input_array[i]->op_code);
+		ft_printf("%sargs[0]%s = %-10s", PINK, WHITE, input_array[i]->args[0]);
+		ft_printf("%sargs[1]%s = %-10s", PINK, WHITE, input_array[i]->args[1]);
+		ft_printf("%sargs[2]%s = %-10s", PINK, WHITE, input_array[i]->args[2]);
+		ft_printf("%sargs[3]%s = %-10s", PINK, WHITE, input_array[i]->args[3]);
+		ft_printf("\n");
 		// ft_printf("%sCONTENT%s = %s\n", PINK, WHITE, input_array[i]->label_name);
 		i += 1;
 	}

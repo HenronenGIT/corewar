@@ -108,7 +108,7 @@ void save_argument_values(t_input **original_data, t_input *data, int current_ar
 
 void make_final(t_input *data)
 {
-	printf("%s%s%s%s%s\n", ft_itoh(data->instruction, 1), ft_itoh(data->argument_type_code, 1), ft_itoh(data->arg_values[0], data->arg_size[0]), ft_itoh(data->arg_values[1], data->arg_size[1]), ft_itoh(data->arg_values[2], data->arg_size[2]));
+	printf("%s%s%s%s%s\n", ft_itoh(data->op_code, 1), ft_itoh(data->argument_type_code, 1), ft_itoh(data->arg_values[0], data->arg_size[0]), ft_itoh(data->arg_values[1], data->arg_size[1]), ft_itoh(data->arg_values[2], data->arg_size[2]));
 }
 
 void generate_input(t_input **original_data, t_input *data, int curr_struct)
@@ -140,7 +140,7 @@ void generator(t_input **data)
 
 void print_array(t_input *data)
 {
-	printf("instruction: %d\n", data->instruction);
+	printf("op_code: %d\n", data->op_code);
 	printf("is_label: %d\n", data->is_label);
 	printf("a1 size: %d\n", data->arg_size[0]);
 	printf("a2 size: %d\n", data->arg_size[1]);
@@ -165,7 +165,7 @@ int main(void)
 	array = (t_input **)malloc(sizeof(t_input *) * 2);
 
 	// //and r1, %0, r1
-	test.instruction = 6;
+	test.op_code = 6;
 	test.is_label = 0;
 	test.current_bytes = 0;
 	test.label_name[0] = '\0';
