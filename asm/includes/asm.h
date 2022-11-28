@@ -11,49 +11,56 @@
 /* ************************************************************************** */
 
 #ifndef ASM_H
-#define ASM_H
+# define ASM_H
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include "../../libft/includes/libft.h"
+# include <stdio.h>
+# include <fcntl.h>
+# include <stdbool.h>
+# include "../../libft/includes/libft.h"
 
-#define PRINT(s) (printf("FILE: |%s| FUNC: |%s| LINE: |%d|\nValue:%s", __FILE__, __FUNCTION__, __LINE__, s))
-#define PRINT_D(d) (printf("FILE: |%s| FUNC: |%s| LINE: |%d|\nValue:%d", __FILE__, __FUNCTION__, __LINE__, d))
-#define LOCATION printf("FILE: |%s| FUNC: |%s| LINE: |%d|\n", __FILE__, __FUNCTION__, __LINE__)
+# define PRINT(s) (printf("FILE: |%s| FUNC: |%s| LINE: |%d|\nValue:%s", __FILE__, __FUNCTION__, __LINE__, s))
+# define PRINT_D(d) (printf("FILE: |%s| FUNC: |%s| LINE: |%d|\nValue:%d", __FILE__, __FUNCTION__, __LINE__, d))
+# define LOCATION printf("FILE: |%s| FUNC: |%s| LINE: |%d|\n", __FILE__, __FUNCTION__, __LINE__)
 
 /*---------- Error codes ----------*/
-#define OPEN_ERR -1
-#define ARG_ERR -2
-#define MALLOC_ERR -3
-#define NULL_ERR -4
-#define INVALID_LABEL -5
-#define NAME_LEN_ERR -6
-#define COMMENT_LEN_ERR -7
-#define LEXICAL_ERROR -8
+# define OPEN_ERR -1
+# define ARG_ERR -2
+# define MALLOC_ERR -3
+# define NULL_ERR -4
+# define INVALID_LABEL -5
+# define NAME_LEN_ERR -6
+# define COMMENT_LEN_ERR -7
+# define LEXICAL_ERROR -8
 
-#define TEMP_ERR -999 //! TEMP
+# define SYNTAX_ERROR -9 //TEMP ERROR
+
+# define TEMP_ERR -999 //! TEMP
 
 //! This is copied from op.h header
-#define PROG_NAME_LENGTH (128)
-#define COMMENT_LENGTH (2048)
-#define COREWAR_EXEC_MAGIC 0xea83f3
+# define PROG_NAME_LENGTH (128)
+# define COMMENT_LENGTH (2048)
+# define COREWAR_EXEC_MAGIC 0xea83f3
 
 /*---------- Defines from op.h header ----------*/
-#define NAME_CMD_STRING ".name"
-#define NAME_CMD_LEN 5
-#define COMMENT_CMD_STRING ".comment"
-#define COMMENT_CMD_LEN 8
+# define NAME_CMD_STRING ".name"
+# define NAME_CMD_LEN 5
+# define COMMENT_CMD_STRING ".comment"
+# define COMMENT_CMD_LEN 8
 
 /*---------- Chars for identifying ----------*/
-#define LABEL_CHAR ':'
-#define HEADER_CHAR '.'
-#define STRING_CHAR '"'
-#define SEPARATOR_CHAR ','
-#define REGISTER_CHAR 'r'
-#define DIRECT_CHAR '%'
-#define COMMENT_CHAR '#'
-#define LABEL_CHARS "abcdefghijklmnopqrstuvwxyz_0123456789"
+# define LABEL_CHAR ':'
+# define HEADER_CHAR '.'
+# define STRING_CHAR '"'
+# define SEPARATOR_CHAR ','
+# define REGISTER_CHAR 'r'
+# define DIRECT_CHAR '%'
+# define COMMENT_CHAR '#'
+# define LABEL_CHARS "abcdefghijklmnopqrstuvwxyz_0123456789"
+
+# define T_REG 1
+# define T_DIR 2
+# define T_IND 4
+# define T_LAB 8
 
 /*---------- Main data struct ----------*/
 typedef struct s_data
@@ -128,11 +135,6 @@ typedef enum e_type
 // 	T_IND
 // } t_type;
 
-#define T_REG 1
-#define T_DIR 2
-#define T_IND 4
-#define T_LAB 8
-
 typedef struct s_table
 {
 	const char *instruction;
@@ -141,7 +143,7 @@ typedef struct s_table
 } t_table;
 
 static const t_table g_table[] = {
-	{"live", 1, {T_REG}},
+	{"live", 1, {T_DIR}},
 	{"ld", 2, {T_DIR | T_IND, T_REG}},
 	{"st", 3, {T_REG, T_IND | T_REG}},
 	{"add", 4, {T_REG, T_REG, T_REG}},
@@ -172,6 +174,11 @@ int ft_btoi(char *num);
 char *ft_itoh(int num, int byte_size);
 
 /* HENRI */
+/* Inits */
+void init_structs(t_data *data, t_header *header, t_error_log *error_log);
+void init_vectors(t_data *s_data);
+t_input *init_values(t_input *element);
+
 void error(int error_number);
 void read_input(char *input, t_data *s_data);
 void read_header(int fd, t_data *s_data);

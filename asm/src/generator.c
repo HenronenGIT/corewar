@@ -83,7 +83,7 @@ void find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_s
 	i = 0;
 	while (data[i])
 	{
-		if (data[i]->is_label)
+		if (data[i]->label_name)
 		{
 			if (ft_strcmp(data[i]->label_name, current_arg))
 			{
@@ -132,7 +132,7 @@ void generator(t_input **data)
 	i = 0;
 	while (data[i])
 	{
-		if (!data[i]->is_label)
+		if (!data[i]->label_name)
 			generate_input(data, data[i], i);
 		i++;
 	}
@@ -141,7 +141,6 @@ void generator(t_input **data)
 void print_array(t_input *data)
 {
 	printf("op_code: %d\n", data->op_code);
-	printf("is_label: %d\n", data->is_label);
 	printf("a1 size: %d\n", data->arg_size[0]);
 	printf("a2 size: %d\n", data->arg_size[1]);
 	printf("a3 size: %d\n", data->arg_size[2]);
@@ -166,7 +165,6 @@ int main(void)
 
 	// //and r1, %0, r1
 	test.op_code = 6;
-	test.is_label = 0;
 	test.current_bytes = 0;
 	test.label_name[0] = '\0';
 	test.byte_size = 8;

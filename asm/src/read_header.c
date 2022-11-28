@@ -108,5 +108,4 @@ void read_header(int fd, t_data *s_data)
 	}
 	if (*(prog_name) == '\0' || *(comment) == '\0')
 		lexical_error(s_data);
-
 }

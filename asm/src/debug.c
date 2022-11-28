@@ -40,7 +40,7 @@ void print_temp_name(t_vec *vec_input)
 
 	i = 0;
 	input_array = (t_input **)vec_input->array;
-	ft_printf("%s------ vec_input->array ------%s\n", GREEN, WHITE);
+	ft_printf("%s########### vec_input->array ###########%s\n", GREEN, WHITE);
 	while (i < vec_input->space_taken)
 	{
 		ft_printf("%s[%d]%-8s", GREEN, i, WHITE);
@@ -68,7 +68,7 @@ void print_tokens(t_vec *vec_tokens)
 
 	i = 0;
 	token_array = (t_token **)vec_tokens->array;
-	ft_printf("%s------ t_token ** vector ------%s\n", GREEN, WHITE);
+	ft_printf("%s########### t_token ** vector ###########%s\n", GREEN, WHITE);
 
 	while (i < vec_tokens->space_taken)
 	{
@@ -77,15 +77,17 @@ void print_tokens(t_vec *vec_tokens)
 		ft_printf("%sCONTENT%s = %s\n", PINK, WHITE, token_array[i]->content);
 		i += 1;
 	}
+	ft_printf("\n");
 }
 
 void print_header_data(t_header *s_header)
 {
-	ft_printf("%s------ t_header ------%s\n", GREEN, WHITE);
+	ft_printf("%s########### t_header ###########%s\n", GREEN, WHITE);
 	ft_printf("%s.name%s = \t|%s|\n", PINK, WHITE, s_header->prog_name);
 	ft_printf("%s.comment%s = \t|%s|\n", PINK, WHITE, s_header->comment);
 	// ft_printf("%sprog_size%s = \t|%s|\n", PINK, WHITE, s_header->prog_size);
 	ft_printf("%smagic%s = \t|%d|\n", PINK, WHITE, s_header->magic);
+	ft_printf("\n");
 }
 
 void print_data(t_data *s_data)

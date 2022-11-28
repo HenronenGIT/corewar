@@ -31,33 +31,6 @@ void error(int error_number)
 	exit(error_number);
 }
 
-static void init_vectors(t_data *s_data)
-{
-	s_data->vec_input = (t_vec *)malloc(sizeof(t_vec));
-	s_data->vec_tokens = (t_vec *)malloc(sizeof(t_vec));
-	if (!s_data->vec_tokens || !s_data->vec_input)
-		error(MALLOC_ERR);
-	vec_new_arr(s_data->vec_input, 2);
-	vec_new_arr(s_data->vec_tokens, 2);
-}
-
-/*
-Initializes all structs from the stack memory.
-Then initializes pointers to those structs to t_data struct;
-*/
-static void init_structs(t_data *data, t_header *header, t_error_log *error_log)
-{
-	header->magic = COREWAR_EXEC_MAGIC;
-	ft_bzero(header->prog_name, PROG_NAME_LENGTH);
-	// s_header.prog_size = ;
-	ft_bzero(header->comment, COMMENT_LENGTH);
-	error_log->line = 1;
-	error_log->column = 1;
-	data->vec_input = NULL;
-	data->s_header = header;
-	data->s_error_log = error_log;
-}
-
 int main(int argc, char *argv[])
 {
 	t_data s_data;
@@ -71,7 +44,5 @@ int main(int argc, char *argv[])
 	read_input(argv[1], &s_data);
 	syntax_analyzer(&s_data);
 	print_data(&s_data);
-
-	// exit(0);
 	return (0);
 }
