@@ -83,12 +83,12 @@ typedef struct s_vec
 /*---------- One of these structs contains info from one statement ----------*/
 typedef struct s_data_cell
 {
+	char *label_name;
 	int op_code;
 	char *args[4];
-	char *label_name;
+	int arg_type[4]; // is 0 for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
 	int byte_size;	 // full size of every statement as bytes. 0 for labels | HENRI
 	int arg_size[4]; // is size of every arg in bytes | HENRI
-	int arg_type[4]; // is 0 for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
 	int current_bytes;
 
 	int argument_type_code; // argument type code in int | OTTO
@@ -117,6 +117,7 @@ typedef enum e_type
 	REGISTER,
 	DIRECT_LABEL,
 	DIRECT,
+	INDIRECT,
 	INVALID
 } t_type;
 
@@ -136,27 +137,27 @@ typedef struct s_table
 {
 	const char *instruction;
 	int op_code;
+	int params_type[3];
 } t_table;
 
 static const t_table g_table[] = {
-	{"live", 1},
-	{"ld", 2},
-	{"st", 3},
-	{"add", 4},
-	{"sub", 5},
-	{"and", 6},
-	{"or", 7},
-	{"xor", 8},
-	{"zjmp", 9},
-	{"ldi", 10},
-	{"sti", 11},
-	{"fork", 12},
-	{"lld", 13},
-	{"lldi", 14},
-	{"lfork", 15},
-	{"aff", 16},
-	{NULL, 0}
-};
+	{"live", 1, {T_REG}},
+	{"ld", 2, {T_DIR | T_IND, T_REG}},
+	{"st", 3, {T_REG, T_IND | T_REG}},
+	{"add", 4, {T_REG, T_REG, T_REG}},
+	{"sub", 5, {T_REG, T_REG, T_REG}},
+	{"and", 6, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}},
+	{"or", 7, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}},
+	{"xor", 8, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}},
+	{"zjmp", 9, {T_DIR}},
+	{"ldi", 10, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}},
+	{"sti", 11, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}},
+	{"fork", 12, {T_DIR}},
+	{"lld", 13, {T_DIR | T_IND, T_REG}},
+	{"lldi", 14, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}},
+	{"lfork", 15, {T_DIR}},
+	{"aff", 16, {T_REG}},
+	{NULL, 0}};
 
 /*---------- Token struct ----------*/
 typedef struct s_token
@@ -181,13 +182,14 @@ void vec_new_arr(t_vec *dst, size_t len);
 void vec_insert(t_vec *dst_vec, void *element);
 
 /*---------- Functions to validate Tokens ----------*/
-bool is_label(char *sub_string, t_data *data);
+bool is_label(t_data *s_data, char *sub_string);
 bool is_statement(char *sub_string);
 bool is_delimiter(char c);
 bool is_register(char *string);
 bool is_separator(char c);
 bool is_directlabel(t_data *s_data, char *string);
 bool is_direct(t_data *s_data, char *string);
+bool is_indirect(t_data *s_data, char *lexeme);
 
 /*---------- Syntax Analyzer ----------*/
 void syntax_analyzer(t_data *s_data);

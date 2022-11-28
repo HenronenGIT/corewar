@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-t_token	*allocate_token_struct(t_type type, char *content)
+t_token *allocate_token_struct(t_type type, char *content)
 {
 	t_token *s_token;
 
@@ -26,7 +26,7 @@ t_token	*allocate_token_struct(t_type type, char *content)
 
 void save_token(t_data *s_data, char *sub_string, t_type type)
 {
-	t_token	*s_token;
+	t_token *s_token;
 
 	s_token = NULL;
 	s_token = allocate_token_struct(type, sub_string);
@@ -65,13 +65,14 @@ void lexical_scanner(char *line, t_data *s_data)
 			right += 1;
 			left += 1;
 		}
+
+		// mayby can be splitted over here to separate function
 		else if (is_delimiter(line[right]) == true && left != right)
-			//|| (right == len && len && left != right/ )
 		{
 			sub_string = ft_strsub(line, left, right - left);
 			if (!sub_string)
 				error(MALLOC_ERR);
-			if (is_label(sub_string, s_data))
+			if (is_label(s_data, sub_string))
 				save_token(s_data, sub_string, LABEL);
 			else if (is_statement(sub_string))
 				save_token(s_data, sub_string, INSTRUCTION);
@@ -79,6 +80,8 @@ void lexical_scanner(char *line, t_data *s_data)
 				save_token(s_data, sub_string, DIRECT_LABEL);
 			else if (is_direct(s_data, sub_string))
 				save_token(s_data, sub_string, DIRECT);
+			else if (is_indirect(s_data, sub_string))
+				save_token(s_data, sub_string, INDIRECT);
 			else if (is_register(sub_string))
 				save_token(s_data, sub_string, REGISTER);
 			else

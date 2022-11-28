@@ -15,19 +15,14 @@
 
 int lookup(const char *string)
 {
-	// printf("%s\n", g_table[0].instruction);
 	size_t i;
-	// t_table *ptr;
 
 	i = 0;
-	// ptr = g_table[0];
 
-	// while (ptr->op_code != 0)
-	// {
-	// 	if (ft_strcmp(string, ptr->instruction) == 0)
-	// 		return (ptr->op_code);
-	// 	ptr += 1;
-	// }
+	// printf("%d\n", g_table[2].params_type[0]);
+	// printf("%d\n", g_table[2].params_type[1]);
+	// printf("%d\n", g_table[2].params_type[2]);
+	// exit(0);
 	while (g_table[i].instruction != NULL)
 	{
 		if (ft_strcmp(string, g_table[i].instruction) == 0)
@@ -64,6 +59,10 @@ static t_input *init_values(t_input *element)
 	element->args[1] = NULL;
 	element->args[2] = NULL;
 	element->args[3] = NULL;
+	element->arg_type[0] = 0;
+	element->arg_type[1] = 0;
+	element->arg_type[2] = 0;
+	element->arg_type[3] = 0;
 	element->label_name = NULL;
 	element->byte_size = 0;
 	element->arg_size[0] = 0;
@@ -80,21 +79,45 @@ static t_input *init_values(t_input *element)
 	return (element);
 }
 
+void save_argument(t_input **input_array, t_token *token)
+{
+	size_t	i;
+
+	i = 0;
+	while ((*input_array)->args[i] != NULL)
+		i += 1;
+	(*input_array)->args[i] = token->content;
+	i = 0;
+	while ((*input_array)->arg_type[i] != 0)
+		i += 1;
+	if (token->type == REGISTER)
+		(*input_array)->arg_type[i] = T_REG;
+	else if (token->type == DIRECT || token->type == DIRECT_LABEL)
+		(*input_array)->arg_type[i] = T_DIR;
+	else if (token->type == INDIRECT)
+		(*input_array)->arg_type[i] = T_IND;
+	
+}
+
 static void init_instruction(t_data *s_data, t_token *token)
 {
 	size_t newest_element;
 	t_input **input_array;
 
+	if (token->type == SEPARATOR)
+		return;
 	input_array = (t_input **)s_data->vec_input->array;
 	newest_element = s_data->vec_input->space_taken - 1;
 	if (token->type == INSTRUCTION)
 		input_array[newest_element]->op_code = lookup(token->content);
-	// else if (token->type == )
 	else
-	{
-		input_array[newest_element]->args[0] = token->content;
-	}
-	
+		save_argument(&input_array[newest_element], token);
+	// else if (input_array[newest_element]->args[0] == NULL)
+	// 	input_array[newest_element]->args[0] = token->content;
+	// else if (input_array[newest_element]->args[1] == NULL)
+	// 	input_array[newest_element]->args[1] = token->content;
+	// else if (input_array[newest_element]->args[2] == NULL)
+	// 	input_array[newest_element]->args[2] = token->content;
 }
 
 static void init_label(t_data *s_data, t_token *token)
@@ -133,7 +156,6 @@ static void allocate_element(t_data *s_data)
 void syntax_analyzer(t_data *s_data)
 {
 	t_token **token_array = (t_token **)s_data->vec_tokens->array;
-	// t_input **input_array = (t_input **)s_data->vec_input->array;
 	t_vec *vec_tokens = s_data->vec_tokens;
 	size_t i;
 
@@ -141,7 +163,10 @@ void syntax_analyzer(t_data *s_data)
 	while (i < vec_tokens->space_taken)
 	{
 		if (token_array[i]->type == LABEL || token_array[i]->type == INSTRUCTION)
+		{
+			//validate_last struct
 			allocate_element(s_data);
+		}
 		if (token_array[i]->type == LABEL)
 			init_label(s_data, token_array[i]);
 		else

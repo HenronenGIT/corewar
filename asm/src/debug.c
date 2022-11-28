@@ -18,7 +18,7 @@
 
 char *get_type(t_type type)
 {
-	static char *types_arr[9] = {
+	static char *types_arr[] = {
 		"NAME",
 		"COMMENT",
 		"LABEL",
@@ -27,6 +27,7 @@ char *get_type(t_type type)
 		"REGISTER",
 		"DIRECT_LABEL",
 		"DIRECT",
+		"INDIRECT",
 		"INVALID"};
 
 	return (types_arr[type]);
@@ -42,13 +43,18 @@ void print_temp_name(t_vec *vec_input)
 	ft_printf("%s------ vec_input->array ------%s\n", GREEN, WHITE);
 	while (i < vec_input->space_taken)
 	{
-		ft_printf("%s[%d]%s\t", GREEN, i, WHITE);
-		ft_printf("%slabel_name%s = %-10s\t", PINK, WHITE, input_array[i]->label_name);
-		ft_printf("%sop_code%s = %-10d", PINK, WHITE, input_array[i]->op_code);
-		ft_printf("%sargs[0]%s = %-10s", PINK, WHITE, input_array[i]->args[0]);
-		ft_printf("%sargs[1]%s = %-10s", PINK, WHITE, input_array[i]->args[1]);
-		ft_printf("%sargs[2]%s = %-10s", PINK, WHITE, input_array[i]->args[2]);
-		ft_printf("%sargs[3]%s = %-10s", PINK, WHITE, input_array[i]->args[3]);
+		ft_printf("%s[%d]%-8s", GREEN, i, WHITE);
+		ft_printf("%slabel_name%s = %-8s\n", PINK, WHITE, input_array[i]->label_name);
+		ft_printf("% 11sop_code%s = %-5d\n", PINK, WHITE, input_array[i]->op_code);
+
+		ft_printf("% 11sargs[0]%s = %-8s", PINK, WHITE, input_array[i]->args[0]);
+		ft_printf("%sargs[1]%s = %-8s", PINK, WHITE, input_array[i]->args[1]);
+		ft_printf("% 11sargs[2]%s = %-8s\n", PINK, WHITE, input_array[i]->args[2]);
+
+		ft_printf("% 11sarg_type[0]%s = %-4d", PINK, WHITE, input_array[i]->arg_type[0]);
+		ft_printf("%sarg_type[1]%s = %-4d", PINK, WHITE, input_array[i]->arg_type[1]);
+		ft_printf("%sarg_type[2]%s = %-4d\n", PINK, WHITE, input_array[i]->arg_type[2]);
+
 		ft_printf("\n");
 		// ft_printf("%sCONTENT%s = %s\n", PINK, WHITE, input_array[i]->label_name);
 		i += 1;

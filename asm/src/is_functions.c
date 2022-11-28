@@ -12,31 +12,31 @@
 
 #include "../includes/asm.h"
 
-static int contains_invalid_characters(t_data *s_data, char *string)
+static int contains_invalid_characters(t_data *s_data, char *lexeme)
 {
-	while (*string != ':')
+	while (*lexeme != ':')
 	{
-		if (ft_strchr(LABEL_CHARS, *string) == NULL)
+		if (ft_strchr(LABEL_CHARS, *lexeme) == NULL)
 			return (-1);
-		string += 1;
+		lexeme += 1;
 	}
 	return (0);
 }
 
 /*
-Validates if string literal matches specifications of LABEL.
+Validates if lexeme literal matches specifications of LABEL.
 */
-bool is_label(char *sub_string, t_data *s_data)
+bool is_label(t_data *s_data, char *lexeme)
 {
 	char *found_colon;
 
 	found_colon = NULL;
-	found_colon = ft_strchr(sub_string, LABEL_CHAR);
+	found_colon = ft_strchr(lexeme, LABEL_CHAR);
 	if (found_colon == NULL)
 		return (false);
 	if (*(found_colon + 1) != '\0')
 		return (false);
-	if (contains_invalid_characters(s_data, sub_string))
+	if (contains_invalid_characters(s_data, lexeme))
 		lexical_error(s_data);
 	return (true);
 }
@@ -48,23 +48,30 @@ bool is_delimiter(char c)
 	return (false);
 }
 
-bool is_statement(char *sub_string)
+bool is_statement(char *lexeme)
 {
-	if (!ft_strcmp(sub_string, "live") || !ft_strcmp(sub_string, "ld") || !ft_strcmp(sub_string, "st") || !ft_strcmp(sub_string, "add") || !ft_strcmp(sub_string, "sub") || !ft_strcmp(sub_string, "and") || !ft_strcmp(sub_string, "or") || !ft_strcmp(sub_string, "xor") || !ft_strcmp(sub_string, "zjmp") || !ft_strcmp(sub_string, "ldi") || !ft_strcmp(sub_string, "sti") || !ft_strcmp(sub_string, "fork") || !ft_strcmp(sub_string, "lld") || !ft_strcmp(sub_string, "lldi") || !ft_strcmp(sub_string, "lfork") || !ft_strcmp(sub_string, "aff"))
+	if (!ft_strcmp(lexeme, "live") || !ft_strcmp(lexeme, "ld")
+	|| !ft_strcmp(lexeme, "st") || !ft_strcmp(lexeme, "add")
+	|| !ft_strcmp(lexeme, "sub") || !ft_strcmp(lexeme, "and")
+	|| !ft_strcmp(lexeme, "or") || !ft_strcmp(lexeme, "xor")
+	|| !ft_strcmp(lexeme, "zjmp") || !ft_strcmp(lexeme, "ldi")
+	|| !ft_strcmp(lexeme, "sti") || !ft_strcmp(lexeme, "fork")
+	|| !ft_strcmp(lexeme, "lld") || !ft_strcmp(lexeme, "lldi")
+	|| !ft_strcmp(lexeme, "lfork") || !ft_strcmp(lexeme, "aff"))
 		return (1);
 	return (0);
 }
 
-bool is_register(char *string)
+bool is_register(char *lexeme)
 {
 	size_t i;
 
-	if (string[0] != REGISTER_CHAR)
+	if (lexeme[0] != REGISTER_CHAR)
 		return (false);
 	i = 1;
-	while (string[i] != '\0')
+	while (lexeme[i] != '\0')
 	{
-		if (!ft_isdigit(string[i]))
+		if (!ft_isdigit(lexeme[i]))
 			return (false);
 		i += 1;
 	}
@@ -78,36 +85,47 @@ bool is_separator(char c)
 	return (false);
 }
 
-bool is_directlabel(t_data *s_data, char *string)
+bool is_directlabel(t_data *s_data, char *lexeme)
 {
-	if (string[0] != DIRECT_CHAR)
+	if (lexeme[0] != DIRECT_CHAR)
 		return (false);
-	if (string[1] != LABEL_CHAR)
+	if (lexeme[1] != LABEL_CHAR)
 		return (false);
-	string += 2;
-	while (*string != '\0')
+	lexeme += 2;
+	while (*lexeme != '\0')
 	{
-		if (ft_strchr(LABEL_CHARS, *string) == NULL)
+		if (ft_strchr(LABEL_CHARS, *lexeme) == NULL)
 			lexical_error(s_data);
-		string += 1;
+		lexeme += 1;
 	}
 	return (true);
 }
 
-bool is_direct(t_data *s_data, char *string)
+bool is_direct(t_data *s_data, char *lexeme)
 {
 	size_t i;
 
 	i = 1;
-	if (string[0] != DIRECT_CHAR)
+	if (lexeme[0] != DIRECT_CHAR)
 		return (false);
-	if (string[1] == LABEL_CHAR)
+	if (lexeme[1] == LABEL_CHAR)
 		return (false);
-	while (string[i] != '\0')
+	while (lexeme[i] != '\0')
 	{
-		if (!ft_isdigit(string[i]))
+		if (!ft_isdigit(lexeme[i]))
 			lexical_error(s_data);
 		i += 1;
 	}
+	return (true);
+}
+
+bool is_indirect(t_data *s_data, char *lexeme)
+{
+	if (ft_isnumber(lexeme))
+		return true;
+	if (lexeme[0] != LABEL_CHAR)
+		return (false);
+	if (contains_invalid_characters(s_data, lexeme))
+		return (false);
 	return (true);
 }
