@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:40:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/24 12:26:41 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:59:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t jump_size(t_types *types, bool arg_type_code)
 	size_t n;
 	int i;
 
-	n = 0;
+	n = 1;
 	if (arg_type_code)
 		n++;
 	i = 0;

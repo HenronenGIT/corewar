@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:42:58 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/24 14:53:45 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:59:41 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,29 +49,113 @@ void	op_live(t_process *cur_process, t_data *data)
 	//redundant
 	//types.size_t_dir = 4;
 	//types.num_args = 1;
-	cur_process->byte_jump_size = 4;
+	cur_process->byte_jump_size = 5; //size of T_DIR + 1
 	cur_process->cycles_remaining = -1;
 
 }
 
 void	op_ld(t_process *cur_process, t_data *data)
 {
-	printf("XXXXX");
+	t_types types;
+	
+	ft_printf("process %d is on 'ld'\n", cur_process->id);
+	types.size_t_dir = 4;
+	types.num_args = 2;
+	//only if arg type code is 2nd byte
+	get_types(data->arena[cur_process->cursor + 1], &types);
+	//set regardless if incorrect types
+	cur_process->byte_jump_size = jump_size(&types, true);
+	//check if args are of correct type
+	if (types.type_arg[1] == T_REG && (types.type_arg[0] != T_REG && types.type_arg[0] != T_NULL))
+	{
+		//get values, checks if is a valid T_REG
+		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		{
+			cur_process->registeries[types.val_arg[1] - 1] = types.val_arg[0];
+			
+			if (types.val_arg[0])
+				cur_process->carry = false;
+			else
+				cur_process->carry = true;
+		}
+			
+	}
+
 }
 
 void	op_st(t_process *cur_process, t_data *data)
 {
-	printf("XXXXX");
+	t_types types;
+	
+	ft_printf("process %d is on 'st'\n", cur_process->id);
+	types.size_t_dir = 4;
+	types.num_args = 2;
+	//only if arg type code is 2nd byte
+	get_types(data->arena[cur_process->cursor + 1], &types);
+	//set regardless if incorrect types
+	cur_process->byte_jump_size = jump_size(&types, true);
+	//check if args are of correct type
+	if (types.type_arg[0] == T_REG && (types.type_arg[1] != T_DIR && types.type_arg[1] != T_NULL))
+	{
+		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		{
+			if (types.type_arg[1] == T_REG)
+				cur_process->registeries[types.val_arg[0] - 1] = cur_process->registeries[types.val_arg[1] - 1];
+			else
+				cur_process->registeries[types.val_arg[0] - 1] = types.val_arg[1];
+		}
+	}
 }
 
 void	op_add(t_process *cur_process, t_data *data)
 {
-	printf("XXXXX");
+	t_types types;
+	int32_t sum;
+
+	ft_printf("process %d is on 'add'\n", cur_process->id);
+	types.size_t_dir = 4;
+	types.num_args = 3;
+	//only if arg type code is 2nd byte
+	get_types(data->arena[cur_process->cursor + 1], &types);
+	//set regardless if incorrect types
+	cur_process->byte_jump_size = jump_size(&types, true);
+	//check if args are of correct type
+	if (types.type_arg[0] == T_REG && types.type_arg[1] == T_REG && types.type_arg[2] == T_REG)
+	{
+		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		{
+			sum = cur_process->registeries[types.val_arg[0] - 1] + cur_process->registeries[types.val_arg[1] - 1];
+			cur_process->registeries[types.val_arg[2] - 1] = sum;
+			if (sum)
+				cur_process->carry = false;
+			else
+				cur_process->carry = true;
+		}
+	}
 }
 
 void	op_sub(t_process *cur_process, t_data *data)
 {
-	printf("XXXXX");
+	t_types types;
+	int32_t sum;
+
+	ft_printf("process %d is on 'sub'\n", cur_process->id);
+	types.size_t_dir = 4;
+	types.num_args = 3;
+	//only if arg type code is 2nd byte
+	get_types(data->arena[cur_process->cursor + 1], &types);
+	//set regardless if incorrect types
+	cur_process->byte_jump_size = jump_size(&types, true);
+	//check if args are of correct type
+	if (types.type_arg[0] == T_REG && types.type_arg[1] == T_REG && types.type_arg[2] == T_REG)
+	{
+		sum = cur_process->registeries[types.val_arg[0] - 1] - cur_process->registeries[types.val_arg[1] - 1];
+		cur_process->registeries[types.val_arg[2] - 1] = sum;
+		if (sum)
+			cur_process->carry = false;
+		else
+			cur_process->carry = true;
+	}
 }
 
 void	op_and(t_process *cur_process, t_data *data)
@@ -100,30 +184,90 @@ void	op_and(t_process *cur_process, t_data *data)
 				cur_process->carry = false;
 			else
 				cur_process->carry = true;
-			ft_memcpy(&cur_process->registeries[types.val_arg[2] - 1], &val, 4);
+			//cur_process->carry = val ^ 1;
+			cur_process->registeries[types.val_arg[2] - 1] = val;
+			//ft_memcpy(&cur_process->registeries[types.val_arg[2] - 1], &val, 4);
 			//testinf ONLY
 			ft_printf("executed 'and' -wrote %d to regristry %d\n", val, types.val_arg[2]);
-			//ft_printf("cursor is at: %d\n", cur_process->cursor);
-			//print_arena(&data->arena);
+
 		}
 	}
-	cur_process->cycles_remaining = -1;
 
 }
 
 void	op_or(t_process *cur_process, t_data *data)
 {
-	printf("XXXXX");
+	t_types types;
+	int32_t val;
+	
+	ft_printf("process %d is on 'or'\n", cur_process->id);
+	types.size_t_dir = 4;
+	types.num_args = 3;
+	//only if arg type code is 2nd byte
+	get_types(data->arena[cur_process->cursor + 1], &types);
+	//set regardless if incorrect types
+	cur_process->byte_jump_size = jump_size(&types, true);
+	if (types.type_arg[2] == T_REG && !check_null(&types))
+	{
+		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		{
+			if (types.type_arg[0] == T_REG)
+				types.val_arg[0] = cur_process->registeries[types.val_arg[0] - 1];
+			if (types.val_arg[1] == T_REG)
+				types.val_arg[1] = cur_process->registeries[types.val_arg[1] - 1];
+			val = (int32_t)(types.val_arg[0] | types.val_arg[1]);
+			if (val)
+				cur_process->carry = false;
+			else
+				cur_process->carry = true;
+			//cur_process->carry = val ^ 1;
+			cur_process->registeries[types.val_arg[2] - 1] = val;
+			//ft_memcpy(&cur_process->registeries[types.val_arg[2] - 1], &val, 4);
+			//testinf ONLY
+			ft_printf("executed 'or' -wrote %d to regristry %d\n", val, types.val_arg[2]);
+
+		}
+	}
 }
 
 void	op_xor(t_process *cur_process, t_data *data)
 {
-	printf("XXXXX");
+	t_types types;
+	int32_t val;
+	
+	ft_printf("process %d is on 'xor'\n", cur_process->id);
+	types.size_t_dir = 4;
+	types.num_args = 3;
+	//only if arg type code is 2nd byte
+	get_types(data->arena[cur_process->cursor + 1], &types);
+	//set regardless if incorrect types
+	cur_process->byte_jump_size = jump_size(&types, true);
+	if (types.type_arg[2] == T_REG && !check_null(&types))
+	{
+		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		{
+			if (types.type_arg[0] == T_REG)
+				types.val_arg[0] = cur_process->registeries[types.val_arg[0] - 1];
+			if (types.val_arg[1] == T_REG)
+				types.val_arg[1] = cur_process->registeries[types.val_arg[1] - 1];
+			val = (int32_t)(types.val_arg[0] ^ types.val_arg[1]);
+			if (val)
+				cur_process->carry = false;
+			else
+				cur_process->carry = true;
+			//cur_process->carry = val ^ 1;
+			cur_process->registeries[types.val_arg[2] - 1] = val;
+			//ft_memcpy(&cur_process->registeries[types.val_arg[2] - 1], &val, 4);
+			//testinf ONLY
+			ft_printf("executed 'xor' -wrote %d to regristry %d\n", val, types.val_arg[2]);
+
+		}
+	}
 }
 
 void	op_zjmp(t_process *cur_process, t_data *data)
 {
-	t_types types;
+	//t_types types;
 	int	val;
 
 	ft_printf("process %d is on --> 'zjump'\n", cur_process->id);
@@ -138,8 +282,6 @@ void	op_zjmp(t_process *cur_process, t_data *data)
 	}
 	else
 		cur_process->byte_jump_size = 2;
-	cur_process->cycles_remaining = -1;
-
 
 	//testing
 	if (cur_process->carry)
@@ -151,7 +293,36 @@ void	op_zjmp(t_process *cur_process, t_data *data)
 }
 void	op_ldi(t_process *cur_process, t_data *data)
 {
-	printf("XXXXX");
+	t_types types;
+	int change;
+	int idx;
+	
+	//comment stuff probably part of verbose mode
+	ft_printf("process %d is on 'ldi'\n", cur_process->id);
+	types.size_t_dir = 2;
+	types.num_args = 3;
+	//only if arg type code is 2nd byte
+	get_types(data->arena[cur_process->cursor + 1], &types);
+	//set regardless if incorrect types
+	//the 'true' for arg type code may not be needed
+	cur_process->byte_jump_size = jump_size(&types, true);
+	if (types.type_arg[2] == T_REG && types.type_arg[1] != T_IND \
+	&& !check_null(&types))
+	{
+		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		{
+			if (types.type_arg[0] == T_REG)
+				types.val_arg[0] = cur_process->registeries[types.val_arg[0] - 1];
+			if (types.val_arg[1] == T_REG)
+				types.val_arg[1] = cur_process->registeries[types.val_arg[1] - 1];
+			change = (types.val_arg[0] + types.val_arg[1]) % IDX_MOD;
+			idx = circular_mem(cur_process->cursor, change);
+			
+			//cur_process->registeries[types.val_arg[2] - 1] = bytes2int((uint8_t*)&data->arena[idx], 4);
+			//OR
+			ft_memcpy(&cur_process->registeries[types.val_arg[2] - 1],&data->arena[idx], 4);
+		}
+	}
 }
 
 
@@ -193,7 +364,6 @@ void	op_sti(t_process *cur_process, t_data *data)
 			//print_arena(&data->arena);
 		}
 	}
-	cur_process->cycles_remaining = -1;
 }
 
 void	op_fork(t_process *cur_process, t_data *data)
@@ -203,12 +373,67 @@ void	op_fork(t_process *cur_process, t_data *data)
 
 void	op_lld(t_process *cur_process, t_data *data)
 {
-	printf("XXXXX");
+	t_types types;
+	int32_t val;
+	int idx;
+
+	ft_printf("process %d is on 'lld'\n", cur_process->id);
+	types.size_t_dir = 4;
+	types.num_args = 2;
+	//only if arg type code is 2nd byte
+	get_types(data->arena[cur_process->cursor + 1], &types);
+	//set regardless if incorrect types
+	cur_process->byte_jump_size = jump_size(&types, true);
+	//check if args are of correct type
+	if (types.type_arg[1] == T_REG && (types.type_arg[0] != T_REG && types.type_arg[0] != T_NULL))
+	{
+		//get values, checks if is a valid T_REG
+		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		{
+			idx = circular_mem(cur_process->cursor, types.val_arg[0]);
+			val = bytes2int((uint8_t*)&data->arena[idx], 4);
+			cur_process->registeries[types.val_arg[1] - 1] = val;
+			if (val)
+				cur_process->carry = false;
+			else
+				cur_process->carry = true;
+		}
+			
+	}
 }
 
 void	op_lldi(t_process *cur_process, t_data *data)
 {
-	printf("XXXXX");
+	t_types types;
+	int change;
+	int idx;
+	
+	//comment stuff probably part of verbose mode
+	ft_printf("process %d is on 'lldi'\n", cur_process->id);
+	types.size_t_dir = 2;
+	types.num_args = 3;
+	//only if arg type code is 2nd byte
+	get_types(data->arena[cur_process->cursor + 1], &types);
+	//set regardless if incorrect types
+	//the 'true' for arg type code may not be needed
+	cur_process->byte_jump_size = jump_size(&types, true);
+	if (types.type_arg[2] == T_REG && types.type_arg[1] != T_IND \
+	&& !check_null(&types))
+	{
+		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		{
+			if (types.type_arg[0] == T_REG)
+				types.val_arg[0] = cur_process->registeries[types.val_arg[0] - 1];
+			if (types.val_arg[1] == T_REG)
+				types.val_arg[1] = cur_process->registeries[types.val_arg[1] - 1];
+			change = types.val_arg[0] + types.val_arg[1];
+			idx = circular_mem(cur_process->cursor, change);
+			
+			//cur_process->registeries[types.val_arg[2] - 1] = bytes2int((uint8_t*)&data->arena[idx], 4);
+			//OR
+			ft_memcpy(&cur_process->registeries[types.val_arg[2] - 1],&data->arena[idx], 4);
+		}
+	}
 }
 
 void	op_lfork(t_process *cur_process, t_data *data)
@@ -218,5 +443,19 @@ void	op_lfork(t_process *cur_process, t_data *data)
 
 void	op_aff(t_process *cur_process, t_data *data)
 {
-	printf("XXXXX");
+	
+	t_types types;
+	
+	//comment stuff probably part of verbose mode
+	ft_printf("process %d is on 'aff'\n", cur_process->id);
+	types.size_t_dir = 4;
+	types.num_args = 1;
+	//sc + atc + 4
+	get_types(data->arena[cur_process->cursor + 1], &types);
+	//hardcoded in this case
+	cur_process->byte_jump_size = 6;
+	if (types.type_arg[0] == T_REG)
+		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+			ft_printf("AFF: %c\n", (char)cur_process->registeries[types.val_arg[0] - 1]);
+
 }
