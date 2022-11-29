@@ -31,17 +31,17 @@ void	save_atc(t_input *data)
 	temp[8] = '\0';
 	while (j < 8)
 	{
-		if (data->arg_type[i] == 1)
+		if (data->arg_type[i] == T_REG)
 		{
 			temp[j++] = '0';
 			temp[j++] = '1';
 		}
-		else if (data->arg_type[i] == 2)
+		else if (data->arg_type[i] == T_DIR)
 		{
 			temp[j++] = '1';
 			temp[j++] = '0';
 		}
-		else if (data->arg_type[i] == 3)
+		else if (data->arg_type[i] == T_IND)
 		{
 			temp[j++] = '1';
 			temp[j++] = '1';
