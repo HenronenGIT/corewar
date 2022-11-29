@@ -31,18 +31,50 @@ void error(int error_number)
 	exit(error_number);
 }
 
+char	*find_file_name(char *s)
+{
+	char	*file_name;
+	int		i;
+	int		len;
+	int		j;
+
+	i = 1;
+	j = 0;
+	file_name = NULL;
+	s = ft_strrchr(s, '/');
+	len = ft_strlen(s);
+	printf("len: %d\n", len);
+	file_name = ft_strnew(len + 3);
+	file_name[len + 2] = '\0';
+	while (s[i] && s[i] != '.')
+	{
+		file_name[j++] = s[i++];
+	}
+	file_name[i] = '\0';
+	file_name = ft_strcat(file_name, ".cor");
+	return (file_name);
+}
+
 int main(int argc, char *argv[])
 {
-	t_data s_data;
-	t_header s_header;
-	t_error_log s_error_log;
+//	t_data		s_data;
+	t_header	s_header;
+//	t_error_log	s_error_log;
+	int			fd;
 
+	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
+	fd = open(find_file_name(argv[1]), O_CREAT | O_WRONLY);
+	printf("open returns: %d", fd);
 	if (argc != 2)
 		error(ARG_ERR);
-	init_structs(&s_data, &s_header, &s_error_log);
-	init_vectors(&s_data);
-	read_input(argv[1], &s_data);
-	syntax_analyzer(&s_data);
-	print_data(&s_data);
+//	init_structs(&s_data, &s_header, &s_error_log);
+//	init_vectors(&s_data);
+//	read_input(argv[1], &s_data);
+//	syntax_analyzer(&s_data);
+//	print_data(&s_data);
+	add_magic(fd);
+	hex_translator(s_header.prog_name, fd, PROG_NAME_LENGTH);
+	hex_translator(s_header.comment, fd, COMMENT_LENGTH);
+//	generator(s_data.vec_input);
 	return (0);
 }
