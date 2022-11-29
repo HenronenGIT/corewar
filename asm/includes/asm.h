@@ -64,6 +64,7 @@
 
 # define T_REG_SIZE 1
 # define T_IND_SIZE 2
+# define STATEMENT_SIZE 1
 
 # define REG_SIZE 4
 # define DIR_SIZE REG_SIZE
@@ -148,25 +149,26 @@ typedef struct s_table
 	int op_code;
 	int params_type[3];
 	int direct_size;
+	int arg_type_code;
 } t_table;
 
 static const t_table g_table[] = {
-	{"live", 1, {T_DIR}, 4},
-	{"ld", 2, {T_DIR | T_IND, T_REG}, 4},
-	{"st", 3, {T_REG, T_IND | T_REG}, 4},
-	{"add", 4, {T_REG, T_REG, T_REG}, 4},
-	{"sub", 5, {T_REG, T_REG, T_REG}, 4},
-	{"and", 6, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 4},
-	{"or", 7, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4},
-	{"xor", 8, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4},
-	{"zjmp", 9, {T_DIR}, 2},
-	{"ldi", 10, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2},
-	{"sti", 11, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 2},
-	{"fork", 12, {T_DIR}, 2},
-	{"lld", 13, {T_DIR | T_IND, T_REG}, 4},
-	{"lldi", 14, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2},
-	{"lfork", 15, {T_DIR}, 2},
-	{"aff", 16, {T_REG}, 4},
+	{"live", 1, {T_DIR}, 4, 0},
+	{"ld", 2, {T_DIR | T_IND, T_REG}, 1},
+	{"st", 3, {T_REG, T_IND | T_REG}, 4, 1},
+	{"add", 4, {T_REG, T_REG, T_REG}, 4, 1},
+	{"sub", 5, {T_REG, T_REG, T_REG}, 4, 1},
+	{"and", 6, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
+	{"or", 7, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
+	{"xor", 8, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
+	{"zjmp", 9, {T_DIR}, 2, 0},
+	{"ldi", 10, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1},
+	{"sti", 11, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 2, 1},
+	{"fork", 12, {T_DIR}, 2, 0},
+	{"lld", 13, {T_DIR | T_IND, T_REG}, 4, 1},
+	{"lldi", 14, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1},
+	{"lfork", 15, {T_DIR}, 2, 0},
+	{"aff", 16, {T_REG}, 4, 1},
 	{NULL, 0, {0}, 0}};
 
 /*---------- Token struct ----------*/

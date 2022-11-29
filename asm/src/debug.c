@@ -29,7 +29,6 @@ char *get_type(t_type type)
 		"DIRECT",
 		"INDIRECT",
 		"INVALID"};
-
 	return (types_arr[type]);
 }
 
@@ -55,14 +54,15 @@ void print_temp_name(t_vec *vec_input)
 		ft_printf("%sarg_type[1]%s = %-4d", PINK, WHITE, input_array[i]->arg_type[1]);
 		ft_printf("%sarg_type[2]%s = %-4d\n", PINK, WHITE, input_array[i]->arg_type[2]);
 
-		ft_printf("% 11sarg_size[0]]%s = %-3d", PINK, WHITE, input_array[i]->arg_size[0]);
-		ft_printf("%sarg_size[1]]%s = %-3d", PINK, WHITE, input_array[i]->arg_size[1]);
+		ft_printf("% 11sarg_size[0]%s = %-3d", PINK, WHITE, input_array[i]->arg_size[0]);
+		ft_printf("%sarg_size[1]%s = %-3d", PINK, WHITE, input_array[i]->arg_size[1]);
 		ft_printf("%sarg_size[2]%s = %-2d", PINK, WHITE, input_array[i]->arg_size[2]);
 		ft_printf("\n");
-
 		ft_printf("% 11scurrent_bytes%s = %-4d\n", PINK, WHITE, input_array[i]->current_bytes);
+		// ft_printf("\n");
 
-
+		ft_printf("% 11stotal_size%s = %-3d", PINK, WHITE, input_array[i]->total_size);
+		ft_printf("\n");
 		ft_printf("\n");
 		// ft_printf("%sCONTENT%s = %s\n", PINK, WHITE, input_array[i]->label_name);
 		i += 1;
