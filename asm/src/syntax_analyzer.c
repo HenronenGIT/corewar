@@ -36,6 +36,8 @@ void save_argument(t_input **input_array, t_token *token)
 	i = 0;
 	while ((*input_array)->args[i] != NULL)
 		i += 1;
+	if (i >= 3)
+		error(SYNTAX_ERROR);
 	(*input_array)->args[i] = token->content;
 	i = 0;
 	while ((*input_array)->arg_type[i] != 0)
@@ -61,7 +63,7 @@ static void copy_instruction_data(t_data *s_data, t_token *token)
 	if (token->type == INSTRUCTION)
 		input_array[newest_element]->op_code = lookup(token->content);
 	else
-		save_argument(&input_array[newest_element], token);
+		save_argument(&input_array[newest_element], token);//save argumnets better name?
 }
 
 static void copy_label_data(t_data *s_data, t_token *token)
@@ -110,8 +112,11 @@ void	validate_instruction_syntax(t_input *statement)
 	i = 0;
 	result = 0;
 	op_code = statement->op_code;
-	while (statement->arg_type[i] != 0)
+	// while (statement->arg_type[i] != 0)
+	while (i < 3)
 	{
+		if (g_table[op_code - 1].params_type[i] && !statement->arg_type[i])
+			error(SYNTAX_ERROR);
 		result = statement->arg_type[i] & g_table[op_code - 1].params_type[i];
 		if (result != statement->arg_type[i])
 			error(SYNTAX_ERROR);
@@ -162,4 +167,5 @@ void syntax_analyzer(t_data *s_data)
 			copy_instruction_data(s_data, tokens[i]);
 		i += 1;
 	}
+	validate_syntax(s_data->vec_input); // better style?
 }

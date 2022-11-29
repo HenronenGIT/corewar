@@ -24,8 +24,8 @@
 		
 live	%1
 l2:	
-sti	r1,%:live, r2
-	and	r1,%0, r1
+sti	,%:live, r2 # missing 1st ARG
+	and	r1,%0,r1
 
 	and	r1,%0,r1
 	lldi 42, r2, r3

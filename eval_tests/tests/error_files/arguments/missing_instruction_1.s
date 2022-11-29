@@ -25,7 +25,7 @@
 live	%1
 l2:	
 sti	r1,%:live, r2
-	and	r1,%0, r1
+		r1,%0,r1 # missing INSTRUCTION
 
 	and	r1,%0,r1
 	lldi 42, r2, r3
