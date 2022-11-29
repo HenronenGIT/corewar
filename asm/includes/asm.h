@@ -62,6 +62,12 @@
 # define T_IND 4
 # define T_LAB 8
 
+# define T_REG_SIZE 1
+# define T_IND_SIZE 2
+
+# define REG_SIZE 4
+# define DIR_SIZE REG_SIZE
+
 /*---------- Main data struct ----------*/
 typedef struct s_data
 {
@@ -94,14 +100,15 @@ typedef struct s_data_cell
 	int op_code;
 	char *args[4];
 	int arg_type[4]; // is 0 for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-	int byte_size;	 // full size of every statement as bytes. 0 for labels | HENRI
+
+	int total_size;	 // full size of every statement as bytes. 0 for labels | HENRI
 	int arg_size[4]; // is size of every arg in bytes | HENRI
 	int current_bytes;
 
 	int argument_type_code; // argument type code in int | OTTO
 	int arg_values[4];		// arg codes in int | OTTO
 	char *final;			// final bytecode for current statement | OTTO
-} t_input;
+} t_input; //! change name to better one
 
 //! This is copied fromo op.h header
 /*---------- Header Struct ----------*/
@@ -140,26 +147,27 @@ typedef struct s_table
 	const char *instruction;
 	int op_code;
 	int params_type[3];
+	int direct_size;
 } t_table;
 
 static const t_table g_table[] = {
-	{"live", 1, {T_DIR}},
-	{"ld", 2, {T_DIR | T_IND, T_REG}},
-	{"st", 3, {T_REG, T_IND | T_REG}},
-	{"add", 4, {T_REG, T_REG, T_REG}},
-	{"sub", 5, {T_REG, T_REG, T_REG}},
-	{"and", 6, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}},
-	{"or", 7, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}},
-	{"xor", 8, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}},
-	{"zjmp", 9, {T_DIR}},
-	{"ldi", 10, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}},
-	{"sti", 11, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}},
-	{"fork", 12, {T_DIR}},
-	{"lld", 13, {T_DIR | T_IND, T_REG}},
-	{"lldi", 14, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}},
-	{"lfork", 15, {T_DIR}},
-	{"aff", 16, {T_REG}},
-	{NULL, 0}};
+	{"live", 1, {T_DIR}, 4},
+	{"ld", 2, {T_DIR | T_IND, T_REG}, 4},
+	{"st", 3, {T_REG, T_IND | T_REG}, 4},
+	{"add", 4, {T_REG, T_REG, T_REG}, 4},
+	{"sub", 5, {T_REG, T_REG, T_REG}, 4},
+	{"and", 6, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 4},
+	{"or", 7, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4},
+	{"xor", 8, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4},
+	{"zjmp", 9, {T_DIR}, 2},
+	{"ldi", 10, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2},
+	{"sti", 11, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 2},
+	{"fork", 12, {T_DIR}, 2},
+	{"lld", 13, {T_DIR | T_IND, T_REG}, 4},
+	{"lldi", 14, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2},
+	{"lfork", 15, {T_DIR}, 2},
+	{"aff", 16, {T_REG}, 4},
+	{NULL, 0, {0}, 0}};
 
 /*---------- Token struct ----------*/
 typedef struct s_token
@@ -170,39 +178,42 @@ typedef struct s_token
 } t_token;
 
 /* OTTO */
-int ft_btoi(char *num);
-char *ft_itoh(int num, int byte_size);
+int		ft_btoi(char *num);
+char	*ft_itoh(int num, int byte_size);
 
 /* HENRI */
 /* Inits */
-void init_structs(t_data *data, t_header *header, t_error_log *error_log);
-void init_vectors(t_data *s_data);
+void	init_structs(t_data *data, t_header *header, t_error_log *error_log);
+void	init_vectors(t_data *s_data);
 t_input *init_values(t_input *element);
 
-void error(int error_number);
-void read_input(char *input, t_data *s_data);
-void read_header(int fd, t_data *s_data);
-void lexical_error(t_data *s_data);
+void	error(int error_number);
+void	read_input(char *input, t_data *s_data);
+void	read_header(int fd, t_data *s_data);
+void	lexical_error(t_data *s_data);
 
 /*---------- Dynamic 2D array ----------*/
-void vec_new_arr(t_vec *dst, size_t len);
-void vec_insert(t_vec *dst_vec, void *element);
+void	vec_new_arr(t_vec *dst, size_t len);
+void	vec_insert(t_vec *dst_vec, void *element);
 
 /*---------- Functions to validate Tokens ----------*/
-bool is_label(t_data *s_data, char *sub_string);
-bool is_statement(char *sub_string);
-bool is_delimiter(char c);
-bool is_register(char *string);
-bool is_separator(char c);
-bool is_directlabel(t_data *s_data, char *string);
-bool is_direct(t_data *s_data, char *string);
-bool is_indirect(t_data *s_data, char *lexeme);
+bool	is_label(t_data *s_data, char *sub_string);
+bool	is_statement(char *sub_string);
+bool	is_delimiter(char c);
+bool	is_register(char *string);
+bool	is_separator(char c);
+bool	is_directlabel(t_data *s_data, char *string);
+bool	is_direct(t_data *s_data, char *string);
+bool	is_indirect(t_data *s_data, char *lexeme);
 
 /*---------- Syntax Analyzer ----------*/
-void syntax_analyzer(t_data *s_data);
+void	syntax_analyzer(t_data *s_data);
+
+/*---------- Calculating bytes for statements ----------*/
+void	calculate_statement_sizes(t_vec	*vec_statements);
 
 /*---------- Printing / debug ----------*/
-void print_data(t_data *s_data);
-void print_tokens(t_vec *vec_tokens);
+void	print_data(t_data *s_data);
+void	print_tokens(t_vec *vec_tokens);
 
 #endif

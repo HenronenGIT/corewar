@@ -112,7 +112,6 @@ void	validate_instruction_syntax(t_input *statement)
 	i = 0;
 	result = 0;
 	op_code = statement->op_code;
-	// while (statement->arg_type[i] != 0)
 	while (i < 3)
 	{
 		if (g_table[op_code - 1].params_type[i] && !statement->arg_type[i])
@@ -133,6 +132,7 @@ static void	validate_syntax(t_vec *vec_input)
 	if (vec_input->space_taken == 0)
 		return ;
 	statement = vec_input->array[newsest_element];
+	// validate_label_syntax might NOT be needed... check with different error cases
 	if (statement->label_name)
 		validate_label_syntax(statement);
 	else
