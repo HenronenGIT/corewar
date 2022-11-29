@@ -5,24 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C/C++: asm",
+            "name": "C/C++: a", // Can be anything
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/asm/src/a.out", // Binary name
-            "args": [""],
-            // "args": ["fixed_tdc3.s"],
-            // "args": ["/Users/hmaronen/workspace/github/corewar/test.s"],
+            "program": "${workspaceFolder}/asm/asm", // Path to executable
+            "args": ["test.s"], // Arguments for the executable
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "MIMode": "lldb",
-            "preLaunchTask": "C/C++: asm", // Task name
-            // "setupCommands": [
-				// /*---- PATH TO FILE ----*/
-                // {
-                    // "text": "settings set target.input-path /Users/hmaronen/workspace/github/corewar/test.s"
-                // }
-            // ]
+            "preLaunchTask": "C/C++: asm", // Can be anything, but needs to match name
         }
     ]
 }

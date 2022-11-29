@@ -22,10 +22,10 @@
 	  still saved?
 	  "	
 		
-live	%1
+live	#missing arg
 l2:	
 sti	r1,%:live, r2
-	and	r1,%0, r1
+	and	r1,%0,r1
 
 	and	r1,%0,r1
 	lldi 42, r2, r3

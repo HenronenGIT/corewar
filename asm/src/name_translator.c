@@ -12,6 +12,7 @@
 
 #include "../includes/asm.h"
 
+<<<<<<< HEAD
 char	*name_translator(t_header *name)
 {
 	int		i;
@@ -46,3 +47,6 @@ char	*name_translator(t_header *name)
 	free(magic);
 	return (name_str);
 }
+=======
+// void	name_translator()
+>>>>>>> 3f373b85590e3024da301092b028b0d1a7f19d61

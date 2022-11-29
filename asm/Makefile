@@ -26,7 +26,8 @@ SRC_FILES = asm.c \
 			read_input.c \
 			validation.c \
 			read_header.c \
-			syntax_analysis.c \
+			syntax_analyzer.c \
+			init.c \
 			debug.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -45,7 +46,7 @@ LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(INC)
 	@echo "$(CYELLOW)Compiling $(NAME) program$(CEND)"
 #	@$(CC) -o $(NAME) $(FLAGS) $(SRC) -I $(INC) -L. $(LIBFT)
 	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I $(INC) $(LIBFT)
