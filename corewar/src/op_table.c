@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:42:58 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/29 15:59:41 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:38:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,23 @@ static void print_arg_values(t_types *types)
 void	op_live(t_process *cur_process, t_data *data)
 {
 	t_types types;
+	int player;
 	
 	ft_printf("process %d is on --> 'live'\n", cur_process->id);
 	//redundant
 	//types.size_t_dir = 4;
 	//types.num_args = 1;
 	cur_process->byte_jump_size = 5; //size of T_DIR + 1
-	cur_process->cycles_remaining = -1;
+	//count process as alive??
+	cur_process->last_live = data->cycles_total;
+	//count arg as last_alive_champ. Later check if this is a valid champ?
+	data->last_alive_champ = bytes2int((uint8_t *)&data->arena[cur_process->cursor + 1], 4);
+	//are champ id's always negative??
+	player = data->last_alive_champ * -1;
+	if (player <= data->champions_num && player > 0)
+		ft_printf("A process shows that player %d (%s) is alive\n", player, data->champions[player - 1]->name);
+	//TESTING
+	ft_printf("Executed 'live' statement with arg: %d\n", data->last_alive_champ);
 
 }
 

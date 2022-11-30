@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/29 13:19:12 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:17:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,13 @@ static void read_statement_code(t_data *data, t_process *temp)
 	{
 		temp->statement_code = n;
 		temp->cycles_remaining = cycles_remaining[n];
-		printf("set cycles remaining to: %d\n", temp->cycles_remaining);
+		//printf("set cycles remaining to: %d\n", temp->cycles_remaining);
 	}
 	else
 	{
-		//invalid op code
-		//move cursor forward 1 byte and go to next process
-		//printf("in here?\n");
 		temp->byte_jump_size = 0;
-		temp->cursor++;
+		temp->cursor = (temp->cursor + 1) % MEM_SIZE;
 	}
-		
-
 }
 
 static void check_process(t_data *data, t_process *temp)
@@ -69,9 +64,9 @@ static void check_process(t_data *data, t_process *temp)
 	if (temp->cycles_remaining == -1)
 	{
 		//move cursor to next position
-		printf("byte jump size: %d\n", temp->byte_jump_size);
+		//printf("byte jump size: %d\n", temp->byte_jump_size);
 		temp->cursor = circular_mem(temp->cursor, temp->byte_jump_size);
-		printf("read data %d | temp->cursor: %d\n", data->arena[temp->cursor], temp->cursor);
+		//printf("read data %d | temp->cursor: %d\n", data->arena[temp->cursor], temp->cursor);
 		read_statement_code(data, temp);
 	}
 	else if (temp->cycles_remaining == 0)
@@ -96,7 +91,7 @@ static void	execute_processes(t_data *data, t_process *head)
 	data->cycles_after_check++;
 	while (temp)
 	{
-		ft_printf("CYCLE: %d | id: %d | cyc rem: %d | cursor: %d\n",data->cycles_total, temp->id, temp->cycles_remaining, temp->cursor);
+		//ft_printf("CYCLE: %d | id: %d | cyc rem: %d | cursor: %d\n",data->cycles_total, temp->id, temp->cycles_remaining, temp->cursor);
 		check_process(data, temp);
 		//testing stuff
 		

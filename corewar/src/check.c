@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:47:37 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/22 15:36:27 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:38:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static	void	remove_died(t_data *data, t_process *head)
 		}
 	}
 }
-
+//can this be done in data and not champions??
 static void	reset_live_statements(t_data *data)
 {
 	int	i;

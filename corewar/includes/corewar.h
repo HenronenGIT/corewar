@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/29 15:59:46 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:59:41 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_data
 	int			cycles_to_die;
 	int			cycles_after_check;
 	int			num_checks_performed;
-	int			last_alive_player;
+	int			last_alive_champ;
 	int			num_live_statements;
 }	t_data;
 
