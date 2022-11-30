@@ -37,7 +37,7 @@ static void print_statement(t_input *data, int fd)
 		else
 			temp = int_to_bigendian(data->arg_values[i], data->arg_size[i]);
 	//	write(1, &data->arg_values[i], data->arg_size[i]);
-		printf("temp: %d\n", temp);
+		printf("temp: %x\n", temp);
 		write(fd, &temp, data->arg_size[i]);
 		i++;
 	}
