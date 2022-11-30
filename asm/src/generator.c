@@ -12,16 +12,12 @@
 
 #include "../includes/asm.h"
 
-<<<<<<< HEAD
 /*
 	generate agument type code by making an 8-bit binary number from types, where all
 	types have their own 2 bit code. T_REG = 01, T_DIR = 10, T_IND = 11.
 	empty spots will be 00. Saving code in decimal int form in data.
 */
 void	save_atc(t_input *data)
-=======
-void save_atc(t_input *data)
->>>>>>> 3f373b85590e3024da301092b028b0d1a7f19d61
 {
 	int i;
 	char *temp;
@@ -61,14 +57,10 @@ void save_atc(t_input *data)
 	free(temp);
 }
 
-<<<<<<< HEAD
 /*
 	find numeric value in T_DIR, T_REG or T_IND type argument when argument also has characters
 */
 int	find_number(char *current_arg)
-=======
-int find_number(char *current_arg)
->>>>>>> 3f373b85590e3024da301092b028b0d1a7f19d61
 {
 	int i;
 
@@ -92,14 +84,10 @@ int is_label_call(char *current_arg)
 	return (0);
 }
 
-<<<<<<< HEAD
 /*
 	find label address to use for calculation of realtive position of label address and current postition
 */
 void	find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_struct)
-=======
-void find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_struct)
->>>>>>> 3f373b85590e3024da301092b028b0d1a7f19d61
 {
 	int i;
 
@@ -118,15 +106,11 @@ void find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_s
 	}
 }
 
-<<<<<<< HEAD
 
 /*
 	save values in int form for all arguments
 */
 void	save_argument_values(t_input **original_data, t_input *data, int current_arg, int curr_struct)
-=======
-void save_argument_values(t_input **original_data, t_input *data, int current_arg, int curr_struct)
->>>>>>> 3f373b85590e3024da301092b028b0d1a7f19d61
 {
 	int num;
 
@@ -142,15 +126,11 @@ void make_final(t_input *data)
 	printf("%s%s%s%s%s\n", ft_itoh(data->op_code, 1), ft_itoh(data->argument_type_code, 1), ft_itoh(data->arg_values[0], data->arg_size[0]), ft_itoh(data->arg_values[1], data->arg_size[1]), ft_itoh(data->arg_values[2], data->arg_size[2]));
 }
 
-<<<<<<< HEAD
 /*
 	generate input value for argument type code and for different arguments of a
 	single statement
 */
 void	generate_input(t_input **original_data, t_input *data, int curr_struct)
-=======
-void generate_input(t_input **original_data, t_input *data, int curr_struct)
->>>>>>> 3f373b85590e3024da301092b028b0d1a7f19d61
 {
 	int i;
 
@@ -164,16 +144,12 @@ void generate_input(t_input **original_data, t_input *data, int curr_struct)
 	make_final(data);
 }
 
-<<<<<<< HEAD
 
 /*
 	loop through all statements and labels and generate input for each
 	statement, skipping labels
 */
 void	generator(t_input **data)
-=======
-void generator(t_input **data)
->>>>>>> 3f373b85590e3024da301092b028b0d1a7f19d61
 {
 	int i;
 
@@ -186,15 +162,11 @@ void generator(t_input **data)
 	}
 }
 
-<<<<<<< HEAD
 
 /*
 	test function
 */
 void	print_array(t_input *data)
-=======
-void print_array(t_input *data)
->>>>>>> 3f373b85590e3024da301092b028b0d1a7f19d61
 {
 	printf("op_code: %d\n", data->op_code);
 	printf("a1 size: %d\n", data->arg_size[0]);
