@@ -16,7 +16,7 @@ CGREEN=\033[0;32m
 
 NAME = asm
 CC = gcc
-FLAGS = -g -Wall -fsanitize=address#-Wextra #-Werror
+FLAGS = -g -Wall# -fsanitize=address#-Wextra #-Werror
 
 SRC_DIR = ./src/
 SRC_FILES = asm.c \
@@ -28,8 +28,12 @@ SRC_FILES = asm.c \
 			lexical_error.c \
 			validation.c \
 			syntax_analyzer.c \
-			calculations.c \
-			debug.c
+			init.c \
+			debug.c \
+			generator.c \
+			ft_btoi.c \
+			ft_itoh.c \
+			hex_translator.c \
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

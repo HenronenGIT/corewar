@@ -180,8 +180,11 @@ typedef struct s_token
 } t_token;
 
 /* OTTO */
-int		ft_btoi(char *num);
-char	*ft_itoh(int num, int byte_size);
+int ft_btoi(char *num);
+char *ft_itoh(int num, int byte_size);
+void	generator(t_vec *vec_input);
+void	hex_translator(char *str, int fd, int len);
+void	add_magic(int fd);
 
 /* HENRI */
 /* Inits */
