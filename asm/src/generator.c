@@ -21,15 +21,25 @@
 static void print_statement(t_input *data, int fd)
 {
 	int i;
+	int temp;
 
 	i = 0;
+	temp = 0;
 	write(fd, &data->op_code, 1);
 	if (data->argument_type_code)
 		write(fd, &data->argument_type_code, 1);
 	while (data->arg_size[i])
-	{
-		write(fd, &data->arg_values[i], data->arg_size[i]);
-		i += 1;
+	{	
+		printf("data->args[i] = %s\n", data->args[i]);
+		printf("data->arg_values[i] = %d\n", data->arg_values[i]);
+		if (data->arg_size[i] == 1)
+			temp = data->arg_values[i];
+		else
+			temp = int_to_bigendian(data->arg_values[i], data->arg_size[i]);
+	//	write(1, &data->arg_values[i], data->arg_size[i]);
+		printf("temp: %d\n", temp);
+		write(fd, &temp, data->arg_size[i]);
+		i++;
 	}
 }
 
@@ -135,19 +145,23 @@ void save_argument_values(t_input **original_data, t_input *data, int current_ar
 	if (is_label_call(data->args[current_arg]))
 		find_label_addr(original_data, data->args[current_arg], current_arg, curr_struct);
 	else
+	{
 		data->arg_values[current_arg] = find_number(data->args[current_arg]);
+		// printf("data->arg_values[i]: %d\n", data->arg_values[current_arg]);
+	}
 }
 
 void make_final(t_input *data, int fd)
 {
-	int i;
+	// int i;
 
-	i = 0;
-	while (data->arg_size[i])
-	{
-		data->arg_values[i] = int_to_bigendian(data->arg_values[i], data->arg_size[i]);
-		i++;
-	}
+	// i = 0;
+	// while (data->arg_size[i])
+	// {
+	// 	data->arg_values[i] = int_to_bigendian(data->arg_values[i], data->arg_size[i]);
+	// 	printf("in make final: %d\n", data->arg_values[i]);
+	// 	i++;
+	// }
 	print_statement(data, fd);
 }
 
@@ -167,7 +181,6 @@ void generate_input(t_input **original_data, t_input *data, int curr_struct)
 		save_argument_values(original_data, data, i, curr_struct);
 		i++;
 	}
-	// make_final(data);
 }
 
 /*
@@ -204,11 +217,11 @@ void generator(t_vec *vec_input, int fd)
 	data = (t_input **)vec_input->array;
 	while (data[i])
 	{
-		print_array(data[i]);
 		if (!data[i]->label_name)
 		{
 			generate_input(data, data[i], i);
 			make_final(data[i], fd);
+	//		print_array(data[i]);
 		}
 		i++;
 	}

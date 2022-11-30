@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 	uint32_t			magic;
 
 	magic = 0x00ea83f3;
-	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
+//	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
 	fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
  	if (argc != 2)
 		error(ARG_ERR);
@@ -80,12 +80,12 @@ int main(int argc, char *argv[])
 	read_input(argv[1], &s_data);
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(s_data.vec_input);
-	print_data(&s_data);
-	printf("magic 0x%x\n", magic);
-	magic = int_to_bigendian(magic, 3);
+//	print_data(&s_data);
+//	printf("magic 0x%x\n", magic);
+	magic = int_to_bigendian(magic, 4);
 	// magic = int_to_bigendian(COREWAR_EXEC_MAGIC, 4);
-	printf("magic 0x%x\n", magic);
-	write(fd, &magic, 3);
+//	printf("magic 0x%x\n", magic);
+	write(fd, &magic, 4);
 	hex_translator(s_data.s_header->prog_name, fd, PROG_NAME_LENGTH);
 	hex_translator(s_data.s_header->comment, fd, COMMENT_LENGTH);
 	generator(s_data.vec_input, fd);
