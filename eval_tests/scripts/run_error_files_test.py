@@ -13,33 +13,25 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-# FNULL = open(os.devnull, 'w')    #use this if you want to suppress output to stdout from the subprocess
-executable = "/Users/hmaronen/workspace/github/corewar/asm/asm"
-filename = "/Users/hmaronen/workspace/github/corewar/test.s"
-exit_status = 0
+def main():
+	# Path to asm executable
+	asm = "/Users/hmaronen/workspace/github/corewar/asm/asm"
+	# Path to Corewar folder
+	corewar_folder = "/Users/hmaronen/workspace/github/corewar/"
+	# Path to test folder
+	error_files = corewar_folder + "eval_tests/tests/error_files/"
 
-# Path to Corewar folder
-corewar_path = "/Users/hmaronen/workspace/github/corewar/"
-# Path to test folder
-error_files = corewar_path + "eval_tests/tests/error_files/"
+	file_list = os.listdir(error_files)
+	failed_files = []
 
+	for file in file_list:
+		exit_status = os.system(asm + " " + error_files + file)
+		if exit_status == 0:
+			failed_files.append(file)
 
-
-file_list = os.listdir(error_files)
-# print(dir_list)
-# print(dir_list[0])
-
-failed_files = []
-for file in file_list:
-	exit_status = os.system(executable + " " + error_files + file)
-	if exit_status == 0:
-		failed_files.append(file)
+	print(bcolors.WARNING + "FAILED FILES:" + bcolors.ENDC)
+	for file in failed_files:
 		print(file)
 
-print(bcolors.WARNING + "FAILED FILES:" + bcolors.ENDC)
-for file in failed_files:
-	print(file)
-
-# exit_status = os.system(executable + " " + filename)
-
-#if exit status == 0, everything went well.
+if __name__ == "__main__":
+	main()

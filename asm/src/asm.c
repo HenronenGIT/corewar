@@ -50,7 +50,7 @@ char	*find_file_name(char *s)
 		i = 0;
 	}
 	len = ft_strlen(temp);
-	printf("len: %d\n", len);
+	// printf("len: %d\n", len);
 	file_name = ft_strnew(len + 3);
 	file_name[len + 2] = '\0';
 	while (temp[i] && temp[i] != '.')
@@ -67,11 +67,10 @@ int main(int argc, char *argv[])
 	t_data		s_data;
 	t_header	s_header;
 	t_error_log	s_error_log;
-	int			fd;
+	// int			fd;
 
-	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
-	fd = open(find_file_name(argv[1]), O_CREAT | O_WRONLY);
-	printf("open returns: %d", fd);
+	// printf("\n\n||%s||\n\n", find_file_name(argv[1]));
+	// fd = open(find_file_name(argv[1]), O_CREAT | O_WRONLY);
 	if (argc != 2)
 		error(ARG_ERR);
 	init_structs(&s_data, &s_header, &s_error_log);

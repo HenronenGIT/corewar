@@ -1,0 +1,139 @@
+[0;32m########### t_header ###########[0;37m
+[0;35m.name[0;37m = 	|
+   
+   
+   # is this saved?
+   
+   
+   
+   test_name|
+[0;35m.comment[0;37m = 	|This is a comment?
+
+	  #saved ?
+	  
+
+
+
+	  still saved?
+	  |
+[0;35mmagic[0;37m = 	|15369203|
+
+[0;32m########### t_token ** vector ###########[0;37m
+[0;32m[0][0;37m	[0;35mTYPE[0;37m = INSTRUCTION	[0;35mCONTENT[0;37m = live
+[0;32m[1][0;37m	[0;35mTYPE[0;37m = DIRECT    	[0;35mCONTENT[0;37m = %1
+[0;32m[2][0;37m	[0;35mTYPE[0;37m = LABEL     	[0;35mCONTENT[0;37m = l2:
+[0;32m[3][0;37m	[0;35mTYPE[0;37m = INSTRUCTION	[0;35mCONTENT[0;37m = sti
+[0;32m[4][0;37m	[0;35mTYPE[0;37m = REGISTER  	[0;35mCONTENT[0;37m = r1
+[0;32m[5][0;37m	[0;35mTYPE[0;37m = SEPARATOR 	[0;35mCONTENT[0;37m = ,
+[0;32m[6][0;37m	[0;35mTYPE[0;37m = DIRECT_LABEL	[0;35mCONTENT[0;37m = %:live
+[0;32m[7][0;37m	[0;35mTYPE[0;37m = SEPARATOR 	[0;35mCONTENT[0;37m = ,
+[0;32m[8][0;37m	[0;35mTYPE[0;37m = REGISTER  	[0;35mCONTENT[0;37m = r2
+[0;32m[9][0;37m	[0;35mTYPE[0;37m = INSTRUCTION	[0;35mCONTENT[0;37m = and
+[0;32m[10][0;37m	[0;35mTYPE[0;37m = REGISTER  	[0;35mCONTENT[0;37m = r1
+[0;32m[11][0;37m	[0;35mTYPE[0;37m = SEPARATOR 	[0;35mCONTENT[0;37m = ,
+[0;32m[12][0;37m	[0;35mTYPE[0;37m = DIRECT    	[0;35mCONTENT[0;37m = %0
+[0;32m[13][0;37m	[0;35mTYPE[0;37m = SEPARATOR 	[0;35mCONTENT[0;37m = ,
+[0;32m[14][0;37m	[0;35mTYPE[0;37m = REGISTER  	[0;35mCONTENT[0;37m = r1
+[0;32m[15][0;37m	[0;35mTYPE[0;37m = INSTRUCTION	[0;35mCONTENT[0;37m = and
+[0;32m[16][0;37m	[0;35mTYPE[0;37m = REGISTER  	[0;35mCONTENT[0;37m = r1
+[0;32m[17][0;37m	[0;35mTYPE[0;37m = SEPARATOR 	[0;35mCONTENT[0;37m = ,
+[0;32m[18][0;37m	[0;35mTYPE[0;37m = DIRECT    	[0;35mCONTENT[0;37m = %0
+[0;32m[19][0;37m	[0;35mTYPE[0;37m = SEPARATOR 	[0;35mCONTENT[0;37m = ,
+[0;32m[20][0;37m	[0;35mTYPE[0;37m = REGISTER  	[0;35mCONTENT[0;37m = r1
+[0;32m[21][0;37m	[0;35mTYPE[0;37m = INSTRUCTION	[0;35mCONTENT[0;37m = lldi
+[0;32m[22][0;37m	[0;35mTYPE[0;37m = INDIRECT  	[0;35mCONTENT[0;37m = 42
+[0;32m[23][0;37m	[0;35mTYPE[0;37m = SEPARATOR 	[0;35mCONTENT[0;37m = ,
+[0;32m[24][0;37m	[0;35mTYPE[0;37m = REGISTER  	[0;35mCONTENT[0;37m = r2
+[0;32m[25][0;37m	[0;35mTYPE[0;37m = SEPARATOR 	[0;35mCONTENT[0;37m = ,
+[0;32m[26][0;37m	[0;35mTYPE[0;37m = REGISTER  	[0;35mCONTENT[0;37m = r3
+[0;32m[27][0;37m	[0;35mTYPE[0;37m = INSTRUCTION	[0;35mCONTENT[0;37m = st
+[0;32m[28][0;37m	[0;35mTYPE[0;37m = REGISTER  	[0;35mCONTENT[0;37m = r1
+[0;32m[29][0;37m	[0;35mTYPE[0;37m = SEPARATOR 	[0;35mCONTENT[0;37m = ,
+[0;32m[30][0;37m	[0;35mTYPE[0;37m = INDIRECT  	[0;35mCONTENT[0;37m = :l2
+[0;32m[31][0;37m	[0;35mTYPE[0;37m = LABEL     	[0;35mCONTENT[0;37m = live:
+[0;32m[32][0;37m	[0;35mTYPE[0;37m = INSTRUCTION	[0;35mCONTENT[0;37m = live
+[0;32m[33][0;37m	[0;35mTYPE[0;37m = DIRECT    	[0;35mCONTENT[0;37m = %1
+[0;32m[34][0;37m	[0;35mTYPE[0;37m = INSTRUCTION	[0;35mCONTENT[0;37m = zjmp
+[0;32m[35][0;37m	[0;35mTYPE[0;37m = DIRECT_LABEL	[0;35mCONTENT[0;37m = %:live
+
+[0;32m########### vec_input->array ###########[0;37m
+[0;32m[0][0;37m [0;35mlabel_name[0;37m = (null)  
+    [0;35mop_code[0;37m = 1    
+    [0;35margs[0][0;37m = %1      [0;35margs[1][0;37m = (null)      [0;35margs[2][0;37m = (null)  
+    [0;35marg_type[0][0;37m = 2   [0;35marg_type[1][0;37m = 0   [0;35marg_type[2][0;37m = 0   
+    [0;35marg_size[0][0;37m = 4  [0;35marg_size[1][0;37m = 0  [0;35marg_size[2][0;37m = 0 
+    [0;35mcurrent_bytes[0;37m = 0   
+    [0;35mtotal_size[0;37m = 5  
+
+[0;32m[1][0;37m [0;35mlabel_name[0;37m = l2:     
+    [0;35mop_code[0;37m = 0    
+    [0;35margs[0][0;37m = (null)  [0;35margs[1][0;37m = (null)      [0;35margs[2][0;37m = (null)  
+    [0;35marg_type[0][0;37m = 0   [0;35marg_type[1][0;37m = 0   [0;35marg_type[2][0;37m = 0   
+    [0;35marg_size[0][0;37m = 0  [0;35marg_size[1][0;37m = 0  [0;35marg_size[2][0;37m = 0 
+    [0;35mcurrent_bytes[0;37m = 5   
+    [0;35mtotal_size[0;37m = 0  
+
+[0;32m[2][0;37m [0;35mlabel_name[0;37m = (null)  
+    [0;35mop_code[0;37m = 11   
+    [0;35margs[0][0;37m = r1      [0;35margs[1][0;37m = %:live      [0;35margs[2][0;37m = r2      
+    [0;35marg_type[0][0;37m = 1   [0;35marg_type[1][0;37m = 2   [0;35marg_type[2][0;37m = 1   
+    [0;35marg_size[0][0;37m = 1  [0;35marg_size[1][0;37m = 2  [0;35marg_size[2][0;37m = 1 
+    [0;35mcurrent_bytes[0;37m = 5   
+    [0;35mtotal_size[0;37m = 6  
+
+[0;32m[3][0;37m [0;35mlabel_name[0;37m = (null)  
+    [0;35mop_code[0;37m = 6    
+    [0;35margs[0][0;37m = r1      [0;35margs[1][0;37m = %0          [0;35margs[2][0;37m = r1      
+    [0;35marg_type[0][0;37m = 1   [0;35marg_type[1][0;37m = 2   [0;35marg_type[2][0;37m = 1   
+    [0;35marg_size[0][0;37m = 1  [0;35marg_size[1][0;37m = 4  [0;35marg_size[2][0;37m = 1 
+    [0;35mcurrent_bytes[0;37m = 11  
+    [0;35mtotal_size[0;37m = 8  
+
+[0;32m[4][0;37m [0;35mlabel_name[0;37m = (null)  
+    [0;35mop_code[0;37m = 6    
+    [0;35margs[0][0;37m = r1      [0;35margs[1][0;37m = %0          [0;35margs[2][0;37m = r1      
+    [0;35marg_type[0][0;37m = 1   [0;35marg_type[1][0;37m = 2   [0;35marg_type[2][0;37m = 1   
+    [0;35marg_size[0][0;37m = 1  [0;35marg_size[1][0;37m = 4  [0;35marg_size[2][0;37m = 1 
+    [0;35mcurrent_bytes[0;37m = 19  
+    [0;35mtotal_size[0;37m = 8  
+
+[0;32m[5][0;37m [0;35mlabel_name[0;37m = (null)  
+    [0;35mop_code[0;37m = 14   
+    [0;35margs[0][0;37m = 42      [0;35margs[1][0;37m = r2          [0;35margs[2][0;37m = r3      
+    [0;35marg_type[0][0;37m = 4   [0;35marg_type[1][0;37m = 1   [0;35marg_type[2][0;37m = 1   
+    [0;35marg_size[0][0;37m = 2  [0;35marg_size[1][0;37m = 1  [0;35marg_size[2][0;37m = 1 
+    [0;35mcurrent_bytes[0;37m = 27  
+    [0;35mtotal_size[0;37m = 6  
+
+[0;32m[6][0;37m [0;35mlabel_name[0;37m = (null)  
+    [0;35mop_code[0;37m = 3    
+    [0;35margs[0][0;37m = r1      [0;35margs[1][0;37m = :l2         [0;35margs[2][0;37m = (null)  
+    [0;35marg_type[0][0;37m = 1   [0;35marg_type[1][0;37m = 4   [0;35marg_type[2][0;37m = 0   
+    [0;35marg_size[0][0;37m = 1  [0;35marg_size[1][0;37m = 2  [0;35marg_size[2][0;37m = 0 
+    [0;35mcurrent_bytes[0;37m = 33  
+    [0;35mtotal_size[0;37m = 5  
+
+[0;32m[7][0;37m [0;35mlabel_name[0;37m = live:   
+    [0;35mop_code[0;37m = 0    
+    [0;35margs[0][0;37m = (null)  [0;35margs[1][0;37m = (null)      [0;35margs[2][0;37m = (null)  
+    [0;35marg_type[0][0;37m = 0   [0;35marg_type[1][0;37m = 0   [0;35marg_type[2][0;37m = 0   
+    [0;35marg_size[0][0;37m = 0  [0;35marg_size[1][0;37m = 0  [0;35marg_size[2][0;37m = 0 
+    [0;35mcurrent_bytes[0;37m = 38  
+    [0;35mtotal_size[0;37m = 0  
+
+[0;32m[8][0;37m [0;35mlabel_name[0;37m = (null)  
+    [0;35mop_code[0;37m = 1    
+    [0;35margs[0][0;37m = %1      [0;35margs[1][0;37m = (null)      [0;35margs[2][0;37m = (null)  
+    [0;35marg_type[0][0;37m = 2   [0;35marg_type[1][0;37m = 0   [0;35marg_type[2][0;37m = 0   
+    [0;35marg_size[0][0;37m = 4  [0;35marg_size[1][0;37m = 0  [0;35marg_size[2][0;37m = 0 
+    [0;35mcurrent_bytes[0;37m = 38  
+    [0;35mtotal_size[0;37m = 5  
+
+[0;32m[9][0;37m [0;35mlabel_name[0;37m = (null)  
+    [0;35mop_code[0;37m = 9    
+    [0;35margs[0][0;37m = %:live  [0;35margs[1][0;37m = (null)      [0;35margs[2][0;37m = (null)  
+    [0;35marg_type[0][0;37m = 2   [0;35marg_type[1][0;37m = 0   [0;35marg_type[2][0;37m = 0   
+    [0;35marg_size[0][0;37m = 2  [0;35marg_size[1][0;37m = 0  [0;35marg_size[2][0;37m = 0 
+    [0;35mcurrent_bytes[0;37m = 43  
+    [0;35mtotal_size[0;37m = 3  
+

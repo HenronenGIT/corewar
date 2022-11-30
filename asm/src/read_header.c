@@ -12,11 +12,16 @@
 
 #include "../includes/asm.h"
 
+static void	reel_to_end()
+{
+
+}
+
 static void copy_name(t_data *s_data, char *string, int fd, t_type type)
 {
-	size_t i;
-	size_t j;
-	char *dst;
+	size_t	i;
+	size_t	j;
+	char	*dst;
 
 	i = 0;
 	j = 0;
@@ -33,41 +38,14 @@ static void copy_name(t_data *s_data, char *string, int fd, t_type type)
 			i = 0;
 		}
 		else
-		{
-			dst[j] = string[i];
-			i += 1;
-		}
+			dst[j] = string[i++];
 		j += 1;
 	}
+	if (type == NAME && ft_strlen(dst) > PROG_NAME_LENGTH)
+		error(NAME_LEN_ERR);
+	else if (type == NAME && ft_strlen(dst) > COMMENT_LENGTH)
+		error(COMMENT_LEN_ERR);
 }
-// static void copy_name(t_data *s_data, char *string, int fd, t_type type)
-// {
-// 	size_t i;
-// 	size_t j;
-// 	char *dst;
-
-// 	i = 0;
-// 	j = 0;
-// 	if (type == NAME)
-// 		dst = s_data->s_header->prog_name;
-// 	else if (type == COMMENT)
-// 		dst = s_data->s_header->comment;
-// 	while (string[i] != STRING_CHAR)
-// 	{
-// 		if (string[i] == '\0')
-// 		{
-// 			dst[j] = '\n';
-// 			get_next_line(fd, &string);
-// 			i = 0;
-// 		}
-// 		else
-// 		{
-// 			dst[j] = string[i];
-// 			i += 1;
-// 		}
-// 		j += 1;
-// 	}
-// }
 
 static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 {
@@ -83,6 +61,7 @@ static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 		if (string[i] == STRING_CHAR)
 		{
 			copy_name(s_data, &string[i + 1], fd, type);
+			reel_to_end();
 			return;
 		}
 		if (is_delimiter(string[i]) == false)

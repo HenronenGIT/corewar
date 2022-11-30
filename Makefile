@@ -64,9 +64,6 @@ run:
 
 original:
 	./eval_tests/asm test.s
-
-both:
-	@./asm/asm test.s
-	@./eval_tests/asm test.s
-
+python:
+	python3 ./eval_tests/scripts/run_error_files_test.py
 re : fclean all clean all
