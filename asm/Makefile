@@ -28,8 +28,12 @@ SRC_FILES = asm.c \
 			lexical_error.c \
 			validation.c \
 			syntax_analyzer.c \
-			calculations.c \
-			debug.c
+			debug.c \
+			generator.c \
+			ft_btoi.c \
+			ft_itoh.c \
+			hex_translator.c \
+			calculations.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

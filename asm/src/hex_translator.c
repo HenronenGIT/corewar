@@ -12,41 +12,28 @@
 
 #include "../includes/asm.h"
 
-<<<<<<< HEAD
-char	*name_translator(t_header *name)
+void	hex_translator(char *str, int fd, int len)
 {
 	int		i;
-	int		j;
-	char	*name_str;
-	char	*magic;
 	char	*temp;
 
+	temp = NULL;
 	i = 0;
-	j = 0;
-	name_str = (char *)malloc(sizeof(char) * (PROG_NAME_LENGTH * 2 + 1));
-	if (!name_str)
-		exit (0);
-	name_str[PROG_NAME_LENGTH * 2] = '\0';
-	magic = ft_strdup("0xea83f");
-	while (magic[j])
-		name_str[i++] = magic[j++];
-	j = 0;
-	while (name->prog_name[j])
+	while (str[i])
 	{
-		temp = ft_itoh((int)name->prog_name[j], 1);
-		name_str = ft_strcat(name_str, temp);
+		temp = ft_itoh((int)str[i], 1);
+		write(fd, temp, 2);
+		i++;
 		free(temp);
-		j++;
-		i += 2;
 	}
-	while (j < PROG_NAME_LENGTH * 2)
+	while (i < len)
 	{
-		name_str = ft_strcat(name_str, "0");
-		i += 2;
+		write(fd, "00", 2);
+		i++;
 	}
-	free(magic);
-	return (name_str);
 }
-=======
-// void	name_translator()
->>>>>>> 3f373b85590e3024da301092b028b0d1a7f19d61
+
+void	add_magic(int fd)
+{
+	write(fd, "0xea83f3", 8);
+}

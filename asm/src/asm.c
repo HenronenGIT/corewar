@@ -31,12 +31,47 @@ void error(int error_number)
 	exit(error_number);
 }
 
+char	*find_file_name(char *s)
+{
+	char	*file_name;
+	int		i;
+	int		len;
+	int		j;
+	char	*temp;
+
+	i = 1;
+	j = 0;
+	file_name = NULL;
+	temp = ft_strdup(s);
+	temp = ft_strrchr(s, '/');
+	if (!temp)
+	{
+		temp = s;
+		i = 0;
+	}
+	len = ft_strlen(temp);
+	printf("len: %d\n", len);
+	file_name = ft_strnew(len + 3);
+	file_name[len + 2] = '\0';
+	while (temp[i] && temp[i] != '.')
+	{
+		file_name[j++] = temp[i++];
+	}
+	file_name[i] = '\0';
+	file_name = ft_strcat(file_name, ".cor");
+	return (file_name);
+}
+
 int main(int argc, char *argv[])
 {
-	t_data s_data;
-	t_header s_header;
-	t_error_log s_error_log;
+	t_data		s_data;
+	t_header	s_header;
+	t_error_log	s_error_log;
+	int			fd;
 
+	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
+	fd = open(find_file_name(argv[1]), O_CREAT | O_WRONLY);
+	printf("open returns: %d", fd);
 	if (argc != 2)
 		error(ARG_ERR);
 	init_structs(&s_data, &s_header, &s_error_log);

@@ -104,6 +104,8 @@ void	find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_s
 		}
 		i++;
 	}
+	if (!data[i])
+		ft_puterror("ERROR: A label is not defined\n");
 }
 
 
@@ -144,25 +146,6 @@ void	generate_input(t_input **original_data, t_input *data, int curr_struct)
 	make_final(data);
 }
 
-
-/*
-	loop through all statements and labels and generate input for each
-	statement, skipping labels
-*/
-void	generator(t_input **data)
-{
-	int i;
-
-	i = 0;
-	while (data[i])
-	{
-		if (!data[i]->label_name)
-			generate_input(data, data[i], i);
-		i++;
-	}
-}
-
-
 /*
 	test function
 */
@@ -185,8 +168,28 @@ void	print_array(t_input *data)
 }
 
 /*
-	test main
+	loop through all statements and labels and generate input for each
+	statement, skipping labels
 */
+void	generator(t_vec *vec_input)
+{
+	int i;
+	t_input **data;
+
+	i = 0;
+	data = (t_input **)vec_input->array;
+	while (data[i])
+	{
+		print_array(data[i]);
+		if (!data[i]->label_name)
+			generate_input(data, data[i], i);
+		i++;
+	}
+}
+
+/*
+	test main
+
 int main(void)
 {
 	t_input test;
@@ -214,3 +217,4 @@ int main(void)
 	//	print_array(array[0]);
 	return (0);
 }
+*/
