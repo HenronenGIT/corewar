@@ -185,6 +185,7 @@ char *ft_itoh(int num, int byte_size);
 void	generator(t_vec *vec_input);
 void	hex_translator(char *str, int fd, int len);
 void	add_magic(int fd);
+int		int_to_bigendian(int value, int size);
 
 /* HENRI */
 /* Inits */

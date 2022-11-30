@@ -68,6 +68,7 @@ int main(int argc, char *argv[])
 	t_header	s_header;
 	t_error_log	s_error_log;
 	int			fd;
+	int			magic;
 
 	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
 	fd = open(find_file_name(argv[1]), O_CREAT | O_WRONLY);
@@ -80,5 +81,9 @@ int main(int argc, char *argv[])
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(s_data.vec_input);
 	print_data(&s_data);
+	magic = int_to_bigendian(COREWAR_EXEC_MAGIC, 4);
+	printf("magic 0x%x\n", magic);
+	write(fd, &magic, 4);
+	generator(s_data.vec_input);
 	return (0);
 }

@@ -33,7 +33,8 @@ SRC_FILES = asm.c \
 			ft_btoi.c \
 			ft_itoh.c \
 			hex_translator.c \
-			calculations.c
+			calculations.c \
+			int_to_bigendian.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

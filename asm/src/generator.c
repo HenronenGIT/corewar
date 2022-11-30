@@ -125,7 +125,14 @@ void	save_argument_values(t_input **original_data, t_input *data, int current_ar
 
 void make_final(t_input *data)
 {
-	printf("%s%s%s%s%s\n", ft_itoh(data->op_code, 1), ft_itoh(data->argument_type_code, 1), ft_itoh(data->arg_values[0], data->arg_size[0]), ft_itoh(data->arg_values[1], data->arg_size[1]), ft_itoh(data->arg_values[2], data->arg_size[2]));
+	int i;
+
+	i = 0;
+	while (data->arg_size[i])
+	{
+		data->arg_values[i] = int_to_bigendian(data->arg_values[i], data->arg_size[i]);
+		i++;
+	}
 }
 
 /*

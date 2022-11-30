@@ -32,8 +32,3 @@ void	hex_translator(char *str, int fd, int len)
 		i++;
 	}
 }
-
-void	add_magic(int fd)
-{
-	write(fd, "0xea83f3", 8);
-}
