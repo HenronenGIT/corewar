@@ -18,16 +18,16 @@ static int fetch_size(int arg_type, int op_code)
 		return (T_REG_SIZE);
 	else if (arg_type == T_IND)
 		return (T_IND_SIZE);
-	else if (arg_type== T_DIR)
+	else if (arg_type == T_DIR)
 		return (g_table[op_code - 1].direct_size);
 	else
 		return (0);
 }
 
-static int	calculate_total(t_input *statement)
+static int calculate_total(t_input *statement)
 {
-	int	sum;
-	int	i;
+	int sum;
+	int i;
 
 	i = -1;
 	sum = 0;
@@ -42,18 +42,15 @@ static int	calculate_total(t_input *statement)
 static void calculate_bytes(t_input *statement)
 {
 	static int total_bytes;
-	int	i;
+	int i;
 
 	i = -1;
-	if (statement->label_name)
-		statement->current_bytes = total_bytes;
-	else
-	{
-		while (statement->arg_type[++i])
-			statement->arg_size[i] = fetch_size(statement->arg_type[i], statement->op_code);
-		statement->total_size= calculate_total(statement);
-		total_bytes += statement->total_size;
-	}
+	statement->current_bytes = total_bytes;
+	while (statement->arg_type[++i])
+		statement->arg_size[i] = fetch_size(statement->arg_type[i], statement->op_code);
+	if (statement->label_name == NULL)
+		statement->total_size = calculate_total(statement);
+	total_bytes += statement->total_size;
 }
 
 void calculate_statement_sizes(t_vec *vec_statements)

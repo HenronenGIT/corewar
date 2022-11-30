@@ -44,6 +44,6 @@ int main(int argc, char *argv[])
 	read_input(argv[1], &s_data);
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(s_data.vec_input);
-	// print_data(&s_data);
+	print_data(&s_data);
 	return (0);
 }
