@@ -51,7 +51,7 @@ t_input *init_values(t_input *element)
 	element->arg_type[2] = 0;
 	element->arg_type[3] = 0;
 	element->label_name = NULL;
-	element->byte_size = 0;
+	element->total_size = 0;
 	element->arg_size[0] = 0;
 	element->arg_size[1] = 0;
 	element->arg_size[2] = 0;

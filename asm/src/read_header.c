@@ -40,6 +40,34 @@ static void copy_name(t_data *s_data, char *string, int fd, t_type type)
 		j += 1;
 	}
 }
+// static void copy_name(t_data *s_data, char *string, int fd, t_type type)
+// {
+// 	size_t i;
+// 	size_t j;
+// 	char *dst;
+
+// 	i = 0;
+// 	j = 0;
+// 	if (type == NAME)
+// 		dst = s_data->s_header->prog_name;
+// 	else if (type == COMMENT)
+// 		dst = s_data->s_header->comment;
+// 	while (string[i] != STRING_CHAR)
+// 	{
+// 		if (string[i] == '\0')
+// 		{
+// 			dst[j] = '\n';
+// 			get_next_line(fd, &string);
+// 			i = 0;
+// 		}
+// 		else
+// 		{
+// 			dst[j] = string[i];
+// 			i += 1;
+// 		}
+// 		j += 1;
+// 	}
+// }
 
 static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 {
