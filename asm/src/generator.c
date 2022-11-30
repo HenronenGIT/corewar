@@ -146,25 +146,6 @@ void	generate_input(t_input **original_data, t_input *data, int curr_struct)
 	make_final(data);
 }
 
-
-/*
-	loop through all statements and labels and generate input for each
-	statement, skipping labels
-*/
-void	generator(t_input **data)
-{
-	int i;
-
-	i = 0;
-	while (data[i])
-	{
-		if (!data[i]->label_name)
-			generate_input(data, data[i], i);
-		i++;
-	}
-}
-
-
 /*
 	test function
 */
@@ -205,8 +186,6 @@ void	generator(t_vec *vec_input)
 		i++;
 	}
 }
-
-
 
 /*
 	test main

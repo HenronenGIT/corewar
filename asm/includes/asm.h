@@ -107,7 +107,7 @@ typedef struct s_data_cell
 	int current_bytes;
 
 	int argument_type_code; // argument type code in int | OTTO
-	int arg_values[4];		// arg codes in int | OTTO
+	uint32_t arg_values[4];		// arg codes in int | OTTO
 	char *final;			// final bytecode for current statement | OTTO
 } t_input; //! change name to better one
 
@@ -196,6 +196,7 @@ void	error(int error_number);
 void	read_input(char *input, t_data *s_data);
 void	read_header(int fd, t_data *s_data);
 void	lexical_error(t_data *s_data);
+void	calculate_statement_sizes(t_vec *vec_statements);
 
 /*---------- Dynamic 2D array ----------*/
 void	vec_new_arr(t_vec *dst, size_t len);

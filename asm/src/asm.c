@@ -37,18 +37,25 @@ char	*find_file_name(char *s)
 	int		i;
 	int		len;
 	int		j;
+	char	*temp;
 
 	i = 1;
 	j = 0;
 	file_name = NULL;
-	s = ft_strrchr(s, '/');
-	len = ft_strlen(s);
+	temp = ft_strdup(s);
+	temp = ft_strrchr(s, '/');
+	if (!temp)
+	{
+		temp = s;
+		i = 0;
+	}
+	len = ft_strlen(temp);
 	printf("len: %d\n", len);
 	file_name = ft_strnew(len + 3);
 	file_name[len + 2] = '\0';
-	while (s[i] && s[i] != '.')
+	while (temp[i] && temp[i] != '.')
 	{
-		file_name[j++] = s[i++];
+		file_name[j++] = temp[i++];
 	}
 	file_name[i] = '\0';
 	file_name = ft_strcat(file_name, ".cor");
@@ -57,9 +64,9 @@ char	*find_file_name(char *s)
 
 int main(int argc, char *argv[])
 {
-//	t_data		s_data;
+	t_data		s_data;
 	t_header	s_header;
-//	t_error_log	s_error_log;
+	t_error_log	s_error_log;
 	int			fd;
 
 	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
@@ -72,6 +79,6 @@ int main(int argc, char *argv[])
 	read_input(argv[1], &s_data);
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(s_data.vec_input);
-	// print_data(&s_data);
+	print_data(&s_data);
 	return (0);
 }
