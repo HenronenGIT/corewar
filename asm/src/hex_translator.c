@@ -15,25 +15,17 @@
 void	hex_translator(char *str, int fd, int len)
 {
 	int		i;
-	char	*temp;
+	int	temp;
 
-	temp = NULL;
+	temp = 0;
 	i = 0;
-	while (str[i])
-	{
-		temp = ft_itoh((int)str[i], 1);
-		write(fd, temp, 2);
-		i++;
-		free(temp);
-	}
 	while (i < len)
 	{
-		write(fd, "00", 2);
+		if (str[i])
+			temp = (int)str[i];
+		else
+			temp = 0;
+		write(fd, &temp, 1);
 		i++;
 	}
-}
-
-void	add_magic(int fd)
-{
-	write(fd, "0xea83f3", 8);
 }

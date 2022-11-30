@@ -17,7 +17,23 @@
 	types have their own 2 bit code. T_REG = 01, T_DIR = 10, T_IND = 11.
 	empty spots will be 00. Saving code in decimal int form in data.
 */
-void	save_atc(t_input *data)
+
+static void print_statement(t_input *data, int fd)
+{
+	int i;
+
+	i = 0;
+	write(fd, &data->op_code, 1);
+	if (data->argument_type_code)
+		write(fd, &data->argument_type_code, 1);
+	while (data->arg_size[i])
+	{
+		write(fd, &data->arg_values[i], data->arg_size[i]);
+		i += 1;
+	}
+}
+
+void save_atc(t_input *data)
 {
 	int i;
 	char *temp;
@@ -60,7 +76,7 @@ void	save_atc(t_input *data)
 /*
 	find numeric value in T_DIR, T_REG or T_IND type argument when argument also has characters
 */
-int	find_number(char *current_arg)
+int find_number(char *current_arg)
 {
 	int i;
 
@@ -87,7 +103,7 @@ int is_label_call(char *current_arg)
 /*
 	find label address to use for calculation of realtive position of label address and current postition
 */
-void	find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_struct)
+void find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_struct)
 {
 	int i;
 
@@ -108,11 +124,10 @@ void	find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_s
 		ft_puterror("ERROR: A label is not defined\n");
 }
 
-
 /*
 	save values in int form for all arguments
 */
-void	save_argument_values(t_input **original_data, t_input *data, int current_arg, int curr_struct)
+void save_argument_values(t_input **original_data, t_input *data, int current_arg, int curr_struct)
 {
 	int num;
 
@@ -123,33 +138,42 @@ void	save_argument_values(t_input **original_data, t_input *data, int current_ar
 		data->arg_values[current_arg] = find_number(data->args[current_arg]);
 }
 
-void make_final(t_input *data)
+void make_final(t_input *data, int fd)
 {
-	printf("%s%s%s%s%s\n", ft_itoh(data->op_code, 1), ft_itoh(data->argument_type_code, 1), ft_itoh(data->arg_values[0], data->arg_size[0]), ft_itoh(data->arg_values[1], data->arg_size[1]), ft_itoh(data->arg_values[2], data->arg_size[2]));
+	int i;
+
+	i = 0;
+	while (data->arg_size[i])
+	{
+		data->arg_values[i] = int_to_bigendian(data->arg_values[i], data->arg_size[i]);
+		i++;
+	}
+	print_statement(data, fd);
 }
 
 /*
 	generate input value for argument type code and for different arguments of a
 	single statement
 */
-void	generate_input(t_input **original_data, t_input *data, int curr_struct)
+void generate_input(t_input **original_data, t_input *data, int curr_struct)
 {
 	int i;
 
 	i = 0;
-	save_atc(data);
+	if (g_table[data->op_code - 1].arg_type_code != 0)
+		save_atc(data);
 	while (data->args[i])
 	{
 		save_argument_values(original_data, data, i, curr_struct);
 		i++;
 	}
-	make_final(data);
+	// make_final(data);
 }
 
 /*
 	test function
 */
-void	print_array(t_input *data)
+void print_array(t_input *data)
 {
 	printf("op_code: %d\n", data->op_code);
 	printf("a1 size: %d\n", data->arg_size[0]);
@@ -171,7 +195,7 @@ void	print_array(t_input *data)
 	loop through all statements and labels and generate input for each
 	statement, skipping labels
 */
-void	generator(t_vec *vec_input)
+void generator(t_vec *vec_input, int fd)
 {
 	int i;
 	t_input **data;
@@ -182,7 +206,10 @@ void	generator(t_vec *vec_input)
 	{
 		print_array(data[i]);
 		if (!data[i]->label_name)
+		{
 			generate_input(data, data[i], i);
+			make_final(data[i], fd);
+		}
 		i++;
 	}
 }

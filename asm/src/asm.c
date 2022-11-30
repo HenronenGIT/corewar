@@ -67,11 +67,13 @@ int main(int argc, char *argv[])
 	t_data		s_data;
 	t_header	s_header;
 	t_error_log	s_error_log;
-	// int			fd;
+	int			fd;
+	uint32_t			magic;
 
-	// printf("\n\n||%s||\n\n", find_file_name(argv[1]));
-	// fd = open(find_file_name(argv[1]), O_CREAT | O_WRONLY);
-	if (argc != 2)
+	magic = 0x00ea83f3;
+	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
+	fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
+ 	if (argc != 2)
 		error(ARG_ERR);
 	init_structs(&s_data, &s_header, &s_error_log);
 	init_vectors(&s_data);
@@ -79,5 +81,13 @@ int main(int argc, char *argv[])
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(s_data.vec_input);
 	print_data(&s_data);
+	printf("magic 0x%x\n", magic);
+	magic = int_to_bigendian(magic, 3);
+	// magic = int_to_bigendian(COREWAR_EXEC_MAGIC, 4);
+	printf("magic 0x%x\n", magic);
+	write(fd, &magic, 3);
+	hex_translator(s_data.s_header->prog_name, fd, PROG_NAME_LENGTH);
+	hex_translator(s_data.s_header->comment, fd, COMMENT_LENGTH);
+	generator(s_data.vec_input, fd);
 	return (0);
 }
