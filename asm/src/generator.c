@@ -220,8 +220,3 @@ int main(void)
 	return (0);
 }
 */
-
-
-int_to_bigendian(magic)
-
-write(fd, &data->arg_values[1], 4);
