@@ -4,11 +4,12 @@
 
 
    .name		""
-	#.das TEST THIS
+	
 	  .comment    ""	
 		
 live	%1
-l2:asd	
+#l2:	
+live:
 sti	r1,%:live, r2
 	and	r1,%0, r1
 
@@ -16,5 +17,6 @@ sti	r1,%:live, r2
 	lldi 42, r2, r3
 	st r1, :l2
 
-live:	live	%1
+#live:	live	%1
+l2:	live	%1
 	zjmp	%:live

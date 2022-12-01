@@ -96,12 +96,11 @@ Opens file descriptor for reading the input.
 After that while loops starts reading file descriptor line by line.
 Every single line is sent to lexical_scanner function to be tokenized.
 */
-void read_input(char *input, t_data *s_data)
+void	read_input(char *input, t_data *s_data)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
-	fd = 0;
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
 		error(OPEN_ERR);

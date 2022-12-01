@@ -1,14 +1,9 @@
-
-
-
-
-
-   .name		""
-	#.das TEST THIS
-	  .comment    ""	
+.name		""
+   
+.comment    ""	
 		
 live	%1
-l2:asd	
+l2:asd	# <----------------
 sti	r1,%:live, r2
 	and	r1,%0, r1
 

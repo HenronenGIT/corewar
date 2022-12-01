@@ -30,7 +30,7 @@ no:
 	zjmp	%:no
 	
 boucle2:
-	ld	%0, r2
+	ld	%0, r2r
 	zjmp	%:no
 
 end:	

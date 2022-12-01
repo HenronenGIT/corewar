@@ -18,9 +18,11 @@
 # include <stdbool.h>
 # include "../../libft/includes/libft.h"
 
+//! TEMP
 # define PRINT(s) (printf("FILE: |%s| FUNC: |%s| LINE: |%d|\nValue:%s", __FILE__, __FUNCTION__, __LINE__, s))
 # define PRINT_D(d) (printf("FILE: |%s| FUNC: |%s| LINE: |%d|\nValue:%d", __FILE__, __FUNCTION__, __LINE__, d))
 # define LOCATION printf("FILE: |%s| FUNC: |%s| LINE: |%d|\n", __FILE__, __FUNCTION__, __LINE__)
+//! TEMP
 
 /*---------- Error codes ----------*/
 # define OPEN_ERR -1
@@ -31,6 +33,8 @@
 # define NAME_LEN_ERR -6
 # define COMMENT_LEN_ERR -7
 # define LEXICAL_ERROR -8
+# define NAME_COUNT_ERR -9
+# define COMMENT_COUNT_ERR -10
 
 # define SYNTAX_ERROR -9 //TEMP ERROR
 
@@ -72,10 +76,11 @@
 /*---------- Main data struct ----------*/
 typedef struct s_data
 {
-	struct s_vec *vec_input;
-	struct s_vec *vec_tokens;
-	struct s_error_log *s_error_log;
-	struct s_header *s_header;
+	struct s_vec		*vec_input;
+	struct s_vec		*vec_tokens;
+	struct s_error_log	*s_error_log;
+	struct s_header		*s_header;
+	int					champ_size;
 } t_data;
 
 /*---------- Collecting information about location ----------*/
@@ -119,6 +124,8 @@ typedef struct s_header
 	char prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int prog_size;
 	char comment[COMMENT_LENGTH + 1];
+	bool	name_saved;
+	bool	comment_saved;
 } t_header;
 
 /*---------- enums for identifying type of token ----------*/
@@ -135,13 +142,6 @@ typedef enum e_type
 	INDIRECT,
 	INVALID
 } t_type;
-
-// typedef enum e_type
-// {
-// 	T_REG,
-// 	T_DIR,
-// 	T_IND
-// } t_type;
 
 typedef struct s_table
 {
@@ -188,17 +188,16 @@ void	hex_translator(char *str, int fd, int len);
 void	add_magic(int fd);
 int		int_to_bigendian(int value, int size);
 
-/* HENRI */
 /* Inits */
 void	init_structs(t_data *data, t_header *header, t_error_log *error_log);
 void	init_vectors(t_data *s_data);
-t_input *init_values(t_input *element);
+t_input	*init_values(t_input *element);
 
 void	error(int error_number);
 void	read_input(char *input, t_data *s_data);
 void	read_header(int fd, t_data *s_data);
 void	lexical_error(t_data *s_data);
-void	calculate_statement_sizes(t_vec *vec_statements);
+// void	calculate_statement_sizes(t_vec *vec_statements);
 
 /*---------- Dynamic 2D array ----------*/
 void	vec_new_arr(t_vec *dst, size_t len);
@@ -218,7 +217,7 @@ bool	is_indirect(t_data *s_data, char *lexeme);
 void	syntax_analyzer(t_data *s_data);
 
 /*---------- Calculating bytes for statements ----------*/
-void	calculate_statement_sizes(t_vec	*vec_statements);
+void calculate_statement_sizes(t_data *s_data);
 
 /*---------- Printing / debug ----------*/
 void	print_data(t_data *s_data);

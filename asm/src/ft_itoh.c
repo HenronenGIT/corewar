@@ -23,7 +23,7 @@ char	*ft_itoh(int num, int byte_size)
 	j = 0;
 	final = (char *)malloc(sizeof(char) * (byte_size * 2 + 1));
 	if (!final)
-		exit (1);
+		exit (MALLOC_ERR);
 	final[byte_size * 2] = '\0';
 	while (i < byte_size * 2)
 		final[i++] = '0';

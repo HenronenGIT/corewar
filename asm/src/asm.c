@@ -28,16 +28,20 @@ void error(int error_number)
 		ft_puterror("ERROR: Champion name too long (Max length 128)\n");
 	if (error_number == COMMENT_LEN_ERR)
 		ft_puterror("ERROR: Champion comment too long (Max length 2048)\n");
+	if (error_number == NAME_COUNT_ERR)
+		ft_puterror("ERROR: File contained multiple .name!\n");
+	if (error_number == COMMENT_COUNT_ERR)
+		ft_puterror("ERROR: File contained multiple .comment\n");
 	exit(error_number);
 }
 
-char	*find_file_name(char *s)
+char *find_file_name(char *s)
 {
-	char	*file_name;
-	int		i;
-	int		len;
-	int		j;
-	char	*temp;
+	char *file_name;
+	int i;
+	int len;
+	int j;
+	char *temp;
 
 	i = 1;
 	j = 0;
@@ -83,16 +87,17 @@ void	write_champ_code(t_data *data, int fd)
 int main(int argc, char *argv[])
 {
 	t_data		s_data;
-	t_header	s_header;
+	t_header 	s_header;
 	t_error_log	s_error_log;
 	int			fd;
-	uint32_t			magic;
+	uint32_t	magic;
 
 	magic = 0x00ea83f3;
 //	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
 	fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
  	if (argc != 2)
 		error(ARG_ERR);
+	fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
 	init_structs(&s_data, &s_header, &s_error_log);
 	init_vectors(&s_data);
 	read_input(argv[1], &s_data);
