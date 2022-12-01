@@ -53,14 +53,18 @@ static void calculate_bytes(t_input *statement)
 	total_bytes += statement->total_size;
 }
 
-void calculate_statement_sizes(t_vec *vec_statements)
+void calculate_statement_sizes(t_data *s_data)
 {
 	t_input **ptr;
+	size_t	last_element;
 
-	ptr = (t_input **)vec_statements->array;
+	last_element = s_data->vec_input->space_taken - 1;
+	ptr = (t_input **)s_data->vec_input->array;
 	while (*ptr != NULL)
 	{
 		calculate_bytes(*ptr);
 		ptr += 1;
 	}
+	ptr -= 1;
+	s_data->champ_size = (*ptr)->current_bytes + (*ptr)->total_size;
 }

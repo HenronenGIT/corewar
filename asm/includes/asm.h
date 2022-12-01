@@ -76,10 +76,11 @@
 /*---------- Main data struct ----------*/
 typedef struct s_data
 {
-	struct s_vec *vec_input;
-	struct s_vec *vec_tokens;
-	struct s_error_log *s_error_log;
-	struct s_header *s_header;
+	struct s_vec		*vec_input;
+	struct s_vec		*vec_tokens;
+	struct s_error_log	*s_error_log;
+	struct s_header		*s_header;
+	int					champ_size;
 } t_data;
 
 /*---------- Collecting information about location ----------*/
@@ -196,7 +197,7 @@ void	error(int error_number);
 void	read_input(char *input, t_data *s_data);
 void	read_header(int fd, t_data *s_data);
 void	lexical_error(t_data *s_data);
-void	calculate_statement_sizes(t_vec *vec_statements);
+// void	calculate_statement_sizes(t_vec *vec_statements);
 
 /*---------- Dynamic 2D array ----------*/
 void	vec_new_arr(t_vec *dst, size_t len);
@@ -216,7 +217,7 @@ bool	is_indirect(t_data *s_data, char *lexeme);
 void	syntax_analyzer(t_data *s_data);
 
 /*---------- Calculating bytes for statements ----------*/
-void	calculate_statement_sizes(t_vec	*vec_statements);
+void calculate_statement_sizes(t_data *s_data);
 
 /*---------- Printing / debug ----------*/
 void	print_data(t_data *s_data);

@@ -28,6 +28,7 @@ void	init_structs(t_data *data, t_header *header, t_error_log *error_log)
 	data->vec_input = NULL;
 	data->s_header = header;
 	data->s_error_log = error_log;
+	data->champ_size = 0;
 }
 
 void	init_vectors(t_data *s_data)

@@ -83,7 +83,8 @@ int main(int argc, char *argv[])
 	init_vectors(&s_data);
 	read_input(argv[1], &s_data);
 	syntax_analyzer(&s_data);
-	calculate_statement_sizes(s_data.vec_input);
+	// calculate_statement_sizes(s_data.vec_input);
+	calculate_statement_sizes(&s_data);
 	print_data(&s_data);
 	// printf("magic 0x%x\n", magic);
 	// magic = int_to_bigendian(magic, 3);
