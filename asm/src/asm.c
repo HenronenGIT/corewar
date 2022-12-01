@@ -62,6 +62,24 @@ char	*find_file_name(char *s)
 	return (file_name);
 }
 
+void	write_champ_code(t_data *data, int fd)
+{
+	int		temp;
+	int		i;
+	char	*exec_size;
+
+	temp = 0;
+	i = 0;
+	exec_size = NULL;
+	write(fd, &temp, 2);
+	write(fd, &temp, 2);
+	write(fd, &temp, 2);
+	write(fd, &temp, 2);
+	exec_size = ft_itoa(data->champion_exec_size);
+	hex_translator(exec_size, fd, 2);
+	free (exec_size);
+}
+
 int main(int argc, char *argv[])
 {
 	t_data		s_data;
@@ -87,6 +105,7 @@ int main(int argc, char *argv[])
 //	printf("magic 0x%x\n", magic);
 	write(fd, &magic, 4);
 	hex_translator(s_data.s_header->prog_name, fd, PROG_NAME_LENGTH);
+	write_champ_code(&s_data, fd);
 	hex_translator(s_data.s_header->comment, fd, COMMENT_LENGTH);
 	generator(s_data.vec_input, fd);
 	return (0);

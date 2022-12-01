@@ -30,14 +30,14 @@ static void print_statement(t_input *data, int fd)
 		write(fd, &data->argument_type_code, 1);
 	while (data->arg_size[i])
 	{	
-		printf("data->args[i] = %s\n", data->args[i]);
-		printf("data->arg_values[i] = %d\n", data->arg_values[i]);
+//		printf("data->args[i] = %s\n", data->args[i]);
+//		printf("data->arg_values[i] = %d\n", data->arg_values[i]);
 		if (data->arg_size[i] == 1)
 			temp = data->arg_values[i];
 		else
 			temp = int_to_bigendian(data->arg_values[i], data->arg_size[i]);
 	//	write(1, &data->arg_values[i], data->arg_size[i]);
-		printf("temp: %x\n", temp);
+//		printf("temp: %x\n", temp);
 		write(fd, &temp, data->arg_size[i]);
 		i++;
 	}
@@ -110,27 +110,52 @@ int is_label_call(char *current_arg)
 	return (0);
 }
 
+int	compare_labels(char *original_label, char *current_label)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	printf("original_label: %s\ncurrent_label: %s\n", original_label, current_label);
+	while (original_label[i] && current_label[j])
+	{
+		while (original_label[i] == ':' || original_label[i] == '%')
+			i++;
+		while (current_label[j] == ':' || current_label[j] == '%')
+			j++;
+		if (original_label[i] != current_label[j])
+			return (0);
+		i++;
+		j++;
+	}
+	return (1);
+}
+
 /*
 	find label address to use for calculation of realtive position of label address and current postition
 */
-void find_label_addr(t_input **data, char *current_arg, int curr_arg, int curr_struct)
+void find_label_addr(t_input **array, char *curr_label_name, int curr_arg, int curr_struct)
 {
 	int i;
 
 	i = 0;
-	while (data[i])
+	while (array[i])
 	{
-		if (data[i]->label_name)
+		if (array[i]->label_name)
 		{
-			if (ft_strcmp(data[i]->label_name, current_arg))
+//			printf("array[i]->label_name = %s\ncurr_label_name: %s\n\n", array[i]->label_name, curr_label_name);
+			if (compare_labels(array[i]->label_name, curr_label_name))
 			{
-				data[curr_struct]->arg_values[curr_arg] = data[i]->current_bytes - data[curr_struct]->current_bytes;
+				array[curr_struct]->arg_values[curr_arg] = array[i]->current_bytes - array[curr_struct]->current_bytes;
+//				printf("Position of the label: %d\n", array[i]->current_bytes);
+//				printf("Our current position: %d\n", array[curr_struct]->current_bytes);
 				return;
 			}
 		}
 		i++;
 	}
-	if (!data[i])
+	if (!array[i])
 		ft_puterror("ERROR: A label is not defined\n");
 }
 
