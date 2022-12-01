@@ -75,7 +75,7 @@ void	write_champ_code(t_data *data, int fd)
 	write(fd, &temp, 2);
 	write(fd, &temp, 2);
 	write(fd, &temp, 2);
-	exec_size = ft_itoa(data->champion_exec_size);
+	exec_size = ft_itoa(data->champ_size);
 	hex_translator(exec_size, fd, 2);
 	free (exec_size);
 }
