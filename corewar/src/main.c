@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/24 10:49:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:28:02 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,17 @@ void print_arena(int8_t *arena)
 int	main(int ac, char **av)
 {
 	t_data	data;
-	t_process *head;
 
-	head = NULL;
 	if (ac >= 2)
 	{
 		init_data(&data);
 		parse(ac, av, &data);
 		load_arena(&data);
-
-		print_arena(data.arena);
+		//print_arena(data.arena);
 		//parse_dump(&ac, &av, &data);
 		// to add: print_introduction(players, id)
-		create_processes(&data, &head);
-		play_game(&data, head);
+		create_processes(&data);
+		play_game(&data);
 	}
 	else
 	//make exit type function

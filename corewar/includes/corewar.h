@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/30 15:59:41 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:28:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ typedef struct s_data
 	int			num_checks_performed;
 	int			last_alive_champ;
 	int			num_live_statements;
+	int			new_cursor;
+	struct s_process	*head;
+	struct s_process	*parent;
+
 }	t_data;
 
 typedef struct s_process
@@ -103,7 +107,10 @@ int	main(int argc, char **argv);
 t_champion	*init_champion(void);
 void	init_data(t_data *data);
 void	load_arena(t_data *data);
-void	create_processes(t_data *data, t_process **head);
+
+/* processes */
+void	create_processes(t_data *data);
+void	add_process(t_data *data, t_process **head, int i);
 
 /* parse */
 void	parse(int ac, char **av, t_data *data);
@@ -120,7 +127,7 @@ int32_t	bytes2int(uint8_t *byte_value, size_t size);
 void	print_data(t_data *data);
 
 /* play */
-void	play_game(t_data *data, t_process *head);
+void	play_game(t_data *data);
 
 /* check */
 void	check(t_data *data, t_process *head);

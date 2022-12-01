@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:02:39 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/29 15:59:40 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:28:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	get_arg_values(int8_t *arena, t_types *types, t_process *cur_process)
 	while (i < types->num_args)
 	{
 		val = bytes2int((uint8_t*)&arena[start], types->size_arg[i]);
+		
 		if (types->type_arg[i] == T_REG)
 		{
 			//check regies
