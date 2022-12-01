@@ -79,7 +79,7 @@ void	write_champ_code(t_data *data, int fd)
 	write(fd, &temp, 2);
 	write(fd, &temp, 2);
 	write(fd, &temp, 2);
-	exec_size = ft_itoa(data->champion_exec_size);
+	exec_size = ft_itoa(data->champ_size);
 	hex_translator(exec_size, fd, 2);
 	free (exec_size);
 }
@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 	init_vectors(&s_data);
 	read_input(argv[1], &s_data);
 	syntax_analyzer(&s_data);
-	calculate_statement_sizes(s_data.vec_input);
+	calculate_statement_sizes(&s_data);
 //	print_data(&s_data);
 //	printf("magic 0x%x\n", magic);
 	magic = int_to_bigendian(magic, 4);
