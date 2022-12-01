@@ -8,7 +8,7 @@
 	  .comment    ""	
 		
 live	%1
-l2:asd	
+l2:
 sti	r1,%:live, r2
 	and	r1,%0, r1
 
@@ -18,3 +18,4 @@ sti	r1,%:live, r2
 
 live:	live	%1
 	zjmp	%:live
+	

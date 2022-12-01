@@ -53,7 +53,7 @@ void save_atc(t_input *data)
 	j = 0;
 	temp = (char *)malloc(sizeof(char) * 9);
 	if (!temp)
-		exit(MALLOC_ERR);
+		exit(1);
 	temp[8] = '\0';
 	while (j < 8)
 	{
@@ -144,12 +144,12 @@ void find_label_addr(t_input **array, char *curr_label_name, int curr_arg, int c
 	{
 		if (array[i]->label_name)
 		{
-//			printf("array[i]->label_name = %s\ncurr_label_name: %s\n\n", array[i]->label_name, curr_label_name);
+			printf("array[i]->label_name = %s\ncurr_label_name: %s\n\n", array[i]->label_name, curr_label_name);
 			if (compare_labels(array[i]->label_name, curr_label_name))
 			{
 				array[curr_struct]->arg_values[curr_arg] = array[i]->current_bytes - array[curr_struct]->current_bytes;
-//				printf("Position of the label: %d\n", array[i]->current_bytes);
-//				printf("Our current position: %d\n", array[curr_struct]->current_bytes);
+				printf("Position of the label: %d\n", array[i]->current_bytes);
+				printf("Our current position: %d\n", array[curr_struct]->current_bytes);
 				return;
 			}
 		}
