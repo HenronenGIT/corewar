@@ -95,23 +95,29 @@ When HEADER_CHAR is found, function checks that was the word .name or .comment
 */
 static void	seek_header_char(t_data *s_data, char *line, int fd)
 {
-	size_t left;
+	// size_t left;
 	size_t right;
 
-	left = 0;
+	// left = 0;
 	right = 0;
 	while (line[right] != '\0')
 	{
-		if (line[right] == HEADER_CHAR && left != right)
-			left = right;
-		else if (is_delimiter(line[right]) && line[left] == HEADER_CHAR)
+		if (line[right] == COMMENT_CHAR)
+			return ;
+		if (line[right] == HEADER_CHAR)
 		{
-			if (ft_strncmp(&line[left], NAME_CMD_STRING, NAME_CMD_LEN) == 0)
-				seek_quote(s_data, &line[left], fd, NAME);
-			else if (ft_strncmp(&line[left], COMMENT_CMD_STRING, COMMENT_CMD_LEN) == 0)
-				seek_quote(s_data, &line[left], fd, COMMENT);
+			if (ft_strncmp(&line[right], NAME_CMD_STRING, NAME_CMD_LEN) == 0)
+				seek_quote(s_data, &line[right], fd, NAME);
+			else if (ft_strncmp(&line[right], COMMENT_CMD_STRING, COMMENT_CMD_LEN) == 0)
+				seek_quote(s_data, &line[right], fd, COMMENT);
 			else
 				lexical_error(s_data);
+			// if (ft_strncmp(&line[left], NAME_CMD_STRING, NAME_CMD_LEN) == 0)
+				// seek_quote(s_data, &line[left], fd, NAME);
+			// else if (ft_strncmp(&line[left], COMMENT_CMD_STRING, COMMENT_CMD_LEN) == 0)
+				// seek_quote(s_data, &line[left], fd, COMMENT);
+			// else
+				// lexical_error(s_data);
 			return;
 		}
 		else

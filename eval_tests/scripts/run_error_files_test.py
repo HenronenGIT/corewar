@@ -20,18 +20,32 @@ def main():
 	corewar_folder = "/Users/hmaronen/workspace/github/corewar/"
 	# Path to test folder
 	error_files = corewar_folder + "eval_tests/tests/error_files/"
+	valid_files = corewar_folder + "eval_tests/tests/valid_files/"
 
-	file_list = os.listdir(error_files)
-	failed_files = []
+	file_list_1 = os.listdir(error_files)
+	file_list_2 = os.listdir(valid_files)
+	failed_files_1 = []
+	failed_files_2 = []
 
-	for file in file_list:
+	# Test error_files and if return value is wrong, save that file.
+	for file in file_list_1:
 		exit_status = os.system(asm + " " + error_files + file)
 		if exit_status == 0:
-			failed_files.append(file)
+			failed_files_1.append(file)
 
-	print(bcolors.WARNING + "FAILED FILES:" + bcolors.ENDC)
-	for file in failed_files:
+	# Test valid_files and if return value is wrong, save that file.
+	for file in file_list_2:
+		exit_status = os.system(asm + " " + valid_files + file)
+		if exit_status != 0:
+			failed_files_2.append(file)
+
+	print(bcolors.WARNING + "FAILED ERROR_FILES:" + bcolors.ENDC)
+	for file in failed_files_1:
 		print(file)
+	print(bcolors.WARNING + "FAILED VALID_FILES:" + bcolors.ENDC)
+	for file in failed_files_2:
+		print(file)
+
 
 if __name__ == "__main__":
 	main()
