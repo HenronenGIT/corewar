@@ -3,6 +3,7 @@
 		"*.js": "javascriptreact",
 		"stdio.h": "c",
 		"stdbool.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"fcntl.h": "c"
 	}
 }

@@ -87,7 +87,7 @@ static void allocate_element(t_data *s_data)
 
 	element = (t_input *)malloc(sizeof(t_input));
 	if (!element)
-		exit(MALLOC_ERR);
+		error(MALLOC_ERR);
 	element = init_values(element);
 	vec_insert(s_data->vec_input, element);
 }

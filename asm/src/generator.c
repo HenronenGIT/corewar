@@ -43,7 +43,7 @@ void save_atc(t_input *data)
 	j = 0;
 	temp = (char *)malloc(sizeof(char) * 9);
 	if (!temp)
-		exit(1);
+		exit(MALLOC_ERR);
 	temp[8] = '\0';
 	while (j < 8)
 	{

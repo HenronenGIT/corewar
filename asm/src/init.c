@@ -13,15 +13,16 @@
 #include "../includes/asm.h"
 
 /*
-Initializes all structs from the stack memory.
-Then initializes pointers to those structs to t_data struct;
+Initializes all the struct variables.
 */
-void init_structs(t_data *data, t_header *header, t_error_log *error_log)
+void	init_structs(t_data *data, t_header *header, t_error_log *error_log)
 {
 	header->magic = COREWAR_EXEC_MAGIC;
 	ft_bzero(header->prog_name, PROG_NAME_LENGTH);
-	// s_header.prog_size = ;
+	header->prog_size = 0;
 	ft_bzero(header->comment, COMMENT_LENGTH);
+	header->comment_saved = false;
+	header->name_saved = false;
 	error_log->line = 1;
 	error_log->column = 1;
 	data->vec_input = NULL;
@@ -29,7 +30,7 @@ void init_structs(t_data *data, t_header *header, t_error_log *error_log)
 	data->s_error_log = error_log;
 }
 
-void init_vectors(t_data *s_data)
+void	init_vectors(t_data *s_data)
 {
 	s_data->vec_input = (t_vec *)malloc(sizeof(t_vec));
 	s_data->vec_tokens = (t_vec *)malloc(sizeof(t_vec));
@@ -39,7 +40,7 @@ void init_vectors(t_data *s_data)
 	vec_new_arr(s_data->vec_tokens, 2);
 }
 
-t_input *init_values(t_input *element)
+t_input	*init_values(t_input *element)
 {
 	element->op_code = 0;
 	element->args[0] = NULL;
