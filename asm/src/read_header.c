@@ -95,10 +95,8 @@ When HEADER_CHAR is found, function checks that was the word .name or .comment
 */
 static void	seek_header_char(t_data *s_data, char *line, int fd)
 {
-	// size_t left;
 	size_t right;
 
-	// left = 0;
 	right = 0;
 	while (line[right] != '\0')
 	{
@@ -112,12 +110,6 @@ static void	seek_header_char(t_data *s_data, char *line, int fd)
 				seek_quote(s_data, &line[right], fd, COMMENT);
 			else
 				lexical_error(s_data);
-			// if (ft_strncmp(&line[left], NAME_CMD_STRING, NAME_CMD_LEN) == 0)
-				// seek_quote(s_data, &line[left], fd, NAME);
-			// else if (ft_strncmp(&line[left], COMMENT_CMD_STRING, COMMENT_CMD_LEN) == 0)
-				// seek_quote(s_data, &line[left], fd, COMMENT);
-			// else
-				// lexical_error(s_data);
 			return;
 		}
 		else

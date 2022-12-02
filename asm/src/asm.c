@@ -78,12 +78,11 @@ int main(int argc, char *argv[])
 	// printf("\n\n||%s||\n\n", find_file_name(argv[1]));
 	if (argc != 2)
 		error(ARG_ERR);
-	fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
+	// fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
 	init_structs(&s_data, &s_header, &s_error_log);
 	init_vectors(&s_data);
 	read_input(argv[1], &s_data);
 	syntax_analyzer(&s_data);
-	// calculate_statement_sizes(s_data.vec_input);
 	calculate_statement_sizes(&s_data);
 	print_data(&s_data);
 	// printf("magic 0x%x\n", magic);
