@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/01 16:28:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/02 14:31:02 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,28 @@ static void check_process(t_data *data, t_process *temp)
 {
 	if (temp->cycles_remaining == -1)
 	{
+		//for verbose 16
+		if (data->cycles_total > 1 && temp->statement_code != 8)
+		{
+			int idx = temp->cursor;
+			int i = 0;
+			ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", temp->byte_jump_size, idx, idx + temp->byte_jump_size);
+			while (i < temp->byte_jump_size)
+			{
+				ft_printf("%.2x ", (uint8_t)data->arena[idx + i]);
+				i++;
+			}
+			ft_printf("\n");
+		}
+		
+
 		//move cursor to next position
 		//printf("byte jump size: %d\n", temp->byte_jump_size);
 		temp->cursor = circular_mem(temp->cursor, temp->byte_jump_size);
 		//ft_printf("read data %d | temp->cursor: %d\n", data->arena[temp->cursor], temp->cursor);
+
+
+
 		read_statement_code(data, temp);
 	}
 	//else if (temp->cycles_remaining == 0)

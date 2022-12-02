@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:42:58 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/02 13:00:39 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:40:51 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,7 @@ void	op_xor(t_process *cur_process, t_data *data)
 void	op_zjmp(t_process *cur_process, t_data *data)
 {
 	int	val;
-	ft_printf("CURSOR @: %d\n", cur_process->cursor);
+	//ft_printf("CURSOR @: %d\n", cur_process->cursor);
 	val = bytes2int((uint8_t *)&data->arena[cur_process->cursor + 1] , 2);
 	if (cur_process->carry)
 	{
@@ -333,7 +333,7 @@ void	op_sti(t_process *cur_process, t_data *data)
 			cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2], \
 			types.val_arg[1], types.val_arg[2], types.val_arg[1] + types.val_arg[2], idx);
 			//tester
-			ft_printf("     ->wrote %d\n", cur_process->registeries[types.val_arg[0] - 1]);
+			//ft_printf("     ->wrote %d\n", cur_process->registeries[types.val_arg[0] - 1]);
 		}
 	}
 }

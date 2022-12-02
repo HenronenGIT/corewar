@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+         #
+#    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 13:03:56 by hmaronen          #+#    #+#              #
-#    Updated: 2022/11/03 13:03:56 by hmaronen         ###   ########.fr        #
+#    Updated: 2022/12/02 13:36:42 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,4 +63,4 @@ run:
 	./asm/asm test.s
 original:
 	./eval_tests/asm test.s
-# re : fclean all clean all
+re : fclean all clean all
