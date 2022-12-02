@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/01 16:28:02 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:38:37 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	error(char **str, char *msg, int usage)
 		ft_printf("Usage: ./corewar [-dump <num>] [-n <num>] <champion.cor> <...>\n");
 	exit (1);
 }
-
 
 //tester
 void print_arena(int8_t *arena)
@@ -66,9 +65,10 @@ int	main(int ac, char **av)
 		load_arena(&data);
 		//print_arena(data.arena);
 		//parse_dump(&ac, &av, &data);
-		// to add: print_introduction(players, id)
 		create_processes(&data);
-		play_game(&data);
+		print_contestants(&data);
+		// play_game(&data);
+		print_last_alive(&data);
 	}
 	else
 	//make exit type function

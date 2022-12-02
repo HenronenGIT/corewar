@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:40:16 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/24 12:26:37 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:22:57 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,27 @@ void	print_data(t_data *data)
 		i++;
 	}
 	exit (0);
+}
+
+void	print_contestants(t_data *data)
+{
+	int	i;
+
+	i = 1;
+	ft_printf("Introducing contestants...\n");
+	while (i <= data->champions_num)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",\
+			i, data->champions[i - 1]->code_size, data->champions[i - 1]->name,\
+			data->champions[i - 1]->comment);
+		i++;
+	}
+}
+
+void	print_last_alive(t_data *data)
+{
+	int	i;
+
+	i = data->last_alive_champ;
+	ft_printf("Contestant %d, \"%s\", has won !\n", i, data->champions[i - 1]->name);
 }

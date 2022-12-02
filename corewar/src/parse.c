@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/19 17:34:12 by akilk            ###   ########.fr       */
+/*   Updated: 2022/12/02 16:23:20 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	parse(int ac, char **av, t_data *data)
 	if (data->champions_num < 1 || data->champions_num > MAX_PLAYERS)
 		error(NULL, "Champions amount should be between 1 and 4", 0);
 	reset_ids(data);
-
+	data->last_alive_champ = data->champions_num;
 	//test id-s
 	for (int i = 0; i < data->champions_num; i++)
 	{

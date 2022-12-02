@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/01 16:28:11 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:38:07 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void	parse_n(int *ac, char ***av, t_data *data, t_champion *champion);
 bool	is_cor_file(char *file);
 int32_t	bytes2int(uint8_t *byte_value, size_t size);
 void	print_data(t_data *data);
+void	print_contestants(t_data *data);
+void	print_last_alive(t_data *data);
 
 /* play */
 void	play_game(t_data *data);
