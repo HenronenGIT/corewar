@@ -112,7 +112,7 @@ typedef struct s_data_cell
 	int current_bytes;
 
 	int argument_type_code; // argument type code in int | OTTO
-	uint32_t arg_values[4];		// arg codes in int | OTTO
+	int arg_values[4];		// arg codes in int | OTTO
 	char *final;			// final bytecode for current statement | OTTO
 } t_input; //! change name to better one
 

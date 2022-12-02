@@ -85,7 +85,8 @@ void lexical_scanner(char *line, t_data *s_data)
 			else if (is_register(sub_string))
 				save_token(s_data, sub_string, REGISTER);
 			else
-				save_token(s_data, sub_string, INVALID);
+				lexical_error(s_data);
+				// save_token(s_data, sub_string, INVALID);
 			left = right;
 		}
 	}

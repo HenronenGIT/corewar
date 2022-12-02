@@ -66,6 +66,24 @@ char *find_file_name(char *s)
 	return (file_name);
 }
 
+void	write_champ_code(t_data *data, int fd)
+{
+	int		temp;
+	int		i;
+	char	*exec_size;
+
+	temp = 0;
+	i = 0;
+	exec_size = NULL;
+	write(fd, &temp, 2);
+	write(fd, &temp, 2);
+	write(fd, &temp, 2);
+	exec_size = ft_itoa_base(data->champ_size, 16);
+	write(fd, &temp, 1);
+	hex_translator(exec_size, fd, 1);
+	free (exec_size);
+}
+
 int main(int argc, char *argv[])
 {
 	t_data		s_data;
@@ -75,8 +93,9 @@ int main(int argc, char *argv[])
 	uint32_t	magic;
 
 	magic = 0x00ea83f3;
-	// printf("\n\n||%s||\n\n", find_file_name(argv[1]));
-	if (argc != 2)
+//	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
+	fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
+ 	if (argc != 2)
 		error(ARG_ERR);
 	// fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
 	init_structs(&s_data, &s_header, &s_error_log);
@@ -85,13 +104,14 @@ int main(int argc, char *argv[])
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(&s_data);
 	print_data(&s_data);
-	// printf("magic 0x%x\n", magic);
-	// magic = int_to_bigendian(magic, 3);
+//	printf("magic 0x%x\n", magic);
+	magic = int_to_bigendian(magic, 4);
 	// magic = int_to_bigendian(COREWAR_EXEC_MAGIC, 4);
-	// printf("magic 0x%x\n", magic);
-	// write(fd, &magic, 3);
-	// hex_translator(s_data.s_header->prog_name, fd, PROG_NAME_LENGTH);
-	// hex_translator(s_data.s_header->comment, fd, COMMENT_LENGTH);
-	// generator(s_data.vec_input, fd);
+//	printf("magic 0x%x\n", magic);
+	write(fd, &magic, 4);
+	hex_translator(s_data.s_header->prog_name, fd, PROG_NAME_LENGTH);
+	write_champ_code(&s_data, fd);
+	hex_translator(s_data.s_header->comment, fd, COMMENT_LENGTH);
+	generator(s_data.vec_input, fd);
 	return (0);
 }
