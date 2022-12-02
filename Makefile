@@ -15,7 +15,7 @@ CEND=\033[0m
 CGREEN=\033[0;32m
 
 CC = gcc
-FLAGS = -Wall -Wextra #-Werror
+FLAGS = -Wall -Wextra -g#-Werror
 
 ASM_DIR = ./asm
 VM_DIR = ./corewar
@@ -60,7 +60,10 @@ fclean: clean
 
 # temp
 run:
-	./asm/asm test.s
+	@./asm/asm test.s
+
 original:
 	./eval_tests/asm test.s
-# re : fclean all clean all
+python:
+	python3 ./eval_tests/scripts/run_error_files_test.py
+re : fclean all clean all

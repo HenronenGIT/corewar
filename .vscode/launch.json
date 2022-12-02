@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C/C++: a", // Can be anything
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/asm/asm", // Path to executable
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/text_after_label.s"],
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/comment_too_long.s"],
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/two_names.s"],
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/name_too_long.s"],
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/extra_quote.s"], // Arguments for the executable
+            "args": ["test.s"], // Arguments for the executable
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "MIMode": "lldb",
+            "preLaunchTask": "C/C++: asm", // Can be anything, but needs to match name
+        }
+    ]
+}

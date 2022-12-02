@@ -12,3 +12,7 @@
 
 # Debug files
 *.dSYM/
+
+.DS_Store
+asm/asm
+*.cor
