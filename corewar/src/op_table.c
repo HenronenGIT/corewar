@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:42:58 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/01 16:28:09 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:01:12 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,8 @@ void	op_st(t_process *cur_process, t_data *data)
 	ft_printf("process %d is on 'st'\n", cur_process->id);
 	types.size_t_dir = 4;
 	types.num_args = 2;
-	//only if arg type code is 2nd byte
 	get_types(data->arena[cur_process->cursor + 1], &types);
-	//set regardless if incorrect types
 	cur_process->byte_jump_size = jump_size(&types, true);
-	//check if args are of correct type
 	if (types.type_arg[0] == T_REG && (types.type_arg[1] != T_DIR && types.type_arg[1] != T_NULL))
 	{
 		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
@@ -252,7 +249,7 @@ void	op_xor(t_process *cur_process, t_data *data)
 void	op_zjmp(t_process *cur_process, t_data *data)
 {
 	int	val;
-
+	ft_printf("CURSOR @: %d\n", cur_process->cursor);
 	val = bytes2int((uint8_t *)&data->arena[cur_process->cursor + 1] , 2);
 	if (cur_process->carry)
 	{
@@ -266,6 +263,8 @@ void	op_zjmp(t_process *cur_process, t_data *data)
 		ft_printf("P%5d | zjmp %d OK\n", cur_process->id, val);
 	else
 		ft_printf("P%5d | zjmp %d FAILED\n", cur_process->id, val);
+	
+	
 }
 
 void	op_ldi(t_process *cur_process, t_data *data)
@@ -298,7 +297,7 @@ void	op_ldi(t_process *cur_process, t_data *data)
 			//testing
 			ft_printf("P%5d | ldi %d %d r%d\n       | -> load from %d + %d = %d (with pc and mod %d)\n", \
 			cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2], \
-			types.val_arg[1], types.val_arg[2], types.val_arg[1] + types.val_arg[2], idx);
+			types.val_arg[0], types.val_arg[1], types.val_arg[0] + types.val_arg[1], idx);
 		}
 		
 	}
@@ -333,6 +332,8 @@ void	op_sti(t_process *cur_process, t_data *data)
 			ft_printf("P%5d | sti r%d %d %d\n       | -> store to %d + %d = %d (with pc and mod %d)\n", \
 			cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2], \
 			types.val_arg[1], types.val_arg[2], types.val_arg[1] + types.val_arg[2], idx);
+			//tester
+			ft_printf("     ->wrote %d\n", cur_process->registeries[types.val_arg[0] - 1]);
 		}
 	}
 }
