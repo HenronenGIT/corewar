@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:02:47 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/19 18:41:34 by akilk            ###   ########.fr       */
+/*   Updated: 2022/12/02 14:21:44 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static void	sort_ids(t_champion **unlisted, t_champion **result, t_data *data)
 
 	i = 0;
 	k = 0;
-	while (unlisted[k] != NULL && i < data->champions_num)
+	while (i < data->champions_num)
 	{
 		if (result[i] == NULL)
 		{
@@ -142,7 +142,7 @@ void	reset_ids(t_data *data)
 		else if (data->champions[i]->id == 0)
 			unlisted[k++] = data->champions[i];
 		else
-			result[data->champions[i]->id - 1] =  data->champions[i];
+			result[data->champions[i]->id - 1] = data->champions[i];
 		i++;
 	}
 	sort_ids(unlisted, result, data);
