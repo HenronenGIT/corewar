@@ -65,5 +65,6 @@ t_input	*init_values(t_input *element)
 	element->arg_values[2] = 0;
 	element->arg_values[3] = 0;
 	element->final = NULL;
+	element->commas = 0;
 	return (element);
 }

@@ -35,8 +35,8 @@
 # define LEXICAL_ERROR -8
 # define NAME_COUNT_ERR -9
 # define COMMENT_COUNT_ERR -10
+# define SYNTAX_ERROR -11 //TEMP ERROR
 
-# define SYNTAX_ERROR -9 //TEMP ERROR
 
 # define TEMP_ERR -999 //! TEMP
 
@@ -102,6 +102,8 @@ typedef struct s_vec
 /*---------- One of these structs contains info from one statement ----------*/
 typedef struct s_data_cell
 {
+	short commas;
+	short arg_count;//test
 	char *label_name;
 	int op_code;
 	char *args[4];
