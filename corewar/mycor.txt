@@ -37,12 +37,12 @@ ADV 5 (0x00a9 -> 0x00ae) 04 54 04 0c 04
 P    1 | sub r10 r11 r10
 ADV 5 (0x00ae -> 0x00b3) 05 54 0a 0b 0a 
 P    1 | zjmp -50 FAILED
+ADV 3 (0x00b3 -> 0x00b6) 09 ff ce 
 P    1 | fork -25 (157)
-ADV 0 (0x009d -> 0x009d) 
 ADV 3 (0x00b6 -> 0x00b9) 0c ff e7 
 P    2 | live 42
-P    1 | live 3
 ADV 5 (0x009d -> 0x00a2) 01 00 00 00 2a 
+P    1 | live 3
 ADV 5 (0x00b9 -> 0x00be) 01 00 00 00 03 
 P    2 | sti r4 -155 1
        | -> store to -155 + 1 = -154 (with pc and mod 8)
@@ -52,19 +52,18 @@ ADV 5 (0x00a9 -> 0x00ae) 04 54 04 0c 04
 P    2 | sub r10 r11 r10
 ADV 5 (0x00ae -> 0x00b3) 05 54 0a 0b 0a 
 P    2 | zjmp -50 FAILED
+ADV 3 (0x00b3 -> 0x00b6) 09 ff ce 
 P    1 | fork 40 (230)
-ADV 0 (0x00e6 -> 0x00e6) 
 ADV 3 (0x00be -> 0x00c1) 0c 00 28 
 P    3 | live 42
-P    1 | live 4
 ADV 5 (0x00e6 -> 0x00eb) 01 00 00 00 2a 
+P    1 | live 4
 ADV 5 (0x00c1 -> 0x00c6) 01 00 00 00 04 
 P    2 | fork -25 (157)
-ADV 0 (0x009d -> 0x009d) 
 ADV 3 (0x00b6 -> 0x00b9) 0c ff e7 
 P    4 | live 42
-P    2 | live 3
 ADV 5 (0x009d -> 0x00a2) 01 00 00 00 2a 
+P    2 | live 3
 ADV 5 (0x00b9 -> 0x00be) 01 00 00 00 03 
 P    4 | sti r4 -155 1
        | -> store to -155 + 1 = -154 (with pc and mod 8)
@@ -74,58 +73,56 @@ ADV 5 (0x00a9 -> 0x00ae) 04 54 04 0c 04
 P    4 | sub r10 r11 r10
 ADV 5 (0x00ae -> 0x00b3) 05 54 0a 0b 0a 
 P    4 | zjmp -50 FAILED
+ADV 3 (0x00b3 -> 0x00b6) 09 ff ce 
 P    3 | fork 61 (296)
-P    1 | fork 69 (267)
-ADV 0 (0x010b -> 0x010b) 
-ADV 0 (0x0128 -> 0x0128) 
 ADV 3 (0x00eb -> 0x00ee) 0c 00 3d 
+P    1 | fork 69 (267)
 ADV 3 (0x00c6 -> 0x00c9) 0c 00 45 
 P    6 | live 42
-P    5 | live 42
-P    3 | live 42
-P    1 | live 42
 ADV 5 (0x010b -> 0x0110) 01 00 00 00 2a 
+P    5 | live 42
 ADV 5 (0x0128 -> 0x012d) 01 00 00 00 2a 
+P    3 | live 42
 ADV 5 (0x00ee -> 0x00f3) 01 00 00 00 2a 
+P    1 | live 42
 ADV 5 (0x00c9 -> 0x00ce) 01 00 00 00 2a 
 P    6 | ldi 12 -259 r15
        | -> load from 12 + -259 = -247 (with pc and mod 25)
+ADV 7 (0x0110 -> 0x0117) 0a a4 00 0c fe fd 0f 
 P    5 | ldi 0 -288 r15
        | -> load from 0 + -288 = -288 (with pc and mod 13)
+ADV 7 (0x012d -> 0x0134) 0a a4 00 00 fe e0 0f 
 P    3 | ldi 4 -230 r15
        | -> load from 4 + -230 = -226 (with pc and mod 17)
+ADV 7 (0x00f3 -> 0x00fa) 0a a4 00 04 ff 1a 0f 
 P    1 | ldi 8 -193 r15
        | -> load from 8 + -193 = -185 (with pc and mod 21)
-ADV 7 (0x0110 -> 0x0117) 0a a4 00 0c fe fd 0f 
-ADV 7 (0x012d -> 0x0134) 0a a4 00 00 fe e0 0f 
-ADV 7 (0x00f3 -> 0x00fa) 0a a4 00 04 ff 1a 0f 
 ADV 7 (0x00ce -> 0x00d5) 0a a4 00 08 ff 3f 0f 
 P    6 | ld -182 r14
-P    5 | ld -194 r14
-P    3 | ld -190 r14
-P    1 | ld -186 r14
 ADV 7 (0x0117 -> 0x011e) 02 90 ff ff ff 4a 0e 
+P    5 | ld -194 r14
 ADV 7 (0x0134 -> 0x013b) 02 90 ff ff ff 3e 0e 
+P    3 | ld -190 r14
 ADV 7 (0x00fa -> 0x0101) 02 90 ff ff ff 42 0e 
+P    1 | ld -186 r14
 ADV 7 (0x00d5 -> 0x00dc) 02 90 ff ff ff 46 0e 
 P    6 | ld 0 r2
-P    5 | ld 0 r2
-P    3 | ld 0 r2
-P    1 | ld 0 r2
 ADV 7 (0x011e -> 0x0125) 02 90 00 00 00 00 02 
+P    5 | ld 0 r2
 ADV 7 (0x013b -> 0x0142) 02 90 00 00 00 00 02 
+P    3 | ld 0 r2
 ADV 7 (0x0101 -> 0x0108) 02 90 00 00 00 00 02 
+P    1 | ld 0 r2
 ADV 7 (0x00dc -> 0x00e3) 02 90 00 00 00 00 02 
 P    6 | zjmp -286 OK
 P    5 | zjmp -315 OK
 P    3 | zjmp -257 OK
 P    2 | fork 40 (230)
-P    1 | zjmp -220 OK
-ADV 0 (0x00e6 -> 0x00e6) 
 ADV 3 (0x00be -> 0x00c1) 0c 00 28 
+P    1 | zjmp -220 OK
 P    7 | live 42
-P    2 | live 4
 ADV 5 (0x00e6 -> 0x00eb) 01 00 00 00 2a 
+P    2 | live 4
 ADV 5 (0x00c1 -> 0x00c6) 01 00 00 00 04 
 P    6 | zjmp 0 OK
 P    5 | zjmp 0 OK
@@ -140,11 +137,10 @@ P    5 | zjmp 0 OK
 P    3 | zjmp 0 OK
 P    1 | zjmp 0 OK
 P    4 | fork -25 (157)
-ADV 0 (0x009d -> 0x009d) 
 ADV 3 (0x00b6 -> 0x00b9) 0c ff e7 
 P    8 | live 42
-P    4 | live 3
 ADV 5 (0x009d -> 0x00a2) 01 00 00 00 2a 
+P    4 | live 3
 ADV 5 (0x00b9 -> 0x00be) 01 00 00 00 03 
 P    6 | zjmp 0 OK
 P    5 | zjmp 0 OK
@@ -152,20 +148,21 @@ P    3 | zjmp 0 OK
 P    1 | zjmp 0 OK
 P    8 | sti r4 -155 1
        | -> store to -155 + 1 = -154 (with pc and mod 8)
+ADV 7 (0x00a2 -> 0x00a9) 0b 68 04 ff 65 00 01 
 P    6 | zjmp 0 OK
 P    5 | zjmp 0 OK
 P    3 | zjmp 0 OK
 P    1 | zjmp 0 OK
-ADV 7 (0x00a2 -> 0x00a9) 0b 68 04 ff 65 00 01 
 P    8 | add r4 r12 r4
 ADV 5 (0x00a9 -> 0x00ae) 04 54 04 0c 04 
 P    8 | sub r10 r11 r10
+ADV 5 (0x00ae -> 0x00b3) 05 54 0a 0b 0a 
 P    6 | zjmp 0 OK
 P    5 | zjmp 0 OK
 P    3 | zjmp 0 OK
 P    1 | zjmp 0 OK
-ADV 5 (0x00ae -> 0x00b3) 05 54 0a 0b 0a 
 P    8 | zjmp -50 FAILED
+ADV 3 (0x00b3 -> 0x00b6) 09 ff ce 
 P    6 | zjmp 0 OK
 P    5 | zjmp 0 OK
 P    3 | zjmp 0 OK

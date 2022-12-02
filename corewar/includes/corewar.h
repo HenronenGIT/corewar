@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/01 16:28:11 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:38:48 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_data
 	int			last_alive_champ;
 	int			num_live_statements;
 	int			new_cursor;
+	//int			verbose;
 	struct s_process	*head;
 	struct s_process	*parent;
 

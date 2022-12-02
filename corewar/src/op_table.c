@@ -6,12 +6,28 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:42:58 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/02 13:40:51 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:07:51 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include "../includes/op_table.h"
+
+static void print_verbose16(t_process *cur_process, t_data *data)
+{
+	int	idx;
+	int	i;
+
+	idx = cur_process->cursor;
+	i = 0;
+	ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", cur_process->byte_jump_size, idx, idx + cur_process->byte_jump_size);
+	while (i < cur_process->byte_jump_size)
+	{
+		ft_printf("%.2x ", (uint8_t)data->arena[idx + i]);
+		i++;
+	}
+	ft_printf("\n");
+}
 
 void	op_live(t_process *cur_process, t_data *data)
 {
@@ -28,6 +44,7 @@ void	op_live(t_process *cur_process, t_data *data)
 		ft_printf("A process shows that player %d (%s) is alive\n", player, data->champions[player - 1]->name);
 	//TESTING
 	ft_printf("P%5d | live %d\n", cur_process->id, data->last_alive_champ);
+	print_verbose16(cur_process, data);
 
 }
 
@@ -57,7 +74,8 @@ void	op_ld(t_process *cur_process, t_data *data)
 		}
 	}
 	ft_printf("P%5d | ld %d r%d\n", cur_process->id, types.val_arg[0], types.val_arg[1]);
-
+	print_verbose16(cur_process, data);
+	
 }
 
 void	op_st(t_process *cur_process, t_data *data)
@@ -106,6 +124,8 @@ void	op_add(t_process *cur_process, t_data *data)
 				cur_process->carry = true;
 		}
 		ft_printf("P%5d | add r%d r%d r%d\n", cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2]);
+		print_verbose16(cur_process, data);
+		
 	}
 }
 
@@ -135,6 +155,8 @@ void	op_sub(t_process *cur_process, t_data *data)
 			else
 				cur_process->carry = true;
 			ft_printf("P%5d | sub r%d r%d r%d\n", cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2]);
+			print_verbose16(cur_process, data);
+			
 		}
 		
 	}
@@ -171,6 +193,8 @@ void	op_and(t_process *cur_process, t_data *data)
 			//ft_memcpy(&cur_process->registeries[types.val_arg[2] - 1], &val, 4);
 			//testinf ONLY
 			ft_printf("P%5d | add %d %d r%d\n", cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2]);
+			print_verbose16(cur_process, data);
+			
 		}
 	}
 
@@ -206,6 +230,8 @@ void	op_or(t_process *cur_process, t_data *data)
 			//ft_memcpy(&cur_process->registeries[types.val_arg[2] - 1], &val, 4);
 			//testinf ONLY
 			ft_printf("executed 'or' -wrote %d to regristry %d\n", val, types.val_arg[2]);
+			print_verbose16(cur_process, data);
+			
 
 		}
 	}
@@ -241,6 +267,8 @@ void	op_xor(t_process *cur_process, t_data *data)
 			//ft_memcpy(&cur_process->registeries[types.val_arg[2] - 1], &val, 4);
 			//testinf ONLY
 			ft_printf("executed 'xor' -wrote %d to regristry %d\n", val, types.val_arg[2]);
+			print_verbose16(cur_process, data);
+			
 
 		}
 	}
@@ -262,7 +290,12 @@ void	op_zjmp(t_process *cur_process, t_data *data)
 	if (cur_process->carry)
 		ft_printf("P%5d | zjmp %d OK\n", cur_process->id, val);
 	else
+	{
 		ft_printf("P%5d | zjmp %d FAILED\n", cur_process->id, val);
+		print_verbose16(cur_process, data);
+		
+	}
+		
 	
 	
 }
@@ -298,6 +331,8 @@ void	op_ldi(t_process *cur_process, t_data *data)
 			ft_printf("P%5d | ldi %d %d r%d\n       | -> load from %d + %d = %d (with pc and mod %d)\n", \
 			cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2], \
 			types.val_arg[0], types.val_arg[1], types.val_arg[0] + types.val_arg[1], idx);
+			print_verbose16(cur_process, data);
+			
 		}
 		
 	}
@@ -332,6 +367,8 @@ void	op_sti(t_process *cur_process, t_data *data)
 			ft_printf("P%5d | sti r%d %d %d\n       | -> store to %d + %d = %d (with pc and mod %d)\n", \
 			cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2], \
 			types.val_arg[1], types.val_arg[2], types.val_arg[1] + types.val_arg[2], idx);
+			print_verbose16(cur_process, data);
+			
 			//tester
 			//ft_printf("     ->wrote %d\n", cur_process->registeries[types.val_arg[0] - 1]);
 		}
@@ -351,6 +388,8 @@ void	op_fork(t_process *cur_process, t_data *data)
 	add_process(data, &data->head, ++data->num_processes);
 	//TESTING
 	ft_printf("P%5d | fork %d (%d)\n", cur_process->id, idx, data->new_cursor);
+	print_verbose16(cur_process, data);
+	
 }
 
 void	op_lld(t_process *cur_process, t_data *data)
