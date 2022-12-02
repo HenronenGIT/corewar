@@ -116,7 +116,7 @@ void validate_instruction_syntax(t_input *statement)
 	result = 0;
 	op_code = statement->op_code;
 	if ((statement->arg_count - statement->commas) != 1)
-		error(SYNTAX_ERROR);
+		error(MISSING_COMMA_ERR);
 	while (i < 3)
 	{
 		if (g_table[op_code - 1].params_type[i] && !statement->arg_type[i])

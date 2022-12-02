@@ -35,8 +35,9 @@
 # define LEXICAL_ERROR -8
 # define NAME_COUNT_ERR -9
 # define COMMENT_COUNT_ERR -10
-# define SYNTAX_ERROR -11 //TEMP ERROR
+# define MISSING_COMMA_ERR -11 //TEMP ERROR
 
+# define SYNTAX_ERROR -999 //TEMP ERROR
 
 # define TEMP_ERR -999 //! TEMP
 
