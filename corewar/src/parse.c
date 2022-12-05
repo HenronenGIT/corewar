@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/05 15:53:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:10:17 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,10 @@ void	parse(int ac, char **av, t_data *data)
 	reset_ids(data);
 	data->last_alive_champ = data->champions_num;
 	//test id-s
-	for (int i = 0; i < data->champions_num; i++)
-	{
-		printf("id %d name %s\n", data->champions[i]->id, data->champions[i]->name);
-	}
+	//for (int i = 0; i < data->champions_num; i++)
+	//{
+	//	printf("id %d name %s\n", data->champions[i]->id, data->champions[i]->name);
+	//}
 }
 
 	// while (list)
