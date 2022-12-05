@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/19 17:34:12 by akilk            ###   ########.fr       */
+/*   Updated: 2022/12/05 13:27:20 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ void	parse(int ac, char **av, t_data *data)
 			champion = init_champion();
 			parse_n(&ac, &av, data, champion);
 		}
+		else if (!ft_strcmp(*av, "-v"))
+			parse_verbosity(&ac, &av, data);
 		else
 			error(NULL, "Error in parse()", 1);
 	}

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/02 15:38:48 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/05 13:29:21 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_data
 	int			last_alive_champ;
 	int			num_live_statements;
 	int			new_cursor;
-	//int			verbose;
+	int			verbosity;
 	struct s_process	*head;
 	struct s_process	*parent;
 
@@ -121,9 +121,11 @@ void	parse_champions(char *file, t_champion *champion);
 void	parse_dump(int *ac, char ***av, t_data *data);
 void	reset_ids(t_data *data);
 void	parse_n(int *ac, char ***av, t_data *data, t_champion *champion);
+void	parse_verbosity(int *ac, char ***av, t_data *data);
 
 /* utils */
 bool	is_cor_file(char *file);
+bool	valid_int(char *str);
 int32_t	bytes2int(uint8_t *byte_value, size_t size);
 void	print_data(t_data *data);
 

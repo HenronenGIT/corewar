@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:40:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/11/29 15:59:43 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/05 12:53:05 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@ int circular_mem(int pos, int change)
 		return ((pos + change) % MEM_SIZE);
 }
 
-size_t jump_size(t_types *types, bool arg_type_code)
+size_t jump_size(t_types *types)
 {
 	size_t n;
 	int i;
 
-	n = 1;
-	if (arg_type_code)
-		n++;
+	n = 2;
 	i = 0;
 	while (i < types->num_args)
 		n += types->size_arg[i++];
@@ -46,4 +44,32 @@ bool check_null(t_types *types)
 			return (true);
 	}
 	return (false);
+}
+
+void write_arena(int8_t *arena, int32_t *reg)
+{
+	int i;
+	int8_t *p;
+
+	p = (int8_t *)reg;
+	arena += 3;
+	i = 0;
+	while (i++ < 4)
+		*arena-- = *p++;
+}
+
+void print_byte_jumps(t_process *cur_process, t_data *data)
+{
+	int	idx;
+	int	i;
+
+	idx = cur_process->cursor;
+	i = 0;
+	ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", cur_process->byte_jump_size, idx, idx + cur_process->byte_jump_size);
+	while (i < cur_process->byte_jump_size)
+	{
+		ft_printf("%.2x ", (uint8_t)data->arena[idx + i]);
+		i++;
+	}
+	ft_printf("\n");
 }

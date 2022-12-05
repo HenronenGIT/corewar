@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:40:16 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/24 12:26:37 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/05 13:24:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@ bool	is_cor_file(char *file)
 		return (true);
 	else
 		return (false);
+}
+
+bool	valid_int(char *str)
+{
+	int	i;
+	double	num;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	num = ft_atol(str);
+	if (num < 0 || num > INT_MAX)
+		return (false);
+	return (true);
 }
 
 /*

@@ -1,1 +1,0 @@
-Usage: ./corewar [-dump <num>] [-n <num>] <champion.cor> <...>
