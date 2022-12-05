@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/04 11:07:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/05 15:33:52 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,25 @@ int	error(char **str, char *msg, int usage)
 		ft_strdel(str);
 	ft_putendl_fd(msg, 2);
 	if (usage)
-		ft_printf("Usage: ./corewar [-dump <num>] [-n <num>] <champion.cor> <...>\n");
+	{
+		ft_printf("###########################################################################\n");
+		ft_printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>CORE WAR<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
+		ft_printf("###########################################################################\n");
+		ft_printf("░░░░░░░░░░░░░░░░░░  ░░░░░░░░░░░░░░░░░  ░░░░░░░░░░░░░░░░░  ░░░░░░░░░░░░░░░░░\n");
+		ft_printf("░░░░░▄▄████▄▄░░░░░  ░░░░░▀▄░░░▄▀░░░░░  ░░░▄░▀▄░░░▄▀░▄░░░  ░░░░▄▄████▄▄░░░░░\n");
+		ft_printf("░░░▄██████████▄░░░  ░░░░▄█▀███▀█▄░░░░  ░░░█▄███████▄█░░░  ░░░██████████░░░░\n");
+		ft_printf("░▄██▄██▄██▄██▄██▄░  ░░░█▀███████▀█░░░  ░░░███▄███▄███░░░  ░░░██▄▄██▄▄██░░░░\n");
+		ft_printf("░░░▀█▀░░▀▀░░▀█▀░░░  ░░░█░█▀▀▀▀▀█░█░░░  ░░░▀█████████▀░░░  ░░░░▄▀▄▀▀▄▀▄░░░░░\n");
+		ft_printf("░░░░░░░░░░░░░░░░░░  ░░░░░░▀▀░▀▀░░░░░░  ░░░░▄▀░░░░░▀▄░░░░  ░░░▀░░░░░░░░▀░░░░\n");
+		ft_printf("░░░░░░░░░░░░░░░░░░  ░░░░░░░░░░░░░░░░░  ░░░░░░░░░░░░░░░░░  ░░░░░░░░░░░░░░░░░\n");
+		ft_printf("Usage: ./corewar [-dump <num>] [-n <num>] [-v <num>] <champion.cor> <...>\n");
+		ft_printf("#### OUTPUT MODE ##########################################################\n");
+		ft_printf("\t-dump <num>\t: Dumps memory after <num> cycles and exits\n");
+		ft_printf("\t-v <num>\t: Verbosity levels, can be added together to enable several\n");
+		ft_printf("\t\t\t - 1 : Show operations\n");
+		ft_printf("\t\t\t - 2 : Show cursor movements\n");
+		ft_printf("\t\t\t - 4 : Show cycles\n");
+	}
 	exit (1);
 }
 
@@ -64,15 +82,12 @@ int	main(int ac, char **av)
 		init_data(&data);
 		parse(ac, av, &data);
 		load_arena(&data);
-		//print_arena(data.arena);
-		//parse_dump(&ac, &av, &data);
 		// to add: print_introduction(players, id)
 		create_processes(&data);
 		play_game(&data);
 	}
 	else
-	//make exit type function
-		error(NULL, "Bad input", 1);
+		error(NULL, "Too few arguments", 1);
 
 	//free processes
 	//free champions

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 12:48:22 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/05 12:53:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/05 15:33:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,7 @@ size_t	jump_size(t_types *types);
 bool	check_null(t_types *types);
 void	write_arena(int8_t *arena, int32_t *reg);
 void	print_byte_jumps(t_process *cur_process, t_data *data);
+/*op_functions*/
+
+
 #endif
