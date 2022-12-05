@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:43:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/02 15:40:01 by akilk            ###   ########.fr       */
+/*   Updated: 2022/12/05 16:04:48 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ void	init_data(t_data *data)
 	data->dump_cycle = -1;
 	data->num_processes = 0;
 	data->last_alive_champ = 0;
+	data->verbosity = 0;
 	data->head = NULL;
+
 }
