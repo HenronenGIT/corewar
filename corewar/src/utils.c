@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:40:16 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/05 15:52:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:22:37 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ bool	valid_int(char *str)
 +----------+---------+
 */
 
+//big endian
 int32_t	bytes2int(uint8_t *byte_value, size_t size)
 {
 	int		signbit;
