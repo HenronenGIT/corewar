@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:47:37 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/06 17:11:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/07 17:41:30 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,15 @@ void	check(t_data *data, t_process *head)
 {
 	data->num_checks_performed++;
 	remove_died(data, head);
+	ft_printf("num_checks_performed: %d num_live_statements: %d\n", data->num_checks_performed, data->num_live_statements);
 	if (data->num_checks_performed == MAX_CHECKS || data->num_live_statements >= NBR_LIVE)
 	{
 		data->cycles_to_die -= CYCLE_DELTA;
+		ft_printf("CYCLES to DIE: %d\n", data->cycles_to_die);
 		data->num_checks_performed = 0;
 	}
-	reset_live_statements(data);
+	//reset_live_statements(data);
 	data->cycles_after_check = 0;
+
+
 }

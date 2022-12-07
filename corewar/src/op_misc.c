@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_misc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/06 17:11:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/07 17:39:02 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ void	op_live(t_process *cur_process, t_data *data)
 {
 	//int player;
 
-	cur_process->byte_jump_size = 5; //size of T_DIR + 1 
+	cur_process->byte_jump_size = 5; //size of T_DIR + 1
 	//count process as alive??
 	cur_process->last_live = data->cycles_total;
 	//count arg as last_alive_champ. Later check if this is a valid champ?
 	data->last_alive_champ = bytes2int((uint8_t *)&data->arena[cur_process->cursor + 1], 4);
+	data->num_live_statements++;
 	//are champ id's always negative??
 	//player = data->last_alive_champ * -1;
 	//if (player <= data->champions_num && player > 0)
