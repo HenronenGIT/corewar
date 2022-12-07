@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:40:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/05 15:40:45 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:11:15 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,7 @@ void	print_byte_jumps(t_process *cur_process, t_data *data)
 		ft_printf("%.2x ", (uint8_t)data->arena[idx + i]);
 		i++;
 	}
+	//tester
+	//ft_printf(" | P %d ", cur_process->id);
 	ft_printf("\n");
 }

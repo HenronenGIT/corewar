@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:48 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/05 15:45:59 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:11:13 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	op_ld(t_process *cur_process, t_data *data)
 		{
 			cur_process->registeries[types.val_arg[1] - 1] = types.val_arg[0];
 			update_carry(cur_process, types.val_arg[0]);
+			if (data->verbosity & 0x01)
+				ft_printf("P%5d | ld %d r%d\n", cur_process->id, types.val_arg[0], types.val_arg[1]);
 		}
 	}
-	if (data->verbosity & 0x01)
-		ft_printf("P%5d | ld %d r%d\n", cur_process->id, types.val_arg[0], types.val_arg[1]);
 	if (data->verbosity & 0x02)
 		print_byte_jumps(cur_process, data);
 }
@@ -61,10 +61,11 @@ void	op_ldi(t_process *cur_process, t_data *data)
 				ft_printf("P%5d | ldi %d %d r%d\n       | -> load from %d + %d = %d (with pc and mod %d)\n", \
 				cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2], \
 				types.val_arg[0], types.val_arg[1], types.val_arg[0] + types.val_arg[1], idx);
-			if (data->verbosity & 0x02)
-				print_byte_jumps(cur_process, data);
+			
 		}
 	}
+	if (data->verbosity & 0x02)
+		print_byte_jumps(cur_process, data);
 }
 
 void	op_lld(t_process *cur_process, t_data *data)
