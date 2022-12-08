@@ -1,6 +1,7 @@
 import os
 import pathlib
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -14,46 +15,68 @@ class bcolors:
 
 
 def get_path():
-	current_dir = os.path.abspath(os.getcwd())
-	current_dir += '/'
-	return current_dir
+    current_dir = os.path.abspath(os.getcwd())
+    current_dir += '/'
+    return current_dir
+
+
+def get_files(path):
+    list = []
+    list = os.listdir(path)
+    return list
+
+
+def print_failed_files(failed_error_files, failed_valid_files):
+    print(bcolors.WARNING + "FAILED ERROR_FILES:" + bcolors.ENDC)
+    for file in failed_error_files:
+        print(file)
+    print(bcolors.WARNING + "FAILED VALID_FILES:" + bcolors.ENDC)
+    for file in failed_valid_files:
+        print(file)
+
+
+def run_error_files(program, path_to_files, file_array):
+    failed_files = []
+    for file in file_array:
+        exit_status = os.system(program + " " + path_to_files + file)
+        if exit_status == 0:
+            failed_files.append(file)
+    return failed_files
+
+def run_valid_files(program, path_to_files, file_array):
+    failed_files = []
+    for file in file_array:
+        exit_status = os.system(program + " " + path_to_files + file)
+        if exit_status != 0:
+            failed_files.append(file)
+    return failed_files
+
 
 def main():
-	work_dir = get_path()
+    work_dir = get_path()
 
-	# Path to asm executable
-	asm = work_dir + "asm/asm"
+    # Path to asm executable
+    asm = work_dir + "asm/asm"
 
-	# Path to test folder
-	error_files = work_dir + "eval_tests/tests/error_files/"
-	valid_files = work_dir + "eval_tests/tests/valid_files/"
+    # Path to test files
+    path_error_files = work_dir + "eval_tests/tests/error_files/"
+    path_valid_files = work_dir + "eval_tests/tests/valid_files/"
 
-	file_list_1 = os.listdir(error_files)
-	file_list_2 = os.listdir(valid_files)
-	failed_files_1 = []
-	failed_files_2 = []
+    error_files_arr = get_files(path_error_files)
+    valid_files_arr = get_files(path_valid_files)
 
-	# Test error_files and if return value is wrong, save that file.
-	for file in file_list_1:
-		exit_status = os.system(asm + " " + error_files + file)
-		if exit_status == 0:
-			failed_files_1.append(file)
+    error_files_arr = []
+    valid_files_arr = []
+    failed_error_files = []
+    failed_valid_files = []
 
-	# Test valid_files and if return value is wrong, save that file.
-	for file in file_list_2:
-		exit_status = os.system(asm + " " + valid_files + file)
-		# print(f"FILE: {file}")
-		# print(f"EXII STATUS: {exit_status}")
-		if exit_status != 0:
-			failed_files_2.append(file)
+    error_files_arr = get_files(path_error_files)
+    valid_files_arr = get_files(path_valid_files)
 
-	print(bcolors.WARNING + "FAILED ERROR_FILES:" + bcolors.ENDC)
-	for file in failed_files_1:
-		print(file)
-	print(bcolors.WARNING + "FAILED VALID_FILES:" + bcolors.ENDC)
-	for file in failed_files_2:
-		print(file)
+    failed_error_files = run_error_files(asm, path_error_files, error_files_arr)
+    failed_valid_files = run_valid_files(asm, path_valid_files, valid_files_arr)
 
+    print_failed_files(failed_error_files, failed_valid_files)
 
 if __name__ == "__main__":
-	main()
+    main()
