@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/08 15:59:33 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:54:26 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	op_live(t_process *cur_process, t_data *data)
 	//count process as alive??
 	cur_process->last_live = data->cycles_total;
 	//count arg as last_alive_champ. Later check if this is a valid champ?
-	data->last_alive_champ = bytes2int((uint8_t *)&data->arena[cur_process->cursor + 1], 4);
+	data->last_alive_champ = bytes2int((uint8_t *)data->arena, cur_process->cursor + 1, 4);
 	data->num_live_statements++;
 	//are champ id's always negative??
 	//player = data->last_alive_champ * -1;
@@ -38,7 +38,7 @@ void	op_zjmp(t_process *cur_process, t_data *data)
 {
 	int	val;
 
-	val = bytes2int((uint8_t *)&data->arena[cur_process->cursor + 1], 2);
+	val = bytes2int((uint8_t *)data->arena, cur_process->cursor + 1, 2);
 	if (cur_process->carry)
 	{
 		cur_process->cursor = circular_mem(cur_process->cursor, val);
@@ -72,7 +72,7 @@ void	op_aff(t_process *cur_process, t_data *data)
 	//hardcoded in this case
 	cur_process->byte_jump_size = 6;
 	if (types.type_arg[0] == T_REG)
-		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		if (get_arg_values(data->arena, cur_process->cursor + 2, &types, cur_process))
 			ft_printf("AFF: %c\n", (char)cur_process->registeries[types.val_arg[0] - 1]);
 
 }

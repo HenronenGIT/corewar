@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:38 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/08 13:08:54 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:52:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	op_and(t_process *cur_process, t_data *data)
 	cur_process->byte_jump_size = jump_size(&types);
 	if (types.type_arg[2] == T_REG && !check_null(&types))
 	{
-		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		if (get_arg_values(data->arena, cur_process->cursor + 2, &types, cur_process))
 		{
 			if (types.type_arg[0] == T_REG)
 				types.val_arg[0] = cur_process->registeries[types.val_arg[0] - 1];
@@ -52,7 +52,7 @@ void	op_or(t_process *cur_process, t_data *data)
 	cur_process->byte_jump_size = jump_size(&types);
 	if (types.type_arg[2] == T_REG && !check_null(&types))
 	{
-		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		if (get_arg_values(data->arena, cur_process->cursor + 2, &types, cur_process))
 		{
 			if (types.type_arg[0] == T_REG)
 				types.val_arg[0] = cur_process->registeries[types.val_arg[0] - 1];
@@ -82,7 +82,7 @@ void	op_xor(t_process *cur_process, t_data *data)
 	{
 		//int preval0 = types.val_arg[0];
 		//int preval1 = types.val_arg[1];
-		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		if (get_arg_values(data->arena, cur_process->cursor + 2, &types, cur_process))
 		{
 			if (types.type_arg[0] == T_REG)
 				types.val_arg[0] = cur_process->registeries[types.val_arg[0] - 1];

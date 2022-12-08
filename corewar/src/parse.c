@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/05 16:10:17 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:09:34 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int32_t parse_bytes(int fd)
 		error(NULL, "Error reading file", 0);
 	if (ret < 4)
 		error(NULL, "Invalid file", 0);
-	return (bytes2int(byte_value, ret));
+	return (bytes2int(byte_value, 0, ret));
 }
 
 /* Parsing champions name and comment */

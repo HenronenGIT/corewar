@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:40:16 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/08 15:05:23 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:27:05 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	valid_int(char *str)
 +----------+---------+
 */
 
-//big endian
+/*
 int32_t	bytes2int(uint8_t *byte_value, size_t size)
 {
 	int		signbit;
@@ -84,7 +84,34 @@ int32_t	bytes2int(uint8_t *byte_value, size_t size)
 		decimal = ~(decimal);
 	return (decimal);
 }
+*/
 
+int32_t	bytes2int(uint8_t *byte_value, int start,  size_t size)
+{
+	int		signbit;
+	int		n;
+	int32_t	decimal;
+	int		idx;
+
+	decimal = 0;
+	signbit = 0;
+	if (byte_value[start] & 0x80)
+		signbit = 1;
+	n = 0;
+	while (size)
+	{
+		idx = (start + (size - 1)) % MEM_SIZE;
+		if (signbit)
+			decimal += ((byte_value[idx] ^ 0xFF) << (n * 8));
+		else
+			decimal += byte_value[idx] << (n * 8);
+		n++;
+		size--;
+	}
+	if (signbit)
+		decimal = ~(decimal);
+	return (decimal);
+}
 void	print_data(t_data *data)
 {
 	int	i;

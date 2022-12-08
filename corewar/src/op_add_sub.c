@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/08 13:32:48 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:51:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	op_add(t_process *cur_process, t_data *data)
 	cur_process->byte_jump_size = jump_size(&types);
 	if (types.type_arg[0] == T_REG && types.type_arg[1] == T_REG && types.type_arg[2] == T_REG)
 	{
-		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		if (get_arg_values(data->arena,cur_process->cursor + 2, &types, cur_process))
 		{
 			sum = cur_process->registeries[types.val_arg[0] - 1] + cur_process->registeries[types.val_arg[1] - 1];
 			cur_process->registeries[types.val_arg[2] - 1] = sum;
@@ -48,7 +48,7 @@ void	op_sub(t_process *cur_process, t_data *data)
 	cur_process->byte_jump_size = jump_size(&types);
 	if (types.type_arg[0] == T_REG && types.type_arg[1] == T_REG && types.type_arg[2] == T_REG)
 	{
-		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
+		if (get_arg_values(data->arena, cur_process->cursor + 2, &types, cur_process))
 		{
 			diff = cur_process->registeries[types.val_arg[0] - 1] - cur_process->registeries[types.val_arg[1] - 1];
 			cur_process->registeries[types.val_arg[2] - 1] = diff;

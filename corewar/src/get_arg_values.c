@@ -6,26 +6,26 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:02:39 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/08 15:32:50 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:49:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include "../includes/op_table.h"
 
-bool	get_arg_values(int8_t *arena, t_types *types, t_process *cur_process)
+bool	get_arg_values(int8_t *arena, size_t start, t_types *types, t_process *cur_process)
 {
 	int		i;
 	int		idx;
 	int32_t	val;
-	size_t	start;
+	//size_t	start;
 
-	start = 0;
+	//start = 0;
 	i = 0;
 	while (i < types->num_args)
 	{
 		//checked that reading 2 bytes returns correct val
-		val = bytes2int((uint8_t*)&arena[start], types->size_arg[i]);
+		val = bytes2int((uint8_t*)arena, start, types->size_arg[i]);
 		
 		if (types->type_arg[i] == T_REG)
 		{
@@ -48,13 +48,13 @@ bool	get_arg_values(int8_t *arena, t_types *types, t_process *cur_process)
 				if (cur_process->statement_code != 12)
 				{
 					idx = circular_mem(cur_process->cursor, (val % IDX_MOD));
-					types->val_arg[i] = bytes2int((uint8_t *)&arena[idx], 4);
+					types->val_arg[i] = bytes2int((uint8_t *)arena, idx, 4);
 				}
 				else //is lld
 				{
 					idx = circular_mem(cur_process->cursor, val);
 					//read 2 bytes bug make flag to activate
-					types->val_arg[i] = bytes2int((uint8_t *)&arena[idx], 2);
+					types->val_arg[i] = bytes2int((uint8_t *)arena, idx, 2);
 				}
 			}
 			else

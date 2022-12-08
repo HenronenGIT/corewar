@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:40:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/08 15:57:21 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:53:31 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,23 @@ bool	check_null(t_types *types)
 }
 
 //fix with IDX_MOD
-void	write_arena(int8_t *arena, int32_t *reg)
+void	write_arena(int8_t *arena, int idx, int32_t *reg)
 {
 	int		i;
 	int8_t	*p;
 
 	p = (int8_t *)reg;
-	arena += 3;
+	idx = (idx + 3) % MEM_SIZE;
 	i = 0;
 	while (i++ < 4)
-		*arena-- = *p++;
+	{
+		arena[idx] = *p;
+		idx = (idx - 1);
+		if (idx < 0)
+			idx = MEM_SIZE + idx;
+		p++;
+	}
+		
 }
 
 void	update_carry(t_process *cur_process, int32_t val)
@@ -78,7 +85,7 @@ void	print_byte_jumps(t_process *cur_process, t_data *data)
 	ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", cur_process->byte_jump_size, idx, idx + cur_process->byte_jump_size);
 	while (i < cur_process->byte_jump_size)
 	{
-		ft_printf("%.2x ", (uint8_t)data->arena[(idx + i)]);
+		ft_printf("%.2x ", (uint8_t)data->arena[(idx + i) % MEM_SIZE]);
 		i++;
 	}
 	//tester

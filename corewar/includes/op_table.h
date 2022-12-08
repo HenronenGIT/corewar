@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 12:48:22 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/05 15:55:23 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:52:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,13 @@ static const t_op g_dispatch[NUM_OPS] = {
 };
 
 void	get_types(int8_t byte, t_types *types);
-bool	get_arg_values(int8_t *arena, t_types *types, t_process *cur_process);
+//bool	get_arg_values(int8_t *arena, t_types *types, t_process *cur_process);
+bool	get_arg_values(int8_t *arena, size_t start, t_types *types, t_process *cur_process);
 /* op_util */
 int		circular_mem(int pos, int change);
 size_t	jump_size(t_types *types);
 bool	check_null(t_types *types);
-void	write_arena(int8_t *arena, int32_t *reg);
+void	write_arena(int8_t *arena, int idx, int32_t *reg);
 void	print_byte_jumps(t_process *cur_process, t_data *data);
 void	update_carry(t_process *cur_process, int32_t val);
 #endif
