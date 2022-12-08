@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:47:37 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/08 14:59:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:59:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	check(t_data *data, t_process **head)
 {
 	data->num_checks_performed++;
 	remove_died(data, head);
+	ft_printf("num_checks_performed: %d num_live_statements: %d\n", data->num_checks_performed, data->num_live_statements);
 	if (data->num_checks_performed == MAX_CHECKS || data->num_live_statements >= NBR_LIVE)
 	{
 		data->cycles_to_die -= CYCLE_DELTA;
@@ -80,6 +81,8 @@ void	check(t_data *data, t_process **head)
 			ft_printf("Cycle to die is now %d\n", data->cycles_to_die);
 		data->num_checks_performed = 0;
 	}
-	reset_live_statements(data);
+	//reset_live_statements(data);
 	data->cycles_after_check = 0;
+
+
 }

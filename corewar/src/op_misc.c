@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/08 15:02:25 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:59:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	op_live(t_process *cur_process, t_data *data)
 {
 	//int player;
 
-	cur_process->byte_jump_size = 5; //size of T_DIR + 1 
+	cur_process->byte_jump_size = 5; //size of T_DIR + 1
 	//count process as alive??
 	cur_process->last_live = data->cycles_total;
 	//count arg as last_alive_champ. Later check if this is a valid champ?
