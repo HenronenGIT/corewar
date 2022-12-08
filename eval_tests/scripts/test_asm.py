@@ -36,6 +36,8 @@ def main():
 	# Test valid_files and if return value is wrong, save that file.
 	for file in file_list_2:
 		exit_status = os.system(asm + " " + valid_files + file)
+		# print(f"FILE: {file}")
+		# print(f"EXII STATUS: {exit_status}")
 		if exit_status != 0:
 			failed_files_2.append(file)
 

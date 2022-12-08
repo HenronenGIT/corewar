@@ -15,7 +15,9 @@
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/two_names.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/name_too_long.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/extra_quote.s"], // Arguments for the executable
-            "args": ["/Users/hmaronen/workspace/github/corewar/all_instructions.s"], // Arguments for the executable
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/42.s"], // Arguments for the executable
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/Backward_fixed.s"], // Arguments for the executable
+            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/42.s"], // Arguments for the executable
             // "args": ["test.s"], // Arguments for the executable
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

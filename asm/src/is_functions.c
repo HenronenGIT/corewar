@@ -14,11 +14,19 @@
 
 static int contains_invalid_characters(t_data *s_data, char *lexeme)
 {
-	while (*lexeme != ':')
+	if (*lexeme == LABEL_CHAR)
+	{
+		lexeme += 1;
+		s_data->s_error_log->column += 1;
+	}
+	if (*lexeme == '\0')
+		lexical_error(s_data);
+	while (*lexeme != ':' && *lexeme != '\0')
 	{
 		if (ft_strchr(LABEL_CHARS, *lexeme) == NULL)
 			return (-1);
 		lexeme += 1;
+		s_data->s_error_log->column += 1;
 	}
 	return (0);
 }
@@ -30,6 +38,8 @@ bool is_label(t_data *s_data, char *lexeme)
 {
 	char *found_colon;
 
+	if (lexeme[0] == LABEL_CHAR)
+		return (false);
 	found_colon = NULL;
 	found_colon = ft_strchr(lexeme, LABEL_CHAR);
 	if (found_colon == NULL)
@@ -112,6 +122,8 @@ bool is_direct(t_data *s_data, char *lexeme)
 		return (false);
 	if (lexeme[1] == '\0')
 		return (false);
+	if (lexeme[1] == '-')
+		i += 1;
 	while (lexeme[i] != '\0')
 	{
 		if (!ft_isdigit(lexeme[i]))
@@ -127,6 +139,8 @@ bool is_indirect(t_data *s_data, char *lexeme)
 		return true;
 	if (lexeme[0] != LABEL_CHAR)
 		return (false);
+	// s_data->s_error_log->column += 1;
+	// if (contains_invalid_characters(s_data, &lexeme[1]))
 	if (contains_invalid_characters(s_data, lexeme))
 		return (false);
 	return (true);
