@@ -1,5 +1,5 @@
-import subprocess
 import os
+import pathlib
 
 class bcolors:
     HEADER = '\033[95m'
@@ -13,14 +13,20 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
+def get_path():
+	current_dir = os.path.abspath(os.getcwd())
+	current_dir += '/'
+	return current_dir
+
 def main():
+	work_dir = get_path()
+
 	# Path to asm executable
-	asm = "/Users/hmaronen/workspace/github/corewar/asm/asm"
-	# Path to Corewar folder
-	corewar_folder = "/Users/hmaronen/workspace/github/corewar/"
+	asm = work_dir + "asm/asm"
+
 	# Path to test folder
-	error_files = corewar_folder + "eval_tests/tests/error_files/"
-	valid_files = corewar_folder + "eval_tests/tests/valid_files/"
+	error_files = work_dir + "eval_tests/tests/error_files/"
+	valid_files = work_dir + "eval_tests/tests/valid_files/"
 
 	file_list_1 = os.listdir(error_files)
 	file_list_2 = os.listdir(valid_files)
