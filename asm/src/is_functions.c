@@ -110,6 +110,8 @@ bool is_direct(t_data *s_data, char *lexeme)
 		return (false);
 	if (lexeme[1] == LABEL_CHAR)
 		return (false);
+	// if (lexeme[1] == '-')
+	// i += 1;
 	while (lexeme[i] != '\0')
 	{
 		if (!ft_isdigit(lexeme[i]))
