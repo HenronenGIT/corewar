@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:47:37 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/06 17:11:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:59:56 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,25 @@ static bool	is_died(t_data *data, t_process *process)
 
 /* go over the list of processes. If found died, remove it
 		and put list together  */
-static	void	remove_died(t_data *data, t_process *head)
+static	void	remove_died(t_data *data, t_process **head)
 {
 	t_process	*prev;
 	t_process	*curr;
 	t_process	*remove;
 
 	prev = NULL;
-	curr = head;
+	curr = *head;
 	while (curr)
 	{
 		if (is_died(data, curr))
 		{
-			ft_printf("%d is died\n", curr->id);
+			if (data->verbosity & 0x08)
+				ft_printf("Process %d hasn't lived for <> cycles (CTD <num>)\n", curr->id);
 			remove = curr;
 			data->num_processes--;
 			curr = curr->next;
-			if (head == remove)
-				head = curr;
+			if (*head == remove)
+				*head = curr;
 			if (prev)
 				prev->next = curr;
 			ft_memdel((void **)&remove);
@@ -68,13 +69,15 @@ static void	reset_live_statements(t_data *data)
 	data->num_live_statements = 0;
 }
 
-void	check(t_data *data, t_process *head)
+void	check(t_data *data, t_process **head)
 {
 	data->num_checks_performed++;
 	remove_died(data, head);
 	if (data->num_checks_performed == MAX_CHECKS || data->num_live_statements >= NBR_LIVE)
 	{
 		data->cycles_to_die -= CYCLE_DELTA;
+		if (data->verbosity & 0x02)
+			ft_printf("Cycle to die is now %d\n", data->cycles_to_die);
 		data->num_checks_performed = 0;
 	}
 	reset_live_statements(data);

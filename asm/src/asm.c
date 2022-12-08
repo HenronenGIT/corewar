@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:55:51 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ int main(int argc, char *argv[])
 
 	magic = 0x00ea83f3;
 //	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
-	fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
  	if (argc != 2)
 		error(ARG_ERR);
+	//fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
 	fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
 	init_structs(&s_data, &s_header, &s_error_log);
 	init_vectors(&s_data);

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/06 17:11:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:02:25 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ void	op_live(t_process *cur_process, t_data *data)
 	cur_process->last_live = data->cycles_total;
 	//count arg as last_alive_champ. Later check if this is a valid champ?
 	data->last_alive_champ = bytes2int((uint8_t *)&data->arena[cur_process->cursor + 1], 4);
+	data->num_live_statements++;
 	//are champ id's always negative??
 	//player = data->last_alive_champ * -1;
 	//if (player <= data->champions_num && player > 0)
 	//	ft_printf("A process shows that player %d (%s) is alive\n", player, data->champions[player - 1]->name);
-	if (data->verbosity & 0x01)
+	if (data->verbosity & 0x04)
 		ft_printf("P%5d | live %d\n", cur_process->id, data->last_alive_champ);
-	if (data->verbosity & 0x02)
+	if (data->verbosity & 0x10)
 		print_byte_jumps(cur_process, data);
 }
 
@@ -45,14 +46,14 @@ void	op_zjmp(t_process *cur_process, t_data *data)
 	}
 	else
 		cur_process->byte_jump_size = 3; //size t_dir + 1
-	if (data->verbosity & 0x01)
+	if (data->verbosity & 0x04)
 	{
 		if (cur_process->carry)
 			ft_printf("P%5d | zjmp %d OK\n", cur_process->id, val);
 		else
 		{
 			ft_printf("P%5d | zjmp %d FAILED\n", cur_process->id, val);
-			if (data->verbosity & 0x02)
+			if (data->verbosity & 0x10)
 				print_byte_jumps(cur_process, data);
 		}
 	}

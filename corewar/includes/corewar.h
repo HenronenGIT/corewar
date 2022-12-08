@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/05 15:56:17 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:00:14 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_data
 	int			num_live_statements;
 	int			new_cursor;
 	int			verbosity;
+	int			new_process_id;
 	struct s_process	*head;
 	struct s_process	*parent;
 
@@ -135,7 +136,7 @@ void	print_last_alive(t_data *data);
 void	play_game(t_data *data);
 
 /* check */
-void	check(t_data *data, t_process *head);
+void	check(t_data *data, t_process **head);
 
 //testing ONLY
 void print_arena(int8_t *arena);

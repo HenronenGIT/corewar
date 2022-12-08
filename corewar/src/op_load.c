@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:48 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/06 17:11:13 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:13:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	op_ld(t_process *cur_process, t_data *data)
 		{
 			cur_process->registeries[types.val_arg[1] - 1] = types.val_arg[0];
 			update_carry(cur_process, types.val_arg[0]);
-			if (data->verbosity & 0x01)
+			if (data->verbosity & 0x04)
 				ft_printf("P%5d | ld %d r%d\n", cur_process->id, types.val_arg[0], types.val_arg[1]);
 		}
 	}
-	if (data->verbosity & 0x02)
+	if (data->verbosity & 0x10)
 		print_byte_jumps(cur_process, data);
 }
 
@@ -57,14 +57,13 @@ void	op_ldi(t_process *cur_process, t_data *data)
 			change = (types.val_arg[0] + types.val_arg[1]) % IDX_MOD;
 			idx = circular_mem(cur_process->cursor, change);
 			cur_process->registeries[types.val_arg[2] - 1] = bytes2int((uint8_t *)&data->arena[idx], 4);
-			if (data->verbosity & 0x01)
+			if (data->verbosity & 0x04)
 				ft_printf("P%5d | ldi %d %d r%d\n       | -> load from %d + %d = %d (with pc and mod %d)\n", \
 				cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2], \
 				types.val_arg[0], types.val_arg[1], types.val_arg[0] + types.val_arg[1], idx);
-			
 		}
 	}
-	if (data->verbosity & 0x02)
+	if (data->verbosity & 0x10)
 		print_byte_jumps(cur_process, data);
 }
 
@@ -74,7 +73,7 @@ void	op_lld(t_process *cur_process, t_data *data)
 	int32_t	val;
 	int		idx;
 
-	ft_printf("process %d is on 'lld'\n", cur_process->id);
+	
 	types.size_t_dir = 4;
 	types.num_args = 2;
 	get_types(data->arena[cur_process->cursor + 1], &types);
@@ -83,12 +82,15 @@ void	op_lld(t_process *cur_process, t_data *data)
 	{
 		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
 		{
+			ft_printf("process %d is on 'lld'\n", cur_process->id);
 			idx = circular_mem(cur_process->cursor, types.val_arg[0]);
 			val = bytes2int((uint8_t *)&data->arena[idx], 4);
 			cur_process->registeries[types.val_arg[1] - 1] = val;
 			update_carry(cur_process, val);
 		}
 	}
+	if (data->verbosity & 0x10)
+		print_byte_jumps(cur_process, data);
 }
 
 void	op_lldi(t_process *cur_process, t_data *data)
@@ -97,7 +99,7 @@ void	op_lldi(t_process *cur_process, t_data *data)
 	int		change;
 	int		idx;
 
-	ft_printf("process %d is on 'lldi'\n", cur_process->id);
+
 	types.size_t_dir = 2;
 	types.num_args = 3;
 	get_types(data->arena[cur_process->cursor + 1], &types);
@@ -107,6 +109,7 @@ void	op_lldi(t_process *cur_process, t_data *data)
 	{
 		if (get_arg_values(&data->arena[cur_process->cursor + 2], &types, cur_process))
 		{
+			ft_printf("process %d is on 'lldi'\n", cur_process->id);
 			if (types.type_arg[0] == T_REG)
 				types.val_arg[0] = cur_process->registeries[types.val_arg[0] - 1];
 			if (types.type_arg[1] == T_REG)
@@ -117,4 +120,6 @@ void	op_lldi(t_process *cur_process, t_data *data)
 			update_carry(cur_process, cur_process->registeries[types.val_arg[2] - 1]);
 		}
 	}
+	if (data->verbosity & 0x10)
+		print_byte_jumps(cur_process, data);
 }

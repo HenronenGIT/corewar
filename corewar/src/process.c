@@ -65,7 +65,6 @@ void add_process(t_data *data, t_process **head, int i)
 	temp = malloc(sizeof(t_process));
 	if (!temp)
 		error(NULL, "Allocation failed in add_process", 0);
-
 	if (*head == NULL)
 		temp->next = NULL;
 	else
@@ -92,4 +91,5 @@ void create_processes(t_data *data)
 		data->num_processes++;
 		i++;
 	}
+	data->new_process_id = data->num_processes;
 }

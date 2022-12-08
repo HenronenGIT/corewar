@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:38 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/06 17:11:13 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:08:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	op_and(t_process *cur_process, t_data *data)
 			val = (int32_t)(types.val_arg[0] & types.val_arg[1]);
 			update_carry(cur_process, val);
 			cur_process->registeries[types.val_arg[2] - 1] = val;
-			if (data->verbosity & 0x01)
+			if (data->verbosity & 0x04)
 				ft_printf("P%5d | and %d %d r%d\n", cur_process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2]);
 		}
 	}
-	if (data->verbosity & 0x02)
+	if (data->verbosity & 0x10)
 		print_byte_jumps(cur_process, data);
 }
 
@@ -61,11 +61,11 @@ void	op_or(t_process *cur_process, t_data *data)
 			val = (int32_t)(types.val_arg[0] | types.val_arg[1]);
 			update_carry(cur_process, val);
 			cur_process->registeries[types.val_arg[2] - 1] = val;
-			if (data->verbosity & 0x01)
+			if (data->verbosity & 0x04)
 				ft_printf("P%5d | or %d %d r%d\n", cur_process->id,types.val_arg[0], types.val_arg[1], types.val_arg[2]);
 		}
 	}
-	if (data->verbosity & 0x02)
+	if (data->verbosity & 0x10)
 		print_byte_jumps(cur_process, data);
 }
 
@@ -91,10 +91,10 @@ void	op_xor(t_process *cur_process, t_data *data)
 			val = (int32_t)(types.val_arg[0] ^ types.val_arg[1]);
 			update_carry(cur_process, val);
 			cur_process->registeries[types.val_arg[2] - 1] = val;
-			if (data->verbosity & 0x01)
+			if (data->verbosity & 0x04)
 				ft_printf("P%5d | xor %d %d r%d\n", cur_process->id,types.val_arg[0], types.val_arg[1], types.val_arg[2]);
 		}
 	}
-	if (data->verbosity & 0x02)
+	if (data->verbosity & 0x10)
 		print_byte_jumps(cur_process, data);
 }

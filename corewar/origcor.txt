@@ -12,6 +12,7 @@ Usage: ./corewar [-dump <num>] [-n <num>] [-v <num>] <champion.cor> <...>
 #### OUTPUT MODE ##########################################################
 	-dump <num>	: Dumps memory after <num> cycles and exits
 	-v <num>	: Verbosity levels, can be added together to enable several
-			 - 1 : Show operations
-			 - 2 : Show cursor movements
-			 - 4 : Show cycles
+			 - 2 : Show cycles
+			 - 4 : Show operations
+			 - 8 : Show deaths
+			 - 16 : Show cursor movements
