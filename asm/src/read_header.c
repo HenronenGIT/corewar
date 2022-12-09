@@ -95,25 +95,29 @@ When HEADER_CHAR is found, function checks that was the word .name or .comment
 */
 static void	seek_header_char(t_data *s_data, char *line, int fd)
 {
-	size_t right;
+	size_t	i;
 
-	right = 0;
-	while (line[right] != '\0')
+	i = 0;
+	while (line[i] != '\0')
 	{
-		if (line[right] == COMMENT_CHAR)
+		if (ft_is_whitespace(line[i]))
+			i += 1;
+		else if (line[i] == COMMENT_CHAR)
 			return ;
-		if (line[right] == HEADER_CHAR)
+		else if (line[i] == HEADER_CHAR)
 		{
-			if (ft_strncmp(&line[right], NAME_CMD_STRING, NAME_CMD_LEN) == 0)
-				seek_quote(s_data, &line[right], fd, NAME);
-			else if (ft_strncmp(&line[right], COMMENT_CMD_STRING, COMMENT_CMD_LEN) == 0)
-				seek_quote(s_data, &line[right], fd, COMMENT);
+			if (ft_strncmp(&line[i], NAME_CMD_STRING, NAME_CMD_LEN) == 0)
+				seek_quote(s_data, &line[i], fd, NAME);
+			else if (ft_strncmp(&line[i], COMMENT_CMD_STRING, COMMENT_CMD_LEN) == 0)
+				seek_quote(s_data, &line[i], fd, COMMENT);
 			else
 				lexical_error(s_data);
 			return;
 		}
 		else
-			right += 1;
+			lexical_error(s_data);
+		// else
+			// i += 1;
 	}
 }
 
@@ -127,11 +131,11 @@ void	read_header(int fd, t_data *s_data)
 	line = NULL;
 	while (get_next_line(fd, &line))
 	{
-		s_data->s_error_log->line += 1;
 		seek_header_char(s_data, line, fd);
 		if (s_data->s_header->name_saved && s_data->s_header->comment_saved)
 			return;
 		free(line);
+		s_data->s_error_log->line += 1;
 	}
 	if (!s_data->s_header->name_saved || !s_data->s_header->comment_saved)
 		lexical_error(s_data);

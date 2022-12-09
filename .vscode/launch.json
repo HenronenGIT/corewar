@@ -17,7 +17,8 @@
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/extra_quote.s"], // Arguments for the executable
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/42.s"], // Arguments for the executable
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/Backward_fixed.s"], // Arguments for the executable
-            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/42.s"], // Arguments for the executable
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/42.s"], // Arguments for the executable
+            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/junk_before_comment_cmd.s"], // Arguments for the executable
             // "args": ["test.s"], // Arguments for the executable
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
