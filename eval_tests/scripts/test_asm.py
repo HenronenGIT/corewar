@@ -12,8 +12,7 @@
 
 import os
 import subprocess
-import animation
-import time
+import sys
 
 class bcolors:
 	HEADER = '\033[95m'
@@ -25,7 +24,6 @@ class bcolors:
 	ENDC = '\033[0m'
 	BOLD = '\033[1m'
 	UNDERLINE = '\033[4m'
-
 
 # If file is failed, it is saved to this ibject
 class failedFile():
@@ -60,20 +58,6 @@ def print_array(array):
 		print("")
 		i += 1
 
-def print_failed_files(failed_error_files, failed_valid_files):
-	print(f"{bcolors.WARNING}FAILED {bcolors.UNDERLINE}INVALID{bcolors.ENDC} {bcolors.WARNING}FILES:{bcolors.ENDC}")
-	if len(failed_error_files) == 0:
-		print(f"{bcolors.OKGREEN}ALL INVALID FILES PASSED {bcolors.ENDC}")
-	else:
-		print_array(failed_error_files)
-
-	print(f"{bcolors.WARNING}FAILED {bcolors.UNDERLINE}VALID{bcolors.ENDC} {bcolors.WARNING}FILES:{bcolors.ENDC}")
-	if len(failed_valid_files) == 0:
-		print(f"{bcolors.OKGREEN}ALL VALID FILES PASSED {bcolors.ENDC}")
-	else:
-		print_array(failed_valid_files)
-
-
 def run_error_files(program, file_array):
 	
 	failed_files = []
@@ -95,6 +79,31 @@ def run_valid_files(program, file_array):
 			failed_files.append(failedFile(file, output.stdout.decode('utf-8'), output.returncode))
 	return failed_files
 
+def print_failed_files(failed_error_files, failed_valid_files):
+	print(f"{bcolors.WARNING}FAILED {bcolors.UNDERLINE}INVALID{bcolors.ENDC} {bcolors.WARNING}FILES:{bcolors.ENDC}")
+	if len(failed_error_files) == 0:
+		print(f"{bcolors.OKGREEN}ALL INVALID FILES PASSED {bcolors.ENDC}")
+	else:
+		print_array(failed_error_files)
+
+	print(f"{bcolors.WARNING}FAILED {bcolors.UNDERLINE}VALID{bcolors.ENDC} {bcolors.WARNING}FILES:{bcolors.ENDC}")
+	if len(failed_valid_files) == 0:
+		print(f"{bcolors.OKGREEN}ALL VALID FILES PASSED {bcolors.ENDC}")
+	else:
+		print_array(failed_valid_files)
+
+def save_to_file(array, filename):
+	i = 0
+	original_stdout = sys.stdout
+	with open(filename, 'w') as f:
+		sys.stdout = f
+		for obj in array:
+			print(f"[{i}]")
+			print(f"File:{obj.file}")
+			print(f"Output:{obj.output}")
+			print("----------")
+			i += 1
+		sys.stdout = original_stdout # Reset the standard
 
 def main():
 	#Paths
@@ -103,13 +112,17 @@ def main():
 	path_errors = workDir + "eval_tests/tests/error_files/" #<---- Path to error files
 	path_valid = workDir + "eval_tests/tests/valid_files/" #<---- Path to valid files
 
-	error_files_arr = get_files(path_errors)
+	invalid_files_arr = get_files(path_errors)
 	valid_files_arr = get_files(path_valid)
 
-	failed_invalid_files = run_error_files(asm, error_files_arr)
+	failed_invalid_files = run_error_files(asm, invalid_files_arr)
 	failed_valid_files = run_valid_files(asm, valid_files_arr)
 
 	print_failed_files(failed_invalid_files, failed_valid_files)
+
+	save_to_file(failed_invalid_files, "invalid_file_fails.txt")
+	save_to_file(failed_valid_files, "valid_file_fails.txt")
+	print(f"{bcolors.OKBLUE}Failed files saved to:{bcolors.ENDC}\ninvalid_file_fails.txt\nvalid_file_fails.txt")
 
 if __name__ == "__main__":
 	main()
