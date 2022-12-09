@@ -12,6 +12,8 @@
 
 import os
 import subprocess
+import animation
+import time
 
 class bcolors:
 	HEADER = '\033[95m'
@@ -23,6 +25,7 @@ class bcolors:
 	ENDC = '\033[0m'
 	BOLD = '\033[1m'
 	UNDERLINE = '\033[4m'
+
 
 # If file is failed, it is saved to this ibject
 class failedFile():
@@ -72,8 +75,10 @@ def print_failed_files(failed_error_files, failed_valid_files):
 
 
 def run_error_files(program, file_array):
+	
 	failed_files = []
 	output = ""
+	print(f"{bcolors.OKBLUE}Testing invalid files...{bcolors.ENDC}")
 	for file in file_array:
 		output = subprocess.run([program, file], capture_output=True)
 		if output.returncode == 0:
@@ -82,6 +87,8 @@ def run_error_files(program, file_array):
 
 def run_valid_files(program, file_array):
 	failed_files = []
+	print(f"{bcolors.OKBLUE}Testing valid files...{bcolors.ENDC}")
+
 	for file in file_array:
 		output = subprocess.run([program, file], capture_output=True)
 		if output.returncode != 0:
