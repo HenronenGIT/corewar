@@ -47,20 +47,28 @@ def get_files(path):
 		i += 1
 	return list
 
-def print_failed_files(failed_error_files, failed_valid_files):
-	print(bcolors.WARNING + "FAILED ERROR_FILES:" + bcolors.ENDC)
-	for obj in failed_error_files:
-		# print("FAILED FILE:" + obj.file,"OUTPUT:" + obj.output, sep='\n')
-		print(f"{bcolors.FAIL}FAILED FILE:{bcolors.ENDC} {obj.file}")
+def print_array(array):
+	i = 0
+	for obj in array:
+		print(f"{bcolors.OKCYAN}[{i}]{bcolors.ENDC}")
+		print(f"{bcolors.FAIL}FILE:{bcolors.ENDC} {obj.file}")
 		print(f"{bcolors.FAIL}OUTPUT:{bcolors.ENDC} {obj.output}")
 		print(f"{bcolors.FAIL}EXIT CODE:{bcolors.ENDC} {obj.exitCode}")
 		print("")
+		i += 1
 
-	print(bcolors.WARNING + "FAILED VALID_FILES:" + bcolors.ENDC)
-	for obj in failed_valid_files:
-		print(f"{bcolors.FAIL}FAILED FILE:{bcolors.ENDC} {obj.file}")
-		print(f"{bcolors.FAIL}OUTPUT:{bcolors.ENDC} {obj.output}")
-		print(f"{bcolors.FAIL}EXIT CODE:{bcolors.ENDC} {obj.exitCode}")
+def print_failed_files(failed_error_files, failed_valid_files):
+	print(f"{bcolors.WARNING}FAILED {bcolors.UNDERLINE}INVALID{bcolors.ENDC} {bcolors.WARNING}FILES:{bcolors.ENDC}")
+	if len(failed_error_files) == 0:
+		print(f"{bcolors.OKGREEN}ALL INVALID FILES PASSED {bcolors.ENDC}")
+	else:
+		print_array(failed_error_files)
+
+	print(f"{bcolors.WARNING}FAILED {bcolors.UNDERLINE}VALID{bcolors.ENDC} {bcolors.WARNING}FILES:{bcolors.ENDC}")
+	if len(failed_valid_files) == 0:
+		print(f"{bcolors.OKGREEN}ALL VALID FILES PASSED {bcolors.ENDC}")
+	else:
+		print_array(failed_valid_files)
 
 
 def run_error_files(program, file_array):
