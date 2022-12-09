@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 	read_input(argv[1], &s_data);
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(&s_data);
-	print_data(&s_data);
+	// print_data(&s_data);
 //	printf("magic 0x%x\n", magic);
 	magic = int_to_bigendian(magic, 4);
 	// magic = int_to_bigendian(COREWAR_EXEC_MAGIC, 4);
