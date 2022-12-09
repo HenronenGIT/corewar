@@ -2,12 +2,12 @@
 .comment "Fork"
 #.extend
 
-	st	r1, :l1+1
-	st	r1, :l2+1
-	st	r1, :l3+1
-	st	r1, :l4+1
-	st	r1, :golive+1
-	st	r1, :live+1
+	st	r1, :l1
+	st	r1, :l2
+	st	r1, :l3
+	st	r1, :l4
+	st	r1, :golive
+	st	r1, :live
 	xor	r2,r2,r2
 	fork	%:f1
 	ld	%-15, r3
@@ -26,7 +26,7 @@ lock:	add	r3, r4, r3
 nolock:	
 	xor	r1, r1, r1
 	add	r1, r1, r1
-	.code	00 00 00
+#	.code	00 00 00
 live:	live	%1
 
 
