@@ -19,7 +19,7 @@ void	hex_translator(char *str, int fd, int len)
 
 	temp = 0;
 	i = 0;
-	while (i <= len)
+	while (i < len)
 	{
 		if (str[i])
 			temp = (int)str[i];
