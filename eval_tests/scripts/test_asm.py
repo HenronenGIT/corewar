@@ -19,7 +19,7 @@ class bcolors:
 	OKBLUE = '\033[94m'
 	OKCYAN = '\033[96m'
 	OKGREEN = '\033[92m'
-	WARNING = '\033[93m'
+	YELLOW = '\033[93m'
 	FAIL = '\033[91m'
 	ENDC = '\033[0m'
 	BOLD = '\033[1m'
@@ -62,31 +62,38 @@ def run_error_files(program, file_array):
 	
 	failed_files = []
 	output = ""
-	print(f"{bcolors.OKBLUE}Testing invalid files...{bcolors.ENDC}")
+	print(f"{bcolors.OKBLUE}----INVALID FILES----{bcolors.ENDC}")
 	for file in file_array:
+		print(f"Testing with: {os.path.basename(file)}")
 		output = subprocess.run([program, file], capture_output=True)
 		if output.returncode == 0:
 			failed_files.append(failedFile(file, output.stdout.decode('utf-8'), output.returncode))
+			print(f"{bcolors.FAIL}FAIL{bcolors.ENDC}")
+		else:
+			print(f"{bcolors.OKGREEN}OK{bcolors.ENDC}")
 	return failed_files
 
 def run_valid_files(program, file_array):
 	failed_files = []
-	print(f"{bcolors.OKBLUE}Testing valid files...{bcolors.ENDC}")
-
+	print(f"{bcolors.OKBLUE}----VALID FILES----{bcolors.ENDC}")
 	for file in file_array:
+		print(f"Testing with: {os.path.basename(file)}")
 		output = subprocess.run([program, file], capture_output=True)
 		if output.returncode != 0:
 			failed_files.append(failedFile(file, output.stdout.decode('utf-8'), output.returncode))
+			print(f"{bcolors.FAIL}FAIL{bcolors.ENDC}")
+		else:
+			print(f"{bcolors.OKGREEN}OK{bcolors.ENDC}")
 	return failed_files
 
 def print_failed_files(failed_error_files, failed_valid_files):
-	print(f"{bcolors.WARNING}FAILED {bcolors.UNDERLINE}INVALID{bcolors.ENDC} {bcolors.WARNING}FILES:{bcolors.ENDC}")
+	print(f"{bcolors.YELLOW}FAILED {bcolors.UNDERLINE}INVALID{bcolors.ENDC} {bcolors.YELLOW}FILES:{bcolors.ENDC}")
 	if len(failed_error_files) == 0:
 		print(f"{bcolors.OKGREEN}ALL INVALID FILES PASSED {bcolors.ENDC}")
 	else:
 		print_array(failed_error_files)
 
-	print(f"{bcolors.WARNING}FAILED {bcolors.UNDERLINE}VALID{bcolors.ENDC} {bcolors.WARNING}FILES:{bcolors.ENDC}")
+	print(f"{bcolors.YELLOW}FAILED {bcolors.UNDERLINE}VALID{bcolors.ENDC} {bcolors.YELLOW}FILES:{bcolors.ENDC}")
 	if len(failed_valid_files) == 0:
 		print(f"{bcolors.OKGREEN}ALL VALID FILES PASSED {bcolors.ENDC}")
 	else:
@@ -99,7 +106,7 @@ def save_to_file(array, filename):
 		sys.stdout = f
 		for obj in array:
 			print(f"[{i}]")
-			print(f"File:{obj.file}")
+			print(f"File:{os.path.basename(obj.file)}")
 			print(f"Output:{obj.output}")
 			print("----------")
 			i += 1

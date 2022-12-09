@@ -25,7 +25,6 @@ SRC_FILES = asm.c \
 			read_header.c \
 			vector.c \
 			is_functions.c \
-			lexical_error.c \
 			validation.c \
 			syntax_analyzer.c \
 			debug.c \
@@ -34,7 +33,8 @@ SRC_FILES = asm.c \
 			ft_itoh.c \
 			hex_translator.c \
 			calculations.c \
-			int_to_bigendian.c
+			int_to_bigendian.c \
+			error.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

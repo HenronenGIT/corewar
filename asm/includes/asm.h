@@ -200,6 +200,7 @@ void	error(int error_number);
 void	read_input(char *input, t_data *s_data);
 void	read_header(int fd, t_data *s_data);
 void	lexical_error(t_data *s_data);
+void	syntax_error(int op_code, int result);
 // void	calculate_statement_sizes(t_vec *vec_statements);
 
 /*---------- Dynamic 2D array ----------*/

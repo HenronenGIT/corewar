@@ -18,7 +18,11 @@
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/42.s"], // Arguments for the executable
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/Backward_fixed.s"], // Arguments for the executable
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/42.s"], // Arguments for the executable
-            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/junk_before_comment_cmd.s"], // Arguments for the executable
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/junk_before_comment_cmd.s"], // Arguments for the executable
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/missing_newline.s"],
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/comment_endofline.s"],
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/op_lld.s"],
+            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/op_lld_valid.s"],
             // "args": ["test.s"], // Arguments for the executable
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

@@ -123,7 +123,9 @@ void validate_instruction_syntax(t_input *statement)
 			error(SYNTAX_ERROR);
 		result = statement->arg_type[i] & g_table[op_code - 1].params_type[i];
 		if (result != statement->arg_type[i])
-			error(SYNTAX_ERROR);
+			syntax_error(op_code, result);
+			// error(SYNTAX_ERROR);
+			//
 		i += 1;
 	}
 }
