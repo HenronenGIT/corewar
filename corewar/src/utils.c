@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:40:16 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/08 21:27:05 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/10 14:21:51 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,6 @@ void	print_last_alive(t_data *data)
 	int	i;
 
 	i = data->last_alive_champ;
-	//ft_printf("Contestant %d, \"%s\", has won !\n", i, data->champions[i - 1]->name);
-	ft_printf("Contestant %d, \"%s\", has won !\n", i);
+	// ft_printf("Contestant %d, \"%s\", has won !\n", i, data->champions[i - 1]->name);
+	ft_printf("Contestant %d has won !\n", i);
 }
