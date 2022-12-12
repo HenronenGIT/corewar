@@ -6,14 +6,69 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:02:39 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/08 21:49:24 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/10 11:07:52 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include "../includes/op_table.h"
 
-bool	get_arg_values(int8_t *arena, size_t start, t_types *types, t_process *cur_process)
+/*
+** if statement code is 3 'st' (2) return val of arg as address
+** if code is not 13 'lld' read val at address
+** if code is 'lld' do not truncate address by modulo
+** and read only 2 bytes at address to duplicate original vm bug
+*/
+
+static int32_t	get_ind(int8_t *arena, t_process *process, int32_t	val)
+{
+	int		idx;
+
+	if (process->statement_code != 2)
+	{
+		if (process->statement_code != 12)
+		{
+			idx = circular_mem(process->cursor, (val % IDX_MOD));
+			return (bytes2int((uint8_t *)arena, idx, 4));
+		}
+		else
+		{
+			idx = circular_mem(process->cursor, val);
+			return (bytes2int((uint8_t *)arena, idx, 2));
+		}
+	}
+	else
+		return (val % IDX_MOD);
+}
+
+bool	get_arg_values(int8_t *arena, size_t start, t_types *types, \
+t_process *process)
+{
+	int		i;
+	int32_t	val;
+
+	i = 0;
+	while (i < types->num_args)
+	{
+		val = bytes2int((uint8_t *)arena, start, types->size_arg[i]);
+		if (types->type_arg[i] == T_REG)
+		{
+			if (val < 1 || val > 16)
+				return (false);
+			types->val_arg[i] = val;
+		}
+		else if (types->type_arg[i] == T_DIR)
+			types->val_arg[i] = val;
+		else if (types->type_arg[i] == T_IND)
+			types->val_arg[i] = get_ind(arena, process, val);
+		start += types->size_arg[i];
+		i++;
+	}
+	return (true);
+}
+
+/*
+bool	get_arg_values(int8_t *arena, size_t start, t_types *types, t_process *process)
 {
 	int		i;
 	int		idx;
@@ -43,16 +98,16 @@ bool	get_arg_values(int8_t *arena, size_t start, t_types *types, t_process *cur_
 			types->val_arg[i] = val;
 		else if (types->type_arg[i] == T_IND)
 		{
-			if (cur_process->statement_code != 2)
+			if (process->statement_code != 2)
 			{
-				if (cur_process->statement_code != 12)
+				if (process->statement_code != 12)
 				{
-					idx = circular_mem(cur_process->cursor, (val % IDX_MOD));
+					idx = circular_mem(process->cursor, (val % IDX_MOD));
 					types->val_arg[i] = bytes2int((uint8_t *)arena, idx, 4);
 				}
 				else //is lld
 				{
-					idx = circular_mem(cur_process->cursor, val);
+					idx = circular_mem(process->cursor, val);
 					//read 2 bytes bug make flag to activate
 					types->val_arg[i] = bytes2int((uint8_t *)arena, idx, 2);
 				}
@@ -66,3 +121,4 @@ bool	get_arg_values(int8_t *arena, size_t start, t_types *types, t_process *cur_
 	}
 	return (true);
 }
+*/
