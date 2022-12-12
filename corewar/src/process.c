@@ -42,7 +42,7 @@ static void init_process(t_data *data, t_process *temp, int i)
 	temp->last_live = 0;
 	temp->cycles_remaining = -1;
 	temp->byte_jump_size = 0;
-	
+
 	init_process_registries(temp->registeries, i);
 }
 

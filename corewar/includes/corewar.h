@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/10 11:31:40 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:25:04 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ typedef struct			s_champion
 	int32_t				code_size;
 	char				*code;
 	int					start_addr;
-	int					prev_live_statements;
-	int					curr_live_statements;
 	//struct s_champion	*next;
 }						t_champion;
 
@@ -71,7 +69,7 @@ typedef struct s_data
 	int8_t		arena[MEM_SIZE];
 	int			champions_num;
 	t_champion	*champions[MAX_PLAYERS];
-	int			num_processes;
+	size_t		num_processes;
 	int			dump_cycle;
 	int			cycles_total;
 	int			cycles_to_die;
