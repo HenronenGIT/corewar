@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/19 17:34:12 by akilk            ###   ########.fr       */
+/*   Updated: 2022/12/08 21:09:34 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int32_t parse_bytes(int fd)
 		error(NULL, "Error reading file", 0);
 	if (ret < 4)
 		error(NULL, "Invalid file", 0);
-	return (bytes2int(byte_value, ret));
+	return (bytes2int(byte_value, 0, ret));
 }
 
 /* Parsing champions name and comment */
@@ -115,18 +115,20 @@ void	parse(int ac, char **av, t_data *data)
 			champion = init_champion();
 			parse_n(&ac, &av, data, champion);
 		}
+		else if (!ft_strcmp(*av, "-v"))
+			parse_verbosity(&ac, &av, data);
 		else
 			error(NULL, "Error in parse()", 1);
 	}
 	if (data->champions_num < 1 || data->champions_num > MAX_PLAYERS)
 		error(NULL, "Champions amount should be between 1 and 4", 0);
 	reset_ids(data);
-
+	data->last_alive_champ = data->champions_num;
 	//test id-s
-	for (int i = 0; i < data->champions_num; i++)
-	{
-		printf("id %d name %s\n", data->champions[i]->id, data->champions[i]->name);
-	}
+	//for (int i = 0; i < data->champions_num; i++)
+	//{
+	//	printf("id %d name %s\n", data->champions[i]->id, data->champions[i]->name);
+	//}
 }
 
 	// while (list)

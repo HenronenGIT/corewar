@@ -12,26 +12,26 @@
 
 #include "../includes/corewar.h"
 
-static void copy_parent_registries(int32_t *fork_registeries, int32_t *parent_registeries)
+static void copy_parent_registers(int32_t *fork_registers, int32_t *parent_registers)
 {
 	int i;
 
 	i = 0;
 	while (i < REG_NUMBER)
 	{
-		fork_registeries[i] = parent_registeries[i];
+		fork_registers[i] = parent_registers[i];
 		i++;
 	}
 }
 
-static void init_process_registries(int32_t *registeries, int i)
+static void init_process_registers(int32_t *registers, int i)
 {
 	int n;
 
-	registeries[0] = -i;
+	registers[0] = -i;
 	n = 1;
 	while (n < REG_NUMBER)
-		registeries[n++] = 0;
+		registers[n++] = 0;
 }
 
 static void init_process(t_data *data, t_process *temp, int i)
@@ -42,8 +42,8 @@ static void init_process(t_data *data, t_process *temp, int i)
 	temp->last_live = 0;
 	temp->cycles_remaining = -1;
 	temp->byte_jump_size = 0;
-	
-	init_process_registries(temp->registeries, i);
+
+	init_process_registers(temp->registers, i);
 }
 
 static void init_fork(t_data *data, t_process *temp, int i)
@@ -55,7 +55,7 @@ static void init_fork(t_data *data, t_process *temp, int i)
 	temp->cycles_remaining = -1;
 	temp->byte_jump_size = 0;
 
-	copy_parent_registries(temp->registeries, data->parent->registeries);
+	copy_parent_registers(temp->registers, data->parent->registers);
 }
 
 void add_process(t_data *data, t_process **head, int i)
@@ -65,7 +65,6 @@ void add_process(t_data *data, t_process **head, int i)
 	temp = malloc(sizeof(t_process));
 	if (!temp)
 		error(NULL, "Allocation failed in add_process", 0);
-
 	if (*head == NULL)
 		temp->next = NULL;
 	else
@@ -92,4 +91,5 @@ void create_processes(t_data *data)
 		data->num_processes++;
 		i++;
 	}
+	data->new_process_id = data->num_processes;
 }

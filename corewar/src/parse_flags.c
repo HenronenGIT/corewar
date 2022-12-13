@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:02:47 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/19 18:41:34 by akilk            ###   ########.fr       */
+/*   Updated: 2022/12/08 11:49:40 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,6 @@ on the standard output and quit the game.
 The memory must be dumped in the
 hexadecimal format with 32 octets per line.
 */
-static bool	valid_int(char *str)
-{
-	int	i;
-	double	num;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (false);
-		i++;
-	}
-	num = ft_atol(str);
-	if (num < 0 || num > INT_MAX)
-		return (false);
-	return (true);
-}
 
 void	parse_dump(int *ac, char ***av, t_data *data)
 {
@@ -50,6 +33,26 @@ void	parse_dump(int *ac, char ***av, t_data *data)
 	}
 	else
 		error(NULL, "Error in parse_dump()", 1);
+}
+
+/*
+** verbosity 2 -> show cycles
+** verbosity 4 -> show operations
+** verbosity 16 -> show cursor movements
+*/
+void	parse_verbosity(int *ac, char ***av, t_data *data)
+{
+	int	num;
+
+	if (*ac > 2 && valid_int(*(*av + 1)))
+	{
+		num = ft_atoi(*(*av + 1));
+		data->verbosity = num;
+		(*ac) -= 2;
+		(*av) += 2;
+	}
+	else
+		error(NULL, "Error in parse_verbosity()", 1);
 }
 
 /*
@@ -110,7 +113,7 @@ static void	sort_ids(t_champion **unlisted, t_champion **result, t_data *data)
 
 	i = 0;
 	k = 0;
-	while (unlisted[k] != NULL && i < data->champions_num)
+	while (i < data->champions_num)
 	{
 		if (result[i] == NULL)
 		{
@@ -142,7 +145,7 @@ void	reset_ids(t_data *data)
 		else if (data->champions[i]->id == 0)
 			unlisted[k++] = data->champions[i];
 		else
-			result[data->champions[i]->id - 1] =  data->champions[i];
+			result[data->champions[i]->id - 1] = data->champions[i];
 		i++;
 	}
 	sort_ids(unlisted, result, data);

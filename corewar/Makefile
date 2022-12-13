@@ -3,22 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
+#    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/12/02 13:16:03 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/12/10 15:05:14 by akilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 CC = gcc
-#FLAGS = -Wall #-Wextra -Werror
-FLAGS = -Wall -fsanitize=address -g
+#FLAGS = -Wall -Wextra -Werror
+FLAGS = -fsanitize=address -g
 
 SRC_DIR = ./src/
 SRC_FILES = main.c init.c parse.c data.c process.c \
-			parse_flags.c utils.c play_game.c op_table.c \
-			get_types.c get_arg_values.c check.c op_util.c
+			parse_flags.c utils.c play_game.c get_types.c \
+			get_arg_values.c check.c op_util.c \
+			op_add_sub.c op_bitwise.c op_fork.c op_load.c op_misc.c op_store.c
+
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ_DIR = ./obj/
 OBJ_FILES = $(SRC_FILES:.c=.o)

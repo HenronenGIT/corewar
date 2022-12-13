@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:43:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/01 16:28:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/10 14:12:08 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ void	init_data(t_data *data)
 	data->cycles_after_check = 0;
 	data->num_checks_performed = 0;
 	data->dump_cycle = -1;
-	data->num_processes = 0;
+	//how to init?
+	data->last_alive_champ = 1;
+	data->verbosity = 0;
+	//data->new_process_id = 0;
 	data->head = NULL;
+
 }
