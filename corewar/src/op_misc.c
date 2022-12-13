@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/13 12:30:49 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:07:18 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void	op_zjmp(t_process *process, t_data *data)
 		else
 		{
 			ft_printf("P%5d | zjmp %d FAILED\n", process->id, val);
-			if (data->verbosity & 0x10)
-				print_byte_jumps(process, data);
 		}
 	}
+	if ((data->verbosity & 0x10) && !process->carry)
+		print_byte_jumps(process, data);
 }
 
 //WIP

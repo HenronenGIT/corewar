@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:54 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/13 11:59:43 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:12:51 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ void	op_st(t_process *process, t_data *data)
 
 	types.size_t_dir = 4;
 	types.num_args = 2;
-	get_types(data->arena[process->cursor + 1], &types);
+	get_types(data->arena[(process->cursor + 1) % MEM_SIZE], &types);
 	process->byte_jump_size = jump_size(&types);
-	if (types.type_arg[0] == T_REG && (types.type_arg[1] != T_DIR \
-	&& types.type_arg[1] != T_NULL))
+	//ft_printf("st bjmp size %d\n", process->byte_jump_size);
+	if (types.type_arg[0] == T_REG && (types.type_arg[1] == T_REG \
+	|| types.type_arg[1] == T_IND))
 	{
-		if (get_arg_values(data->arena, process->cursor + 2, &types, process))
+		if (get_arg_values(data->arena, (process->cursor + 2) % MEM_SIZE, &types, process))
 		{
 			if (types.type_arg[1] == T_REG)
 				process->registers[types.val_arg[1] - 1] \
@@ -64,12 +65,12 @@ void	op_sti(t_process *process, t_data *data)
 
 	types.size_t_dir = 2;
 	types.num_args = 3;
-	get_types(data->arena[process->cursor + 1], &types);
+	get_types(data->arena[(process->cursor + 1) % MEM_SIZE], &types);
 	process->byte_jump_size = jump_size(&types);
 	if (types.type_arg[0] == T_REG && types.type_arg[2] != T_IND \
 	&& !check_null(&types))
 	{
-		if (get_arg_values(data->arena, process->cursor + 2, &types, process))
+		if (get_arg_values(data->arena, (process->cursor + 2) % MEM_SIZE, &types, process))
 		{
 			if (types.type_arg[1] == T_REG)
 				types.val_arg[1] = process->registers[types.val_arg[1] - 1];

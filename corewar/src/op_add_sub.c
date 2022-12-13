@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/10 11:33:58 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:19:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ void	op_add(t_process *process, t_data *data)
 
 	types.size_t_dir = 4;
 	types.num_args = 3;
-	get_types(data->arena[process->cursor + 1], &types);
+	get_types(data->arena[(process->cursor + 1) % MEM_SIZE], &types);
 	process->byte_jump_size = jump_size(&types);
 	if (types.type_arg[0] == T_REG && types.type_arg[1] == T_REG \
 	&& types.type_arg[2] == T_REG)
 	{
-		if (get_arg_values(data->arena, process->cursor + 2, &types, process))
+		if (get_arg_values(data->arena, (process->cursor + 2) % MEM_SIZE, &types, process))
 		{
 			sum = process->registers[types.val_arg[0] - 1] \
 			+ process->registers[types.val_arg[1] - 1];
 			process->registers[types.val_arg[2] - 1] = sum;
 			update_carry(process, sum);
-		}
-		if (data->verbosity & 0x04)
+			if (data->verbosity & 0x04)
 			ft_printf("P%5d | add r%d r%d r%d\n", process->id, \
 			types.val_arg[0], types.val_arg[1], types.val_arg[2]);
+		}
 	}
 	if (data->verbosity & 0x10)
 		print_byte_jumps(process, data);
@@ -47,12 +47,12 @@ void	op_sub(t_process *process, t_data *data)
 
 	types.size_t_dir = 4;
 	types.num_args = 3;
-	get_types(data->arena[process->cursor + 1], &types);
+	get_types(data->arena[(process->cursor + 1) % MEM_SIZE], &types);
 	process->byte_jump_size = jump_size(&types);
 	if (types.type_arg[0] == T_REG && types.type_arg[1] == T_REG \
 	&& types.type_arg[2] == T_REG)
 	{
-		if (get_arg_values(data->arena, process->cursor + 2, &types, process))
+		if (get_arg_values(data->arena, (process->cursor + 2) % MEM_SIZE, &types, process))
 		{
 			diff = process->registers[types.val_arg[0] - 1] \
 			- process->registers[types.val_arg[1] - 1];

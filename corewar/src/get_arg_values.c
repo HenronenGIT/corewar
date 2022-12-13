@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:02:39 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/10 11:07:52 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:17:05 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_process *process)
 		else if (types->type_arg[i] == T_IND)
 			types->val_arg[i] = get_ind(arena, process, val);
 		start += types->size_arg[i];
+		start %= MEM_SIZE;
 		i++;
 	}
 	return (true);
