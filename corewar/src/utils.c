@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:40:16 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/10 14:21:51 by akilk            ###   ########.fr       */
+/*   Updated: 2022/12/13 11:41:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,44 +48,6 @@ bool	valid_int(char *str)
 ** If signed bit is 1, apply masking.
 */
 
-/*
-  Bitwise    Logical
-+----------+---------+
-|  a & b   |  a && b |
-+----------+---------+
-| a ^ b    |  a != b |
-+----------+---------+
-|    ~a    |   !a    |
-+----------+---------+
-*/
-
-/*
-int32_t	bytes2int(uint8_t *byte_value, size_t size)
-{
-	int		signbit;
-	int		n;
-	int32_t	decimal;
-
-	decimal = 0;
-	signbit = 0;
-	if (byte_value[0] & 0x80)
-		signbit = 1;
-	n = 0;
-	while (size)
-	{
-		if (signbit)
-			decimal += ((byte_value[size - 1] ^ 0xFF) << (n * 8));
-		else
-			decimal += byte_value[size - 1] << (n * 8);
-		n++;
-		size--;
-	}
-	if (signbit)
-		decimal = ~(decimal);
-	return (decimal);
-}
-*/
-
 int32_t	bytes2int(uint8_t *byte_value, int start,  size_t size)
 {
 	int		signbit;
@@ -112,6 +74,7 @@ int32_t	bytes2int(uint8_t *byte_value, int start,  size_t size)
 		decimal = ~(decimal);
 	return (decimal);
 }
+
 void	print_data(t_data *data)
 {
 	int	i;
@@ -149,6 +112,5 @@ void	print_last_alive(t_data *data)
 	int	i;
 
 	i = data->last_alive_champ;
-	// ft_printf("Contestant %d, \"%s\", has won !\n", i, data->champions[i - 1]->name);
-	ft_printf("Contestant %d has won !\n", i);
+	 ft_printf("Contestant %d, \"%s\", has won !\n", i, data->champions[i - 1]->name);
 }

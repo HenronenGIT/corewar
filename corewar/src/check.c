@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:47:37 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/10 17:19:15 by akilk            ###   ########.fr       */
+/*   Updated: 2022/12/13 11:39:13 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ static bool	is_died(t_data *data, t_process *process)
 	return (false);
 }
 
-/* go over the list of processes. If found died, remove it
-		and put list together  */
+/*
+** go over the list of processes. If found died, remove it
+** and put list together
+*/
+
 static	void	remove_died(t_data *data, t_process **head)
 {
 	t_process	*prev;
@@ -72,8 +75,6 @@ void	check(t_data *data, t_process **head)
 {
 	data->num_checks_performed++;
 	remove_died(data, head);
-	if (data->cycles_total == 25903)
-		ft_printf("num_checks_performed: %d num_live_statements: %d, total prorcesses: %d\n", data->num_checks_performed, data->num_live_statements, data->num_processes);
 	if (data->num_checks_performed == MAX_CHECKS || data->num_live_statements >= NBR_LIVE)
 	{
 		data->cycles_to_die -= CYCLE_DELTA;

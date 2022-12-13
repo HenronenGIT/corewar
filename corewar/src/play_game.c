@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/10 17:37:59 by akilk            ###   ########.fr       */
+/*   Updated: 2022/12/13 12:31:58 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,6 @@ static void	execute_processes(t_data *data, t_process *head)
 	temp = head;
 	data->cycles_total++;
 	data->cycles_after_check++;
-	//moved here ??
-	// if (data->cycles_to_die == data->cycles_after_check \
-	// || data->cycles_to_die <= 0)
-	// 	check(data, data->head);
-
 	if (data->verbosity & 0x02)
 		ft_printf("It is now cycle %d\n", data->cycles_total);
 	while (temp)
@@ -98,9 +93,9 @@ static void	execute_processes(t_data *data, t_process *head)
 
 void	play_game(t_data *data)
 {
-	while (data->num_processes >= 0)
+	while (data->num_processes > 0)
 	{
-		ft_printf("num_processes: %d\n", data->num_processes);
+		//ft_printf("num_processes: %d\n", data->num_processes);
 		if (data->dump_cycle == data->cycles_total)
 			print_data(data);
 		execute_processes(data, data->head);

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:02:47 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/08 11:49:40 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:26:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	parse_dump(int *ac, char ***av, t_data *data)
 /*
 ** verbosity 2 -> show cycles
 ** verbosity 4 -> show operations
+** verbosity 8 -> show deaths
 ** verbosity 16 -> show cursor movements
 */
 void	parse_verbosity(int *ac, char ***av, t_data *data)

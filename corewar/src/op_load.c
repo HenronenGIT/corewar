@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:48 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/10 11:37:47 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:00:13 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void	op_ldi(t_process *process, t_data *data)
 			idx = circular_mem(process->cursor, change);
 			process->registers[types.val_arg[2] - 1] = bytes2int((uint8_t *)data->arena, idx, 4);
 			if (data->verbosity & 0x04)
-				ft_printf("P%5d | ldi %d %d r%d\n       \
-				| -> load from %d + %d = %d (with pc and mod %d)\n", \
+				ft_printf("P%5d | ldi %d %d r%d\n       | -> load from %d + %d = %d (with pc and mod %d)\n", \
 				process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2], \
 				types.val_arg[0], types.val_arg[1], types.val_arg[0] + types.val_arg[1], idx);
 		}
@@ -111,7 +110,6 @@ void	op_lldi(t_process *process, t_data *data)
 	{
 		if (get_arg_values(data->arena, process->cursor + 2, &types, process))
 		{
-			ft_printf("process %d is on 'lldi'\n", process->id);
 			if (types.type_arg[0] == T_REG)
 				types.val_arg[0] = process->registers[types.val_arg[0] - 1];
 			if (types.type_arg[1] == T_REG)
@@ -120,6 +118,10 @@ void	op_lldi(t_process *process, t_data *data)
 			idx = circular_mem(process->cursor, change);
 			process->registers[types.val_arg[2] - 1] = bytes2int((uint8_t *)data->arena, idx, 4);
 			update_carry(process, process->registers[types.val_arg[2] - 1]);
+			if (data->verbosity & 0x04)
+				ft_printf("P%5d | lldi %d %d r%d\n       | -> load from %d + %d = %d (with pc %d)\n", \
+				process->id, types.val_arg[0], types.val_arg[1], types.val_arg[2], \
+				types.val_arg[0], types.val_arg[1], change, change + process->cursor);
 		}
 	}
 	if (data->verbosity & 0x10)

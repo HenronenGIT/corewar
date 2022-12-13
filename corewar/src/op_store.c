@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:54 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/10 11:53:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:59:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	op_st(t_process *process, t_data *data)
 static void	sti_verbose(t_process *process, t_types	*types, int change)
 {
 
-	ft_printf("P%5d | sti r%d %d %d\n       \
-	| -> store to %d + %d = %d (with pc and mod %d)\n", \
+	ft_printf("P%5d | sti r%d %d %d\n       | -> store to %d + %d = %d (with pc and mod %d)\n", \
 	process->id, \
 	types->val_arg[0], types->val_arg[1], types->val_arg[2], \
 	types->val_arg[1], types->val_arg[2], \

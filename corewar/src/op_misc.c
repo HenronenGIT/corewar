@@ -6,30 +6,28 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/12 14:25:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:30:49 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include "../includes/op_table.h"
 
-//WIP
 void	op_live(t_process *process, t_data *data)
 {
-	//int player;
+	int	val;
 
 	process->byte_jump_size = 5; //size of T_DIR + 1
-	//count process as alive??
 	process->last_live = data->cycles_total;
-	//count arg as last_alive_champ. Later check if this is a valid champ?
-	data->last_alive_champ = bytes2int((uint8_t *)data->arena, process->cursor + 1, 4);
+	val = bytes2int((uint8_t *)data->arena, process->cursor + 1, 4);
 	data->num_live_statements++;
-	//are champ id's always negative??
-	//player = data->last_alive_champ * -1;
-	//if (player <= data->champions_num && player > 0)
-	//	ft_printf("A process shows that player %d (%s) is alive\n", player, data->champions[player - 1]->name);
+	 if (val && ft_abs(val) <= data->champions_num)
+	{
+		data->last_alive_champ = ft_abs(val);
+		//ft_printf("A process shows that player %d (%s) is alive\n", ft_abs(val), data->champions[ft_abs(val) - 1]->name);
+	}
 	if (data->verbosity & 0x04)
-		ft_printf("P%5d | live %d\n", process->id, data->last_alive_champ);
+		ft_printf("P%5d | live %d\n", process->id, val);
 	if (data->verbosity & 0x10)
 		print_byte_jumps(process, data);
 }
@@ -41,7 +39,7 @@ void	op_zjmp(t_process *process, t_data *data)
 	val = bytes2int((uint8_t *)data->arena, process->cursor + 1, 2);
 	if (process->carry)
 	{
-		process->cursor = circular_mem(process->cursor, val);
+		process->cursor = circular_mem(process->cursor, val % IDX_MOD);
 		process->byte_jump_size = 0;
 	}
 	else
