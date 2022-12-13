@@ -68,9 +68,9 @@ void	vec_new_arr(t_vec *dst, size_t len)
 	dst->length = len;
 	dst->space_taken = 0;
 	dst->space_left = len;
-	dst->array = (void **)malloc(sizeof(void *) * len);
+	dst->array = (void **)malloc(sizeof(void *) * (len + 1));
 	if (!dst->array)
 		error(MALLOC_ERR);
-	while (i < len)
+	while (i <= len)
 		dst->array[i++] = NULL;
 }
