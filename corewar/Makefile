@@ -6,47 +6,51 @@
 #    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/11/07 16:55:33 by akilk            ###   ########.fr        #
+#    Updated: 2022/12/10 15:05:14 by akilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CYELLOW=\033[0;33m
-CEND=\033[0m
-CGREEN=\033[0;32m
-
 NAME = corewar
 CC = gcc
-FLAGS = -g#-Wall -Wextra -Werror
+#FLAGS = -Wall -Wextra -Werror
+FLAGS = -fsanitize=address -g
 
 SRC_DIR = ./src/
-SRC_FILES = corewar_main.c\
-		init.c\
-		parse.c
+SRC_FILES = main.c init.c parse.c data.c process.c \
+			parse_flags.c utils.c play_game.c get_types.c \
+			get_arg_values.c check.c op_util.c \
+			op_add_sub.c op_bitwise.c op_fork.c op_load.c op_misc.c op_store.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
-
 OBJ_DIR = ./obj/
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 INC_DIR = ./includes/
-INC_FILES = corewar.h
+#INCL =  -I includes -I ../libft/includes
+INC_FILES = corewar.h op_table.h
 INC = $(addprefix $(INC_DIR), $(INC_FILES))
 
 LIBFTDIR = ../libft/
 LIBFT = ../libft/libft.a
+#LIB = -L ../libft #-lft
+
+CYELLOW=\033[0;33m
+CEND=\033[0m
+CGREEN=\033[0;32m
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	gcc $(FLAGS) -o $(NAME) $(SRC) -I $(INC) -L. $(LIBFT)
+	$(CC) $(FLAGS) -o $(NAME) $(SRC) -I $(INC_DIR) -L. $(LIBFT)
+#	$(CC) $(FLAGS) $(INCL) $(OBJ) -o $(NAME) -L. $(LIBFT)
 
 $(LIBFT):
-	make -C $(LIBFTDIR)
+	make -sC $(LIBFTDIR)
 
 $(OBJ): $(SRC)
 	@mkdir -p $(OBJ_DIR)
-	@gcc $(FLAGS) -c $< -o $@
+	@$(CC) -c $(FLAGS) $(INCL) $< -o $@
 
 clean:
 	@make -C $(LIBFTDIR) clean
@@ -60,4 +64,5 @@ fclean: clean
 	@rm -rf $(NAME)
 	@echo "$(CGREEN)OK$(CEND)"
 
-re : fclean all clean all
+#re : fclean all clean all
+re : fclean all
