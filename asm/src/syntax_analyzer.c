@@ -58,7 +58,7 @@ static void copy_instruction_data(t_data *s_data, t_token *token)
 	t_input **input_array;
 
 	// if (token->type == SEPARATOR)
-		// return;
+	// return;
 	input_array = (t_input **)s_data->vec_input->array;
 	newest_element = s_data->vec_input->space_taken - 1;
 	if (token->type == SEPARATOR)
@@ -122,10 +122,11 @@ void validate_instruction_syntax(t_input *statement)
 		if (g_table[op_code - 1].params_type[i] && !statement->arg_type[i])
 			error(SYNTAX_ERROR);
 		result = statement->arg_type[i] & g_table[op_code - 1].params_type[i];
+		//! error here
 		if (result != statement->arg_type[i])
 			syntax_error(op_code, result);
-			// error(SYNTAX_ERROR);
-			//
+		// error(SYNTAX_ERROR);
+		//
 		i += 1;
 	}
 }
@@ -154,15 +155,14 @@ static void validate_syntax(t_vec *vec_input)
 	else
 		-> Init data to the element that was allocated before
 */
-
-void syntax_analyzer(t_data *s_data)
+void	syntax_analyzer(t_data *s_data)
 {
-	t_token **tokens = (t_token **)s_data->vec_tokens->array;
-	t_vec *vec_tokens = s_data->vec_tokens;
-	size_t i;
+	t_token	**tokens = (t_token **)s_data->vec_tokens->array;
+	t_vec	*vec_tokens = s_data->vec_tokens;
+	size_t	i;
 
 	i = 0;
-	while (i < vec_tokens->space_taken)
+	while (vec_tokens->array[i])
 	{
 		if (tokens[i]->type == LABEL || tokens[i]->type == INSTRUCTION)
 		{

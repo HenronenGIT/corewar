@@ -55,16 +55,17 @@ static void calculate_bytes(t_input *statement)
 
 void calculate_statement_sizes(t_data *s_data)
 {
-	t_input **ptr;
-	size_t	last_element;
+	t_input	**array;
+	size_t	i;
+	size_t	last_index;
 
-	last_element = s_data->vec_input->space_taken - 1;
-	ptr = (t_input **)s_data->vec_input->array;
-	while (*ptr != NULL)
+	i = 0;
+	last_index = s_data->vec_input->space_taken - 1;
+	array = (t_input **)s_data->vec_input->array;
+	while (array[i])
 	{
-		calculate_bytes(*ptr);
-		ptr += 1;
+		calculate_bytes(array[i]);
+		i += 1;
 	}
-	ptr -= 1;
-	s_data->champ_size = (*ptr)->current_bytes + (*ptr)->total_size;
+	s_data->champ_size = array[last_index]->current_bytes + array[last_index]->total_size;
 }

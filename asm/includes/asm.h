@@ -62,6 +62,8 @@
 # define COMMENT_CHAR '#'
 # define LABEL_CHARS "abcdefghijklmnopqrstuvwxyz_0123456789"
 
+# define REG_NUMBER 16
+
 # define T_REG 1
 # define T_DIR 2
 # define T_IND 4
