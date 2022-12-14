@@ -184,18 +184,6 @@ static const t_table g_table[] = {
 	{"aff", 16, {T_REG}, 4, 1},
 	{NULL, 0, {0}, 0}};
 
-typedef struct t_arg_types
-{
-	int type;
-	char *type_str;
-} t_arg_types;
-
-static const t_arg_types g_types[] = {
-	{T_REG, "T_REG"},
-	{T_DIR, "T_DIR"},
-	{T_IND, "T_IND"},
-
-};
 /*---------- Token struct ----------*/
 typedef struct s_token
 {

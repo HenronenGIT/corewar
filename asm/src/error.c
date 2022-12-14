@@ -56,9 +56,7 @@ Is called form syntax_analyzer
 */
 void	syntax_error(int op_code, int arg_type)
 {
-
-	printf("%d\n", g_types[0]);
-	// ft_printf("Instruction [%s] cannot take arg type of [%]\n", g_table[op_code - 1].instruction, g_types[arg_type]);
-
+	ft_printf("Instruction [%s] cannot take arg type of [%d].\n", g_table[op_code - 1].instruction, arg_type);
+	error(SYNTAX_ERROR)	;
 
 }
