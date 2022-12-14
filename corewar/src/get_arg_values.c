@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:02:39 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/13 15:17:05 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:27:20 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,16 @@ static int32_t	get_ind(int8_t *arena, t_process *process, int32_t	val)
 		}
 	}
 	else
-		return (val % IDX_MOD);
+		return (val);
 }
 
-bool	get_arg_values(int8_t *arena, size_t start, t_types *types, \
-t_process *process)
+bool	get_arg_values(int8_t *arena, t_types *types, t_process *process)
 {
 	int		i;
+	size_t start;
 	int32_t	val;
 
+	start = (process->cursor + 2) % MEM_SIZE;
 	i = 0;
 	while (i < types->num_args)
 	{
