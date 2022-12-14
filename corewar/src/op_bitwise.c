@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:38 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 15:35:44 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:18:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	op_and(t_process *process, t_data *data)
 	get_types(data, process, &types);
 	if (types.type_arg[2] == T_REG && !check_null(&types))
 	{
-		if (get_arg_values(data->arena, &types, process))
+		if (get_arg_values(data, &types, process))
 		{
 			if (types.type_arg[0] == T_REG)
 				types.val_arg[0] = process->registers[types.val_arg[0] - 1];
@@ -51,7 +51,7 @@ void	op_or(t_process *process, t_data *data)
 	get_types(data, process, &types);
 	if (types.type_arg[2] == T_REG && !check_null(&types))
 	{
-		if (get_arg_values(data->arena, &types, process))
+		if (get_arg_values(data, &types, process))
 		{
 			if (types.type_arg[0] == T_REG)
 				types.val_arg[0] = process->registers[types.val_arg[0] - 1];
@@ -79,7 +79,7 @@ void	op_xor(t_process *process, t_data *data)
 	get_types(data, process, &types);
 	if (types.type_arg[2] == T_REG && !check_null(&types))
 	{
-		if (get_arg_values(data->arena, &types, process))
+		if (get_arg_values(data, &types, process))
 		{
 			if (types.type_arg[0] == T_REG)
 				types.val_arg[0] = process->registers[types.val_arg[0] - 1];

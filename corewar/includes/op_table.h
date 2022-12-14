@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 12:48:22 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 14:18:55 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:08:51 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static const t_op	g_dispatch[NUM_OPS] = {
 };
 
 void	get_types(t_data *data, t_process *process, t_types *types);
-bool	get_arg_values(int8_t *arena, t_types *types, t_process *process);
+bool	get_arg_values(t_data *data, t_types *types, t_process *process);
 int		circular_mem(int pos, int change);
 size_t	jump_size(t_types *types);
 bool	check_null(t_types *types);

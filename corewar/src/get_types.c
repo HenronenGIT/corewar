@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:55:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 14:27:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:54:04 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,9 @@ static void	get_arg3(int8_t byte, t_types *types)
 
 void	get_types(t_data *data, t_process *process, t_types *types)
 {
-	int8_t byte = data->arena[(process->cursor + 1) % MEM_SIZE];
-	
+	int8_t	byte;
+
+	byte = data->arena[(process->cursor + 1) % MEM_SIZE];
 	get_arg1(byte, types);
 	get_arg2(byte, types);
 	if (types->num_args == 3)

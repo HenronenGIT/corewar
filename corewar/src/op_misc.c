@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 15:51:13 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:22:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void	op_live(t_process *process, t_data *data)
 	if (val && ft_abs(val) <= data->champions_num)
 	{
 		data->last_alive_champ = ft_abs(val);
-		//ft_printf("A process shows that player %d (%s) is alive\n", \
-		//ft_abs(val), data->champions[ft_abs(val) - 1]->name);
+		if (!(data->verbosity & 0x01))
+			ft_printf("A process shows that player %d (%s) is alive\n", \
+			ft_abs(val), data->champions[ft_abs(val) - 1]->name);
 	}
 	if (data->verbosity & 0x04)
 		ft_printf("P%5d | live %d\n", process->id, val);
@@ -66,7 +67,7 @@ void	op_aff(t_process *process, t_data *data)
 	types.num_args = 1;
 	get_types(data, process, &types);
 	if (types.type_arg[0] == T_REG)
-		if (get_arg_values(data->arena, &types, process))
+		if (get_arg_values(data, &types, process))
 			ft_printf("AFF: %c\n", \
 			(char)process->registers[types.val_arg[0] - 1]);
 	if (data->verbosity & 0x10)

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:54 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 15:27:37 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:18:55 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	op_st(t_process *process, t_data *data)
 	if (types.type_arg[0] == T_REG && (types.type_arg[1] == T_REG \
 	|| types.type_arg[1] == T_IND))
 	{
-		if (get_arg_values(data->arena, &types, process))
+		if (get_arg_values(data, &types, process))
 		{
 			if (types.type_arg[1] == T_REG)
 				process->registers[types.val_arg[1] - 1] \
@@ -65,7 +65,7 @@ void	op_sti(t_process *process, t_data *data)
 	if (types.type_arg[0] == T_REG && types.type_arg[2] != T_IND \
 	&& !check_null(&types))
 	{
-		if (get_arg_values(data->arena, &types, process))
+		if (get_arg_values(data, &types, process))
 		{
 			if (types.type_arg[1] == T_REG)
 				types.val_arg[1] = process->registers[types.val_arg[1] - 1];
