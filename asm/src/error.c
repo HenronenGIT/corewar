@@ -54,8 +54,11 @@ void	lexical_error(t_data *s_data)
 /*
 Is called form syntax_analyzer
 */
-void	syntax_error(int op_code, int result)
+void	syntax_error(int op_code, int arg_type)
 {
-	ft_printf("Invalid parameter for instruction %s", g_table[op_code].instruction);
+
+	printf("%d\n", g_types[0]);
+	// ft_printf("Instruction [%s] cannot take arg type of [%]\n", g_table[op_code - 1].instruction, g_types[arg_type]);
+
 
 }
