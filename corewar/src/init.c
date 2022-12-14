@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/11/21 09:39:58 by akilk            ###   ########.fr       */
+/*   Updated: 2022/12/10 17:58:09 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ t_champion	*init_champion(void)
 	new_champion->code_size = 0;
 	new_champion->code = 0;
 	new_champion->start_addr = 0;
-	new_champion->prev_live_statements = 0;
-	new_champion->curr_live_statements = 0;
 	return (new_champion);
 }
 

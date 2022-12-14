@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/08 15:02:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/09 15:24:38 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,17 @@ int	error(char **str, char *msg, int usage)
 	exit (1);
 }
 
-//tester
-void print_arena(int8_t *arena)
+static void free_processes(t_data *data)
 {
-	int i = 0;
-	int j;
+	t_process *temp;
+	t_process *cur;
 
-	printf("\nARENA--->>>\n");
-	while (i < MEM_SIZE)
+	temp = data->head;
+	while (temp)
 	{
-		j = 0;
-		while (j < 32)
-		{
-			printf("%02X ", (uint8_t)arena[i]);
-
-			/*
-			printf("%c%c%c%c%c%c%c%c ",\
-				(arena[i] & 0x80 ? '1' : '0'), \
-				(arena[i] & 0x40 ? '1' : '0'), \
-				(arena[i] & 0x20 ? '1' : '0'), \
-				(arena[i] & 0x10 ? '1' : '0'), \
-				(arena[i] & 0x08 ? '1' : '0'), \
-				(arena[i] & 0x04 ? '1' : '0'), \
-				(arena[i] & 0x02 ? '1' : '0'), \
-				(arena[i] & 0x01 ? '1' : '0') );
-			*/
-			i++;
-			j++;
-		}
-		printf("\n");
+		cur = temp;
+		temp = temp->next;
+		free(cur);
 	}
 }
 
@@ -83,7 +65,6 @@ int	main(int ac, char **av)
 		init_data(&data);
 		parse(ac, av, &data);
 		load_arena(&data);
-		// to add: print_introduction(players, id)
 		create_processes(&data);
 		print_contestants(&data);
 		play_game(&data);
@@ -91,8 +72,7 @@ int	main(int ac, char **av)
 	}
 	else
 		error(NULL, "Too few arguments", 1);
-
-	//free processes
+	free_processes(&data);
 	//free champions
 	return (0);
 }

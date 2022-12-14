@@ -6,38 +6,13 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/08 15:59:43 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:34:59 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include "../includes/op_table.h"
 
-/*
-//tester
-static void print_registers(t_process *temp)
-{
-	int i;
-	int j;
-
-	i = 0;
-	ft_printf("\nProcess %d Regristries--->\n", temp->id);
-	while (i < REG_NUMBER)
-	{
-		j = 31;
-		ft_printf("reg %.2d: ", i + 1);
-		while (j >= 0)
-		{
-			ft_printf("%c", temp->registeries[i] & (int32_t)ft_pow( 2, j) ? '1' : '0' );
-			if (j % 8 == 0)
-				ft_printf(" ");
-			j--;
-		}
-		ft_printf("\n");
-		i++;
-	}
-}
-*/
 static void	read_statement_code(t_data *data, t_process *temp)
 {
 	static const int	cycles_remaining[16] = \
@@ -63,7 +38,6 @@ static void check_process(t_data *data, t_process *temp)
 	if (temp->cycles_remaining == -1)
 	{
 		temp->cursor = circular_mem(temp->cursor, temp->byte_jump_size);
-		//ft_printf("read data %d | temp->cursor: %d\n", data->arena[temp->cursor], temp->cursor);
 		read_statement_code(data, temp);
 	}
 	else if (temp->cycles_remaining == 1)
@@ -82,11 +56,6 @@ static void	execute_processes(t_data *data, t_process *head)
 	temp = head;
 	data->cycles_total++;
 	data->cycles_after_check++;
-	//moved here ??
-	// if (data->cycles_to_die == data->cycles_after_check \
-	// || data->cycles_to_die <= 0)
-	// 	check(data, data->head);
-
 	if (data->verbosity & 0x02)
 		ft_printf("It is now cycle %d\n", data->cycles_total);
 	while (temp)
@@ -98,7 +67,7 @@ static void	execute_processes(t_data *data, t_process *head)
 
 void	play_game(t_data *data)
 {
-	while (data->num_processes)
+	while (data->num_processes > 0)
 	{
 		if (data->dump_cycle == data->cycles_total)
 			print_data(data);

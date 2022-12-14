@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:47:37 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/08 20:53:34 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:34:02 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ static bool	is_died(t_data *data, t_process *process)
 	return (false);
 }
 
-/* go over the list of processes. If found died, remove it
-		and put list together  */
+/*
+** go over the list of processes. If found died, remove it
+** and put list together
+*/
+
 static	void	remove_died(t_data *data, t_process **head)
 {
 	t_process	*prev;
@@ -33,12 +36,11 @@ static	void	remove_died(t_data *data, t_process **head)
 	curr = *head;
 	while (curr)
 	{
-		if (is_died(data, curr))
+		if (is_died(data, curr) && data->num_processes--)
 		{
 			if (data->verbosity & 0x08)
-				ft_printf("Process %d hasn't lived for <> cycles (CTD <num>)\n", curr->id);
+				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", curr->id, data->cycles_total - curr->last_live, data->cycles_to_die);
 			remove = curr;
-			data->num_processes--;
 			curr = curr->next;
 			if (*head == remove)
 				*head = curr;
@@ -54,26 +56,25 @@ static	void	remove_died(t_data *data, t_process **head)
 	}
 }
 //can this be done in data and not champions??
-static void	reset_live_statements(t_data *data)
-{
-	int	i;
+// static void	reset_live_statements(t_data *data)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < data->champions_num)
-	{
-		data->champions[i]->prev_live_statements \
-		= data->champions[i]->curr_live_statements;
-		data->champions[i]->curr_live_statements = 0;
-		i++;
-	}
-	data->num_live_statements = 0;
-}
+// 	i = 0;
+// 	while (i < data->champions_num)
+// 	{
+// 		data->champions[i]->prev_live_statements \
+// 		= data->champions[i]->curr_live_statements;
+// 		data->champions[i]->curr_live_statements = 0;
+// 		i++;
+// 	}
+// 	data->num_live_statements = 0;
+// }
 
 void	check(t_data *data, t_process **head)
 {
 	data->num_checks_performed++;
 	remove_died(data, head);
-	//ft_printf("num_checks_performed: %d num_live_statements: %d\n", data->num_checks_performed, data->num_live_statements);
 	if (data->num_checks_performed == MAX_CHECKS || data->num_live_statements >= NBR_LIVE)
 	{
 		data->cycles_to_die -= CYCLE_DELTA;
@@ -81,8 +82,7 @@ void	check(t_data *data, t_process **head)
 			ft_printf("Cycle to die is now %d\n", data->cycles_to_die);
 		data->num_checks_performed = 0;
 	}
-	//reset_live_statements(data);
+	// reset_live_statements(data);
+	data->num_live_statements = 0;
 	data->cycles_after_check = 0;
-
-
 }

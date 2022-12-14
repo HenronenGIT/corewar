@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/12/07 15:55:51 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/13 10:35:06 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,14 @@ void	write_champ_code(t_data *data, int fd)
 {
 	int		temp;
 	int		i;
-	char	*exec_size;
 
 	temp = 0;
 	i = 0;
-	exec_size = NULL;
 	write(fd, &temp, 2);
 	write(fd, &temp, 2);
 	write(fd, &temp, 2);
-	exec_size = ft_itoa_base(data->champ_size, 16);
 	write(fd, &temp, 1);
-	hex_translator(exec_size, fd, 1);
-	free (exec_size);
+	write(fd, &data->champ_size, 1);
 }
 
 int main(int argc, char *argv[])
@@ -93,7 +89,7 @@ int main(int argc, char *argv[])
 	uint32_t	magic;
 
 	magic = 0x00ea83f3;
-//	printf("\n\n||%s||\n\n", find_file_name(argv[1]));
+	fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
  	if (argc != 2)
 		error(ARG_ERR);
 	//fd = open(find_file_name(argv[1]), O_RDWR | O_CREAT | O_TRUNC, 0600);
@@ -103,15 +99,13 @@ int main(int argc, char *argv[])
 	read_input(argv[1], &s_data);
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(&s_data);
-//	print_data(&s_data);
-//	printf("magic 0x%x\n", magic);
 	magic = int_to_bigendian(magic, 4);
-	// magic = int_to_bigendian(COREWAR_EXEC_MAGIC, 4);
-//	printf("magic 0x%x\n", magic);
 	write(fd, &magic, 4);
 	hex_translator(s_data.s_header->prog_name, fd, PROG_NAME_LENGTH);
 	write_champ_code(&s_data, fd);
 	hex_translator(s_data.s_header->comment, fd, COMMENT_LENGTH);
+	int temp = 0;
+	write(fd, &temp, 4);
 	generator(s_data.vec_input, fd);
 	return (0);
 }

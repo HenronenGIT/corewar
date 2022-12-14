@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   name_translator.c                                  :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoponen <okoponen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 11:23:23 by okoponen          #+#    #+#             */
-/*   Updated: 2022/11/24 11:23:24 by okoponen         ###   ########.fr       */
+/*   Created: 2022/12/13 10:58:37 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/12/13 11:00:45 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
-
-void	hex_translator(char *str, int fd, int len)
+int	ft_abs(int n)
 {
-	int		i;
-	int	temp;
-
-	temp = 0;
-	i = 0;
-	while (i < len)
-	{
-		if (str[i])
-			temp = (int)str[i];
-		else
-			temp = 0;
-		write(fd, &temp, 1);
-		i++;
-	}
+	if (n < 0)
+		return (n * -1);
+	return (n);
 }
