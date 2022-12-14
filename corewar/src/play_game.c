@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 15:57:50 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:26:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,12 @@ void	play_game(t_data *data)
 	while (data->num_processes > 0)
 	{
 		if (data->dump_cycle == data->cycles_total)
-			print_data(data);
+		{
+			if (data->verbosity & 0x01)
+				print_orig_data(data);
+			else
+				print_data(data);
+		}
 		execute_processes(data, data->head);
 		if (data->cycles_to_die == data->cycles_after_check
 			|| data->cycles_to_die <= 0)

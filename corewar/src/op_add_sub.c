@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 15:35:25 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:17:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	op_add(t_process *process, t_data *data)
 	if (types.type_arg[0] == T_REG && types.type_arg[1] == T_REG \
 	&& types.type_arg[2] == T_REG)
 	{
-		if (get_arg_values(data->arena, &types, process))
+		if (get_arg_values(data, &types, process))
 		{
 			sum = process->registers[types.val_arg[0] - 1] \
 			+ process->registers[types.val_arg[1] - 1];
@@ -50,7 +50,7 @@ void	op_sub(t_process *process, t_data *data)
 	if (types.type_arg[0] == T_REG && types.type_arg[1] == T_REG \
 	&& types.type_arg[2] == T_REG)
 	{
-		if (get_arg_values(data->arena, &types, process))
+		if (get_arg_values(data, &types, process))
 		{
 			diff = process->registers[types.val_arg[0] - 1] \
 			- process->registers[types.val_arg[1] - 1];

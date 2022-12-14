@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/14 16:45:07 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:50:59 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ bool		id_used(int id, t_data *);
 bool		is_cor_file(char *file);
 bool		valid_int(char *str);
 int32_t		bytes2int(uint8_t *byte_value, int start, size_t size);
+
+/* print */
 void		print_data(t_data *data);
+void		print_orig_data(t_data *data);
 void		print_contestants(t_data *data);
 void		print_last_alive(t_data *data);
 

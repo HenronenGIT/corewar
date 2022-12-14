@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/14 16:48:46 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:02:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	error(char **str, char *msg, int usage)
 		ft_printf("#### OUTPUT MODE ##########################################################\n");
 		ft_printf("\t-dump <num>\t: Dumps memory after <num> cycles and exits\n");
 		ft_printf("\t-v <num>\t: Verbosity levels, can be added together to enable several\n");
+		ft_printf("\t\t\t - 1 : Mimic supplied VM (hide live statements, immplement 'lld' bug\n");
 		ft_printf("\t\t\t - 2 : Show cycles\n");
 		ft_printf("\t\t\t - 4 : Show operations\n");
 		ft_printf("\t\t\t - 8 : Show deaths\n");
