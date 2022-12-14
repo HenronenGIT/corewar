@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/09 15:24:38 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:48:46 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,14 @@ int	error(char **str, char *msg, int usage)
 		ft_printf("\t\t\t - 4 : Show operations\n");
 		ft_printf("\t\t\t - 8 : Show deaths\n");
 		ft_printf("\t\t\t - 16 : Show cursor movements\n");
-		
 	}
 	exit (1);
 }
 
-static void free_processes(t_data *data)
+static void	free_processes(t_data *data)
 {
-	t_process *temp;
-	t_process *cur;
+	t_process	*temp;
+	t_process	*cur;
 
 	temp = data->head;
 	while (temp)
@@ -53,6 +52,23 @@ static void free_processes(t_data *data)
 		cur = temp;
 		temp = temp->next;
 		free(cur);
+	}
+}
+
+void	load_arena(t_data *data)
+{
+	int	current;
+	int	start;
+
+	current = 0;
+	start = 0;
+	while (current < data->champions_num)
+	{
+		start = (current * MEM_SIZE) / data->champions_num;
+		data->champions[current]->start_addr = start;
+		ft_memcpy(&(data->arena[start]), data->champions[current]->code,
+			data->champions[current]->code_size);
+		current++;
 	}
 }
 
@@ -72,6 +88,7 @@ int	main(int ac, char **av)
 	}
 	else
 		error(NULL, "Too few arguments", 1);
+	//check the free stuff
 	free_processes(&data);
 	//free champions
 	return (0);

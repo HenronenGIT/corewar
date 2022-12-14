@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:55:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/10 11:22:06 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:27:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ static void	get_arg3(int8_t byte, t_types *types)
 	}
 }
 
-void	get_types(int8_t byte, t_types *types)
+void	get_types(t_data *data, t_process *process, t_types *types)
 {
-	int	num_args;
-
-	num_args = types->num_args;
+	int8_t byte = data->arena[(process->cursor + 1) % MEM_SIZE];
+	
 	get_arg1(byte, types);
 	get_arg2(byte, types);
-	if (num_args == 3)
+	if (types->num_args == 3)
 		get_arg3(byte, types);
+	process->byte_jump_size = jump_size(types);
 }
