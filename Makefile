@@ -67,6 +67,8 @@ run:
 
 original:
 	./eval_tests/asm test.s
+
 python:
 	python3 ./eval_tests/scripts/test_asm.py
+
 re : fclean all clean all

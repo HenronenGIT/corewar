@@ -160,9 +160,6 @@ void find_label_addr(t_input **array, char *curr_label_name, int curr_arg, int c
 */
 void save_argument_values(t_input **original_data, t_input *data, int current_arg, int curr_struct)
 {
-	int num;
-
-	num = 0;
 	if (is_label_call(data->args[current_arg]))
 		find_label_addr(original_data, data->args[current_arg], current_arg, curr_struct);
 	else

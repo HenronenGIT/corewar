@@ -35,7 +35,8 @@
 # define LEXICAL_ERROR -8
 # define NAME_COUNT_ERR -9
 # define COMMENT_COUNT_ERR -10
-# define MISSING_COMMA_ERR -11 //TEMP ERROR
+# define MISSING_COMMA_ERR -11
+# define INVALID_FILE_NAME_ERR -12 //TEMP ERROR
 
 # define SYNTAX_ERROR -999 //TEMP ERROR
 
@@ -200,6 +201,11 @@ void make_final(t_input *data, int fd);
 void	hex_translator(char *str, int fd, int len);
 void	add_magic(int fd);
 int		int_to_bigendian(int value, int size);
+void	translation(t_data *s_data, char *file_name);
+
+/* File validation */
+void	validate_file(char *file_name);
+char	*find_file_name(char *s);
 
 /* Inits */
 void	init_structs(t_data *data, t_header *header, t_error_log *error_log);

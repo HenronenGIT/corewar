@@ -25,6 +25,32 @@ class bcolors:
 	BOLD = '\033[1m'
 	UNDERLINE = '\033[4m'
 
+# Leave empty if in root of repo
+path_asm = ''
+# Paths to your invalid files and valid files
+invalidFiles_path = 'eval_tests/tests/error_files/'
+validFiles_path = 'eval_tests/tests/valid_files/'
+
+def main():
+	#Paths
+	workDir = get_path()
+	path_errors = workDir + invalidFiles_path 
+	asm = workDir + path_asm + 'asm'
+	path_valid = workDir + validFiles_path
+
+	invalid_files_arr = get_files(path_errors)
+	valid_files_arr = get_files(path_valid)
+
+	failed_invalid_files = run_error_files(asm, invalid_files_arr)
+	failed_valid_files = run_valid_files(asm, valid_files_arr)
+
+	print_failed_files(failed_invalid_files, failed_valid_files)
+
+	save_to_file(failed_invalid_files, "invalid_file_fails.txt")
+	save_to_file(failed_valid_files, "valid_file_fails.txt")
+	print()
+	print(f"{bcolors.OKBLUE}Failed files saved to:{bcolors.ENDC}\ninvalid_file_fails.txt\nvalid_file_fails.txt")
+
 # If file is failed, it is saved to this ibject
 class failedFile():
     def __init__(self, file, output, exitCode):
@@ -111,25 +137,6 @@ def save_to_file(array, filename):
 			print("----------")
 			i += 1
 		sys.stdout = original_stdout # Reset the standard
-
-def main():
-	#Paths
-	workDir = get_path()
-	asm = workDir + "asm/asm" #<------ EDIT THIS
-	path_errors = workDir + "eval_tests/tests/error_files/" #<---- Path to error files
-	path_valid = workDir + "eval_tests/tests/valid_files/" #<---- Path to valid files
-
-	invalid_files_arr = get_files(path_errors)
-	valid_files_arr = get_files(path_valid)
-
-	failed_invalid_files = run_error_files(asm, invalid_files_arr)
-	failed_valid_files = run_valid_files(asm, valid_files_arr)
-
-	print_failed_files(failed_invalid_files, failed_valid_files)
-
-	save_to_file(failed_invalid_files, "invalid_file_fails.txt")
-	save_to_file(failed_valid_files, "valid_file_fails.txt")
-	print(f"{bcolors.OKBLUE}Failed files saved to:{bcolors.ENDC}\ninvalid_file_fails.txt\nvalid_file_fails.txt")
 
 if __name__ == "__main__":
 	main()

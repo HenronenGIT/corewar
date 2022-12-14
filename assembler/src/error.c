@@ -34,6 +34,8 @@ void error(int error_number)
 		ft_puterror("ERROR: File contained multiple .comment\n");
 	if (error_number == MISSING_COMMA_ERR)
 		ft_puterror("ERROR: Missing comma between arguments!\n");
+	if (error_number == INVALID_FILE_NAME_ERR)
+		ft_puterror("ERROR: Invalid filename\n");
 	exit(error_number);
 }
 

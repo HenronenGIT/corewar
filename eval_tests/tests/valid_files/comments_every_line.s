@@ -1,4 +1,4 @@
-.name "zork"				line1
+.name "zork"				#line1
 .comment "I'M ALIIIIVE"		#line2
 #line3
 l2:		sti r1, %:live, %1	#line4

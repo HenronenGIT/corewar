@@ -34,6 +34,8 @@ SRC_FILES = asm.c \
 			hex_translator.c \
 			calculations.c \
 			int_to_bigendian.c \
+			validite_file.c \
+			translation.c \
 			error.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
