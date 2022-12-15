@@ -4,6 +4,7 @@
 		"stdio.h": "c",
 		"stdbool.h": "c",
 		"libft.h": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"corewar.h": "c"
 	}
 }

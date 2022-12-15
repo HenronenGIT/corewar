@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:40:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/13 15:08:50 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:19:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	circular_mem(int pos, int change)
 size_t	jump_size(t_types *types)
 {
 	size_t	n;
-	int	i;
+	int		i;
 
 	n = 2;
 	i = 0;
@@ -46,7 +46,6 @@ bool	check_null(t_types *types)
 	return (false);
 }
 
-//fix with IDX_MOD
 void	write_arena(int8_t *arena, int idx, int32_t *reg)
 {
 	int		i;
@@ -63,7 +62,6 @@ void	write_arena(int8_t *arena, int idx, int32_t *reg)
 			idx = MEM_SIZE + idx;
 		p++;
 	}
-		
 }
 
 void	update_carry(t_process *cur_process, int32_t val)
@@ -74,7 +72,6 @@ void	update_carry(t_process *cur_process, int32_t val)
 		cur_process->carry = true;
 }
 
-//maybe make verbosity_util.c??
 void	print_byte_jumps(t_process *cur_process, t_data *data)
 {
 	int	idx;
@@ -82,13 +79,12 @@ void	print_byte_jumps(t_process *cur_process, t_data *data)
 
 	idx = cur_process->cursor;
 	i = 0;
-	ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", cur_process->byte_jump_size, idx, idx + cur_process->byte_jump_size);
+	ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", \
+	cur_process->byte_jump_size, idx, idx + cur_process->byte_jump_size);
 	while (i < cur_process->byte_jump_size)
 	{
 		ft_printf("%.2x ", (uint8_t)data->arena[(idx + i) % MEM_SIZE]);
 		i++;
 	}
-	//tester
-	//ft_printf(" | P %d ", cur_process->id);
 	ft_printf("\n");
 }

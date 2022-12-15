@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/13 13:34:59 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:26:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	read_statement_code(t_data *data, t_process *temp)
 {
 	static const int	cycles_remaining[16] = \
 	{10, 5, 5, 10, 10, 6, 6, 6, 20, 25, 25, 800, 10, 50, 1000, 2};
-	int8_t		n;
+	int8_t				n;
 
 	n = data->arena[temp->cursor] - 1;
 	if (n < 16 && n >= 0)
@@ -33,7 +33,7 @@ static void	read_statement_code(t_data *data, t_process *temp)
 	}
 }
 
-static void check_process(t_data *data, t_process *temp)
+static void	check_process(t_data *data, t_process *temp)
 {
 	if (temp->cycles_remaining == -1)
 	{
@@ -70,7 +70,12 @@ void	play_game(t_data *data)
 	while (data->num_processes > 0)
 	{
 		if (data->dump_cycle == data->cycles_total)
-			print_data(data);
+		{
+			if (data->verbosity & 0x01)
+				print_orig_data(data);
+			else
+				print_data(data);
+		}
 		execute_processes(data, data->head);
 		if (data->cycles_to_die == data->cycles_after_check
 			|| data->cycles_to_die <= 0)
