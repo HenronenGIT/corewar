@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:54 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/15 13:01:50 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:42:47 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/corewar.h"
-#include "../includes/op_table.h"
+#include "corewar.h"
+#include "op_table.h"
 
 static void	st_verbose(t_data *data, t_process *process, t_types *types)
 {

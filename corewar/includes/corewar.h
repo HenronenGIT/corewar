@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/15 11:27:58 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:41:15 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <stdint.h>
-
-# include "../../includes/op.h"
-# include "../../libft/includes/libft.h"
-# include "../../libft/includes/ft_printf.h"
 # include <fcntl.h>
+
+# include "op.h"
+# include "libft.h"
+# include "ft_printf.h"
 
 typedef struct s_champion
 {

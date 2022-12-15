@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:04:25 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 21:26:24 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:43:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/corewar.h"
-#include "../includes/op_table.h"
+#include "corewar.h"
+#include "op_table.h"
 
 static void	read_statement_code(t_data *data, t_process *temp)
 {

@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:40:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/15 13:04:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:42:50 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/corewar.h"
-#include "../includes/op_table.h"
+#include "corewar.h"
+#include "op_table.h"
 
 int	circular_mem(int pos, int change)
 {

@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:55:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 21:54:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:41:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/corewar.h"
-#include "../includes/op_table.h"
+#include "corewar.h"
+#include "op_table.h"
 
 static void	get_arg1(int8_t byte, t_types *types)
 {

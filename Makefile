@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 13:03:56 by hmaronen          #+#    #+#              #
-#    Updated: 2022/12/05 16:04:45 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/12/15 14:46:24 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ clean:
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(ASM_DIR) clean
 	@make -C $(VM_DIR) clean
-	rm *.cor
+#	rm *.cor
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
