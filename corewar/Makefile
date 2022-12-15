@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/12/14 21:50:21 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/12/15 11:50:55 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRC_FILES = main.c init_champ_and_data.c init_process_and_fork.c \
 			parse.c parse_n.c process.c \
 			ids.c utils.c print.c play_game.c get_types.c \
 			get_arg_values.c check.c op_util.c \
-			op_add_sub.c op_bitwise.c op_fork.c op_load.c op_misc.c op_store.c
+			op_add_sub.c op_bitwise.c op_fork.c op_load.c op_long_load.c \
+			op_misc.c op_store.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ_DIR = ./obj/

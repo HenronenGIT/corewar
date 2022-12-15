@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:41:19 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/14 21:50:59 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:27:58 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ t_champion	*init_champion(void);
 void		init_data(t_data *data);
 void		init_process(t_data *data, t_process *temp, int i);
 void		init_fork(t_data *data, t_process *temp, int i);
-
-
 void		load_arena(t_data *data);
 
 /* processes */
@@ -93,8 +91,7 @@ void		parse_verbosity(int *ac, char ***av, t_data *data);
 /* ids */
 
 void		reset_ids(t_data *data);
-bool		id_used(int id, t_data *);
-
+bool		id_used(int id, t_data *data);
 
 /* utils */
 bool		is_cor_file(char *file);
