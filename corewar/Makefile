@@ -6,14 +6,14 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/12/15 11:50:55 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/12/15 13:37:44 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
-
+FLAGS = -Wall -Wextra -Werror
+#FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 SRC_DIR = ./src/
 SRC_FILES = main.c init_champ_and_data.c init_process_and_fork.c \
 			parse.c parse_n.c process.c \

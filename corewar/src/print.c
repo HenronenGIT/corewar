@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:01 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/15 13:01:22 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:22:49 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,4 @@ void	print_byte_jumps(t_process *cur_process, t_data *data)
 		}
 		ft_printf("\n");
 	}
-	
 }

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/15 11:44:25 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:47:10 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,18 @@ int	error(char **str, char *msg, int usage)
 	exit (1);
 }
 
-static void	free_processes(t_data *data)
+static void	free_champions(t_data *data)
 {
-	t_process	*temp;
-	t_process	*cur;
+	int	i;
 
-	temp = data->head;
-	while (temp)
+	i = 0;
+	while (i < data->champions_num)
 	{
-		cur = temp;
-		temp = temp->next;
-		free(cur);
+		free (data->champions[i]->name);
+		free (data->champions[i]->comment);
+		free (data->champions[i]->code);
+		free (data->champions[i]);
+		i++;
 	}
 }
 
@@ -84,8 +85,6 @@ int	main(int ac, char **av)
 	}
 	else
 		error(NULL, "Too few arguments", 1);
-	//check the free stuff
-	free_processes(&data);
-	//free champions
+	free_champions(&data);
 	return (0);
 }
