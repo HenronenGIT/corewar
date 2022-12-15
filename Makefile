@@ -69,6 +69,6 @@ original:
 	./eval_tests/asm test.s
 
 python:
-	python3 ./eval_tests/scripts/test_asm.py
+	python3 ./eval_tests/scripts/valid_asm_tests.py
 
 re : fclean all clean all
