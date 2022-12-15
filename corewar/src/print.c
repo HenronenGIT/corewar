@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:01 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/15 12:07:24 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:01:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,18 @@ void	print_byte_jumps(t_process *cur_process, t_data *data)
 	int	idx;
 	int	i;
 
-	idx = cur_process->cursor;
-	i = 0;
-	ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", \
-	cur_process->byte_jump_size, idx, idx + cur_process->byte_jump_size);
-	while (i < cur_process->byte_jump_size)
+	if (data->verbosity & 0x10)
 	{
-		ft_printf("%.2x ", (uint8_t)data->arena[(idx + i) % MEM_SIZE]);
-		i++;
+		idx = cur_process->cursor;
+		i = 0;
+		ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", \
+		cur_process->byte_jump_size, idx, idx + cur_process->byte_jump_size);
+		while (i < cur_process->byte_jump_size)
+		{
+			ft_printf("%.2x ", (uint8_t)data->arena[(idx + i) % MEM_SIZE]);
+			i++;
+		}
+		ft_printf("\n");
 	}
-	ft_printf("\n");
+	
 }
