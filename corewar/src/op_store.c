@@ -6,12 +6,19 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:54 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 21:18:55 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:01:50 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include "../includes/op_table.h"
+
+static void	st_verbose(t_data *data, t_process *process, t_types *types)
+{
+	if (data->verbosity & 0x04)
+		ft_printf("P%5d | st r%d %d\n", process->id, \
+		types->val_arg[0], types->val_arg[1]);
+}
 
 void	op_st(t_process *process, t_data *data)
 {
@@ -35,22 +42,23 @@ void	op_st(t_process *process, t_data *data)
 				write_arena(data->arena, idx, \
 				&process->registers[types.val_arg[0] - 1]);
 			}
-			if (data->verbosity & 0x04)
-				ft_printf("P%5d | st r%d %d\n", process->id, \
-				types.val_arg[0], types.val_arg[1]);
+			st_verbose(data, process, &types);
 		}
 	}
-	if (data->verbosity & 0x10)
-		print_byte_jumps(process, data);
+	print_byte_jumps(process, data);
 }
 
-static void	sti_verbose(t_process *process, t_types	*types, int change)
+static void	sti_verbose(t_data *data, t_process *process, \
+t_types	*types, int change)
 {
-	ft_printf("P%5d | sti r%d %d %d\n       | -> store to %d + %d = %d (with pc and mod %d)\n", \
-	process->id, \
-	types->val_arg[0], types->val_arg[1], types->val_arg[2], \
-	types->val_arg[1], types->val_arg[2], \
-	types->val_arg[1] + types->val_arg[2], process->cursor + change);
+	if (data->verbosity & 0x04)
+	{
+		ft_printf("P%5d | sti r%d %d %d\n", \
+		process->id, types->val_arg[0], types->val_arg[1], types->val_arg[2]);
+		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", \
+		types->val_arg[1], types->val_arg[2], \
+		types->val_arg[1] + types->val_arg[2], process->cursor + change);
+	}
 }
 
 void	op_sti(t_process *process, t_data *data)
@@ -75,10 +83,8 @@ void	op_sti(t_process *process, t_data *data)
 			idx = circular_mem(process->cursor, change);
 			write_arena(data->arena, idx, \
 			&process->registers[types.val_arg[0] - 1]);
-			if (data->verbosity & 0x04)
-				sti_verbose(process, &types, change);
+			sti_verbose(data, process, &types, change);
 		}
 	}
-	if (data->verbosity & 0x10)
-		print_byte_jumps(process, data);
+	print_byte_jumps(process, data);
 }

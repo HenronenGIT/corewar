@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:38 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 21:18:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:02:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void	op_and(t_process *process, t_data *data)
 				types.val_arg[0], types.val_arg[1], types.val_arg[2]);
 		}
 	}
-	if (data->verbosity & 0x10)
-		print_byte_jumps(process, data);
+	print_byte_jumps(process, data);
 }
 
 void	op_or(t_process *process, t_data *data)
@@ -65,8 +64,7 @@ void	op_or(t_process *process, t_data *data)
 				types.val_arg[0], types.val_arg[1], types.val_arg[2]);
 		}
 	}
-	if (data->verbosity & 0x10)
-		print_byte_jumps(process, data);
+	print_byte_jumps(process, data);
 }
 
 void	op_xor(t_process *process, t_data *data)
@@ -93,6 +91,5 @@ void	op_xor(t_process *process, t_data *data)
 				types.val_arg[0], types.val_arg[1], types.val_arg[2]);
 		}
 	}
-	if (data->verbosity & 0x10)
-		print_byte_jumps(process, data);
+	print_byte_jumps(process, data);
 }

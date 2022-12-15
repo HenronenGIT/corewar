@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:40:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/14 21:19:00 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:04:04 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,4 @@ void	update_carry(t_process *cur_process, int32_t val)
 		cur_process->carry = false;
 	else
 		cur_process->carry = true;
-}
-
-void	print_byte_jumps(t_process *cur_process, t_data *data)
-{
-	int	idx;
-	int	i;
-
-	idx = cur_process->cursor;
-	i = 0;
-	ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", \
-	cur_process->byte_jump_size, idx, idx + cur_process->byte_jump_size);
-	while (i < cur_process->byte_jump_size)
-	{
-		ft_printf("%.2x ", (uint8_t)data->arena[(idx + i) % MEM_SIZE]);
-		i++;
-	}
-	ft_printf("\n");
 }
