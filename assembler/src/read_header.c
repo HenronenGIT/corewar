@@ -52,6 +52,7 @@ static char *copy_name(t_data *s_data, char *string, int fd, t_type type)
 		{
 			dst[j] = '\n';
 			get_next_line(fd, &string);
+			ft_replace(&string, '\n', '\0');
 		}
 		else
 		{
@@ -135,6 +136,7 @@ void read_header(int fd, t_data *s_data)
 	line = NULL;
 	while (get_next_line(fd, &line))
 	{
+		ft_replace(&line, '\n', '\0');
 		s_data->s_error_log->column = 1;
 		seek_header_char(s_data, line, fd);
 		if (s_data->s_header->name_saved && s_data->s_header->comment_saved)

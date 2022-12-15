@@ -119,9 +119,10 @@ void validate_instruction_syntax(t_input *statement)
 		error(MISSING_COMMA_ERR);
 	while (i < 3)
 	{
-		if (g_table[op_code - 1].params_type[i] && !statement->arg_type[i])
-			error(SYNTAX_ERROR);
-		result = statement->arg_type[i] & g_table[op_code - 1].params_type[i];
+		if (g_table[op_code - 1].arg_type[i] && !statement->arg_type[i])
+			syntax_error(TEMP_ERR, op_code);
+			// error(SYNTAX_ERROR);
+		result = statement->arg_type[i] & g_table[op_code - 1].arg_type[i];
 		if (result != statement->arg_type[i])
 			syntax_error(INVALID_ARG_ERR, op_code);
 		i += 1;

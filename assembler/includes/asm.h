@@ -36,11 +36,12 @@
 # define NAME_COUNT_ERR -9
 # define COMMENT_COUNT_ERR -10
 # define MISSING_COMMA_ERR -11
-# define INVALID_FILE_NAME_ERR -12 //TEMP ERROR
+# define INVALID_FILE_NAME_ERR -12
+# define NO_NL_ERR -13 //TEMP ERROR
 
 /*---------- Syntax errors ----------*/
-# define ARG_COUNT_ERR -1
-# define INVALID_ARG_ERR -2
+# define ARG_COUNT_ERR -14
+# define INVALID_ARG_ERR -15
 
 # define SYNTAX_ERROR -999 //TEMP ERROR
 
@@ -157,7 +158,7 @@ typedef struct s_table
 {
 	const char *instruction;
 	int op_code;
-	int params_type[3];
+	int arg_type[3];
 	int direct_size;
 	int arg_type_code;
 	int expected_arg_count;

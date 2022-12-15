@@ -19,15 +19,16 @@
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/Backward_fixed.s"], // Arguments for the executable
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/42.s"], // Arguments for the executable
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/junk_before_comment_cmd.s"], // Arguments for the executable
-            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/missing_newline.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/comment_endofline.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/op_lld.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/op_lld_valid.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/moro.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/comments_every_line.s"],
-            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/42.s"],
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/42.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/incorrect_args.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/missing_newline.s"],
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/barriere.s"],
+            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/empty_name.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/test.s"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

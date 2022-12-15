@@ -91,7 +91,6 @@ void lexical_scanner(char *line, t_data *s_data)
 				save_token(s_data, sub_string, REGISTER);
 			else
 				lexical_error(s_data);
-				// save_token(s_data, sub_string, INVALID);
 			left = right;
 		}
 	}
@@ -106,15 +105,26 @@ void	read_input(char *input, t_data *s_data)
 {
 	int		fd;
 	char	*line;
+	int		had_newline;
+	int		last_token;
+	t_token	**tokens;
 
+	had_newline = 0;
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
 		error(OPEN_ERR);
 	read_header(fd, s_data);
 	while (get_next_line(fd, &line) != 0)
 	{
+		had_newline = 0;
+		if (ft_replace(&line, '\n', '\0'))
+			had_newline = 1;
 		s_data->s_error_log->line += 1;
 		lexical_scanner(line, s_data);
 		free(line);
 	}
+	tokens = (t_token **)s_data->vec_tokens->array;
+	last_token = s_data->vec_tokens->space_taken - 1;
+	if (tokens[last_token]->type == LABEL && had_newline == 0)
+		error(NO_NL_ERR);
 }

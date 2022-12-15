@@ -120,5 +120,6 @@ int		ft_printf(const char *format, ...);
 
 void	sort_int_tab(int *tab, int length);
 void	ft_print_tab(int *tab, size_t tab_size);
+int		ft_replace(char **str, char find, char replace);
 
 #endif

@@ -36,6 +36,8 @@ void error(int error_number)
 		ft_puterror("ERROR: Missing comma between arguments!\n");
 	if (error_number == INVALID_FILE_NAME_ERR)
 		ft_puterror("ERROR: Invalid filename\n");
+	if (error_number == NO_NL_ERR)
+		ft_puterror("ERROR: File was missing a newline character!\n");
 	exit(error_number);
 }
 

@@ -96,6 +96,7 @@ def runFile(program, testFile, is_refProgram):
 	if is_refProgram == False:
 		if output.returncode != 0:
 			print(f"{bcolors.FAIL}FAIL - File did not compile{bcolors.ENDC}")
+			# print(output.stdout.decode('utf-8'))
 	if is_refProgram == True:
 		subprocess.run(['mv', corExtension, './'])
 	output = subprocess.run(['xxd', corFile], capture_output=True)

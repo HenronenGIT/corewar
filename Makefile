@@ -54,7 +54,6 @@ clean:
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(ASM_DIR) clean
 	@make -C $(VM_DIR) clean
-	rm *.cor
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
