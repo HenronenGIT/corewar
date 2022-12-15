@@ -57,8 +57,6 @@ static void copy_instruction_data(t_data *s_data, t_token *token)
 	size_t newest_element;
 	t_input **input_array;
 
-	// if (token->type == SEPARATOR)
-	// return;
 	input_array = (t_input **)s_data->vec_input->array;
 	newest_element = s_data->vec_input->space_taken - 1;
 	if (token->type == SEPARATOR)
@@ -115,6 +113,8 @@ void validate_instruction_syntax(t_input *statement)
 	i = 0;
 	result = 0;
 	op_code = statement->op_code;
+	if (statement->arg_count != g_table[op_code - 1].expected_arg_count)
+		syntax_error(ARG_COUNT_ERR, op_code);
 	if ((statement->arg_count - statement->commas) != 1)
 		error(MISSING_COMMA_ERR);
 	while (i < 3)
@@ -122,11 +122,8 @@ void validate_instruction_syntax(t_input *statement)
 		if (g_table[op_code - 1].params_type[i] && !statement->arg_type[i])
 			error(SYNTAX_ERROR);
 		result = statement->arg_type[i] & g_table[op_code - 1].params_type[i];
-		//! error here
 		if (result != statement->arg_type[i])
-			syntax_error(op_code, statement->arg_type[i]);
-		// error(SYNTAX_ERROR);
-		//
+			syntax_error(INVALID_ARG_ERR, op_code);
 		i += 1;
 	}
 }
@@ -140,7 +137,7 @@ static void validate_syntax(t_vec *vec_input)
 	if (vec_input->space_taken == 0)
 		return;
 	statement = vec_input->array[newsest_element];
-	// validate_label_syntax might NOT be needed... check with different error cases
+	//? validate_label_syntax might NOT be needed... check with different error cases
 	if (statement->label_name)
 		validate_label_syntax(statement);
 	else

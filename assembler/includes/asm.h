@@ -38,6 +38,10 @@
 # define MISSING_COMMA_ERR -11
 # define INVALID_FILE_NAME_ERR -12 //TEMP ERROR
 
+/*---------- Syntax errors ----------*/
+# define ARG_COUNT_ERR -1
+# define INVALID_ARG_ERR -2
+
 # define SYNTAX_ERROR -999 //TEMP ERROR
 
 # define TEMP_ERR -999 //! TEMP
@@ -76,14 +80,6 @@
 
 # define REG_SIZE 4
 # define DIR_SIZE REG_SIZE
-
-// typedef enum e_arg_types
-// {
-// 	T_REG = 1,
-// 	T_DIR = 2,
-// 	T_IND = 4,
-// 	T_LAB = 8
-// }	t_arg_types;
 
 /*---------- Main data struct ----------*/
 typedef struct s_data
@@ -164,25 +160,26 @@ typedef struct s_table
 	int params_type[3];
 	int direct_size;
 	int arg_type_code;
+	int expected_arg_count;
 } t_table;
 
 static const t_table g_table[] = {
-	{"live", 1, {T_DIR}, 4, 0},
-	{"ld", 2, {T_DIR | T_IND, T_REG}, 1},
-	{"st", 3, {T_REG, T_IND | T_REG}, 4, 1},
-	{"add", 4, {T_REG, T_REG, T_REG}, 4, 1},
-	{"sub", 5, {T_REG, T_REG, T_REG}, 4, 1},
-	{"and", 6, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
-	{"or", 7, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
-	{"xor", 8, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
-	{"zjmp", 9, {T_DIR}, 2, 0},
-	{"ldi", 10, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1},
-	{"sti", 11, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 2, 1},
-	{"fork", 12, {T_DIR}, 2, 0},
-	{"lld", 13, {T_DIR | T_IND, T_REG}, 4, 1},
-	{"lldi", 14, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1},
-	{"lfork", 15, {T_DIR}, 2, 0},
-	{"aff", 16, {T_REG}, 4, 1},
+	{"live", 1, {T_DIR}, 4, 0, 1},
+	{"ld", 2, {T_DIR | T_IND, T_REG}, 1, 2, 2},
+	{"st", 3, {T_REG, T_IND | T_REG}, 4, 1, 2},
+	{"add", 4, {T_REG, T_REG, T_REG}, 4, 1, 3},
+	{"sub", 5, {T_REG, T_REG, T_REG}, 4, 1, 3},
+	{"and", 6, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 4, 1, 3},
+	{"or", 7, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1, 3},
+	{"xor", 8, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1, 3},
+	{"zjmp", 9, {T_DIR}, 2, 0, 1},
+	{"ldi", 10, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1, 3},
+	{"sti", 11, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 2, 1, 3},
+	{"fork", 12, {T_DIR}, 2, 0, 1},
+	{"lld", 13, {T_DIR | T_IND, T_REG}, 4, 1, 2},
+	{"lldi", 14, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1, 3},
+	{"lfork", 15, {T_DIR}, 2, 0, 1},
+	{"aff", 16, {T_REG}, 4, 1, 1},
 	{NULL, 0, {0}, 0}};
 
 /*---------- Token struct ----------*/
@@ -216,8 +213,7 @@ void	error(int error_number);
 void	read_input(char *input, t_data *s_data);
 void	read_header(int fd, t_data *s_data);
 void	lexical_error(t_data *s_data);
-void	syntax_error(int op_code, int result);
-// void	calculate_statement_sizes(t_vec *vec_statements);
+void	syntax_error(int error_number, int op_code);
 
 /*---------- Dynamic 2D array ----------*/
 void	vec_new_arr(t_vec *dst, size_t len);

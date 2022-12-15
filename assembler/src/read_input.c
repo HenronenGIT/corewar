@@ -53,9 +53,15 @@ void lexical_scanner(char *line, t_data *s_data)
 	sub_string = NULL;
 	while (right <= len && left <= right)
 	{
-		s_data->s_error_log->column = left + 1;
+		s_data->s_error_log->column = right + 1;
 		if (line[right] == COMMENT_CHAR)
-			break;
+		{
+			if (left == right)
+				break;
+			if (is_delimiter(line[left]) == false)
+				lexical_error(s_data);
+		}
+		
 		if (is_separator(line[right]) && left == right)
 			save_token(s_data, ft_strsub(&line[left], 0, 1), SEPARATOR);
 		if (is_delimiter(line[right]) == false)
@@ -65,7 +71,6 @@ void lexical_scanner(char *line, t_data *s_data)
 			right += 1;
 			left += 1;
 		}
-
 		// mayby can be splitted over here to separate function
 		else if (is_delimiter(line[right]) == true && left != right)
 		{
@@ -108,8 +113,8 @@ void	read_input(char *input, t_data *s_data)
 	read_header(fd, s_data);
 	while (get_next_line(fd, &line) != 0)
 	{
+		s_data->s_error_log->line += 1;
 		lexical_scanner(line, s_data);
 		free(line);
-		s_data->s_error_log->line += 1;
 	}
 }

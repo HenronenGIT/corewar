@@ -1,14 +1,10 @@
-.name "zork" #test
-#test
-.comment "I'M ALIIIIVE"
+.name "add"
+.comment "addition"
 
-#l2:
-sti r10, %:live, %1
-,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,
-live %12
-		#and r1, %0, r1
-#,,,,,,,,,,,,,,, 
-#.name "moro"
-#live:	live %1
-#		zjmp %:live
+ft_label:
+add #r1, r2, r3
+add r3, r2, r1
+add r1, r1, r1
+add r15, r16, r17
+
+ft_label2:

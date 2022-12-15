@@ -63,12 +63,15 @@ fclean: clean
 
 # temp
 run:
-	@./asm/asm test.s
+	@./asm test.s
 
 original:
 	./eval_tests/asm test.s
 
-python:
+valid:
 	python3 ./eval_tests/scripts/valid_asm_tests.py
+
+invalid:
+	python3 ./eval_tests/scripts/invalid_asm_tests.py
 
 re : fclean all clean all
