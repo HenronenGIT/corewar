@@ -69,5 +69,7 @@ void	translation(t_data *s_data, char *file_name)
 	hex_translator(s_data->s_header->prog_name, fd, PROG_NAME_LENGTH);
 	write_champ_code(s_data, fd);
 	hex_translator(s_data->s_header->comment, fd, COMMENT_LENGTH);
+	// exit(1);
 	generator(s_data->vec_input, fd);
+	close(fd);
 }

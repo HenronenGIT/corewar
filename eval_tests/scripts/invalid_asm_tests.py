@@ -44,7 +44,7 @@ def main():
 
 	save_to_file(failed_invalid_files, "invalid_file_fails.txt")
 	print()
-	print(f"{bcolors.OKBLUE}Failed files saved to:{bcolors.ENDC}\ninvalid_file_fails.txt")
+	print(f"{bcolors.YELLOW}FAILED FILES SAVED TO:{bcolors.ENDC}\ninvalid_file_fails.txt")
 
 # If file is failed, it is saved to this ibject
 class failedFile():
@@ -83,9 +83,8 @@ def run_error_files(program, file_array):
 	
 	failed_files = []
 	output = ""
-	print(f"{bcolors.OKBLUE}----INVALID FILES----{bcolors.ENDC}")
 	for file in file_array:
-		print(f"Testing with: {os.path.basename(file)}")
+		print(f"{bcolors.YELLOW}RUNNING WITH:{bcolors.ENDC} [{os.path.basename(file)}]... ", end='')
 		output = subprocess.run([program, file], capture_output=True)
 		if output.returncode == 0:
 			failed_files.append(failedFile(file, output.stdout.decode('utf-8'), output.returncode))
@@ -108,9 +107,9 @@ def run_valid_files(program, file_array):
 	return failed_files
 
 def print_failed_files(failed_error_files):
-	print(f"{bcolors.YELLOW}FAILED {bcolors.UNDERLINE}INVALID{bcolors.ENDC} {bcolors.YELLOW}FILES:{bcolors.ENDC}")
 	if len(failed_error_files) == 0:
-		print(f"{bcolors.OKGREEN}ALL INVALID FILES PASSED {bcolors.ENDC}")
+		print()
+		print(f"{bcolors.OKGREEN}~~~~~~~~~~~ ALL INVALID FILES PASSED ~~~~~~~~~~~{bcolors.ENDC}")
 	else:
 		print_array(failed_error_files)
 
