@@ -68,7 +68,7 @@ def get_files(path):
 	return list
 
 def testFile(testFile, asm, asm_ref):
-	print(f"{bcolors.OKCYAN}TESTING WITH:{bcolors.ENDC} {os.path.basename(testFile)} ", end='')
+	print(f"{bcolors.HEADER}TESTING WITH:{bcolors.ENDC} {os.path.basename(testFile)} ", end='')
 	runFile(asm_ref, testFile, True)
 	runFile(asm, testFile, False)
 
@@ -77,7 +77,7 @@ def testFile(testFile, asm, asm_ref):
 
 	output = subprocess.run(['diff', 'ref.txt', 'our.txt'], capture_output=True)
 	if len(output.stdout) != 0:
-		print(f"{bcolors.FAIL}FAIL{bcolors.ENDC}")
+		print(f"{bcolors.YELLOW}DIFF{bcolors.ENDC}")
 		status = subprocess.call(f'cp our.txt eval_tests/failed_our/our_{failedFile}', shell=True) 
 		status = subprocess.call(f'cp ref.txt eval_tests/failed_ref/ref_{failedFile}', shell=True) 
 	else:
@@ -96,7 +96,6 @@ def runFile(program, testFile, is_refProgram):
 	if is_refProgram == False:
 		if output.returncode != 0:
 			print(f"{bcolors.FAIL}FAIL - File did not compile{bcolors.ENDC}")
-			# print(output.stdout.decode('utf-8'))
 	if is_refProgram == True:
 		subprocess.run(['mv', corExtension, './'])
 	output = subprocess.run(['xxd', corFile], capture_output=True)

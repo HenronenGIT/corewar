@@ -178,7 +178,7 @@ void generate_input(t_input **original_data, t_input *data, int curr_struct)
 	int i;
 
 	i = 0;
-	if (g_table[data->op_code - 1].arg_type_code != 0)
+	if (g_op_tab[data->op_code - 1].arg_type_code != 0)
 		save_atc(data);
 	while (data->args[i])
 	{

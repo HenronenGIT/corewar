@@ -65,9 +65,9 @@ void	syntax_error(int error_number, t_input *statement, char *label)
 	if (statement)
 		op_code = statement->op_code;
 	if (error_number == ARG_COUNT_ERR)
-		ft_printf("Invalid amount of arguments for instruciton [%s]\n", g_table[op_code - 1].instruction);
+		ft_printf("Invalid amount of arguments for instruciton [%s]\n", g_op_tab[op_code - 1].instruction);
 	if (error_number == INVALID_ARG_ERR)
-		ft_printf("Invalid argument type for instruction [%s]\n", g_table[op_code - 1].instruction);
+		ft_printf("Invalid argument type for instruction [%s]\n", g_op_tab[op_code - 1].instruction);
 	if (error_number == UNDEFINED_LABEL_ERR)
 		ft_printf("Undefined label [%s]\n", label);
 	exit(SYNTAX_ERROR);

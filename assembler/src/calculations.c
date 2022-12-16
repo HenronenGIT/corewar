@@ -19,7 +19,7 @@ static int fetch_size(int arg_type, int op_code)
 	else if (arg_type == T_IND)
 		return (T_IND_SIZE);
 	else if (arg_type == T_DIR)
-		return (g_table[op_code - 1].direct_size);
+		return (g_op_tab[op_code - 1].direct_size);
 	else
 		return (0);
 }
@@ -34,7 +34,7 @@ static int calculate_total(t_input *statement)
 	sum += STATEMENT_SIZE;
 	while (statement->arg_size[++i] != 0)
 		sum += statement->arg_size[i];
-	if (g_table[statement->op_code - 1].arg_type_code)
+	if (g_op_tab[statement->op_code - 1].arg_type_code)
 		sum += 1;
 	return (sum);
 }

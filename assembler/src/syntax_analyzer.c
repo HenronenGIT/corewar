@@ -17,10 +17,10 @@ int lookup(const char *string)
 	size_t i;
 
 	i = 0;
-	while (g_table[i].instruction != NULL)
+	while (g_op_tab[i].instruction != NULL)
 	{
-		if (ft_strcmp(string, g_table[i].instruction) == 0)
-			return (g_table[i].op_code);
+		if (ft_strcmp(string, g_op_tab[i].instruction) == 0)
+			return (g_op_tab[i].op_code);
 		i += 1;
 	}
 	return (-1);
@@ -52,128 +52,134 @@ void save_argument(t_input **input_array, t_token *token)
 		(*input_array)->arg_type[i] = T_IND;
 }
 
-static void copy_instruction_data(t_data *s_data, t_token *token)
+static void insert_arguments(t_data *s_data, t_token *token)
 {
 	size_t newest_element;
 	t_input **input_array;
 
 	input_array = (t_input **)s_data->vec_input->array;
 	newest_element = s_data->vec_input->space_taken - 1;
-	if (token->type == SEPARATOR)
-		input_array[newest_element]->commas += 1;
-	else if (token->type == INSTRUCTION)
-		input_array[newest_element]->op_code = lookup(token->content);
-	else
+	// if (token->type == SEPARATOR)
+		// input_array[newest_element]->commas += 1;
+	// else
 		save_argument(&input_array[newest_element], token); // save argumnets better name?
 }
 
-static void copy_label_data(t_data *s_data, t_token *token)
+static void validate_arg_types(t_input *cur_element, int op_code)
 {
-	size_t newest_element;
-	t_input **array;
+	int result;
+	int	i;
+	int *arg_type;
 
-	array = (t_input **)s_data->vec_input->array;
-	newest_element = s_data->vec_input->space_taken - 1;
-	array[newest_element]->label_name = token->content;
+	i = 0;
+	result = 0;
+	arg_type = cur_element->arg_type;
+	while (arg_type[i])
+	{
+
+	if (g_op_tab[op_code - 1].arg_type[i] && !arg_type[i])
+		syntax_error(TEMP_ERR, cur_element, NULL);
+		// return (0);
+	result = arg_type[i] & g_op_tab[op_code - 1].arg_type[i];
+	if (result != arg_type[i])
+		syntax_error(INVALID_ARG_ERR, cur_element, NULL);
+		i += 1;
+	}
 }
 
-/*
-Allocates the new pointer that points to t_input struct.
-After allocation vec_insert() function inserts that pointer to:
-	 s_data->vec_tokens->array
-*/
-static void allocate_element(t_data *s_data)
+void validate_instruction_syntax(t_input *cur_element, t_token *cur_token)
+{
+	int op_code;
+	size_t i;
+
+	i = 0;
+	op_code = cur_element->op_code;
+	if (cur_element->arg_count != g_op_tab[op_code - 1].expected_arg_count)
+		syntax_error(ARG_COUNT_ERR, cur_element, NULL);
+	// if ((cur_element->arg_count - cur_element->commas) != 1)
+		// error(MISSING_COMMA_ERR); //? can be inteperted as syntax_error
+	validate_arg_types(cur_element, op_code);
+}
+
+static void validate_label_syntax(t_input *cur_element, t_token *cur_token)
+{
+	if (cur_token->type != NEWLINE)
+		syntax_error(NO_NL_ERR, NULL, cur_element->label_name);
+}
+
+static void validate_syntax(t_vec *vec_input, t_token *current_token, t_type last_token)
+{
+	t_input *newest_element;
+
+	if (vec_input->space_taken == 0)
+		return ;
+	if (last_token == SEPARATOR) //Syntax error at token [TOKEN][004:016] ENDLINE
+		syntax_error(NO_NL_ERR, NULL, NULL);
+	newest_element = vec_input->array[vec_input->space_taken - 1];
+	if (newest_element->label_name)
+		validate_label_syntax(newest_element, current_token);
+	else
+		validate_instruction_syntax(newest_element, current_token);
+	return;
+}
+
+static void allocate_element(t_data *s_data, t_token *token)
 {
 	t_input *element;
+	int op_code;
 
 	element = (t_input *)malloc(sizeof(t_input));
 	if (!element)
 		error(MALLOC_ERR);
 	element = init_values(element);
+	if (token->type == LABEL)
+		element->label_name = token->content;
+	else
+	{
+		op_code = lookup(token->content);
+		element->op_code = g_op_tab[op_code - 1].op_code;
+	}
 	vec_insert(s_data->vec_input, element);
 }
 
-void validate_label_syntax(t_input *label_element)
+void syntax_analyzer(t_data *s_data)
 {
-	// if (label_element->)
-
-	/* Need to check with different error files that what conditions we need
-	to validate valid label element.
-
-	Easy way out would be to just check every single variable that they are eiteher
-	NULL or 0*/
-}
-
-void validate_instruction_syntax(t_input *statement)
-{
-	int op_code;
-	int result;
+	t_token **tokens = (t_token **)s_data->vec_tokens->array;
+	static t_type last_token;
 	size_t i;
 
+	last_token = NEWLINE;
 	i = 0;
-	result = 0;
-	op_code = statement->op_code;
-	if (statement->arg_count != g_table[op_code - 1].expected_arg_count)
-		syntax_error(ARG_COUNT_ERR, statement, NULL);
-		// syntax_error(ARG_COUNT_ERR, op_code);
-	if ((statement->arg_count - statement->commas) != 1)
-		error(MISSING_COMMA_ERR);//? can be inteperted as syntax_error
-	while (i < 3)
+	while (tokens[i])
 	{
-		if (g_table[op_code - 1].arg_type[i] && !statement->arg_type[i])
-			syntax_error(TEMP_ERR, statement, NULL);
-			// error(SYNTAX_ERROR);
-		result = statement->arg_type[i] & g_table[op_code - 1].arg_type[i];
-		if (result != statement->arg_type[i])
-			syntax_error(INVALID_ARG_ERR, statement, NULL);
-		i += 1;
-	}
-}
-
-static void validate_syntax(t_vec *vec_input)
-{
-	t_input *statement;
-	size_t newsest_element;
-
-	newsest_element = vec_input->space_taken - 1;
-	if (vec_input->space_taken == 0)
-		return;
-	statement = vec_input->array[newsest_element];
-	//? validate_label_syntax might NOT be needed... check with different error cases
-	if (statement->label_name)
-		validate_label_syntax(statement);
-	else
-		validate_instruction_syntax(statement);
-}
-
-/*
-	Iterates trough dynamic array found from s_data->vec_tokens;
-	If token found from array is LABEL or INSTRUCTION
-		-> Validate syntax from last element.
-		-> Allocate new element
-	else
-		-> Init data to the element that was allocated before
-*/
-void	syntax_analyzer(t_data *s_data)
-{
-	t_token	**tokens = (t_token **)s_data->vec_tokens->array;
-	// t_vec	*vec_tokens = s_data->vec_tokens;
-	size_t	i;
-
-	i = 0;
-	// while (vec_tokens->array[i])
-	while ((t_token *)s_data->vec_tokens->array[i])
-	{
-		if (tokens[i]->type == LABEL || tokens[i]->type == INSTRUCTION)
-		{
-			validate_syntax(s_data->vec_input);
-			allocate_element(s_data);
-		}
 		if (tokens[i]->type == LABEL)
-			copy_label_data(s_data, tokens[i]);
-		else
-			copy_instruction_data(s_data, tokens[i]);
+			allocate_element(s_data, tokens[i]);
+		// else if ((tokens[i]->type == INSTRUCTION) && last_token != NEWLINE)
+			// syntax_error(NO_NL_ERR, NULL, NULL);
+
+
+			/* Upper statement is cleaner, is there better way to check that
+				IF token is instruction, last token needs to be newline or label*/
+
+				
+		else if (tokens[i]->type == INSTRUCTION) //? This could be cleaner
+		{
+			if (last_token != NEWLINE && last_token != LABEL)
+				syntax_error(NO_NL_ERR, NULL, NULL);
+			else
+				allocate_element(s_data, tokens[i]);
+		}
+		// else if (tokens[i]->type == INSTRUCTION)
+			// allocate_element(s_data, tokens[i]);
+		else if (tokens[i]->type == NEWLINE)
+			validate_syntax(s_data->vec_input, tokens[i], last_token);
+		else if (tokens[i]->type == SEPARATOR && !is_argument(last_token))
+			syntax_error(MISSING_COMMA_ERR, NULL, NULL);
+		else if (is_argument(tokens[i]->type))
+			insert_arguments(s_data, tokens[i]);
+		last_token = tokens[i]->type;
 		i += 1;
 	}
-	validate_syntax(s_data->vec_input); // better style?
+	if (last_token != NEWLINE)
+		syntax_error(NO_NL_ERR, NULL, NULL); //Syntax error at token [TOKEN][005:007] END "(null)"
 }

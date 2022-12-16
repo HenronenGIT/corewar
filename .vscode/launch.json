@@ -15,9 +15,7 @@
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/two_names.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/name_too_long.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/extra_quote.s"], // Arguments for the executable
-            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/42.s"], // Arguments for the executable
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/Backward_fixed.s"], // Arguments for the executable
-            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/42.s"], // Arguments for the executable
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/junk_before_comment_cmd.s"], // Arguments for the executable
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/comment_endofline.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/op_lld.s"],
@@ -34,7 +32,7 @@
             // "args": ["/Users/hmaronen/workspace/github/corewar/test.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/Backward.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/2_statement_same_line.s"],
-            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/Backward_fixed.s"],
+            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/invalid_files_2/error19.s"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

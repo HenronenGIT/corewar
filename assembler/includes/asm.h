@@ -113,12 +113,11 @@ typedef struct s_vec
 typedef struct s_data_cell
 {
 	short commas;
-	short arg_count;//test
+	short arg_count;
 	char *label_name;
 	int op_code;
 	char *args[4];
-	int arg_type[4]; // is 0 for none, 1 for T_REG, 2 for T_DIR and 3 for T_IND | HENRI
-
+	int arg_type[4];
 	int total_size;	 // full size of every statement as bytes. 0 for labels | HENRI
 	int arg_size[4]; // is size of every arg in bytes | HENRI
 	int current_bytes;
@@ -155,7 +154,7 @@ typedef enum e_type
 	NEWLINE,
 } t_type;
 
-typedef struct s_table
+typedef struct s_op_tab
 {
 	const char *instruction;
 	int op_code;
@@ -163,9 +162,9 @@ typedef struct s_table
 	int direct_size;
 	int arg_type_code;
 	int expected_arg_count;
-} t_table;
+} t_op_tab;
 
-static const t_table g_table[] = {
+static const t_op_tab g_op_tab[] = {
 	{"live", 1, {T_DIR}, 4, 0, 1},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 1, 2, 2},
 	{"st", 3, {T_REG, T_IND | T_REG}, 4, 1, 2},
@@ -230,6 +229,7 @@ bool	is_separator(char c);
 bool	is_directlabel(t_data *s_data, char *string);
 bool	is_direct(t_data *s_data, char *string);
 bool	is_indirect(t_data *s_data, char *lexeme);
+bool	is_argument(t_type type);
 
 /*---------- Syntax Analyzer ----------*/
 void	syntax_analyzer(t_data *s_data);

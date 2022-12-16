@@ -145,3 +145,11 @@ bool is_indirect(t_data *s_data, char *lexeme)
 		return (false);
 	return (true);
 }
+
+bool is_argument(t_type type)
+{
+	if (type == REGISTER || type == DIRECT_LABEL
+		|| type == DIRECT || type == INDIRECT)
+		return (true);
+	return(false);
+}

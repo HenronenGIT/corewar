@@ -130,7 +130,7 @@ void	read_input(char *input, t_data *s_data)
 	// tokens = (t_token **)s_data->vec_tokens->array;
 	// last_token = s_data->vec_tokens->space_taken - 1;
 	// if (tokens[last_token]->type == LABEL && had_newline == 0)
-	if (had_newline == 0)
-		error(NO_NL_ERR);
+	// if (had_newline == 0)
+		// error(NO_NL_ERR);
 	close(fd);
 }
