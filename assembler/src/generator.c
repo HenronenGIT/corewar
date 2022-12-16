@@ -152,7 +152,8 @@ void find_label_addr(t_input **array, char *curr_label_name, int curr_arg, int c
 		i++;
 	}
 	if (!array[i])
-		ft_puterror("ERROR: A label is not defined\n");
+		syntax_error(UNDEFINED_LABEL_ERR, NULL, curr_label_name);
+		// ft_puterror("ERROR: A label is not defined\n");
 }
 
 /*

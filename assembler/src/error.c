@@ -14,12 +14,12 @@
 
 void error(int error_number)
 {
+	if (error_number == MALLOC_ERR)
+		ft_puterror("ERROR: Malloc returned NULL!\n");
 	if (error_number == OPEN_ERR)
 		ft_puterror("ERROR: Failed to open received file\n");
 	if (error_number == ARG_ERR)
 		ft_puterror("ERROR: Invalid amount of arguments\n");
-	if (error_number == MALLOC_ERR)
-		ft_puterror("ERROR: Malloc returned NULL!\n");
 	if (error_number == NULL_ERR)
 		ft_puterror("ERROR: NULL was passed to the function!\n");
 	if (error_number == INVALID_LABEL)
@@ -58,12 +58,18 @@ void	lexical_error(t_data *s_data)
 /*
 Is called form syntax_analyzer
 */
-void	syntax_error(int error_number, int op_code)
+void	syntax_error(int error_number, t_input *statement, char *label)
 {
+	int	op_code;
+
+	if (statement)
+		op_code = statement->op_code;
 	if (error_number == ARG_COUNT_ERR)
 		ft_printf("Invalid amount of arguments for instruciton [%s]\n", g_table[op_code - 1].instruction);
 	if (error_number == INVALID_ARG_ERR)
 		ft_printf("Invalid argument type for instruction [%s]\n", g_table[op_code - 1].instruction);
+	if (error_number == UNDEFINED_LABEL_ERR)
+		ft_printf("Undefined label [%s]\n", label);
 	exit(SYNTAX_ERROR);
 
 }

@@ -42,6 +42,7 @@
 /*---------- Syntax errors ----------*/
 # define ARG_COUNT_ERR -14
 # define INVALID_ARG_ERR -15
+# define UNDEFINED_LABEL_ERR -16
 
 # define SYNTAX_ERROR -999 //TEMP ERROR
 
@@ -214,7 +215,7 @@ void	error(int error_number);
 void	read_input(char *input, t_data *s_data);
 void	read_header(int fd, t_data *s_data);
 void	lexical_error(t_data *s_data);
-void	syntax_error(int error_number, int op_code);
+void	syntax_error(int error_number, t_input *statement, char *label);
 
 /*---------- Dynamic 2D array ----------*/
 void	vec_new_arr(t_vec *dst, size_t len);

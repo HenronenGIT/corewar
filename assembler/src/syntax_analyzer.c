@@ -114,17 +114,18 @@ void validate_instruction_syntax(t_input *statement)
 	result = 0;
 	op_code = statement->op_code;
 	if (statement->arg_count != g_table[op_code - 1].expected_arg_count)
-		syntax_error(ARG_COUNT_ERR, op_code);
+		syntax_error(ARG_COUNT_ERR, statement, NULL);
+		// syntax_error(ARG_COUNT_ERR, op_code);
 	if ((statement->arg_count - statement->commas) != 1)
-		error(MISSING_COMMA_ERR);
+		error(MISSING_COMMA_ERR);//? can be inteperted as syntax_error
 	while (i < 3)
 	{
 		if (g_table[op_code - 1].arg_type[i] && !statement->arg_type[i])
-			syntax_error(TEMP_ERR, op_code);
+			syntax_error(TEMP_ERR, statement, NULL);
 			// error(SYNTAX_ERROR);
 		result = statement->arg_type[i] & g_table[op_code - 1].arg_type[i];
 		if (result != statement->arg_type[i])
-			syntax_error(INVALID_ARG_ERR, op_code);
+			syntax_error(INVALID_ARG_ERR, statement, NULL);
 		i += 1;
 	}
 }
