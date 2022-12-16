@@ -40,6 +40,7 @@ lexical_scanner iterates what "line" byte by byte and tries to search tokens.
 When lexical analysis find string literal that matches to one of the types of token,
 it saves that to token to "t_token" struct.
 */
+//! TOKEN LOCATION CAN BE SAVED. ADD TO SAVE_TOKEN FUNCTION.
 void lexical_scanner(char *line, t_data *s_data)
 {
 	unsigned int left;
@@ -106,8 +107,8 @@ void	read_input(char *input, t_data *s_data)
 	int		fd;
 	char	*line;
 	int		had_newline;
-	int		last_token;
-	t_token	**tokens;
+	// int		last_token;
+	// t_token	**tokens;
 
 	had_newline = 0;
 	fd = open(input, O_RDONLY);
@@ -121,11 +122,15 @@ void	read_input(char *input, t_data *s_data)
 			had_newline = 1;
 		s_data->s_error_log->line += 1;
 		lexical_scanner(line, s_data);
+		if (had_newline)
+			save_token(s_data, "\n", NEWLINE);
 		free(line);
 	}
-	tokens = (t_token **)s_data->vec_tokens->array;
-	last_token = s_data->vec_tokens->space_taken - 1;
-	if (tokens[last_token]->type == LABEL && had_newline == 0)
+
+	// tokens = (t_token **)s_data->vec_tokens->array;
+	// last_token = s_data->vec_tokens->space_taken - 1;
+	// if (tokens[last_token]->type == LABEL && had_newline == 0)
+	if (had_newline == 0)
 		error(NO_NL_ERR);
 	close(fd);
 }

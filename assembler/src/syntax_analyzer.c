@@ -157,11 +157,12 @@ static void validate_syntax(t_vec *vec_input)
 void	syntax_analyzer(t_data *s_data)
 {
 	t_token	**tokens = (t_token **)s_data->vec_tokens->array;
-	t_vec	*vec_tokens = s_data->vec_tokens;
+	// t_vec	*vec_tokens = s_data->vec_tokens;
 	size_t	i;
 
 	i = 0;
-	while (vec_tokens->array[i])
+	// while (vec_tokens->array[i])
+	while ((t_token *)s_data->vec_tokens->array[i])
 	{
 		if (tokens[i]->type == LABEL || tokens[i]->type == INSTRUCTION)
 		{

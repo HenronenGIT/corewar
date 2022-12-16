@@ -25,33 +25,38 @@ class bcolors:
 	BOLD = '\033[1m'
 	UNDERLINE = '\033[4m'
 
+# If file is failed, it is saved to this ibject
+class failedFile():
+    def __init__(self, file, output, exitCode, refOutput):
+        self.file = file
+        self.output = output
+        self.exitCode = exitCode
+        self.refOutput = refOutput
+
+invalidFiles_path = 'eval_tests/tests/invalid_files_2/'
+# invalidFiles_path = 'eval_tests/tests/error_files/'
 # Leave empty if in root of repo
 path_asm = ''
+path_asm_ref = 'eval_tests/asm'
 # Paths to your invalid files and valid files
-invalidFiles_path = 'eval_tests/tests/error_files/'
 
 def main():
 	#Paths
 	workDir = get_path()
 	path_errors = workDir + invalidFiles_path 
 	asm = workDir + path_asm + 'asm'
+	asm_ref = workDir + path_asm_ref
 
-	invalid_files_arr = get_files(path_errors)
+	invalidFiles = get_files(path_errors)
 
-	failed_invalid_files = run_error_files(asm, invalid_files_arr)
+	failedFiles = runFiles(asm, invalidFiles, asm_ref)
 
-	print_failed_files(failed_invalid_files)
+	print_failed_files(failedFiles)
 
-	save_to_file(failed_invalid_files, "invalid_file_fails.txt")
+	save_to_file(failedFiles, "invalid_file_fails.txt")
 	print()
 	print(f"{bcolors.YELLOW}FAILED FILES SAVED TO:{bcolors.ENDC}\ninvalid_file_fails.txt")
 
-# If file is failed, it is saved to this ibject
-class failedFile():
-    def __init__(self, file, output, exitCode):
-        self.file = file
-        self.output = output
-        self.exitCode = exitCode
 
 def get_path():
 	current_dir = os.path.abspath(os.getcwd())
@@ -59,38 +64,49 @@ def get_path():
 	return current_dir
 
 def get_files(path):
-	list = []
+	files = []
 	temp = ""
 	i = 0
-	list = os.listdir(path)
-	for file in list:
+	files = os.listdir(path)
+	for file in files:
 		temp = path + file
-		list[i] = temp
+		files[i] = temp
 		i += 1
-	return list
+	return files
 
 def print_array(array):
 	i = 0
 	for obj in array:
 		print(f"{bcolors.OKCYAN}[{i}]{bcolors.ENDC}")
-		print(f"{bcolors.FAIL}FILE:{bcolors.ENDC} {obj.file}")
-		print(f"{bcolors.FAIL}OUTPUT:{bcolors.ENDC} {obj.output}")
-		print(f"{bcolors.FAIL}EXIT CODE:{bcolors.ENDC} {obj.exitCode}")
+		print(f"{bcolors.YELLOW}FILE:{bcolors.ENDC} {obj.file}")
+		print(f"{bcolors.YELLOW}EXIT CODE:{bcolors.ENDC} {obj.exitCode}")
+		print(f"{bcolors.YELLOW}OUTPUT:{bcolors.ENDC} {obj.output}")
+		print(f"{bcolors.YELLOW}REF OUTPUT:{bcolors.ENDC} {obj.refOutput}")
 		print("")
 		i += 1
 
-def run_error_files(program, file_array):
-	
+def runFiles(program: str, files: list, ref_program: str):
 	failed_files = []
 	output = ""
-	for file in file_array:
+	for file in files:
 		print(f"{bcolors.YELLOW}RUNNING WITH:{bcolors.ENDC} [{os.path.basename(file)}]... ", end='')
 		output = subprocess.run([program, file], capture_output=True)
+		ref_output = subprocess.run([ref_program, file], capture_output=True)
 		if output.returncode == 0:
-			failed_files.append(failedFile(file, output.stdout.decode('utf-8'), output.returncode))
+			failed_files.append(failedFile(
+				file,
+				output.stdout.decode('utf-8'),
+				output.returncode,
+				ref_output.stdout.decode('utf-8')))
 			print(f"{bcolors.FAIL}FAIL{bcolors.ENDC}")
 		else:
 			print(f"{bcolors.OKGREEN}OK{bcolors.ENDC}")
+			print(f"{bcolors.YELLOW}OUTPUT:{bcolors.ENDC}{output.stdout.decode('utf-8')}")
+		output = subprocess.run([ref_program, file], capture_output=True)
+		print(f"{bcolors.YELLOW}ORIGINAL OUTPUT:{bcolors.ENDC}{output.stdout.decode('utf-8')}")
+		print('----------------------------')
+		
+		
 	return failed_files
 
 def run_valid_files(program, file_array):
@@ -106,25 +122,27 @@ def run_valid_files(program, file_array):
 			print(f"{bcolors.OKGREEN}OK{bcolors.ENDC}")
 	return failed_files
 
-def print_failed_files(failed_error_files):
-	if len(failed_error_files) == 0:
-		print()
+def print_failed_files(failedFiles: list):
+	failedFilesCount = len(failedFiles)
+	if failedFilesCount == 0:
 		print(f"{bcolors.OKGREEN}~~~~~~~~~~~ ALL INVALID FILES PASSED ~~~~~~~~~~~{bcolors.ENDC}")
 	else:
-		print_array(failed_error_files)
+		print(f'{bcolors.HEADER}FAILED FILES [{failedFilesCount}]:{bcolors.ENDC}')
+		print_array(failedFiles)
 
-def save_to_file(array, filename):
+def save_to_file(failedFiles: list, filename: str):
 	i = 0
 	original_stdout = sys.stdout
 	with open(filename, 'w') as f:
 		sys.stdout = f
-		for obj in array:
+		for obj in failedFiles:
 			print(f"[{i}]")
 			print(f"File:{os.path.basename(obj.file)}")
 			print(f"Output:{obj.output}")
 			print("----------")
 			i += 1
 		sys.stdout = original_stdout # Reset the standard
+	
 
 if __name__ == "__main__":
 	main()

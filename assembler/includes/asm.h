@@ -152,7 +152,7 @@ typedef enum e_type
 	DIRECT_LABEL,
 	DIRECT,
 	INDIRECT,
-	INVALID
+	NEWLINE,
 } t_type;
 
 typedef struct s_table
@@ -207,8 +207,8 @@ void	validate_file(char *file_name);
 char	*find_file_name(char *s);
 
 /* Inits */
-void	init_structs(t_data *data, t_header *header, t_error_log *error_log);
-void	init_vectors(t_data *s_data);
+
+void	init(t_data *data, t_header *header, t_error_log *error_log);
 t_input	*init_values(t_input *element);
 
 void	error(int error_number);

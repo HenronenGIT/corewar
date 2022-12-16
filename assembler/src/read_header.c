@@ -97,7 +97,6 @@ static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 /*
 Iterates trough "line" and seeks HEADER_CHAR ".".
 When HEADER_CHAR is found, function checks that was the word .name or .comment
-
 */
 static void seek_header_char(t_data *s_data, char *line, int fd)
 {
@@ -129,9 +128,9 @@ static void seek_header_char(t_data *s_data, char *line, int fd)
 /*
 Read header information: .name and .comment
 */
-void read_header(int fd, t_data *s_data)
+void	read_header(int fd, t_data *s_data)
 {
-	char *line;
+	char	*line;
 
 	line = NULL;
 	while (get_next_line(fd, &line))
@@ -143,6 +142,7 @@ void read_header(int fd, t_data *s_data)
 			return;
 		free(line);
 		s_data->s_error_log->line += 1;
+		s_data->s_error_log->column = 0;
 	}
 	if (!s_data->s_header->name_saved || !s_data->s_header->comment_saved)
 		lexical_error(s_data);
