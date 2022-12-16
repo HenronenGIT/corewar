@@ -6,12 +6,16 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/15 14:42:44 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/16 09:59:45 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "op_table.h"
+
+/*
+** changed to work with only negative player id's
+*/
 
 void	op_live(t_process *process, t_data *data)
 {
@@ -19,9 +23,9 @@ void	op_live(t_process *process, t_data *data)
 
 	process->byte_jump_size = 5;
 	process->last_live = data->cycles_total;
-	val = bytes2int((uint8_t *)data->arena, process->cursor + 1, 4);
+	val = bytes2int((uint8_t *)data->arena, (process->cursor + 1) % MEM_SIZE, 4);
 	data->num_live_statements++;
-	if (val && ft_abs(val) <= data->champions_num)
+	if (val && val < 0 && ft_abs(val) <= data->champions_num)
 	{
 		data->last_alive_champ = ft_abs(val);
 		if (!(data->verbosity & 0x01))
@@ -37,7 +41,7 @@ void	op_zjmp(t_process *process, t_data *data)
 {
 	int	val;
 
-	val = bytes2int((uint8_t *)data->arena, process->cursor + 1, 2);
+	val = bytes2int((uint8_t *)data->arena, (process->cursor + 1) % MEM_SIZE, 2);
 	if (process->carry)
 	{
 		process->cursor = circular_mem(process->cursor, val % IDX_MOD);

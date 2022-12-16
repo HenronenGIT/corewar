@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:40:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/15 14:42:50 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/16 10:24:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	circular_mem(int pos, int change)
 {
 	if (pos + change < 0)
-		return (MEM_SIZE + (pos + change));
+		return (MEM_SIZE + (pos + change) % MEM_SIZE);
 	else
 		return ((pos + change) % MEM_SIZE);
 }

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:38:58 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/15 14:42:08 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 22:14:15 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	init_data(t_data *data)
 	data->cycles_after_check = 0;
 	data->num_checks_performed = 0;
 	data->dump_cycle = -1;
-	//how to init?
-	data->last_alive_champ = 1;
 	data->verbosity = 0;
 	data->head = NULL;
 }

@@ -6,13 +6,14 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/15 14:21:56 by wdonnell          #+#    #+#              #
-#    Updated: 2022/12/15 14:44:46 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/12/16 10:26:31 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= corewar
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -O2
+#CFLAGS		= -Wall -Wextra -Werror -O2 -fsanitize=address -g
 SRC_FILES = main.c init_champ_and_data.c init_process_and_fork.c \
 			parse.c parse_n.c process.c \
 			ids.c utils.c print.c play_game.c get_types.c \

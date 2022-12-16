@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:43 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/15 14:42:33 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/15 22:29:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	op_fork(t_process *process, t_data *data)
 
 	++data->num_processes;
 	process->byte_jump_size = 3;
-	idx = bytes2int((uint8_t *)data->arena, process->cursor + 1, 2);
+	idx = bytes2int((uint8_t *)data->arena, (process->cursor + 1) % MEM_SIZE, 2);
 	data->new_cursor = circular_mem(process->cursor, idx % IDX_MOD);
 	data->parent = process;
 	add_process(data, &data->head, ++data->new_process_id);
@@ -34,7 +34,7 @@ void	op_lfork(t_process *process, t_data *data)
 
 	++data->num_processes;
 	process->byte_jump_size = 3;
-	idx = bytes2int((uint8_t *)data->arena, process->cursor + 1, 2);
+	idx = bytes2int((uint8_t *)data->arena, (process->cursor + 1) % MEM_SIZE, 2);
 	data->new_cursor = circular_mem(process->cursor, idx);
 	data->parent = process;
 	add_process(data, &data->head, ++data->new_process_id);
