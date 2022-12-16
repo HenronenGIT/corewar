@@ -112,7 +112,6 @@ typedef struct s_vec
 /*---------- One of these structs contains info from one statement ----------*/
 typedef struct s_data_cell
 {
-	short commas;
 	short arg_count;
 	char *label_name;
 	int op_code;

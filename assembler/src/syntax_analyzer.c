@@ -96,8 +96,6 @@ void validate_instruction_syntax(t_input *cur_element, t_token *cur_token)
 	op_code = cur_element->op_code;
 	if (cur_element->arg_count != g_op_tab[op_code - 1].expected_arg_count)
 		syntax_error(ARG_COUNT_ERR, cur_element, NULL);
-	// if ((cur_element->arg_count - cur_element->commas) != 1)
-		// error(MISSING_COMMA_ERR); //? can be inteperted as syntax_error
 	validate_arg_types(cur_element, op_code);
 }
 
@@ -161,7 +159,7 @@ void syntax_analyzer(t_data *s_data)
 			/* Upper statement is cleaner, is there better way to check that
 				IF token is instruction, last token needs to be newline or label*/
 
-				
+
 		else if (tokens[i]->type == INSTRUCTION) //? This could be cleaner
 		{
 			if (last_token != NEWLINE && last_token != LABEL)

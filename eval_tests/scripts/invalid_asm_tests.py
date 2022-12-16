@@ -54,8 +54,6 @@ def main():
 	print_failed_files(failedFiles)
 
 	save_to_file(failedFiles, "invalid_file_fails.txt")
-	print()
-	print(f"{bcolors.YELLOW}FAILED FILES SAVED TO:{bcolors.ENDC}\ninvalid_file_fails.txt")
 
 
 def get_path():
@@ -89,7 +87,7 @@ def runFiles(program: str, files: list, ref_program: str):
 	failed_files = []
 	output = ""
 	for file in files:
-		print(f"{bcolors.YELLOW}RUNNING WITH:{bcolors.ENDC} [{os.path.basename(file)}]... ", end='')
+		print(f"{bcolors.HEADER}RUNNING WITH:{bcolors.ENDC} [{os.path.basename(file)}]... ", end='')
 		output = subprocess.run([program, file], capture_output=True)
 		ref_output = subprocess.run([ref_program, file], capture_output=True)
 		if output.returncode == 0:
@@ -101,9 +99,9 @@ def runFiles(program: str, files: list, ref_program: str):
 			print(f"{bcolors.FAIL}FAIL{bcolors.ENDC}")
 		else:
 			print(f"{bcolors.OKGREEN}OK{bcolors.ENDC}")
-			print(f"{bcolors.YELLOW}OUTPUT:{bcolors.ENDC}{output.stdout.decode('utf-8')}")
+			print(f"{bcolors.HEADER}OUTPUT:{bcolors.ENDC}{output.stdout.decode('utf-8')}")
 		output = subprocess.run([ref_program, file], capture_output=True)
-		print(f"{bcolors.YELLOW}ORIGINAL OUTPUT:{bcolors.ENDC}{output.stdout.decode('utf-8')}")
+		print(f"{bcolors.HEADER}ORIGINAL OUTPUT:{bcolors.ENDC}{output.stdout.decode('utf-8')}")
 		print('----------------------------')
 		
 		
@@ -129,6 +127,8 @@ def print_failed_files(failedFiles: list):
 	else:
 		print(f'{bcolors.HEADER}FAILED FILES [{failedFilesCount}]:{bcolors.ENDC}')
 		print_array(failedFiles)
+		print(f"{bcolors.YELLOW}FAILED FILES SAVED TO:{bcolors.ENDC}\ninvalid_file_fails.txt")
+
 
 def save_to_file(failedFiles: list, filename: str):
 	i = 0
