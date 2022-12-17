@@ -33,7 +33,7 @@ class failedFile():
         self.exitCode = exitCode
         self.refOutput = refOutput
 
-invalidFiles_path = 'eval_tests/tests/invalid_files_2/'
+invalidFiles_path = 'eval_tests/tests/error_files/'
 # invalidFiles_path = 'eval_tests/tests/error_files/'
 # Leave empty if in root of repo
 path_asm = ''
@@ -44,8 +44,8 @@ def main():
 	#Paths
 	workDir = get_path()
 	path_errors = workDir + invalidFiles_path 
-	asm = workDir + path_asm + 'asm'
-	asm_ref = workDir + path_asm_ref
+	asm = f"{workDir}{path_asm}asm"
+	asm_ref = f'{workDir}{path_asm_ref}'
 
 	invalidFiles = get_files(path_errors)
 

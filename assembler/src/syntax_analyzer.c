@@ -90,9 +90,7 @@ static void validate_arg_types(t_input *cur_element, int op_code)
 void validate_instruction_syntax(t_input *cur_element, t_token *cur_token)
 {
 	int op_code;
-	size_t i;
 
-	i = 0;
 	op_code = cur_element->op_code;
 	if (cur_element->arg_count != g_op_tab[op_code - 1].expected_arg_count)
 		syntax_error(ARG_COUNT_ERR, cur_element, NULL);

@@ -30,7 +30,7 @@ class bcolors:
 # 1. Leave empty if in root of repo
 path_asm = ''
 # 2. Path to Reference program
-asm_ref = '/Users/hmaronen/workspace/github/corewar/eval_tests/asm'
+path_asm_ref = 'eval_tests/asm'
 # 3. Path to test files
 path = 'eval_tests/tests/valid_files/'
 
@@ -42,6 +42,7 @@ def main():
 	#Paths
 	workDir = get_path()
 	asm = f"{workDir}{path_asm}asm"
+	asm_ref = f'{workDir}{path_asm_ref}'
 	pathFiles = f"{workDir}{path}"
 
 	# Fetch all the files from test folder
