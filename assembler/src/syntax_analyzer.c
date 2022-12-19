@@ -52,11 +52,13 @@ void save_argument(t_input **input_array, t_token *token)
 		(*input_array)->arg_type[i] = T_IND;
 }
 
-static void insert_arguments(t_data *s_data, t_token *token)
+static void insert_arguments(t_data *s_data, t_token *token, t_type last_token)
 {
 	size_t newest_element;
 	t_input **input_array;
 
+	if (last_token != SEPARATOR && last_token != INSTRUCTION)
+		syntax_error(MISSING_COMMA_ERR, NULL, NULL);
 	input_array = (t_input **)s_data->vec_input->array;
 	newest_element = s_data->vec_input->space_taken - 1;
 	// if (token->type == SEPARATOR)
@@ -153,10 +155,8 @@ void syntax_analyzer(t_data *s_data)
 		// else if ((tokens[i]->type == INSTRUCTION) && last_token != NEWLINE)
 			// syntax_error(NO_NL_ERR, NULL, NULL);
 
-
 			/* Upper statement is cleaner, is there better way to check that
 				IF token is instruction, last token needs to be newline or label*/
-
 
 		else if (tokens[i]->type == INSTRUCTION) //? This could be cleaner
 		{
@@ -172,7 +172,7 @@ void syntax_analyzer(t_data *s_data)
 		else if (tokens[i]->type == SEPARATOR && !is_argument(last_token))
 			syntax_error(MISSING_COMMA_ERR, NULL, NULL);
 		else if (is_argument(tokens[i]->type))
-			insert_arguments(s_data, tokens[i]);
+			insert_arguments(s_data, tokens[i], last_token);
 		last_token = tokens[i]->type;
 		i += 1;
 	}

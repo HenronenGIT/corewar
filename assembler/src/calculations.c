@@ -44,6 +44,7 @@ static void calculate_bytes(t_input *statement)
 	static int total_bytes;
 	int i;
 
+	//! check each statement one by one
 	i = -1;
 	statement->current_bytes = total_bytes;
 	while (statement->arg_type[++i])
@@ -59,7 +60,7 @@ void calculate_statement_sizes(t_data *s_data)
 	size_t	i;
 	size_t	last_index;
 
-	i = 0;
+ 	i = 0;
 	last_index = s_data->vec_input->space_taken - 1;
 	array = (t_input **)s_data->vec_input->array;
 	while (array[i])
