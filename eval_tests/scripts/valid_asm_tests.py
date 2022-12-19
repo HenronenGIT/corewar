@@ -30,7 +30,7 @@ class bcolors:
 # 1. Leave empty if in root of repo
 path_asm = ''
 # 2. Path to Reference program
-path_asm_ref = 'eval_tests/asm'
+path_asm_ref = 'eval_tests/asm_ref'
 # 3. Path to test files
 path = 'eval_tests/tests/valid_files/'
 

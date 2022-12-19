@@ -39,7 +39,7 @@ invalidFiles_path = 'eval_tests/tests/error_files/'
 
 # Leave empty if in root of repo
 path_asm = ''
-path_asm_ref = 'eval_tests/asm'
+path_asm_ref = 'eval_tests/asm_ref'
 # Paths to your invalid files and valid files
 
 def main():
