@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+         #
+#    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 09:49:18 by hmaronen          #+#    #+#              #
-#    Updated: 2021/12/27 18:29:51 by hmaronen         ###   ########.fr        #
+#    Updated: 2022/12/13 11:06:00 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,8 @@ SRC_FILES = ft_memset.c \
 			sort_int_tab.c \
 			ft_print_tab.c \
 			ft_is_whitespace.c \
-			ft_replace.c
+			ft_replace.c \
+			ft_abs.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

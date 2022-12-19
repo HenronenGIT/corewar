@@ -15,11 +15,11 @@
 void	hex_translator(char *str, int fd, int len)
 {
 	int		i;
-	int	temp;
+	int		temp;
 
 	temp = 0;
 	i = 0;
-	while (i <= len)
+	while (i < len)
 	{
 		if (str[i])
 			temp = (int)str[i];

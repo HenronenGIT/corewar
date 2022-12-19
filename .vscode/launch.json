@@ -33,7 +33,7 @@
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/Backward.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/2_statement_same_line.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/invalid_files_2/error19.s"],
-            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/all_instructions.s"],
+            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/Kittystrophic.s"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
