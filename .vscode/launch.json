@@ -22,7 +22,7 @@
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/op_lld_valid.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/moro.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/comments_every_line.s"],
-            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/42.s"],
+            // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/42.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/incorrect_args.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/missing_newline.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/champs/barriere.s"],

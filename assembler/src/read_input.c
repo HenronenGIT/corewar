@@ -34,6 +34,26 @@ void save_token(t_data *s_data, char *sub_string, t_type type)
 	// print_tokens(s_data->vec_tokens);
 }
 
+void	validate_statement(t_data *s_data, char *sub_string)
+{
+	if (!sub_string)
+		error(MALLOC_ERR);
+	if (is_label(s_data, sub_string))
+		save_token(s_data, sub_string, LABEL);
+	else if (is_statement(sub_string))
+		save_token(s_data, sub_string, INSTRUCTION);
+	else if (is_directlabel(s_data, sub_string))
+		save_token(s_data, sub_string, DIRECT_LABEL);
+	else if (is_direct(s_data, sub_string))
+		save_token(s_data, sub_string, DIRECT);
+	else if (is_indirect(s_data, sub_string))
+		save_token(s_data, sub_string, INDIRECT);
+	else if (is_register(sub_string))
+		save_token(s_data, sub_string, REGISTER);
+	else
+		lexical_error(s_data);
+}
+
 /*
 Receives "line" as a parameter.
 lexical_scanner iterates what "line" byte by byte and tries to search tokens.
@@ -45,14 +65,10 @@ void lexical_scanner(char *line, t_data *s_data)
 {
 	unsigned int left;
 	unsigned int right;
-	int len;
-	char *sub_string;
 
 	left = 0;
 	right = 0;
-	len = ft_strlen(line);
-	sub_string = NULL;
-	while (right <= len && left <= right)
+	while (line[right])
 	{
 		s_data->s_error_log->column = right + 1;
 		if (line[right] == COMMENT_CHAR && left == right)
@@ -66,26 +82,9 @@ void lexical_scanner(char *line, t_data *s_data)
 			right += 1;
 			left += 1;
 		}
-		// mayby can be splitted over here to separate function
 		else if (is_delimiter(line[right]) == true && left != right)
 		{
-			sub_string = ft_strsub(line, left, right - left);
-			if (!sub_string)
-				error(MALLOC_ERR);
-			if (is_label(s_data, sub_string))
-				save_token(s_data, sub_string, LABEL);
-			else if (is_statement(sub_string))
-				save_token(s_data, sub_string, INSTRUCTION);
-			else if (is_directlabel(s_data, sub_string))
-				save_token(s_data, sub_string, DIRECT_LABEL);
-			else if (is_direct(s_data, sub_string))
-				save_token(s_data, sub_string, DIRECT);
-			else if (is_indirect(s_data, sub_string))
-				save_token(s_data, sub_string, INDIRECT);
-			else if (is_register(sub_string))
-				save_token(s_data, sub_string, REGISTER);
-			else
-				lexical_error(s_data);
+			validate_statement(s_data, ft_strsub(line, left, right - left));
 			left = right;
 		}
 	}

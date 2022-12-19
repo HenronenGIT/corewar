@@ -33,9 +33,9 @@ class failedFile():
         self.exitCode = exitCode
         self.refOutput = refOutput
 
-# invalidFiles_path = 'eval_tests/tests/error_files/'
+invalidFiles_path = 'eval_tests/tests/error_files/'
 # 
-invalidFiles_path = 'eval_tests/tests/invalid_files_2/'
+# invalidFiles_path = 'eval_tests/tests/invalid_files_2/'
 
 # Leave empty if in root of repo
 path_asm = ''
