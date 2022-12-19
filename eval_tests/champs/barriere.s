@@ -211,8 +211,3 @@ kdebut:		ldi	%:kdebut,r2,r3
 		live	%42
 		and	r6,%0,r6
 kfin:		zjmp	%180
-
-
-
-
-

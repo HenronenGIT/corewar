@@ -17,8 +17,8 @@ CGREEN=\033[0;32m
 CC = gcc
 FLAGS = -Wall -Wextra -g#-Werror
 
-ASM_DIR = ./asm
-VM_DIR = ./corewar
+ASM_DIR = ./assembler
+VM_DIR = ./vm
 
 #SRC_DIR = ./src/
 SRC_FILES = main.c
@@ -40,6 +40,8 @@ LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 all: $(LIBFT) 
 	@make -C $(ASM_DIR)
 	@make -C $(VM_DIR)
+	mv $(ASM_DIR)/asm ./
+	mv $(VM_DIR)/corewar ./
 
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 # 	@mkdir -p $(OBJ_DIR)
@@ -52,7 +54,6 @@ clean:
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(ASM_DIR) clean
 	@make -C $(VM_DIR) clean
-	rm *.cor
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
@@ -61,10 +62,12 @@ fclean: clean
 
 # temp
 run:
-	@./asm/asm test.s
+	@./asm test.s
 
-original:
-	./eval_tests/asm test.s
-python:
-	python3 ./eval_tests/scripts/test_asm.py
+valid:
+	@python3 ./eval_tests/scripts/valid_asm_tests.py
+
+invalid:
+	@python3 ./eval_tests/scripts/invalid_asm_tests.py
+
 re : fclean all clean all
