@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
+/*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,9 @@
 
 #include "../includes/asm.h"
 
-t_token *allocate_token_struct(t_type type, char *content)
+static t_token	*allocate_token_struct(t_type type, char *content)
 {
-	t_token *s_token;
+	t_token	*s_token;
 
 	s_token = (t_token *)malloc(sizeof(t_token));
 	if (!s_token)
@@ -24,17 +24,16 @@ t_token *allocate_token_struct(t_type type, char *content)
 	return (s_token);
 }
 
-void save_token(t_data *s_data, char *sub_string, t_type type)
+static void	save_token(t_data *s_data, char *sub_string, t_type type)
 {
-	t_token *s_token;
+	t_token	*s_token;
 
 	s_token = NULL;
 	s_token = allocate_token_struct(type, sub_string);
 	vec_insert(s_data->vec_tokens, s_token);
-	// print_tokens(s_data->vec_tokens);
 }
 
-void	validate_statement(t_data *s_data, char *sub_string)
+static	void	validate_statement(t_data *s_data, char *sub_string)
 {
 	if (!sub_string)
 		error(MALLOC_ERR);
@@ -56,15 +55,16 @@ void	validate_statement(t_data *s_data, char *sub_string)
 
 /*
 Receives "line" as a parameter.
-lexical_scanner iterates what "line" byte by byte and tries to search tokens.
-When lexical analysis find string literal that matches to one of the types of token,
+lexical_scanner iterates "line" byte by byte and tries to search tokens.
+When lexical analysis finds string literal
+that matches to one of the types of token, 
 it saves that to token to "t_token" struct.
 */
 //! TOKEN LOCATION CAN BE SAVED. ADD TO SAVE_TOKEN FUNCTION.
-void lexical_scanner(char *line, t_data *s_data)
+void	lexical_scanner(char *line, t_data *s_data)
 {
-	unsigned int left;
-	unsigned int right;
+	unsigned int	left;
+	unsigned int	right;
 
 	left = 0;
 	right = 0;
@@ -75,14 +75,14 @@ void lexical_scanner(char *line, t_data *s_data)
 			break ;
 		if (is_separator(line[right]) && left == right)
 			save_token(s_data, ft_strsub(&line[left], 0, 1), SEPARATOR);
-		if (is_delimiter(line[right]) == false)
+		if (is_delim(line[right]) == false)
 			right += 1;
-		if (is_delimiter(line[right]) == true && is_delimiter(line[left]) == true)
+		if (is_delim(line[right]) == true && is_delim(line[left]) == true)
 		{
 			right += 1;
 			left += 1;
 		}
-		else if (is_delimiter(line[right]) == true && left != right)
+		else if (is_delim(line[right]) == true && left != right)
 		{
 			validate_statement(s_data, ft_strsub(line, left, right - left));
 			left = right;
@@ -95,7 +95,7 @@ Opens file descriptor for reading the input.
 After that while loops starts reading file descriptor line by line.
 Every single line is sent to lexical_scanner function to be tokenized.
 */
-void	read_input(char *input, t_data *s_data)
+void	tokenization(char *input, t_data *s_data)
 {
 	int		fd;
 	char	*line;
