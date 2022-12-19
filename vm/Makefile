@@ -3,61 +3,49 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
+#    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/07 15:44:14 by akilk             #+#    #+#              #
-#    Updated: 2022/11/07 16:55:33 by akilk            ###   ########.fr        #
+#    Created: 2022/12/15 14:21:56 by wdonnell          #+#    #+#              #
+#    Updated: 2022/12/16 13:06:30 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CYELLOW=\033[0;33m
-CEND=\033[0m
-CGREEN=\033[0;32m
+NAME		= corewar
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror -O2
+#CFLAGS		= -Wall -Wextra -Werror -O2 -fsanitize=address -g
+SRC_FILES = main.c init_champ_and_data.c init_process_and_fork.c \
+			parse.c parse_n.c process.c \
+			ids.c utils.c print.c play_game.c get_types.c \
+			get_arg_values.c check.c op_util.c \
+			op_add_sub.c op_bitwise.c op_fork.c op_load.c op_long_load.c \
+			op_misc.c op_store.c
 
-NAME = corewar
-CC = gcc
-FLAGS = -g#-Wall -Wextra -Werror
-
-SRC_DIR = ./src/
-SRC_FILES = corewar_main.c\
-		init.c\
-		parse.c
-
-SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
-
-OBJ_DIR = ./obj/
-OBJ_FILES = $(SRC_FILES:.c=.o)
-OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
-
-INC_DIR = ./includes/
-INC_FILES = corewar.h
-INC = $(addprefix $(INC_DIR), $(INC_FILES))
-
-LIBFTDIR = ../libft/
-LIBFT = ../libft/libft.a
+SRCS_DIR	= ./src/
+SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
+OBJS_DIR	= ./obj/
+OBJS		= $(addprefix $(OBJS_DIR), $(SRC_FILES:.c=.o))
+LIB			= -L ../libft -lft
+INCLUDES	= -I includes -I ../libft/includes -I ../includes
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	gcc $(FLAGS) -o $(NAME) $(SRC) -I $(INC) -L. $(LIBFT)
+$(NAME): $(OBJS) $(LIB)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME) $(LIB)
 
-$(LIBFT):
-	make -C $(LIBFTDIR)
+$(LIB):
+	make -sC ../libft
 
-$(OBJ): $(SRC)
-	@mkdir -p $(OBJ_DIR)
-	@gcc $(FLAGS) -c $< -o $@
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+	@mkdir -p $(OBJS_DIR)
+	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 clean:
-	@make -C $(LIBFTDIR) clean
-	@echo "$(CYELLOW)Removing $(NAME) object folder$(CEND)"
-	@rm -rf $(OBJ_DIR)
-	@echo "$(CGREEN)OK$(CEND)"
+	rm -rf $(OBJS_DIR)
+	make -C ../libft clean
 
 fclean: clean
-	@make -C $(LIBFTDIR) fclean
-	@echo "$(CYELLOW)Removing $(NAME)$(CEND)"
-	@rm -rf $(NAME)
-	@echo "$(CGREEN)OK$(CEND)"
+	rm -f $(NAME)
+	make -C ../libft fclean
 
-re : fclean all clean all
+re: fclean all
