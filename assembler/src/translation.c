@@ -41,21 +41,35 @@ char *find_file_name(char *s)
 	return (file_name);
 }
 
-void write_champ_code(t_data *data, int fd)
+void	write_champ_code(t_data *data, int fd)
 {
-	int temp;
-	char *exec_size;
+	int		temp;
+	int		i;
 
 	temp = 0;
-	exec_size = NULL;
+	i = 0;
 	write(fd, &temp, 2);
 	write(fd, &temp, 2);
 	write(fd, &temp, 2);
-	exec_size = ft_itoa_base(data->champ_size, 16);
 	write(fd, &temp, 1);
-	hex_translator(exec_size, fd, 1);
-	free(exec_size);
+	write(fd, &data->champ_size, 1);
 }
+
+// void write_champ_code(t_data *data, int fd)
+// {
+// 	int temp;
+// 	char *exec_size;
+
+// 	temp = 0;
+// 	exec_size = NULL;
+// 	write(fd, &temp, 2);
+// 	write(fd, &temp, 2);
+// 	write(fd, &temp, 2);
+// 	exec_size = ft_itoa_base(data->champ_size, 16);
+// 	write(fd, &temp, 1);
+// 	hex_translator(exec_size, fd, 1);
+// 	free(exec_size);
+// }
 
 void	translation(t_data *s_data, char *file_name)
 {
@@ -69,7 +83,9 @@ void	translation(t_data *s_data, char *file_name)
 	hex_translator(s_data->s_header->prog_name, fd, PROG_NAME_LENGTH);
 	write_champ_code(s_data, fd);
 	hex_translator(s_data->s_header->comment, fd, COMMENT_LENGTH);
+	int temp = 0;
+	write(fd, &temp, 4);
 	// exit(1);
 	generator(s_data->vec_input, fd);
-	close(fd);
+	// close(fd);
 }
