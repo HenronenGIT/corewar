@@ -23,17 +23,16 @@ char	*find_file_name(char *s)
 	i = 1;
 	j = 0;
 	file_name = NULL;
-	temp = ft_strdup(s);
 	temp = ft_strrchr(s, '/');
 	if (!temp)
 	{
 		temp = s;
 		i = 0;
 	}
-	len = ft_strlen(temp);
+	len = ft_strlen(temp) - 2;
 	file_name = ft_strnew(len + 3);
 	file_name[len + 2] = '\0';
-	while (temp[i] && temp[i] != '.')
+	while (len - i)
 		file_name[j++] = temp[i++];
 	file_name[i] = '\0';
 	file_name = ft_strcat(file_name, ".cor");
