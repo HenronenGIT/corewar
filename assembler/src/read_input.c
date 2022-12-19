@@ -55,14 +55,8 @@ void lexical_scanner(char *line, t_data *s_data)
 	while (right <= len && left <= right)
 	{
 		s_data->s_error_log->column = right + 1;
-		if (line[right] == COMMENT_CHAR)
-		{
-			if (left == right)
-				break;
-			if (is_delimiter(line[left]) == false)
-				lexical_error(s_data);
-		}
-		
+		if (line[right] == COMMENT_CHAR && left == right)
+			break ;
 		if (is_separator(line[right]) && left == right)
 			save_token(s_data, ft_strsub(&line[left], 0, 1), SEPARATOR);
 		if (is_delimiter(line[right]) == false)
@@ -107,8 +101,6 @@ void	read_input(char *input, t_data *s_data)
 	int		fd;
 	char	*line;
 	int		had_newline;
-	// int		last_token;
-	// t_token	**tokens;
 
 	had_newline = 0;
 	fd = open(input, O_RDONLY);
@@ -120,17 +112,11 @@ void	read_input(char *input, t_data *s_data)
 		had_newline = 0;
 		if (ft_replace(&line, '\n', '\0'))
 			had_newline = 1;
-		s_data->s_error_log->line += 1;
 		lexical_scanner(line, s_data);
 		if (had_newline)
 			save_token(s_data, "\n", NEWLINE);
 		free(line);
+		s_data->s_error_log->line += 1;
 	}
-
-	// tokens = (t_token **)s_data->vec_tokens->array;
-	// last_token = s_data->vec_tokens->space_taken - 1;
-	// if (tokens[last_token]->type == LABEL && had_newline == 0)
-	// if (had_newline == 0)
-		// error(NO_NL_ERR);
 	close(fd);
 }
