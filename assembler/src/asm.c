@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
 	read_input(argv[1], &s_data);
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(&s_data);
+	// print_data(&s_data);
 	translation(&s_data, argv[1]);
 	return (0);
 }

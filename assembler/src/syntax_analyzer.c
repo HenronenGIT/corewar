@@ -152,22 +152,10 @@ void syntax_analyzer(t_data *s_data)
 	{
 		if (tokens[i]->type == LABEL)
 			allocate_element(s_data, tokens[i]);
-		// else if ((tokens[i]->type == INSTRUCTION) && last_token != NEWLINE)
-			// syntax_error(NO_NL_ERR, NULL, NULL);
-
-			/* Upper statement is cleaner, is there better way to check that
-				IF token is instruction, last token needs to be newline or label*/
-
-		else if (tokens[i]->type == INSTRUCTION) //? This could be cleaner
-		{
-			if (last_token != NEWLINE && last_token != LABEL)
-				syntax_error(NO_NL_ERR, NULL, NULL);
-			else
+		if (tokens[i]->type == INSTRUCTION
+			&& (last_token == LABEL || last_token == NEWLINE))
 				allocate_element(s_data, tokens[i]);
-		}
-		// else if (tokens[i]->type == INSTRUCTION)
-			// allocate_element(s_data, tokens[i]);
-		else if (tokens[i]->type == NEWLINE)
+		if (tokens[i]->type == NEWLINE)
 			validate_syntax(s_data->vec_input, tokens[i], last_token);
 		else if (tokens[i]->type == SEPARATOR && !is_argument(last_token))
 			syntax_error(MISSING_COMMA_ERR, NULL, NULL);

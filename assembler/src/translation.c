@@ -55,22 +55,6 @@ void	write_champ_code(t_data *data, int fd)
 	write(fd, &data->champ_size, 1);
 }
 
-// void write_champ_code(t_data *data, int fd)
-// {
-// 	int temp;
-// 	char *exec_size;
-
-// 	temp = 0;
-// 	exec_size = NULL;
-// 	write(fd, &temp, 2);
-// 	write(fd, &temp, 2);
-// 	write(fd, &temp, 2);
-// 	exec_size = ft_itoa_base(data->champ_size, 16);
-// 	write(fd, &temp, 1);
-// 	hex_translator(exec_size, fd, 1);
-// 	free(exec_size);
-// }
-
 void	translation(t_data *s_data, char *file_name)
 {
 	int	fd;
