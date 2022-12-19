@@ -105,11 +105,8 @@ SRC_FILES = ft_memset.c \
 			sort_int_tab.c \
 			ft_print_tab.c \
 			ft_is_whitespace.c \
-<<<<<<< HEAD
-			ft_replace.c
-=======
+			ft_replace.c \
 			ft_abs.c
->>>>>>> 6b7dba93b263b7b2efdd475d2078e726aee68a06
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
