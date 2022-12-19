@@ -165,7 +165,7 @@ typedef struct s_op_tab
 
 static const t_op_tab g_op_tab[] = {
 	{"live", 1, {T_DIR}, 4, 0, 1},
-	{"ld", 2, {T_DIR | T_IND, T_REG}, 1, 2, 2},
+	{"ld", 2, {T_DIR | T_IND, T_REG}, 4, 1, 2},
 	{"st", 3, {T_REG, T_IND | T_REG}, 4, 1, 2},
 	{"add", 4, {T_REG, T_REG, T_REG}, 4, 1, 3},
 	{"sub", 5, {T_REG, T_REG, T_REG}, 4, 1, 3},

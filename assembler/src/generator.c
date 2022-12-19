@@ -23,7 +23,7 @@ static void print_statement(t_input *data, int fd)
 	int temp;
 
 	i = 0;
-	temp = 0;
+	temp = 0;	
 	write(fd, &data->op_code, 1);
 	if (data->argument_type_code)
 		write(fd, &data->argument_type_code, 1);
@@ -117,7 +117,7 @@ int	compare_labels(char *original_label, char *current_label)
 
 	i = 0;
 	j = 0;
-	while (original_label[i] && current_label[j])
+	while (original_label[i] || current_label[j])
 	{
 		while (original_label[i] == ':' || original_label[i] == '%')
 			i++;
@@ -125,8 +125,10 @@ int	compare_labels(char *original_label, char *current_label)
 			j++;
 		if (original_label[i] != current_label[j])
 			return (0);
-		i++;
-		j++;
+		if (original_label[i])
+			i++;
+		if (current_label[j])
+			j++;
 	}
 	return (1);
 }
@@ -206,6 +208,7 @@ void print_array(t_input *data)
 	printf("arg1_value: %d\n", data->arg_values[0]);
 	printf("arg2_value: %d\n", data->arg_values[1]);
 	printf("arg3_value: %d\n", data->arg_values[2]);
+	printf("-----------------\n");
 }
 
 /*
@@ -224,6 +227,7 @@ void generator(t_vec *vec_input, int fd)
 		if (!data[i]->label_name)
 		{
 			generate_input(data, data[i], i);
+//			print_array(data[i]);
 			print_statement(data[i], fd);
 		}
 		i++;

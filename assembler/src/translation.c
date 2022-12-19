@@ -43,33 +43,24 @@ char *find_file_name(char *s)
 
 void	write_champ_code(t_data *data, int fd)
 {
-	int		temp;
-	int		i;
+	printf("data->champ_size in b10: %d\n", data->champ_size);
+	data->champ_size = int_to_bigendian(data->champ_size, 4);
+	write(fd, &data->champ_size, 4);
+	// int		temp;
 
-	temp = 0;
-	i = 0;
-	write(fd, &temp, 2);
-	write(fd, &temp, 2);
-	write(fd, &temp, 2);
-	write(fd, &temp, 1);
-	write(fd, &data->champ_size, 1);
+	// temp = 0;
+	// write(fd, &temp, 2);
+	// write(fd, &temp, 1);
+	// write(fd, &data->champ_size, 1);
 }
 
-// void write_champ_code(t_data *data, int fd)
-// {
-// 	int temp;
-// 	char *exec_size;
+void	put_null(int fd)
+{
+	int null;
 
-// 	temp = 0;
-// 	exec_size = NULL;
-// 	write(fd, &temp, 2);
-// 	write(fd, &temp, 2);
-// 	write(fd, &temp, 2);
-// 	exec_size = ft_itoa_base(data->champ_size, 16);
-// 	write(fd, &temp, 1);
-// 	hex_translator(exec_size, fd, 1);
-// 	free(exec_size);
-// }
+	null = 0;
+	write(fd, &null, 4);
+}
 
 void	translation(t_data *s_data, char *file_name)
 {
@@ -81,11 +72,10 @@ void	translation(t_data *s_data, char *file_name)
 	magic = int_to_bigendian(magic, 4);
 	write(fd, &magic, 4);
 	hex_translator(s_data->s_header->prog_name, fd, PROG_NAME_LENGTH);
+	put_null(fd);
 	write_champ_code(s_data, fd);
 	hex_translator(s_data->s_header->comment, fd, COMMENT_LENGTH);
-	int temp = 0;
-	write(fd, &temp, 4);
-	// exit(1);
+	put_null(fd);
 	generator(s_data->vec_input, fd);
-	// close(fd);
+	close(fd);
 }
