@@ -13,3 +13,5 @@ echo $champ4
 ./corewar cor_samples/$champ1 cor_samples/$champ2 cor_samples/$champ3 cor_samples/$champ4 -v 21 -dump 10000 > mytest.txt &
 ../eval_tests/corewar cor_samples/$champ1 cor_samples/$champ2 cor_samples/$champ3 cor_samples/$champ4  -v 20 -d 10000 > origtest.txt &
 wait
+
+diff mytest.txt origtest.txt
