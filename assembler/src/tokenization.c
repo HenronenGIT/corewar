@@ -19,8 +19,6 @@ static t_token	*allocate_token_struct(t_type type, char *content)
 	s_token = (t_token *)malloc(sizeof(t_token));
 	if (!s_token)
 		error(MALLOC_ERR);
-	s_token->type = type;
-	s_token->content = content;
 	return (s_token);
 }
 
@@ -30,6 +28,10 @@ static void	save_token(t_data *s_data, char *sub_string, t_type type)
 
 	s_token = NULL;
 	s_token = allocate_token_struct(type, sub_string);
+	s_token->type = type;
+	s_token->content = sub_string;
+	s_token->line = s_data->s_error_log->line;
+	s_token->column = s_data->s_error_log->column;
 	vec_insert(s_data->vec_tokens, s_token);
 }
 
@@ -106,8 +108,9 @@ void	tokenization(char *input, t_data *s_data)
 	if (fd == -1)
 		error(OPEN_ERR);
 	read_header(fd, s_data);
-	while (get_next_line(fd, &line) != 0)
+	while (get_next_line(fd, &line) != 0 && s_data->s_error_log->line++)
 	{
+		// s_data->s_error_log->line += 1;
 		had_newline = 0;
 		if (ft_replace(&line, '\n', '\0'))
 			had_newline = 1;
@@ -115,7 +118,6 @@ void	tokenization(char *input, t_data *s_data)
 		if (had_newline)
 			save_token(s_data, "\n", NEWLINE);
 		free(line);
-		s_data->s_error_log->line += 1;
 	}
 	close(fd);
 }

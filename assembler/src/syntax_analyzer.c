@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-int lookup(const char *string)
+int	lookup(const char *string)
 {
 	size_t i;
 
@@ -29,77 +29,64 @@ int lookup(const char *string)
 /*
 Fill argument values to...
 */
-void save_argument(t_input **input_array, t_token *token)
+void	save_argument(t_input **statement, t_token *token)
 {
-	size_t i;
-
-	i = 0;
-	while ((*input_array)->args[i] != NULL)
-		i += 1;
-	if (i >= 3)
-		error(SYNTAX_ERROR);
-	else
-		(*input_array)->arg_count = i + 1;
-	(*input_array)->args[i] = token->content;
-	i = 0;
-	while ((*input_array)->arg_type[i] != 0)
-		i += 1;
+	if ((*statement)->arg_count > 3)
+		syntax_error(TOO_MANY_ARG_ERR, (*statement), NULL);
+	(*statement)->args[(*statement)->arg_count] = token->content;
 	if (token->type == REGISTER)
-		(*input_array)->arg_type[i] = T_REG;
+		(*statement)->arg_type[(*statement)->arg_count] = T_REG;
 	else if (token->type == DIRECT || token->type == DIRECT_LABEL)
-		(*input_array)->arg_type[i] = T_DIR;
+		(*statement)->arg_type[(*statement)->arg_count] = T_DIR;
 	else if (token->type == INDIRECT)
-		(*input_array)->arg_type[i] = T_IND;
+		(*statement)->arg_type[(*statement)->arg_count] = T_IND;
+	(*statement)->arg_count += 1;
 }
 
-static void insert_arguments(t_data *s_data, t_token *token, t_type last_token)
+static void	insert_arguments(t_data *s_data, t_token *token, t_type last_token)
 {
-	size_t newest_element;
-	t_input **input_array;
+	size_t	newest_element;
+	t_input	**input_array;
 
 	if (last_token != SEPARATOR && last_token != INSTRUCTION)
 		syntax_error(MISSING_COMMA_ERR, NULL, NULL);
 	input_array = (t_input **)s_data->vec_input->array;
 	newest_element = s_data->vec_input->space_taken - 1;
-	// if (token->type == SEPARATOR)
-		// input_array[newest_element]->commas += 1;
-	// else
-		save_argument(&input_array[newest_element], token); // save argumnets better name?
+	save_argument(&input_array[newest_element], token); // save argumnets better name?
 }
 
-static void validate_arg_types(t_input *cur_element, int op_code)
+static void	validate_arg_types(t_input *cur_element, int op_code)
 {
-	int result;
+	int	result;
 	int	i;
-	int *arg_type;
+	int	*arg_type;
 
 	i = 0;
 	result = 0;
 	arg_type = cur_element->arg_type;
 	while (arg_type[i])
 	{
-
-	if (g_op_tab[op_code - 1].arg_type[i] && !arg_type[i])
-		syntax_error(TEMP_ERR, cur_element, NULL);
+		if (g_op_tab[op_code - 1].arg_type[i] && !arg_type[i])
+			syntax_error(TEMP_ERR, cur_element, NULL);
 		// return (0);
-	result = arg_type[i] & g_op_tab[op_code - 1].arg_type[i];
-	if (result != arg_type[i])
-		syntax_error(INVALID_ARG_ERR, cur_element, NULL);
+		result = arg_type[i] & g_op_tab[op_code - 1].arg_type[i];
+		if (result != arg_type[i])
+			syntax_error(INVALID_ARG_ERR, cur_element, NULL);
 		i += 1;
 	}
 }
 
-void validate_instruction_syntax(t_input *cur_element, t_token *cur_token)
+void	validate_instruction_syntax(t_input *cur_element, t_token *cur_token)
 {
 	int op_code;
 
 	op_code = cur_element->op_code;
 	if (cur_element->arg_count != g_op_tab[op_code - 1].expected_arg_count)
-		syntax_error(ARG_COUNT_ERR, cur_element, NULL);
+		syntax_error(ARG_COUNT_ERR, cur_element, NULL, cur_token);
 	validate_arg_types(cur_element, op_code);
 }
 
-static void validate_label_syntax(t_input *cur_element, t_token *cur_token)
+static void	validate_label_syntax(t_input *cur_element, t_token *cur_token)
 {
 	if (cur_token->type != NEWLINE)
 		syntax_error(NO_NL_ERR, NULL, cur_element->label_name);
@@ -142,11 +129,12 @@ static void allocate_element(t_data *s_data, t_token *token)
 
 void syntax_analyzer(t_data *s_data)
 {
-	t_token **tokens = (t_token **)s_data->vec_tokens->array;
-	static t_type last_token;
-	size_t i;
+	t_token			**tokens;
+	static t_type	last_token;
+	size_t			i;
 
 	last_token = NEWLINE;
+	tokens = (t_token **)s_data->vec_tokens->array;
 	i = 0;
 	while (tokens[i])
 	{

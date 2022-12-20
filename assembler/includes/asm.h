@@ -37,12 +37,13 @@
 # define COMMENT_COUNT_ERR -10
 # define MISSING_COMMA_ERR -11
 # define INVALID_FILE_NAME_ERR -12
-# define NO_NL_ERR -13
 
 /*---------- Syntax errors ----------*/
+# define NO_NL_ERR -13
 # define ARG_COUNT_ERR -14
 # define INVALID_ARG_ERR -15
 # define UNDEFINED_LABEL_ERR -16
+# define TOO_MANY_ARG_ERR -17
 
 # define SYNTAX_ERROR -999 //TEMP ERROR
 
@@ -188,6 +189,8 @@ typedef struct s_token
 {
 	t_type type;
 	char *content;
+	int line;
+	int column;
 	// location of the token can be saved
 } t_token;
 

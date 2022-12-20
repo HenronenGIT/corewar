@@ -58,18 +58,22 @@ void	lexical_error(t_data *s_data)
 /*
 Is called form syntax_analyzer
 */
-void	syntax_error(int error_number, t_input *statement, char *label)
+void	syntax_error(int error_number, t_input *statement, char *label, t_token *token)
 {
 	int	op_code;
 
 	if (statement)
 		op_code = statement->op_code;
 	if (error_number == ARG_COUNT_ERR)
-		ft_printf("Invalid amount of arguments for instruciton [%s]\n", g_op_tab[op_code - 1].instruction);
+		ft_printf("Invalid amount of arguments for instruciton [%s][%d:%d]\n", token->content, token->line, token->column);
+		// ft_printf("Invalid amount of arguments for instruciton [%s]\n", token->content);
+		// ft_printf("Invalid amount of arguments for instruciton [%s]\n", g_op_tab[op_code - 1].instruction);
 	if (error_number == INVALID_ARG_ERR)
 		ft_printf("Invalid argument type for instruction [%s]\n", g_op_tab[op_code - 1].instruction);
 	if (error_number == UNDEFINED_LABEL_ERR)
 		ft_printf("Undefined label [%s]\n", label);
+	if (error_number == TOO_MANY_ARG_ERR)
+		ft_printf("Tried to add 4th argument to the instruction [%d]", statement->op_code);
 	exit(SYNTAX_ERROR);
 
 }
