@@ -28,9 +28,9 @@ static void	init_vectors(t_data *s_data)
 void	init(t_data *data, t_header *header, t_error_log *error_log)
 {
 	header->magic = COREWAR_EXEC_MAGIC;
-	ft_bzero(header->prog_name, PROG_NAME_LENGTH);
+	ft_bzero(header->prog_name, PROG_NAME_LENGTH + 1);
 	header->prog_size = 0;
-	ft_bzero(header->comment, COMMENT_LENGTH);
+	ft_bzero(header->comment, COMMENT_LENGTH + 1);
 	header->comment_saved = false;
 	header->name_saved = false;
 	error_log->line = 1;
