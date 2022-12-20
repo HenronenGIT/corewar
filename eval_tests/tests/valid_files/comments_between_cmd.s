@@ -1,7 +1,7 @@
 
 .name "zork"
 #test
-;testj
+#testj
 .comment "I'M ALIIIIVE"
 #test
 l2:		sti r1, %:live, %1
