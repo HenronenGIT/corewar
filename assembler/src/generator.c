@@ -45,6 +45,33 @@ static void	print_statement(t_input *data, int fd)
 */
 void	save_atc(t_input *data)
 {
+	char	*atc_bi;
+	int		i;
+
+	i = 0;
+	atc_bi = (char *)malloc(sizeof(char) * 9);
+	if (!atc_bi)
+		exit (1); //change to error
+	atc_bi[8] = '\0';
+	while (i <= 3)
+	{
+		if (data->arg_type[i] == T_REG)
+			atc_bi = ft_strjoin(atc_bi, "01");
+		if (data->arg_type[i] == T_DIR)
+			atc_bi = ft_strjoin(atc_bi, "10");
+		if (data->arg_type[i] == T_IND)
+			atc_bi = ft_strjoin(atc_bi, "11");
+		if (!data->arg_type[i])
+			atc_bi = ft_strjoin(atc_bi, "00");
+		i++;
+	}
+	data->argument_type_code = ft_btoi(atc_bi);
+	free (atc_bi);
+}
+
+/* !OLD CODE!
+void	save_atc(t_input *data)
+{
 	int		i;
 	char	*temp;
 	int		j;
@@ -82,6 +109,7 @@ void	save_atc(t_input *data)
 	data->argument_type_code = ft_btoi(temp);
 	free(temp);
 }
+*/
 
 /*
 	find numeric value in T_DIR, T_REG or T_IND type argument when argument 
@@ -111,6 +139,10 @@ int	is_label_call(char *current_arg)
 	return (0);
 }
 
+/*
+	Strcmp but we skip the first characters of the name if they are : or %.
+	Compare two labels, if the names match we return 1, else we return 0.
+*/
 int	compare_labels(char *original_label, char *current_label)
 {
 	int	i;
@@ -135,8 +167,10 @@ int	compare_labels(char *original_label, char *current_label)
 }
 
 /*
-	find label address to use for calculation of realtive position 
-	of label address and current postition
+	function to loop through saved labels and compare their names to the label
+	we are currently searching through. When we get a match we can substract
+	the address our current postion from the address of that label to find
+	the relative position of that label. 
 */
 void	find_label_addr(t_input **array, char *curr_label_name, int curr_arg, \
 						int curr_struct)

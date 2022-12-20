@@ -12,6 +12,9 @@
 
 #include "../includes/asm.h"
 
+/*
+	not used anymore
+*/
 char	*ft_itoh(int num, int byte_size)
 {
 	int		i;
