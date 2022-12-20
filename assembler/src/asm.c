@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -13,11 +12,11 @@
 
 #include "../includes/asm.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_data s_data;
-	t_header s_header;
-	t_error_log s_error_log;
+	t_data		s_data;
+	t_header	s_header;
+	t_error_log	s_error_log;
 
 	if (argc != 2)
 		error(ARG_ERR);

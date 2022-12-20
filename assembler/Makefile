@@ -30,7 +30,6 @@ SRC_FILES = asm.c \
 			debug.c \
 			generator.c \
 			ft_btoi.c \
-			ft_itoh.c \
 			hex_translator.c \
 			calculations.c \
 			int_to_bigendian.c \
