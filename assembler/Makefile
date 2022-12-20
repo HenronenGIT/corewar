@@ -35,7 +35,9 @@ SRC_FILES = asm.c \
 			int_to_bigendian.c \
 			validite_file.c \
 			error.c \
-			translation.c
+			translation.c \
+			argument_type_code.c \
+			labels.c \
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

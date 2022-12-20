@@ -15,7 +15,7 @@ sub	r3,		r2,		r1
 
 and	r1,		r2,		r3
 and	%21,	%42,	r2
-and	2,		40,		r4
+and	2,		40,		r41
 
 or	r1,		r2,		r3
 or	%21,	%42,	r2
