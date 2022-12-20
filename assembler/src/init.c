@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-static void	init_vectors(t_data *s_data)
+static	void	init_vectors(t_data *s_data)
 {
 	s_data->vec_input = (t_vec *)malloc(sizeof(t_vec));
 	s_data->vec_tokens = (t_vec *)malloc(sizeof(t_vec));

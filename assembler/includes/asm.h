@@ -37,7 +37,7 @@
 # define COMMENT_COUNT_ERR -10
 # define MISSING_COMMA_ERR -11
 # define INVALID_FILE_NAME_ERR -12
-# define NO_NL_ERR -13 //TEMP ERROR
+# define NO_NL_ERR -13
 
 /*---------- Syntax errors ----------*/
 # define ARG_COUNT_ERR -14

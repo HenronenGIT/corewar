@@ -61,7 +61,7 @@ that matches to one of the types of token,
 it saves that to token to "t_token" struct.
 */
 //! TOKEN LOCATION CAN BE SAVED. ADD TO SAVE_TOKEN FUNCTION.
-void	lexical_scanner(char *line, t_data *s_data)
+static void	lexical_scanner(char *line, t_data *s_data)
 {
 	unsigned int	left;
 	unsigned int	right;
