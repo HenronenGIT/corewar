@@ -32,8 +32,8 @@ void error(int error_number)
 		ft_puterror("ERROR: File contained multiple .name!\n");
 	if (error_number == COMMENT_COUNT_ERR)
 		ft_puterror("ERROR: File contained multiple .comment\n");
-	if (error_number == MISSING_COMMA_ERR)
-		ft_puterror("ERROR: Missing comma between arguments!\n");
+	if (error_number == MISSING_CHAMP_ERR)
+		ft_puterror("ERROR: Missing champion code!\n");
 	if (error_number == INVALID_FILE_NAME_ERR)
 		ft_puterror("ERROR: Invalid filename\n");
 	if (error_number == NO_NL_ERR)
@@ -58,22 +58,24 @@ void	lexical_error(t_data *s_data)
 /*
 Is called form syntax_analyzer
 */
-void	syntax_error(int error_number, t_input *statement, char *label, t_token *token)
+// void	syntax_error(int error_number, t_error_log *error_log, t_input *statement, char *label, t_token *token)
+void	syntax_error(int error_number, t_error_log *error_log, const char *str, t_token *token)
 {
-	int	op_code;
-
-	if (statement)
-		op_code = statement->op_code;
 	if (error_number == ARG_COUNT_ERR)
-		ft_printf("Invalid amount of arguments for instruciton [%s][%d:%d]\n", token->content, token->line, token->column);
-		// ft_printf("Invalid amount of arguments for instruciton [%s]\n", token->content);
-		// ft_printf("Invalid amount of arguments for instruciton [%s]\n", g_op_tab[op_code - 1].instruction);
+		ft_printf("Invalid amount of arguments for instruction [%s] at line [%d]\n", str, token->line);
 	if (error_number == INVALID_ARG_ERR)
-		ft_printf("Invalid argument type for instruction [%s]\n", g_op_tab[op_code - 1].instruction);
+		ft_printf("Invalid argument type for instruction [%s] at line [%d]\n", str, error_log->line);
 	if (error_number == UNDEFINED_LABEL_ERR)
-		ft_printf("Undefined label [%s]\n", label);
+		ft_printf("Undefined label [%s]\n", str);
 	if (error_number == TOO_MANY_ARG_ERR)
-		ft_printf("Tried to add 4th argument to the instruction [%d]", statement->op_code);
+		ft_printf("Tried to add 4th argument to the instruction []");
+	if (error_number == INVALID_TOKEN_ERR)
+		ft_printf("Invalid TOKEN [%s] at location [%d:%d]", str, error_log->line, error_log->column);
+	if (error_number == MISSING_COMMA_ERR)
+		ft_printf("ERROR: Missing comma between arguments!\n");
+	if (error_number == INVALID_EOL_ERR)
+		ft_printf("ERROR: Invalid end of line at line [%d]!\n", token->line);
+	if (error_number)
 	exit(SYNTAX_ERROR);
 
 }

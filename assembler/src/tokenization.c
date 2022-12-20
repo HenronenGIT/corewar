@@ -35,7 +35,7 @@ static void	save_token(t_data *s_data, char *sub_string, t_type type)
 	vec_insert(s_data->vec_tokens, s_token);
 }
 
-static	void	validate_statement(t_data *s_data, char *sub_string)
+static void	validate_statement(t_data *s_data, char *sub_string)
 {
 	if (!sub_string)
 		error(MALLOC_ERR);
@@ -52,7 +52,8 @@ static	void	validate_statement(t_data *s_data, char *sub_string)
 	else if (is_register(sub_string))
 		save_token(s_data, sub_string, REGISTER);
 	else
-		lexical_error(s_data);
+		syntax_error(INVALID_TOKEN_ERR, s_data->s_error_log, sub_string, NULL);
+		// lexical_error(s_data);
 }
 
 /*
@@ -62,7 +63,6 @@ When lexical analysis finds string literal
 that matches to one of the types of token, 
 it saves that to token to "t_token" struct.
 */
-//! TOKEN LOCATION CAN BE SAVED. ADD TO SAVE_TOKEN FUNCTION.
 static void	lexical_scanner(char *line, t_data *s_data)
 {
 	unsigned int	left;
@@ -72,7 +72,8 @@ static void	lexical_scanner(char *line, t_data *s_data)
 	right = 0;
 	while (line[right])
 	{
-		s_data->s_error_log->column = right + 1;
+		// s_data->s_error_log->column = right + 1;
+		s_data->s_error_log->column = left + 1;
 		if (line[right] == COMMENT_CHAR && left == right)
 			break ;
 		if (is_separator(line[right]) && left == right)

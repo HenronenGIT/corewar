@@ -37,6 +37,7 @@
 # define COMMENT_COUNT_ERR -10
 # define MISSING_COMMA_ERR -11
 # define INVALID_FILE_NAME_ERR -12
+# define MISSING_CHAMP_ERR -19
 
 /*---------- Syntax errors ----------*/
 # define NO_NL_ERR -13
@@ -44,6 +45,8 @@
 # define INVALID_ARG_ERR -15
 # define UNDEFINED_LABEL_ERR -16
 # define TOO_MANY_ARG_ERR -17
+# define INVALID_TOKEN_ERR -18
+# define INVALID_EOL_ERR -20
 
 # define SYNTAX_ERROR -999 //TEMP ERROR
 
@@ -191,7 +194,6 @@ typedef struct s_token
 	char *content;
 	int line;
 	int column;
-	// location of the token can be saved
 } t_token;
 
 /* OTTO */
@@ -217,7 +219,8 @@ void	error(int error_number);
 void	tokenization(char *input, t_data *s_data);
 void	read_header(int fd, t_data *s_data);
 void	lexical_error(t_data *s_data);
-void	syntax_error(int error_number, t_input *statement, char *label);
+// void	syntax_error(int error_number, t_input *statement, char *label);
+void	syntax_error(int error_number, t_error_log *error_log, const char *str, t_token *token);
 
 /*---------- Dynamic 2D array ----------*/
 void	vec_new_arr(t_vec *dst, size_t len);

@@ -60,9 +60,12 @@ void calculate_statement_sizes(t_data *s_data)
 	size_t	i;
 	size_t	last_index;
 
+
  	i = 0;
 	last_index = s_data->vec_input->space_taken - 1;
 	array = (t_input **)s_data->vec_input->array;
+	if (array[i] == NULL)
+		error(MISSING_CHAMP_ERR);
 	while (array[i])
 	{
 		calculate_bytes(array[i]);
