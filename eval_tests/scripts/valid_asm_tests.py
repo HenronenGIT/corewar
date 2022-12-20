@@ -1,9 +1,9 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    test_asm.py                                        :+:      :+:    :+:    #
+#    valid_asm_tests.py                                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+         #
+#    By: hmaronen <hmaronen@student.hive.fi>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 10:10:20 by hmaronen          #+#    #+#              #
 #    Updated: 2022/12/09 10:10:21 by hmaronen         ###   ########.fr        #
