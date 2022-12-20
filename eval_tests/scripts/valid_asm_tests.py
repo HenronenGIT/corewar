@@ -97,13 +97,13 @@ def runFile(program, testFile, is_refProgram):
 	if is_refProgram == False:
 		if output.returncode != 0:
 			print(f"{bcolors.FAIL}FAIL - File did not compile{bcolors.ENDC}")
-	if is_refProgram == True:
-		subprocess.run(['mv', corExtension, './'])
-	output = subprocess.run(['xxd', corFile], capture_output=True)
+	# if is_refProgram == True:
+		# subprocess.run(['mv', corExtension, './'])
+	output = subprocess.run(['xxd', corExtension], capture_output=True)
 
 	with open(outputFile, 'w') as file:
 		file.write(output.stdout.decode('utf-8'))
-	output = subprocess.run(['rm', corFile], capture_output=True)
+	output = subprocess.run(['rm', corExtension], capture_output=True)
 
 if __name__ == "__main__":
 	main()
