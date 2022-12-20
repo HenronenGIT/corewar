@@ -21,7 +21,7 @@ FLAGS = -g -Wall -fsanitize=address#-Wextra #-Werror
 SRC_DIR = ./src/
 SRC_FILES = asm.c \
 			init.c \
-			read_input.c \
+			tokenization.c \
 			read_header.c \
 			vector.c \
 			is_functions.c \

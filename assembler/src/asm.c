@@ -22,9 +22,10 @@ int	main(int argc, char *argv[])
 		error(ARG_ERR);
 	validate_file(argv[1]);
 	init(&s_data, &s_header, &s_error_log);
-	read_input(argv[1], &s_data);
+	tokenization(argv[1], &s_data);
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(&s_data);
+	// print_data(&s_data);
 	translation(&s_data, argv[1]);
 	return (0);
 }

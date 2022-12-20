@@ -159,6 +159,7 @@ typedef struct s_op_tab
 	int op_code;
 	int arg_type[3];
 	int direct_size;
+	// bool arg_type_code;
 	int arg_type_code;
 	int expected_arg_count;
 } t_op_tab;
@@ -210,7 +211,7 @@ void	init(t_data *data, t_header *header, t_error_log *error_log);
 t_input	*init_values(t_input *element);
 
 void	error(int error_number);
-void	read_input(char *input, t_data *s_data);
+void	tokenization(char *input, t_data *s_data);
 void	read_header(int fd, t_data *s_data);
 void	lexical_error(t_data *s_data);
 void	syntax_error(int error_number, t_input *statement, char *label);
@@ -222,7 +223,7 @@ void	vec_insert(t_vec *dst_vec, void *element);
 /*---------- Functions to validate Tokens ----------*/
 bool	is_label(t_data *s_data, char *sub_string);
 bool	is_statement(char *sub_string);
-bool	is_delimiter(char c);
+bool	is_delim(char c);
 bool	is_register(char *string);
 bool	is_separator(char c);
 bool	is_directlabel(t_data *s_data, char *string);
