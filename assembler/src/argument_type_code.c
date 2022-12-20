@@ -25,18 +25,18 @@ void	save_atc(t_input *data)
 	i = 0;
 	atc_bi = (char *)malloc(sizeof(char) * 9);
 	if (!atc_bi)
-		exit (1); //change to error
+		error(MALLOC_ERR);
 	atc_bi[8] = '\0';
 	while (i <= 3)
 	{
 		if (data->arg_type[i] == T_REG)
-			atc_bi = ft_strjoin(atc_bi, "01");
+			atc_bi = ft_strcat(atc_bi, "01");
 		if (data->arg_type[i] == T_DIR)
-			atc_bi = ft_strjoin(atc_bi, "10");
+			atc_bi = ft_strcat(atc_bi, "10");
 		if (data->arg_type[i] == T_IND)
-			atc_bi = ft_strjoin(atc_bi, "11");
+			atc_bi = ft_strcat(atc_bi, "11");
 		if (!data->arg_type[i])
-			atc_bi = ft_strjoin(atc_bi, "00");
+			atc_bi = ft_strcat(atc_bi, "00");
 		i++;
 	}
 	data->argument_type_code = ft_btoi(atc_bi);

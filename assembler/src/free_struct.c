@@ -30,4 +30,5 @@ void	free_t_vec(t_vec *s_vec)
 		free_s_data_cell(s_vec->array[i]);
 		i++;
 	}
+	free(s_vec);
 }
