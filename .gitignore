@@ -14,9 +14,7 @@
 *.dSYM/
 
 .DS_Store
-asm/asm
-corewar/corewar
-*.txt
 asm
 corewar
+*.txt
 
