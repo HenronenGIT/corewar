@@ -51,7 +51,7 @@ bool is_label(t_data *s_data, char *lexeme)
 	return (true);
 }
 
-bool is_delimiter(char c)
+bool is_delim(char c)
 {
 	if (c == ' ' || c == '\t' || c == SEPARATOR_CHAR || c == '\0')
 		return (true);

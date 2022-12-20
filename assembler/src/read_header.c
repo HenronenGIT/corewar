@@ -19,7 +19,7 @@ static void reel_to_end(t_data *s_data, char *string)
 		s_data->s_error_log->column += 1;
 		if (*string == COMMENT_CHAR)
 			return ;
-		if (!is_delimiter(*string))
+		if (!is_delim(*string))
 			lexical_error(s_data);
 		string += 1;
 	}
@@ -87,7 +87,7 @@ static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 			reel_to_end(s_data, ++string);
 			return;
 		}
-		if (is_delimiter(string[i]) == false)
+		if (is_delim(string[i]) == false)
 			lexical_error(s_data);
 		i += 1;
 	}
