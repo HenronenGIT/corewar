@@ -27,6 +27,7 @@ void	save_atc(t_input *data)
 	if (!atc_bi)
 		error(MALLOC_ERR);
 	atc_bi[8] = '\0';
+	atc_bi[0] = '\0';
 	while (i <= 3)
 	{
 		if (data->arg_type[i] == T_REG)
