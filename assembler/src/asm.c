@@ -25,7 +25,7 @@ int	main(int argc, char *argv[])
 	tokenization(argv[1], &s_data);
 	syntax_analyzer(&s_data);
 	calculate_statement_sizes(&s_data);
-	// print_data(&s_data);
 	translation(&s_data, argv[1]);
+	free_t_vec(s_data.vec_input);
 	return (0);
 }

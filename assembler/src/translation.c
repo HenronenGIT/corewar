@@ -30,32 +30,6 @@ char	*find_file_name(char *s)
 	new_file_name = ft_strcat(new_file_name, ".cor");
 	return (new_file_name);
 }
-// char	*find_file_name(char *s)
-// {
-// 	char	*file_name;
-// 	int		i;
-// 	int		len;
-// 	int		j;
-// 	char	*temp;
-
-// 	i = 1;
-// 	j = 0;
-// 	file_name = NULL;
-// 	temp = ft_strrchr(s, '/');
-// 	if (!temp)
-// 	{
-// 		temp = s;
-// 		i = 0;
-// 	}
-// 	len = ft_strlen(temp) - 2;
-// 	file_name = ft_strnew(len + 3);
-// 	file_name[len + 2] = '\0';
-// 	while (len - i)
-// 		file_name[j++] = temp[i++];
-// 	file_name[i] = '\0';
-// 	file_name = ft_strcat(file_name, ".cor");
-// 	return (file_name);
-// }
 
 /*
 	take the size of the champion, convert it to big endian
