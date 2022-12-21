@@ -205,6 +205,12 @@ void	hex_translator(char *str, int fd, int len);
 void	add_magic(int fd);
 int		int_to_bigendian(int value, int size);
 void	translation(t_data *s_data, char *file_name);
+void	find_label_addr(t_input **array, char *curr_label_name, int curr_arg, int curr_struct);
+int		compare_labels(char *original_label, char *current_label);
+int		is_label_call(char *current_arg);
+void	save_atc(t_input *data);
+void	free_s_data_cell(t_input *cell);
+void	free_t_vec(t_vec *s_vec);
 
 /* File validation */
 void	validate_file(char *file_name);

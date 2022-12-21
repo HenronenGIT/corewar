@@ -94,7 +94,6 @@ def change_extension(file):
 def runFile(program, testFile, is_refProgram):
 	outputFile = 'ref.txt' if is_refProgram else 'our.txt'
 	corExtension = change_extension(testFile)
-	corFile = os.path.basename(corExtension)
 
 	output = subprocess.run([program, testFile], capture_output=True)
 	if is_refProgram == False:
