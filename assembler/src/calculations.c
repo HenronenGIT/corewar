@@ -24,7 +24,7 @@ static int	fetch_size(int arg_type, int op_code)
 		return (0);
 }
 
-static int	calculate_total(t_statement *statement)
+static int	calculate_total(t_stmnt *statement)
 {
 	int	sum;
 	int	i;
@@ -39,7 +39,7 @@ static int	calculate_total(t_statement *statement)
 	return (sum);
 }
 
-static void	calculate_bytes(t_statement *stmnt)
+static void	calculate_bytes(t_stmnt *stmnt)
 {
 	static int	total_bytes;
 	int			i;
@@ -55,13 +55,13 @@ static void	calculate_bytes(t_statement *stmnt)
 
 void	calculate_statement_sizes(t_data *s_data)
 {
-	t_statement	**arr;
+	t_stmnt	**arr;
 	size_t		i;
 	size_t		last_i;
 
 	i = 0;
 	last_i = s_data->vec_input->space_taken - 1;
-	arr = (t_statement **)s_data->vec_input->array;
+	arr = (t_stmnt **)s_data->vec_input->array;
 	if (arr[i] == NULL)
 		error(MISSING_CHAMP_ERR);
 	while (arr[i])

@@ -26,3 +26,15 @@ int	lookup(const char *string)
 	return (-1);
 }
 
+void	reel_to_end(t_data *s_data, char *string)
+{
+	while (*string != '\0')
+	{
+		s_data->s_error_log->column += 1;
+		if (*string == COMMENT_CHAR)
+			return ;
+		if (!is_delim(*string))
+			lexical_error(s_data);
+		string += 1;
+	}
+}

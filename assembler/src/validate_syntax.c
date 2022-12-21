@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-static void	validate_arg_types(t_data *s_data, t_statement *cur_element)
+static void	validate_arg_types(t_data *s_data, t_stmnt *cur_element)
 {
 	int			result;
 	int			*arg_type;
@@ -36,7 +36,7 @@ static void	validate_arg_types(t_data *s_data, t_statement *cur_element)
 	}
 }
 
-void	validate_instruction(t_data *s_data, t_statement *element, t_token *token)
+void	validate_instruction(t_data *s_data, t_stmnt *element, t_token *token)
 {
 	int			op_code;
 	const char	*instruction;
@@ -48,7 +48,7 @@ void	validate_instruction(t_data *s_data, t_statement *element, t_token *token)
 	validate_arg_types(s_data, element);
 }
 
-static void	validate_label(t_statement *cur_element, t_token *cur_token)
+static void	validate_label(t_stmnt *cur_element, t_token *cur_token)
 {
 	if (cur_token->type != NEWLINE)
 		syntax_error(NO_NL_ERR, NULL, cur_element->label_name, NULL);
@@ -56,7 +56,7 @@ static void	validate_label(t_statement *cur_element, t_token *cur_token)
 
 void	validate_syntax(t_data *s_data, t_token *cur_token, t_type last_token)
 {
-	t_statement	*newest_element;
+	t_stmnt	*newest_element;
 	t_vec	*vec_input;
 
 	vec_input = s_data->vec_input;
