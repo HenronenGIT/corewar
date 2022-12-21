@@ -19,7 +19,7 @@ int	main(int argc, char *argv[])
 	t_error_log	s_error_log;
 
 	if (argc != 2)
-		error(ARG_ERR);
+		error(ARGV_ERR);
 	validate_file(argv[1]);
 	init(&s_data, &s_header, &s_error_log); 
 	tokenization(argv[1], &s_data);

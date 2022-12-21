@@ -83,7 +83,6 @@ void	translation(t_data *s_data, char *file_name)
 
 	file_name[ft_strlen(file_name) - 2] = '\0';
 	new_file_name = find_file_name(file_name);
-	ft_printf("Writing output program to %s\n", new_file_name);
 	magic = COREWAR_EXEC_MAGIC;
 	fd = open(new_file_name, O_RDWR | O_CREAT | O_TRUNC, 0600);
 	magic = int_to_bigendian(COREWAR_EXEC_MAGIC, 4);
@@ -94,6 +93,7 @@ void	translation(t_data *s_data, char *file_name)
 	hex_translator(s_data->s_header->comment, fd, COMMENT_LENGTH);
 	put_null(fd);
 	generator(s_data->vec_input, fd);
+	ft_printf("Writing output program to %s\n", new_file_name);
 	free (new_file_name);
 	close(fd);
 }

@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-void	free_s_data_cell(t_input *cell)
+void	free_s_data_cell(t_stmnt *cell)
 {
 	int	i;
 

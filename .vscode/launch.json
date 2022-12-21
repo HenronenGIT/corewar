@@ -34,7 +34,11 @@
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/2_statement_same_line.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/Backward.s"],
             // "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/unknown_instr.s"],
+<<<<<<< HEAD
             "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/valid_files/42.s"],
+=======
+            "args": ["/Users/hmaronen/workspace/github/corewar/eval_tests/tests/error_files/repeat_name_str.s"],
+>>>>>>> 7b8dbe71dd9512b3658ea04a373c1656a6fee092
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

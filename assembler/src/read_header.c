@@ -12,40 +12,32 @@
 
 #include "../includes/asm.h"
 
-static void reel_to_end(t_data *s_data, char *string)
+static char	*decide_destination(t_data *s_data, t_type type)
 {
-	while (*string != '\0')
-	{
-		s_data->s_error_log->column += 1;
-		if (*string == COMMENT_CHAR)
-			return ;
-		if (!is_delim(*string))
-			lexical_error(s_data);
-		string += 1;
-	}
-}
-
-//? Check if can make better or shorter
-static char *copy_name(t_data *s_data, char *string, int fd, t_type type)
-{
-	size_t j;
-	char *dst;
-
-	j = 0;
 	if (type == NAME)
 	{
 		if (s_data->s_header->name_saved == true)
 			error(NAME_COUNT_ERR);
-		dst = s_data->s_header->prog_name;
 		s_data->s_header->name_saved = true;
+		return (s_data->s_header->prog_name);
 	}
-	else if (type == COMMENT)
+	else
 	{
 		if (s_data->s_header->comment_saved == true)
 			error(COMMENT_COUNT_ERR);
-		dst = s_data->s_header->comment;
 		s_data->s_header->comment_saved = true;
+		return (s_data->s_header->comment);
 	}
+}
+
+//? Check if can make better or shorter
+static char	*copy_name(t_data *s_data, char *string, int fd, t_type type)
+{
+	size_t	j;
+	char	*dst;
+
+	j = 0;
+	dst = decide_destination(s_data, type);
 	while (*string != STRING_CHAR)
 	{
 		if (*string == '\0')
@@ -55,10 +47,7 @@ static char *copy_name(t_data *s_data, char *string, int fd, t_type type)
 			ft_replace(&string, '\n', '\0');
 		}
 		else
-		{
-			dst[j] = *string;
-			string += 1;
-		}
+			dst[j] = *string++;
 		s_data->s_error_log->column += 1;
 		j += 1;
 	}
@@ -69,9 +58,9 @@ static char *copy_name(t_data *s_data, char *string, int fd, t_type type)
 	return (string);
 }
 
-static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
+static void	seek_quote(t_data *s_data, char *string, int fd, t_type type)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (type == NAME)
@@ -80,15 +69,15 @@ static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 		i = COMMENT_CMD_LEN;
 	while (string[i] != '\0')
 	{
-		s_data->s_error_log->column += 1;
+		s_data->s_error_log->column = i + 2;
 		if (string[i] == STRING_CHAR)
 		{
 			string = copy_name(s_data, &string[i + 1], fd, type);
 			reel_to_end(s_data, ++string);
-			return;
+			return ;
 		}
 		if (is_delim(string[i]) == false)
-		lexical_error(s_data);
+			lexical_error(s_data);
 		i += 1;
 	}
 	lexical_error(s_data);
@@ -98,9 +87,9 @@ static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 Iterates trough "line" and seeks HEADER_CHAR ".".
 When HEADER_CHAR is found, function checks that was the word .name or .comment
 */
-static void seek_header_char(t_data *s_data, char *line, int fd)
+static void	seek_header_char(t_data *s_data, char *line, int fd)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (line[i] != '\0')
@@ -111,13 +100,13 @@ static void seek_header_char(t_data *s_data, char *line, int fd)
 			return ;
 		else if (line[i] == HEADER_CHAR)
 		{
-			if (ft_strncmp(&line[i], NAME_CMD_STRING, NAME_CMD_LEN) == 0)
+			if (ft_strncmp(&line[i], NAME_STRING, NAME_CMD_LEN) == 0)
 				seek_quote(s_data, &line[i], fd, NAME);
-			else if (ft_strncmp(&line[i], COMMENT_CMD_STRING, COMMENT_CMD_LEN) == 0)
+			else if (ft_strncmp(&line[i], COMMENT_STRING, COMMENT_CMD_LEN) == 0)
 				seek_quote(s_data, &line[i], fd, COMMENT);
 			else
 				lexical_error(s_data);
-			return;
+			return ;
 		}
 		else
 			lexical_error(s_data);
@@ -138,6 +127,8 @@ void	read_header(int fd, t_data *s_data)
 		ft_replace(&line, '\n', '\0');
 		s_data->s_error_log->column = 1;
 		seek_header_char(s_data, line, fd);
+		if (s_data->s_header->name_saved && s_data->s_header->comment_saved)
+			return ;
 		free(line);
 		if (s_data->s_header->name_saved && s_data->s_header->comment_saved)
 			return ;
