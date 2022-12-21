@@ -56,8 +56,8 @@ static void	calculate_bytes(t_stmnt *stmnt)
 void	calculate_statement_sizes(t_data *s_data)
 {
 	t_stmnt	**arr;
-	size_t		i;
-	size_t		last_i;
+	size_t	i;
+	size_t	last_i;
 
 	i = 0;
 	last_i = s_data->vec_input->space_taken - 1;

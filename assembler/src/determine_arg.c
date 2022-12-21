@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_functions.c                                     :+:      :+:    :+:   */
+/*   determine_arg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,9 @@
 
 #include "../includes/asm.h"
 
-
-
-bool is_register(char *lexeme)
+bool	is_register(char *lexeme)
 {
-	size_t i;
+	size_t	i;
 
 	if (lexeme[0] != REGISTER_CHAR)
 		return (false);
@@ -30,8 +28,7 @@ bool is_register(char *lexeme)
 	return (true);
 }
 
-
-bool is_directlabel(t_data *s_data, char *lexeme)
+bool	is_directlabel(t_data *s_data, char *lexeme)
 {
 	if (lexeme[0] != DIRECT_CHAR)
 		return (false);
@@ -47,9 +44,9 @@ bool is_directlabel(t_data *s_data, char *lexeme)
 	return (true);
 }
 
-bool is_direct(t_data *s_data, char *lexeme)
+bool	is_direct(t_data *s_data, char *lexeme)
 {
-	size_t i;
+	size_	i;
 
 	i = 1;
 	if (lexeme[0] != DIRECT_CHAR)
@@ -69,10 +66,10 @@ bool is_direct(t_data *s_data, char *lexeme)
 	return (true);
 }
 
-bool is_indirect(t_data *s_data, char *lexeme)
+bool	is_indirect(t_data *s_data, char *lexeme)
 {
 	if (ft_isnumber(lexeme))
-		return true;
+		return (true);
 	if (lexeme[0] != LABEL_CHAR)
 		return (false);
 	if (contains_invalid_characters(s_data, lexeme))
@@ -80,10 +77,10 @@ bool is_indirect(t_data *s_data, char *lexeme)
 	return (true);
 }
 
-bool is_argument(t_type type)
+bool	is_argument(t_type type)
 {
 	if (type == REGISTER || type == DIRECT_LABEL
 		|| type == DIRECT || type == INDIRECT)
 		return (true);
-	return(false);
+	return (false);
 }

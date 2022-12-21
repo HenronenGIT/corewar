@@ -39,7 +39,7 @@ void	reel_to_end(t_data *s_data, char *string)
 	}
 }
 
-int contains_invalid_characters(t_data *s_data, char *lexeme)
+int	contains_invalid_characters(t_data *s_data, char *lexeme)
 {
 	if (*lexeme == LABEL_CHAR)
 	{
