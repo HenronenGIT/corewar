@@ -42,7 +42,7 @@ void	init(t_data *data, t_header *header, t_error_log *error_log)
 	init_vectors(data);
 }
 
-t_input	*init_values(t_input *element)
+t_statement	*init_values(t_statement *element)
 {
 	element->op_code = 0;
 	element->args[0] = NULL;

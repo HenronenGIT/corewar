@@ -15,7 +15,7 @@
 /*
 	print all information from all structs
 */
-static void	print_statement(t_input *data, int fd)
+static void	print_statement(t_statement *data, int fd)
 {
 	int	i;
 	int	temp;
@@ -53,7 +53,7 @@ int	find_number(char *current_arg)
 /*
 	save values in int form for all arguments
 */
-void	save_argument_values(t_input **original_data, t_input *data, \
+void	save_argument_values(t_statement **original_data, t_statement *data, \
 							int current_arg, int curr_struct)
 {
 	if (is_label_call(data->args[current_arg]))
@@ -67,7 +67,7 @@ void	save_argument_values(t_input **original_data, t_input *data, \
 	generate input value for argument type code and for different arguments of a
 	single statement
 */
-void	generate_input(t_input **original_data, t_input *data, int curr_struct)
+void	generate_input(t_statement **original_data, t_statement *data, int curr_struct)
 {
 	int	i;
 
@@ -88,10 +88,10 @@ void	generate_input(t_input **original_data, t_input *data, int curr_struct)
 void	generator(t_vec *vec_input, int fd)
 {
 	int		i;
-	t_input	**data;
+	t_statement	**data;
 
 	i = 0;
-	data = (t_input **)vec_input->array;
+	data = (t_statement **)vec_input->array;
 	while (data[i])
 	{
 		if (!data[i]->label_name)

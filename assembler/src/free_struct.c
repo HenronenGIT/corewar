@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-void	free_s_data_cell(t_input *cell)
+void	free_s_data_cell(t_statement *cell)
 {
 	if (cell->label_name)
 		free(cell->label_name);

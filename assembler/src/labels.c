@@ -59,7 +59,7 @@ int	compare_labels(char *original_label, char *current_label)
 	the address our current postion from the address of that label to find
 	the relative position of that label. 
 */
-void	find_label_addr(t_input **array, char *curr_label_name, int curr_arg, \
+void	find_label_addr(t_statement **array, char *curr_label_name, int curr_arg, \
 						int curr_struct)
 {
 	int	i;

@@ -14,10 +14,8 @@
 
 /*
 */
-void	save_argument(t_input **statement, t_token *token)
+void	save_argument(t_statement **statement, t_token *token)
 {
-	if ((*statement)->arg_count > 3)
-		syntax_error(TOO_MANY_ARG_ERR, NULL, NULL, NULL);
 	(*statement)->args[(*statement)->arg_count] = token->content;
 	if (token->type == REGISTER)
 		(*statement)->arg_type[(*statement)->arg_count] = T_REG;
@@ -31,21 +29,21 @@ void	save_argument(t_input **statement, t_token *token)
 static void	insert_arguments(t_data *s_data, t_token *token, t_type last_token)
 {
 	size_t	newest_element;
-	t_input	**input_array;
+	t_statement	**input_array;
 
 	if (last_token != SEPARATOR && last_token != INSTRUCTION)
 		syntax_error(MISSING_COMMA_ERR, s_data->s_error_log, NULL, NULL);
-	input_array = (t_input **)s_data->vec_input->array;
+	input_array = (t_statement **)s_data->vec_input->array;
 	newest_element = s_data->vec_input->space_taken - 1;
 	save_argument(&input_array[newest_element], token); // save argumnets better name?
 }
 
 static void	allocate_element(t_data *s_data, t_token *token)
 {
-	t_input	*element;
+	t_statement	*element;
 	int		op_code;
 
-	element = (t_input *)malloc(sizeof(t_input));
+	element = (t_statement *)malloc(sizeof(t_statement));
 	if (!element)
 		error(MALLOC_ERR);
 	element = init_values(element);
