@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:19:05 by akilk             #+#    #+#             */
-/*   Updated: 2022/12/15 22:14:47 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:30:38 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	parse_verbosity(int *ac, char ***av, t_data *data)
 	if (*ac > 2 && valid_int(*(*av + 1)))
 	{
 		num = ft_atoi(*(*av + 1));
+		if (num < 1 || num > 31)
+			error(NULL, "Error in parse_verbosity()", 1);
 		data->verbosity = num;
 		(*ac) -= 2;
 		(*av) += 2;
@@ -78,7 +80,7 @@ void	parse(int ac, char **av, t_data *data)
 			error(NULL, "Error in parse()", 1);
 	}
 	if (data->champions_num < 1 || data->champions_num > MAX_PLAYERS)
-		error(NULL, "Champions amount should be between 1 and 4", 0);
+		error(NULL, "Champions amount should be between 1 and 4", 1);
 	reset_ids(data);
 	data->last_alive_champ = data->champions_num;
 }
