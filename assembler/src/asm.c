@@ -27,5 +27,6 @@ int	main(int argc, char *argv[])
 	calculate_statement_sizes(&s_data);
 	translation(&s_data, argv[1]);
 	free_t_vec(s_data.vec_input);
+	free_tokens(s_data.vec_tokens);
 	return (0);
 }

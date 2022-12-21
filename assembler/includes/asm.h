@@ -163,7 +163,6 @@ typedef struct s_op_tab
 	int op_code;
 	int arg_type[3];
 	int direct_size;
-	// bool arg_type_code;
 	int arg_type_code;
 	int expected_arg_count;
 } t_op_tab;
@@ -197,10 +196,10 @@ typedef struct s_token
 } t_token;
 
 /* OTTO */
-int ft_btoi(char *num);
-char *ft_itoh(int num, int byte_size);
-void generator(t_vec *vec_input, int fd);
-void make_final(t_input *data, int fd);
+int		ft_btoi(char *num);
+char 	*ft_itoh(int num, int byte_size);
+void 	generator(t_vec *vec_input, int fd);
+void	 make_final(t_input *data, int fd);
 void	hex_translator(char *str, int fd, int len);
 void	add_magic(int fd);
 int		int_to_bigendian(int value, int size);
@@ -211,6 +210,7 @@ int		is_label_call(char *current_arg);
 void	save_atc(t_input *data);
 void	free_s_data_cell(t_input *cell);
 void	free_t_vec(t_vec *s_vec);
+void	free_tokens(t_vec *vec_token);
 
 /* File validation */
 void	validate_file(char *file_name);

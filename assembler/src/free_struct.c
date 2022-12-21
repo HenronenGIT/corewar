@@ -27,6 +27,7 @@ void	free_s_data_cell(t_input *cell)
 			free(cell->args[i]);
 		i++;
 	}
+	free(cell);
 }
 
 void	free_t_vec(t_vec *s_vec)
@@ -40,4 +41,19 @@ void	free_t_vec(t_vec *s_vec)
 		i++;
 	}
 	free(s_vec);
+}
+
+void	free_tokens(t_vec *vec_token)
+{
+	int		i;
+	t_token	**array;
+
+	i = 0;
+	array = (t_token **)vec_token->array;
+	while (array[i])
+	{
+		free(array[i]->content);
+		free(array[i]);
+		i++;
+	}
 }

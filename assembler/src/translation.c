@@ -12,6 +12,24 @@
 
 #include "../includes/asm.h"
 
+void	hex_translator(char *str, int fd, int len)
+{
+	int		i;
+	int		temp;
+
+	temp = 0;
+	i = 0;
+	while (i < len)
+	{
+		if (str[i])
+			temp = (int)str[i];
+		else
+			temp = 0;
+		write(fd, &temp, 1);
+		i++;
+	}
+}
+
 /*
 	Created file must be named the same as the input file with the exception
 	of it having a .cor suffix instead of .s. This function will remove

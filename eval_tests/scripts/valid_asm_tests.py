@@ -98,6 +98,7 @@ def runFile(program, testFile, is_refProgram):
 	output = subprocess.run([program, testFile], capture_output=True)
 	if is_refProgram == False:
 		if output.returncode != 0:
+			print(output.returncode)
 			print(f"{bcolors.FAIL}FAIL - File did not compile{bcolors.ENDC}")
 	output = subprocess.run(['xxd', corExtension], capture_output=True)
 
