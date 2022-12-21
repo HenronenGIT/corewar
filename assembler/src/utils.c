@@ -38,3 +38,22 @@ void	reel_to_end(t_data *s_data, char *string)
 		string += 1;
 	}
 }
+
+int contains_invalid_characters(t_data *s_data, char *lexeme)
+{
+	if (*lexeme == LABEL_CHAR)
+	{
+		lexeme += 1;
+		s_data->s_error_log->column += 1;
+	}
+	if (*lexeme == '\0')
+		lexical_error(s_data);
+	while (*lexeme != ':' && *lexeme != '\0')
+	{
+		if (ft_strchr(LABEL_CHARS, *lexeme) == NULL)
+			return (-1);
+		lexeme += 1;
+		s_data->s_error_log->column += 1;
+	}
+	return (0);
+}

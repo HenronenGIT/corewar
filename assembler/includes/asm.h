@@ -244,7 +244,6 @@ bool	is_argument(t_type type);
 void	syntax_analyzer(t_data *s_data);
 void	validate_syntax(t_data *s_data, t_token *current_token, t_type last_token);
 
-
 /*---------- Calculating bytes for statements ----------*/
 void calculate_statement_sizes(t_data *s_data);
 
@@ -253,7 +252,11 @@ void	print_data(t_data *s_data);
 void	print_tokens(t_vec *vec_tokens);
 void	reel_to_end(t_data *s_data, char *string);
 
+/*---------- Utils ----------*/
 int	lookup(const char *string);
+int contains_invalid_characters(t_data *s_data, char *lexeme);
+
+
 
 
 #endif

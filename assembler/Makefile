@@ -24,7 +24,8 @@ SRC_FILES = asm.c \
 			tokenization.c \
 			read_header.c \
 			vector.c \
-			is_functions.c \
+			determine_token.c \
+			determine_arg.c \
 			syntax_analyzer.c \
 			generator.c \
 			ft_btoi.c \
