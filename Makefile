@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 13:03:56 by hmaronen          #+#    #+#              #
-#    Updated: 2022/12/15 14:46:24 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/12/21 10:26:21 by okoponen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,10 @@ clean:
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
-	@make -C $(VM_DIR) fclean
-	@make -C $(ASM_DIR) fclean
+#	@make -C $(VM_DIR) fclean
+#	@make -C $(ASM_DIR) fclean
+	@rm asm
+	@rm corewar
 
 # temp
 run:

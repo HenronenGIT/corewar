@@ -14,10 +14,19 @@
 
 void	free_s_data_cell(t_input *cell)
 {
+	int	i;
+
+	i = 0;
 	if (cell->label_name)
 		free(cell->label_name);
 	if (cell->final)
 		free (cell->final);
+	while (i <= 3)
+	{
+		if (cell->args[i])
+			free(cell->args[i]);
+		i++;
+	}
 }
 
 void	free_t_vec(t_vec *s_vec)
