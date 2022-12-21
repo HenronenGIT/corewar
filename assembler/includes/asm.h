@@ -26,7 +26,7 @@
 
 /*---------- Error codes ----------*/
 # define OPEN_ERR -1
-# define ARG_ERR -2
+# define ARGV_ERR -2
 # define MALLOC_ERR -3
 # define NULL_ERR -4
 # define INVALID_LABEL -5
@@ -42,7 +42,7 @@
 /*---------- Syntax errors ----------*/
 # define NO_NL_ERR -13
 # define ARG_COUNT_ERR -14
-# define INVALID_ARG_ERR -15
+# define ARG_ERR -15
 # define UNDEFINED_LABEL_ERR -16
 # define TOO_MANY_ARG_ERR -17
 # define INVALID_TOKEN_ERR -18
@@ -50,7 +50,6 @@
 
 # define SYNTAX_ERROR -999 //TEMP ERROR
 
-# define TEMP_ERR -999 //! TEMP
 
 //! This is copied from op.h header
 # define PROG_NAME_LENGTH (128)
@@ -245,6 +244,8 @@ bool	is_argument(t_type type);
 
 /*---------- Syntax Analyzer ----------*/
 void	syntax_analyzer(t_data *s_data);
+void	validate_syntax(t_data *s_data, t_token *current_token, t_type last_token);
+
 
 /*---------- Calculating bytes for statements ----------*/
 void calculate_statement_sizes(t_data *s_data);
@@ -252,5 +253,8 @@ void calculate_statement_sizes(t_data *s_data);
 /*---------- Printing / debug ----------*/
 void	print_data(t_data *s_data);
 void	print_tokens(t_vec *vec_tokens);
+
+int	lookup(const char *string);
+
 
 #endif

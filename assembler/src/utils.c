@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:01:25 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:26 by hmaronen         ###   ########.fr       */
+/*   Created: 2022/12/21 13:16:09 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/12/21 13:16:09 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int	main(int argc, char *argv[])
+int	lookup(const char *string)
 {
-	t_data		s_data;
-	t_header	s_header;
-	t_error_log	s_error_log;
+	size_t	i;
 
-	if (argc != 2)
-		error(ARGV_ERR);
-	validate_file(argv[1]);
-	init(&s_data, &s_header, &s_error_log);
-	tokenization(argv[1], &s_data);
-	syntax_analyzer(&s_data);
-	calculate_statement_sizes(&s_data);
-	translation(&s_data, argv[1]);
-	free_t_vec(s_data.vec_input);
-	return (0);
+	i = 0;
+	while (g_op_tab[i].instruction != NULL)
+	{
+		if (ft_strcmp(string, g_op_tab[i].instruction) == 0)
+			return (g_op_tab[i].op_code);
+		i += 1;
+	}
+	return (-1);
 }
+

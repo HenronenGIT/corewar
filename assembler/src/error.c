@@ -18,7 +18,7 @@ void error(int error_number)
 		ft_puterror("ERROR: Malloc returned NULL!\n");
 	if (error_number == OPEN_ERR)
 		ft_puterror("ERROR: Failed to open received file\n");
-	if (error_number == ARG_ERR)
+	if (error_number == ARGV_ERR)
 		ft_puterror("ERROR: Invalid amount of arguments\n");
 	if (error_number == NULL_ERR)
 		ft_puterror("ERROR: NULL was passed to the function!\n");
@@ -63,7 +63,7 @@ void	syntax_error(int error_number, t_error_log *error_log, const char *str, t_t
 {
 	if (error_number == ARG_COUNT_ERR)
 		ft_printf("Invalid amount of arguments for instruction [%s] at line [%d]\n", str, token->line);
-	if (error_number == INVALID_ARG_ERR)
+	if (error_number == ARG_ERR)
 		ft_printf("Invalid argument type for instruction [%s] at line [%d]\n", str, error_log->line);
 	if (error_number == UNDEFINED_LABEL_ERR)
 		ft_printf("Undefined label [%s]\n", str);
