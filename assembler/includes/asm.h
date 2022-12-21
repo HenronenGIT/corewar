@@ -121,13 +121,13 @@ typedef struct s_data_cell
 	int op_code;
 	char *args[4];
 	int arg_type[4];
-	int total_size;	 // full size of every statement as bytes. 0 for labels | HENRI
-	int arg_size[4]; // is size of every arg in bytes | HENRI
+	int total_size;
+	int arg_size[4];
 	int current_bytes;
 
-	int argument_type_code; // argument type code in int | OTTO
-	int arg_values[4];		// arg codes in int | OTTO
-	char *final;			// final bytecode for current statement | OTTO
+	int argument_type_code;
+	int arg_values[4];
+	char *final;
 } t_input; //! change name to better one
 
 //! This is copied fromo op.h header
