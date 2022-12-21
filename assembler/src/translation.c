@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   translation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
+/*   By: okoponen <okoponen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:39:31 by okoponen          #+#    #+#             */
 /*   Updated: 2022/12/14 21:39:32 by okoponen         ###   ########.fr       */
@@ -19,29 +19,16 @@
 */
 char	*find_file_name(char *s)
 {
-	char	*file_name;
-	int		i;
 	int		len;
-	int		j;
-	char	*temp;
+	char	*new_file_name;
 
-	i = 1;
-	j = 0;
-	file_name = NULL;
-	temp = ft_strrchr(s, '/');
-	if (!temp)
-	{
-		temp = s;
-		i = 0;
-	}
-	len = ft_strlen(temp) - 2;
-	file_name = ft_strnew(len + 3);
-	file_name[len + 2] = '\0';
-	while (len - i)
-		file_name[j++] = temp[i++];
-	file_name[i] = '\0';
-	file_name = ft_strcat(file_name, ".cor");
-	return (file_name);
+	len = ft_strlen(s) + 5;
+	new_file_name = NULL;
+	new_file_name = (char *)malloc(sizeof(char) * len);
+	new_file_name[len - 1] = '\0';
+	ft_strcpy(new_file_name, s);
+	new_file_name = ft_strcat(new_file_name, ".cor");
+	return (new_file_name);
 }
 
 /*
@@ -65,7 +52,6 @@ void	put_null(int fd)
 	write(fd, &null, 4);
 }
 
-
 /*
 	translate magic header, program name, and comment to hexadecimal and
 	print them in the file descriptor. Call generator which will also
@@ -77,9 +63,9 @@ void	translation(t_data *s_data, char *file_name)
 	uint32_t	magic;
 	char		*new_file_name;
 
-	new_file_name = find_file_name(file_name);
 	file_name[ft_strlen(file_name) - 2] = '\0';
-	ft_printf("Writing output program to %s.cor\n", file_name);
+	new_file_name = find_file_name(file_name);
+	ft_printf("Writing output program to %s\n", new_file_name);
 	magic = COREWAR_EXEC_MAGIC;
 	fd = open(new_file_name, O_RDWR | O_CREAT | O_TRUNC, 0600);
 	magic = int_to_bigendian(COREWAR_EXEC_MAGIC, 4);
@@ -90,5 +76,6 @@ void	translation(t_data *s_data, char *file_name)
 	hex_translator(s_data->s_header->comment, fd, COMMENT_LENGTH);
 	put_null(fd);
 	generator(s_data->vec_input, fd);
+	free (new_file_name);
 	close(fd);
 }

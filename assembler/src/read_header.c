@@ -88,7 +88,7 @@ static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 			return;
 		}
 		if (is_delim(string[i]) == false)
-			lexical_error(s_data);
+		lexical_error(s_data);
 		i += 1;
 	}
 	lexical_error(s_data);
@@ -142,7 +142,6 @@ void	read_header(int fd, t_data *s_data)
 			return;
 		free(line);
 		s_data->s_error_log->line += 1;
-		s_data->s_error_log->column = 0;
 	}
 	if (!s_data->s_header->name_saved || !s_data->s_header->comment_saved)
 		lexical_error(s_data);
