@@ -29,7 +29,6 @@ SRC_FILES = asm.c \
 			syntax_analyzer.c \
 			generator.c \
 			ft_btoi.c \
-			hex_translator.c \
 			calculations.c \
 			int_to_bigendian.c \
 			validite_file.c \
