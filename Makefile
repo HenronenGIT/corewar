@@ -59,8 +59,6 @@ fclean: clean
 	@make -C $(LIBFT_DIR) fclean
 #	@make -C $(VM_DIR) fclean
 #	@make -C $(ASM_DIR) fclean
-	@rm asm
-	@rm corewar
 
 # temp
 run:

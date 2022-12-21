@@ -14,7 +14,7 @@
 
 /*
 */
-void	save_argument(t_stmnt **statement, t_token *token)
+static void	save_argument(t_stmnt **statement, t_token *token)
 {
 	(*statement)->args[(*statement)->arg_count] = token->content;
 	if (token->type == REGISTER)

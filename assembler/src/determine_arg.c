@@ -46,7 +46,7 @@ bool	is_directlabel(t_data *s_data, char *lexeme)
 
 bool	is_direct(t_data *s_data, char *lexeme)
 {
-	size_	i;
+	size_t	i;
 
 	i = 1;
 	if (lexeme[0] != DIRECT_CHAR)
