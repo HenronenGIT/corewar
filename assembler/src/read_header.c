@@ -69,9 +69,9 @@ static char *copy_name(t_data *s_data, char *string, int fd, t_type type)
 	return (string);
 }
 
-static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
+static void	seek_quote(t_data *s_data, char *string, int fd, t_type type)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (type == NAME)
@@ -80,7 +80,7 @@ static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 		i = COMMENT_CMD_LEN;
 	while (string[i] != '\0')
 	{
-		s_data->s_error_log->column += 1;
+		s_data->s_error_log->column = i + 2;
 		if (string[i] == STRING_CHAR)
 		{
 			string = copy_name(s_data, &string[i + 1], fd, type);
@@ -88,7 +88,7 @@ static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 			return;
 		}
 		if (is_delim(string[i]) == false)
-		lexical_error(s_data);
+			lexical_error(s_data);
 		i += 1;
 	}
 	lexical_error(s_data);
@@ -98,7 +98,7 @@ static void seek_quote(t_data *s_data, char *string, int fd, t_type type)
 Iterates trough "line" and seeks HEADER_CHAR ".".
 When HEADER_CHAR is found, function checks that was the word .name or .comment
 */
-static void seek_header_char(t_data *s_data, char *line, int fd)
+static void	seek_header_char(t_data *s_data, char *line, int fd)
 {
 	size_t i;
 

@@ -144,14 +144,13 @@ void syntax_analyzer(t_data *s_data)
 	i = 0;
 	while (tokens[i])
 	{
-		if (tokens[i]->type == LABEL)
+		if (tokens[i]->type == LABEL)//? check last element that it is newline?
 			allocate_element(s_data, tokens[i]);
 		if ( tokens[i]->type == INSTRUCTION
 			&& (last_token == LABEL || last_token == NEWLINE))
 			allocate_element(s_data, tokens[i]);
 		if (tokens[i]->type == NEWLINE)
 			validate_syntax(s_data, tokens[i], last_token);
-			// validate_syntax(s_data->vec_input, tokens[i], last_token);
 		else if (tokens[i]->type == SEPARATOR && !is_argument(last_token))
 			syntax_error(MISSING_COMMA_ERR, NULL, NULL, NULL);
 		else if (is_argument(tokens[i]->type))
