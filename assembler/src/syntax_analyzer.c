@@ -35,7 +35,7 @@ static void	insert_arguments(t_data *s_data, t_token *token, t_type last_token)
 		syntax_error(MISSING_COMMA_ERR, s_data->s_error_log, NULL, NULL);
 	input_array = (t_stmnt **)s_data->vec_input->array;
 	newest_element = s_data->vec_input->space_taken - 1;
-	save_argument(&input_array[newest_element], token); // save argumnets better name?
+	save_argument(&input_array[newest_element], token);
 }
 
 static void	allocate_element(t_data *s_data, t_token *token)
@@ -70,7 +70,7 @@ void	syntax_analyzer(t_data *s_data)
 	{
 		if (tokens[i]->type == NEWLINE)
 			validate_syntax(s_data, tokens[i], last_token);
-		else if (tokens[i]->type == LABEL)//? check last element that it is newline
+		else if (tokens[i]->type == LABEL) //? check last element that it is newline
 			allocate_element(s_data, tokens[i]);
 		else if (tokens[i]->type == INSTRUCTION
 			&& (last_token == LABEL || last_token == NEWLINE))

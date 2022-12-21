@@ -26,7 +26,6 @@ SRC_FILES = asm.c \
 			vector.c \
 			is_functions.c \
 			syntax_analyzer.c \
-			debug.c \
 			generator.c \
 			ft_btoi.c \
 			hex_translator.c \

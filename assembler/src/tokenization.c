@@ -71,7 +71,6 @@ static void	lexical_scanner(char *line, t_data *s_data)
 	right = 0;
 	while (line[right])
 	{
-		// s_data->s_error_log->column = left + 1;
 		s_data->s_error_log->column = left + 1;
 		if (line[right] == COMMENT_CHAR && left == right)
 			break ;

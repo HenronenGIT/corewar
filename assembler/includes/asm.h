@@ -44,12 +44,10 @@
 # define ARG_COUNT_ERR -14
 # define ARG_ERR -15
 # define UNDEFINED_LABEL_ERR -16
-# define TOO_MANY_ARG_ERR -17
 # define INVALID_TOKEN_ERR -18
 # define INVALID_EOL_ERR -20
 
 # define SYNTAX_ERROR -999 //TEMP ERROR
-
 
 //! This is copied from op.h header
 # define PROG_NAME_LENGTH (128)
@@ -57,9 +55,9 @@
 # define COREWAR_EXEC_MAGIC 0xea83f3
 
 /*---------- Defines from op.h header ----------*/
-# define NAME_CMD_STRING ".name"
+# define NAME_STRING ".name"
 # define NAME_CMD_LEN 5
-# define COMMENT_CMD_STRING ".comment"
+# define COMMENT_STRING ".comment"
 # define COMMENT_CMD_LEN 8
 
 /*---------- Chars for identifying ----------*/
@@ -113,7 +111,7 @@ typedef struct s_vec
 } t_vec;
 
 /*---------- One of these structs contains info from one statement ----------*/
-typedef struct s_data_cell
+typedef struct s_statement
 {
 	short arg_count;
 	char *label_name;
@@ -127,7 +125,7 @@ typedef struct s_data_cell
 	int argument_type_code; // argument type code in int | OTTO
 	int arg_values[4];		// arg codes in int | OTTO
 	char *final;			// final bytecode for current statement | OTTO
-} t_input; //! change name to better one
+} t_stmnt;
 
 //! This is copied fromo op.h header
 /*---------- Header Struct ----------*/
@@ -199,16 +197,16 @@ typedef struct s_token
 int ft_btoi(char *num);
 char *ft_itoh(int num, int byte_size);
 void generator(t_vec *vec_input, int fd);
-void make_final(t_input *data, int fd);
+void make_final(t_stmnt *data, int fd);
 void	hex_translator(char *str, int fd, int len);
 void	add_magic(int fd);
 int		int_to_bigendian(int value, int size);
 void	translation(t_data *s_data, char *file_name);
-void	find_label_addr(t_input **array, char *curr_label_name, int curr_arg, int curr_struct);
+void	find_label_addr(t_stmnt **array, char *curr_label_name, int curr_arg, int curr_struct);
 int		compare_labels(char *original_label, char *current_label);
 int		is_label_call(char *current_arg);
-void	save_atc(t_input *data);
-void	free_s_data_cell(t_input *cell);
+void	save_atc(t_stmnt *data);
+void	free_s_data_cell(t_stmnt *cell);
 void	free_t_vec(t_vec *s_vec);
 
 /* File validation */
@@ -218,13 +216,13 @@ char	*find_file_name(char *s);
 /* Inits */
 
 void	init(t_data *data, t_header *header, t_error_log *error_log);
-t_input	*init_values(t_input *element);
+t_stmnt	*init_values(t_stmnt *element);
 
 void	error(int error_number);
 void	tokenization(char *input, t_data *s_data);
 void	read_header(int fd, t_data *s_data);
 void	lexical_error(t_data *s_data);
-// void	syntax_error(int error_number, t_input *statement, char *label);
+// void	syntax_error(int error_number, t_stmnt *statement, char *label);
 void	syntax_error(int error_number, t_error_log *error_log, const char *str, t_token *token);
 
 /*---------- Dynamic 2D array ----------*/
@@ -253,6 +251,7 @@ void calculate_statement_sizes(t_data *s_data);
 /*---------- Printing / debug ----------*/
 void	print_data(t_data *s_data);
 void	print_tokens(t_vec *vec_tokens);
+void	reel_to_end(t_data *s_data, char *string);
 
 int	lookup(const char *string);
 
