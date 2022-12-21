@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 09:44:17 by hmaronen          #+#    #+#             */
-/*   Updated: 2021/12/21 17:53:51 by hmaronen         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:00:27 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,8 @@ int		ft_printf(const char *format, ...);
 
 void	sort_int_tab(int *tab, int length);
 void	ft_print_tab(int *tab, size_t tab_size);
+int		ft_replace(char **str, char find, char replace);
+
+int		ft_abs(int n);
 
 #endif

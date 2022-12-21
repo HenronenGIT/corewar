@@ -40,7 +40,7 @@ static void	set_line(int fd, char **fd_arr, char **line)
 	{
 		len = ft_strlen(fd_arr[fd]);
 		line_len = find_eofl(fd_arr[fd]);
-		*line = ft_strndup(fd_arr[fd], find_eofl(fd_arr[fd]) - 1);
+		*line = ft_strndup(fd_arr[fd], find_eofl(fd_arr[fd]) );
 		if (**line == '\n')
 			ft_strclr(*line);
 		remain = ft_strndup(ft_strchr(fd_arr[fd], '\n') + 1, (len - line_len));

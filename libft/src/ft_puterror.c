@@ -12,6 +12,9 @@
 
 #include "../includes/libft.h"
 
+/*
+Takes error_msg as a parameter and puts that error_msg to stderr stream.
+*/
 void	ft_puterror(char *error_msg)
 {
 	if (error_msg == NULL)
