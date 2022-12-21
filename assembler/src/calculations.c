@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-static int fetch_size(int arg_type, int op_code)
+static int	fetch_size(int arg_type, int op_code)
 {
 	if (arg_type == T_REG)
 		return (T_REG_SIZE);
@@ -24,10 +24,10 @@ static int fetch_size(int arg_type, int op_code)
 		return (0);
 }
 
-static int calculate_total(t_input *statement)
+static int	calculate_total(t_stmnt *statement)
 {
-	int sum;
-	int i;
+	int	sum;
+	int	i;
 
 	i = -1;
 	sum = 0;
@@ -39,37 +39,35 @@ static int calculate_total(t_input *statement)
 	return (sum);
 }
 
-static void calculate_bytes(t_input *statement)
+static void	calculate_bytes(t_stmnt *stmnt)
 {
-	static int total_bytes;
-	int i;
+	static int	total_bytes;
+	int			i;
 
-	//! check each statement one by one
 	i = -1;
-	statement->current_bytes = total_bytes;
-	while (statement->arg_type[++i])
-		statement->arg_size[i] = fetch_size(statement->arg_type[i], statement->op_code);
-	if (statement->label_name == NULL)
-		statement->total_size = calculate_total(statement);
-	total_bytes += statement->total_size;
+	stmnt->current_bytes = total_bytes;
+	while (stmnt->arg_type[++i])
+		stmnt->arg_size[i] = fetch_size(stmnt->arg_type[i], stmnt->op_code);
+	if (stmnt->label_name == NULL)
+		stmnt->total_size = calculate_total(stmnt);
+	total_bytes += stmnt->total_size;
 }
 
-void calculate_statement_sizes(t_data *s_data)
+void	calculate_statement_sizes(t_data *s_data)
 {
-	t_input	**array;
+	t_stmnt	**arr;
 	size_t	i;
-	size_t	last_index;
+	size_t	last_i;
 
-
- 	i = 0;
-	last_index = s_data->vec_input->space_taken - 1;
-	array = (t_input **)s_data->vec_input->array;
-	if (array[i] == NULL)
+	i = 0;
+	last_i = s_data->vec_input->space_taken - 1;
+	arr = (t_stmnt **)s_data->vec_input->array;
+	if (arr[i] == NULL)
 		error(MISSING_CHAMP_ERR);
-	while (array[i])
+	while (arr[i])
 	{
-		calculate_bytes(array[i]);
+		calculate_bytes(arr[i]);
 		i += 1;
 	}
-	s_data->champ_size = array[last_index]->current_bytes + array[last_index]->total_size;
+	s_data->champ_size = arr[last_i]->current_bytes + arr[last_i]->total_size;
 }

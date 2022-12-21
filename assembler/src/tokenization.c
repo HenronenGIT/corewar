@@ -53,7 +53,6 @@ static void	validate_statement(t_data *s_data, char *sub_string)
 		save_token(s_data, sub_string, REGISTER);
 	else
 		syntax_error(INVALID_TOKEN_ERR, s_data->s_error_log, sub_string, NULL);
-		// lexical_error(s_data);
 }
 
 /*
@@ -72,7 +71,6 @@ static void	lexical_scanner(char *line, t_data *s_data)
 	right = 0;
 	while (line[right])
 	{
-		// s_data->s_error_log->column = right + 1;
 		s_data->s_error_log->column = left + 1;
 		if (line[right] == COMMENT_CHAR && left == right)
 			break ;
@@ -111,7 +109,7 @@ void	tokenization(char *input, t_data *s_data)
 	read_header(fd, s_data);
 	while (get_next_line(fd, &line) != 0 && s_data->s_error_log->line++)
 	{
-		// s_data->s_error_log->line += 1;
+		s_data->s_error_log->column = 1;
 		had_newline = 0;
 		if (ft_replace(&line, '\n', '\0'))
 			had_newline = 1;

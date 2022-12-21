@@ -12,13 +12,13 @@
 
 #include "../includes/asm.h"
 
-void error(int error_number)
+void	error(int error_number)
 {
 	if (error_number == MALLOC_ERR)
 		ft_puterror("ERROR: Malloc returned NULL!\n");
 	if (error_number == OPEN_ERR)
 		ft_puterror("ERROR: Failed to open received file\n");
-	if (error_number == ARG_ERR)
+	if (error_number == ARGV_ERR)
 		ft_puterror("ERROR: Invalid amount of arguments\n");
 	if (error_number == NULL_ERR)
 		ft_puterror("ERROR: NULL was passed to the function!\n");
@@ -58,24 +58,25 @@ void	lexical_error(t_data *s_data)
 /*
 Is called form syntax_analyzer
 */
-// void	syntax_error(int error_number, t_error_log *error_log, t_input *statement, char *label, t_token *token)
-void	syntax_error(int error_number, t_error_log *error_log, const char *str, t_token *token)
+void	syntax_error(int err_nbr, t_error_log *err_log, \
+					const char *str, t_token *token)
 {
-	if (error_number == ARG_COUNT_ERR)
-		ft_printf("Invalid amount of arguments for instruction [%s] at line [%d]\n", str, token->line);
-	if (error_number == INVALID_ARG_ERR)
-		ft_printf("Invalid argument type for instruction [%s] at line [%d]\n", str, error_log->line);
-	if (error_number == UNDEFINED_LABEL_ERR)
-		ft_printf("Undefined label [%s]\n", str);
-	if (error_number == TOO_MANY_ARG_ERR)
-		ft_printf("Tried to add 4th argument to the instruction []");
-	if (error_number == INVALID_TOKEN_ERR)
-		ft_printf("Invalid TOKEN [%s] at location [%d:%d]", str, error_log->line, error_log->column);
-	if (error_number == MISSING_COMMA_ERR)
-		ft_printf("ERROR: Missing comma between arguments!\n");
-	if (error_number == INVALID_EOL_ERR)
-		ft_printf("ERROR: Invalid end of line at line [%d]!\n", token->line);
-	if (error_number)
-	exit(SYNTAX_ERROR);
+	int	line;
+	int	column;
 
+	line = err_log->line;
+	column = err_log->column;
+	if (err_nbr == ARG_COUNT_ERR)
+		ft_printf("Invalid arg count for [%s] at line [%d]\n", str, token->line);
+	if (err_nbr == ARG_ERR)
+		ft_printf("Invalid arg type for [%s] at line [%d]\n", str, line);
+	if (err_nbr == UNDEFINED_LABEL_ERR)
+		ft_printf("Undefined label [%s]\n", str);
+	if (err_nbr == INVALID_TOKEN_ERR)
+		ft_printf("Invalid TOKEN [%s] at location [%d:%d]", str, line, column);
+	if (err_nbr == MISSING_COMMA_ERR)
+		ft_printf("ERROR: Missing comma between arguments!\n");
+	if (err_nbr == INVALID_EOL_ERR)
+		ft_printf("ERROR: Invalid end of line at line [%d]!\n", token->line);
+	exit(SYNTAX_ERROR);
 }

@@ -35,10 +35,10 @@ char *get_type(t_type type)
 void print_temp_name(t_vec *vec_input)
 {
 	size_t i;
-	t_input **input_array;
+	t_stmnt **input_array;
 
 	i = 0;
-	input_array = (t_input **)vec_input->array;
+	input_array = (t_stmnt **)vec_input->array;
 	ft_printf("%s########### vec_input->array ###########%s\n", GREEN, WHITE);
 	while (i < vec_input->space_taken)
 	{
