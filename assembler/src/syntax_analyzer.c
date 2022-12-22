@@ -12,8 +12,6 @@
 
 #include "../includes/asm.h"
 
-/*
-*/
 static void	save_argument(t_stmnt **statement, t_token *token)
 {
 	(*statement)->args[(*statement)->arg_count] = token->content;
@@ -38,7 +36,7 @@ static void	insert_arguments(t_data *s_data, t_token *token, t_type last_token)
 	save_argument(&input_array[newest_element], token);
 }
 
-static void	allocate_element(t_data *s_data, t_token *token)
+static void	allocate_element(t_data *s_data, t_token *token, t_type last_token)
 {
 	t_stmnt	*element;
 	int		op_code;
@@ -47,13 +45,16 @@ static void	allocate_element(t_data *s_data, t_token *token)
 	if (!element)
 		error(MALLOC_ERR);
 	element = init_values(element);
-	if (token->type == LABEL)
+	if (token->type == LABEL && last_token == NEWLINE)
 		element->label_name = token->content;
-	else
+	else if (token->type == INSTRUCTION
+		&& (last_token == LABEL || last_token == NEWLINE))
 	{
 		op_code = lookup(token->content);
 		element->op_code = g_op_tab[op_code - 1].op_code;
 	}
+	else
+		syntax_error(SYNTAX_ERROR, s_data->s_error_log, token->content, NULL);
 	vec_insert(s_data->vec_input, element);
 }
 
@@ -70,11 +71,8 @@ void	syntax_analyzer(t_data *s_data)
 	{
 		if (tokens[i]->type == NEWLINE)
 			validate_syntax(s_data, tokens[i], last_token);
-		else if (tokens[i]->type == LABEL) //? check last element that it is newline
-			allocate_element(s_data, tokens[i]);
-		else if (tokens[i]->type == INSTRUCTION
-			&& (last_token == LABEL || last_token == NEWLINE))
-			allocate_element(s_data, tokens[i]);
+		else if (tokens[i]->type == LABEL || tokens[i]->type == INSTRUCTION)
+			allocate_element(s_data, tokens[i], last_token);
 		else if (tokens[i]->type == SEPARATOR && !is_argument(last_token))
 			syntax_error(MISSING_COMMA_ERR, NULL, NULL, NULL);
 		else if (is_argument(tokens[i]->type))

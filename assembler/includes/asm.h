@@ -39,8 +39,8 @@
 # define UNDEFINED_LABEL_ERR -16
 # define INVALID_TOKEN_ERR -18
 # define INVALID_EOL_ERR -20
+# define SYNTAX_ERROR -21 //TEMP ERROR
 
-# define SYNTAX_ERROR -999 //TEMP ERROR
 
 /*---------- Header defines ----------*/
 # define NAME_STRING ".name"

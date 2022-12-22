@@ -78,5 +78,7 @@ void	syntax_error(int err_nbr, t_error_log *err_log, \
 		ft_printf("ERROR: Missing comma between arguments!\n");
 	if (err_nbr == INVALID_EOL_ERR)
 		ft_printf("ERROR: Invalid end of line at line [%d]!\n", token->line);
+	if (err_nbr == SYNTAX_ERROR)
+		ft_printf("ERROR: Syntax error at token [%s]!\n", str);
 	exit(SYNTAX_ERROR);
 }
