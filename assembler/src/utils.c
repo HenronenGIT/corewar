@@ -57,3 +57,11 @@ int	contains_invalid_characters(t_data *s_data, char *lexeme)
 	}
 	return (0);
 }
+
+void	usage()
+{
+	ft_printf("Usage: asm [arg]\n\n");
+	ft_printf("Arguments:\n");
+	ft_printf("\tinput_file\tfile to process\n");
+	exit(0);
+}

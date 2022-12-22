@@ -236,5 +236,6 @@ int		contains_invalid_characters(t_data *s_data, char *lexeme);
 void	reel_to_end(t_data *s_data, char *string);
 void	free_s_data_cell(t_stmnt *cell);
 void	free_t_vec(t_vec *s_vec);
+void	usage();
 
 #endif

@@ -20,6 +20,8 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		error(ARGV_ERR);
+	if (!ft_strcmp(argv[1], "--help"))
+		usage();
 	validate_file(argv[1]);
 	init(&s_data, &s_header, &s_error_log); 
 	tokenization(argv[1], &s_data);
