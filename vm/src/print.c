@@ -6,11 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:01 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/15 14:43:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:10:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../includes/corewar.h"
 
 void	print_data(t_data *data)
 {

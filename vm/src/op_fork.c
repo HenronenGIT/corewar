@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:43 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/16 13:08:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:30:21 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-#include "op_table.h"
+#include "../includes/corewar.h"
+#include "../includes/op_table.h"
 
 void	op_fork(t_process *process, t_data *data)
 {

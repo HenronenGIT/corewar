@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 13:01:30 by hmaronen          #+#    #+#              #
-#    Updated: 2023/01/10 10:56:15 by wdonnell         ###   ########.fr        #
+#    Updated: 2023/01/10 14:45:28 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CGREEN=\033[0;32m
 NAME = asm
 EXEC_DIR = ../asm
 CC = gcc
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = ./src/
 
@@ -61,4 +61,4 @@ fclean: clean
 	@rm -rf $(EXEC_DIR)
 	@echo "$(CGREEN)OK$(CEND)"
 
-re : fclean all clean
+re : fclean all 

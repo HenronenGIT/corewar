@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:49:48 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/16 10:26:46 by wdonnell         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:30:27 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-#include "op_table.h"
+#include "../includes/corewar.h"
+#include "../includes/op_table.h"
 
 void	op_lld(t_process *process, t_data *data)
 {

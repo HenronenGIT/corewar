@@ -6,11 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:43:38 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/15 14:42:12 by wdonnell         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:09:32 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../includes/corewar.h"
 
 static void	copy_parent_registers(int32_t *fork_registers, \
 int32_t *parent_registers)

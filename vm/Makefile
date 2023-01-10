@@ -5,46 +5,62 @@
 #                                                     +:+ +:+         +:+      #
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/15 14:21:56 by wdonnell          #+#    #+#              #
-#    Updated: 2022/12/16 13:28:35 by wdonnell         ###   ########.fr        #
+#    Created: 2022/11/03 13:01:30 by hmaronen          #+#    #+#              #
+#    Updated: 2023/01/10 15:11:40 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include vm_srcs.mk
 
-NAME		= corewar
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -O2
-
-SRCS_DIR	= ./src/
-SRCS		= $(addprefix $(SRCS_DIR), $(VM_SRC_FILES))
-OBJS_DIR	= ./obj/
-OBJS		= $(addprefix $(OBJS_DIR), $(VM_SRC_FILES:.c=.o))
-LIB			= -L ../libft -lft
-INCLUDES	= -I includes -I ../libft/includes -I ../includes
-
 CYELLOW=\033[0;33m
-CGREEN=\033[0;32m
 CEND=\033[0m
+CGREEN=\033[0;32m
+
+NAME = corewar
+EXEC_DIR = ../corewar
+CC = gcc
+FLAGS = -Wall -Wextra -Werror -fsanitize=leak
+
+SRC_DIR = ./src/
+
+SRC = $(addprefix $(SRC_DIR), $(VM_SRC_FILES))
+
+OBJ_DIR = ./obj/
+OBJ_FILES = $(VM_SRC_FILES:.c=.o)
+OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
+
+INC_DIR = ./includes/
+INC_FILES = corewar.h op_table.h op.h
+
+INCLS = $(addprefix $(INC_DIR), $(INC_FILES))
+INC = ./includes
+
+LIBFT_DIR = ../libft/
+LIBFT_LIB = libft.a
+LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIB)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME) $(LIB)
+$(NAME): $(LIBFT) $(OBJ) $(INCLS)
+	@echo "$(CYELLOW)Compiling $(NAME) program$(CEND)"
+	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I $(INC) $(LIBFT)
+	@echo "$(CGREEN)OK$(CEND)"
 
-$(LIB):
-	make -sC ../libft
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(FLAGS) -c $< -o $@
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-	@mkdir -p $(OBJS_DIR)
-	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
-	
+$(LIBFT):
+	@make -C $(LIBFT_DIR) all
+
 clean:
-	rm -rf $(OBJS_DIR)
-	make -C ../libft clean
+	@echo "$(CYELLOW)Removing $(NAME) object folder$(CEND)"
+	@rm -rf $(OBJ_DIR)
+	@echo "$(CGREEN)OK$(CEND)"
 
 fclean: clean
-	rm -f ../$(NAME)
-	make -C ../libft fclean
+	@echo "$(CYELLOW)Removing $(NAME) program$(CEND)"
+	@rm -rf $(EXEC_DIR)
+	@echo "$(CGREEN)OK$(CEND)"
 
-re: fclean all
+re : fclean all 

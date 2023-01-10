@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:05 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/16 13:04:38 by wdonnell         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:29:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-#include "op_table.h"
+#include "../includes/corewar.h"
+#include "../includes/op_table.h"
 
 /*
 ** changed to work with only negative player id's

@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 13:03:56 by hmaronen          #+#    #+#              #
-#    Updated: 2022/12/21 10:26:21 by okoponen         ###   ########.fr        #
+#    Updated: 2023/01/10 14:46:22 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ ASM_SRC = $(addprefix $(ASM_SRC_DIR), $(ASM_SRC_FILES))
 VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
 
 # all: $(LIBFT)
-all: $(ASM) $(COREWAR)
+all: $(ASM) $(VM)
 
 $(ASM): $(LIBFT) $(ASM_SRC)
 	echo "$(ASM_SRC)"
@@ -66,4 +66,4 @@ valid:
 invalid:
 	@python3 ./eval_tests/scripts/invalid_asm_tests.py
 
-re : all fclean clean
+re : fclean all  

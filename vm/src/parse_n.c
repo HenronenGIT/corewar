@@ -6,11 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:31:42 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/12/20 16:30:11 by wdonnell         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:10:26 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../includes/corewar.h"
 
 static char	*parse_info(int fd, int32_t size)
 {
