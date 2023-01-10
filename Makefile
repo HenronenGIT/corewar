@@ -10,6 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
+include ./assembler/asm_srcs.mk
+include ./vm/vm_srcs.mk
+
 CYELLOW=\033[0;33m
 CEND=\033[0m
 CGREEN=\033[0;32m
@@ -19,22 +22,29 @@ FLAGS = -Wall -Wextra -Werror
 
 ASM = asm
 ASM_DIR = ./assembler
+ASM_SRC_DIR = ./assembler/src/
+
 VM = corewar
 VM_DIR = ./vm
+VM_SRC_DIR = ./vm/src/
 
 LIBFT_DIR = ./libft/
 LIBFT_LIB = ./libft.a
 LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
+ASM_SRC = $(addprefix $(ASM_SRC_DIR), $(ASM_SRC_FILES))
+VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
+
 # all: $(LIBFT)
 all: $(ASM) $(COREWAR)
 
-$(ASM): $(LIBFT)
+$(ASM): $(LIBFT) $(ASM_SRC)
+	echo "$(ASM_SRC)"
 	@make -C $(ASM_DIR) all
 	mv $(ASM_DIR)/asm ./
 
-$(VM): $(LIBFT) $(VM_DIR)
-	@make -C $(VM_DIR)
+$(VM): $(LIBFT) $(VM_SRC)
+	@make -C $(VM_DIR) all
 	mv $(VM_DIR)/corewar ./
 
 $(LIBFT):
