@@ -12,6 +12,7 @@
 
 import os
 import subprocess
+import shutil
 
 class bcolors:
 	HEADER = '\033[95m'
@@ -48,13 +49,14 @@ def main():
 		testFile(file, asm, asm_ref)
 
 def init_folders():
-	# subprocess.run(['rm', 'eval_tests/failed_our/*'])
-	os.rmdir('/eval_tests/failed_our')
-	# os.remove('./eval_tests/failed_our/test')
-	if not os.path.exists('eval_tests/failed_our/'):
-		os.mkdir('eval_tests/failed_our/')
-	if not os.path.exists('eval_tests/failed_ref/'):
-		os.mkdir('eval_tests/failed_ref/')
+	ourPath = 'eval_tests/failed_our'
+	refPath = 'eval_tests/failed_ref'
+	shutil.rmtree(ourPath)
+	shutil.rmtree(refPath)
+	if not os.path.exists(ourPath):
+		os.mkdir(ourPath)
+	if not os.path.exists(refPath):
+		os.mkdir(refPath)
 
 def get_path():
 	current_dir = os.path.abspath(os.getcwd())
