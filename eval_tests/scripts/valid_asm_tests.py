@@ -33,9 +33,7 @@ path_asm_ref = 'eval_tests/asm_ref'
 path = 'eval_tests/tests/valid_files/'
 
 def main():
-
-
-	create_folders()
+	init_folders()
 	#Paths
 	workDir = get_path()
 	asm = f"{workDir}{path_asm}asm"
@@ -49,7 +47,10 @@ def main():
 	for file in filesArr:
 		testFile(file, asm, asm_ref)
 
-def create_folders():
+def init_folders():
+	# subprocess.run(['rm', 'eval_tests/failed_our/*'])
+	os.rmdir('/eval_tests/failed_our')
+	# os.remove('./eval_tests/failed_our/test')
 	if not os.path.exists('eval_tests/failed_our/'):
 		os.mkdir('eval_tests/failed_our/')
 	if not os.path.exists('eval_tests/failed_ref/'):
