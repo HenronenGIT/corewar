@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:24:29 by akilk             #+#    #+#             */
-/*   Updated: 2023/01/10 11:48:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2023/01/10 12:34:15 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ static void	free_champions(t_data *data)
 	}
 }
 
-static void free_processes(t_data *data)
+static void	free_processes(t_data *data)
 {
-	t_process *temp;
-	t_process *cur;
+	t_process	*temp;
+	t_process	*cur;
 
 	temp = data->head;
 	while (temp)
