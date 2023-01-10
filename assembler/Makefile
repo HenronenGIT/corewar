@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+include asm_srcs.mk
+
 CYELLOW=\033[0;33m
 CEND=\033[0m
 CGREEN=\033[0;32m
@@ -20,29 +22,11 @@ CC = gcc
 FLAGS = -g -Wall -Wextra -Werror
 
 SRC_DIR = ./src/
-SRC_FILES = asm.c \
-			init.c \
-			tokenization.c \
-			read_header.c \
-			vector.c \
-			determine_token.c \
-			determine_arg.c \
-			syntax_analyzer.c \
-			generator.c \
-			calculations.c \
-			int_to_bigendian.c \
-			validite_file.c \
-			error.c \
-			translation.c \
-			argument_type_code.c \
-			labels.c \
-			validate_syntax.c \
-			utils.c
 
-SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
+SRC = $(addprefix $(SRC_DIR), $(ASM_SRC_FILES))
 
 OBJ_DIR = ./obj/
-OBJ_FILES = $(SRC_FILES:.c=.o)
+OBJ_FILES = $(ASM_SRC_FILES:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 INC_DIR = ./includes/
@@ -55,7 +39,7 @@ LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(INC)
+$(NAME): $(LIBFT) $(OBJ) $(INC)
 	@echo "$(CYELLOW)Compiling $(NAME) program$(CEND)"
 	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I $(INC) $(LIBFT)
 	@echo "$(CGREEN)OK$(CEND)"
@@ -63,6 +47,9 @@ $(NAME): $(OBJ) $(INC)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@
+
+$(LIBFT):
+	@make -C $(LIBFT_DIR) all
 
 clean:
 	@echo "$(CYELLOW)Removing $(NAME) object folder$(CEND)"
