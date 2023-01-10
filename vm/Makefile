@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/15 14:21:56 by wdonnell          #+#    #+#              #
-#    Updated: 2022/12/16 13:06:30 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/12/16 13:28:35 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,10 @@ OBJS		= $(addprefix $(OBJS_DIR), $(SRC_FILES:.c=.o))
 LIB			= -L ../libft -lft
 INCLUDES	= -I includes -I ../libft/includes -I ../includes
 
+CYELLOW=\033[0;33m
+CGREEN=\033[0;32m
+CEND=\033[0m
+
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
@@ -39,7 +43,7 @@ $(LIB):
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
 	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
-
+	
 clean:
 	rm -rf $(OBJS_DIR)
 	make -C ../libft clean
