@@ -12,8 +12,6 @@
 
 import os
 import subprocess
-import sys
-import logging
 
 class bcolors:
 	HEADER = '\033[95m'
@@ -108,3 +106,5 @@ def runFile(program, testFile, is_refProgram):
 
 if __name__ == "__main__":
 	main()
+	subprocess.run(['rm', 'our.txt'])
+	subprocess.run(['rm', 'ref.txt'])
