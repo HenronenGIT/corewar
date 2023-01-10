@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_btoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoponen <okoponen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:22:36 by okoponen          #+#    #+#             */
-/*   Updated: 2022/11/22 13:22:42 by okoponen         ###   ########.fr       */
+/*   Updated: 2023/01/10 10:58:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../includes/libft.h"
 
 int	ft_btoi(char *num)
 {

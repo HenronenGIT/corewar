@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 09:49:18 by hmaronen          #+#    #+#              #
-#    Updated: 2022/12/13 11:06:00 by wdonnell         ###   ########.fr        #
+#    Updated: 2023/01/10 10:55:53 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,8 @@ SRC_FILES = ft_memset.c \
 			ft_print_tab.c \
 			ft_is_whitespace.c \
 			ft_replace.c \
-			ft_abs.c
+			ft_abs.c \
+			ft_btoi.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

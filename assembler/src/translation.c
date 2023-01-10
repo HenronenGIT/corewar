@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoponen <okoponen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:39:31 by okoponen          #+#    #+#             */
-/*   Updated: 2022/12/14 21:39:32 by okoponen         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:09:08 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*find_file_name(char *s)
 	len = ft_strlen(s) + 5;
 	new_file_name = NULL;
 	new_file_name = (char *)malloc(sizeof(char) * len);
+	if (!new_file_name)
+		error(MALLOC_ERR);
 	new_file_name[len - 1] = '\0';
 	ft_strcpy(new_file_name, s);
 	new_file_name = ft_strcat(new_file_name, ".cor");
@@ -92,7 +94,7 @@ void	translation(t_data *s_data, char *file_name)
 	write_champ_code(s_data, fd);
 	hex_translator(s_data->s_header->comment, fd, COMMENT_LENGTH);
 	put_null(fd);
-	generator(s_data->vec_input, fd);
+	generate_bytecode(s_data->vec_input, fd);
 	ft_printf("Writing output program to %s\n", new_file_name);
 	free (new_file_name);
 	close(fd);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+         #
+#    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 13:01:30 by hmaronen          #+#    #+#              #
-#    Updated: 2022/11/03 13:03:48 by hmaronen         ###   ########.fr        #
+#    Updated: 2023/01/10 10:56:15 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ SRC_FILES = asm.c \
 			determine_arg.c \
 			syntax_analyzer.c \
 			generator.c \
-			ft_btoi.c \
 			calculations.c \
 			int_to_bigendian.c \
 			validite_file.c \

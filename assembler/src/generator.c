@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generator.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoponen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 12:47:39 by okoponen          #+#    #+#             */
-/*   Updated: 2022/11/09 12:47:40 by okoponen         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:03:05 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	generate_input(t_stmnt **original_data, t_stmnt *data, int curr_struct)
 	loop through all statements and labels and generate input for each
 	statement, skipping labels
 */
-void	generator(t_vec *vec_input, int fd)
+void	generate_bytecode(t_vec *vec_input, int fd)
 {
 	int		i;
 	t_stmnt	**data;

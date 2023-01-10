@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 13:13:58 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/11/03 13:13:59 by hmaronen         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:03:23 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,8 +202,7 @@ void	syntax_error(int error_number, t_error_log *error_log, \
 void	calculate_statement_sizes(t_data *s_data);
 
 /*---------- Translation ----------*/
-int		ft_btoi(char *num);
-void	generator(t_vec *vec_input, int fd);
+void	generate_bytecode(t_vec *vec_input, int fd);
 void	hex_translator(char *str, int fd, int len);
 int		int_to_bigendian(int value, int size);
 void	translation(t_data *s_data, char *file_name);
