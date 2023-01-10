@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-static t_token	*allocate_token_struct(t_type type, char *content)
+static t_token	*allocate_token_struct(void)
 {
 	t_token	*s_token;
 
@@ -27,7 +27,7 @@ static void	save_token(t_data *s_data, char *sub_string, t_type type)
 	t_token	*s_token;
 
 	s_token = NULL;
-	s_token = allocate_token_struct(type, sub_string);
+	s_token = allocate_token_struct();
 	s_token->type = type;
 	s_token->content = sub_string;
 	s_token->line = s_data->s_error_log->line;

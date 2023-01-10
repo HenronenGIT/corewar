@@ -15,19 +15,26 @@ CEND=\033[0m
 CGREEN=\033[0;32m
 
 CC = gcc
-FLAGS = -Wall -Wextra -g -Werror
+FLAGS = -Wall -Wextra -Werror
 
+ASM = asm
 ASM_DIR = ./assembler
+VM = corewar
 VM_DIR = ./vm
 
 LIBFT_DIR = ./libft/
 LIBFT_LIB = ./libft.a
 LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
-all: $(LIBFT) 
-	@make -C $(ASM_DIR)
-	@make -C $(VM_DIR)
+# all: $(LIBFT)
+all: $(ASM) $(COREWAR)
+
+$(ASM): $(LIBFT)
+	@make -C $(ASM_DIR) all
 	mv $(ASM_DIR)/asm ./
+
+$(VM): $(LIBFT) $(VM_DIR)
+	@make -C $(VM_DIR)
 	mv $(VM_DIR)/corewar ./
 
 $(LIBFT):
@@ -40,6 +47,8 @@ clean:
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
+	@make -C $(ASM_DIR) fclean
+	@make -C $(VM_DIR) fclean
 
 valid:
 	@python3 ./eval_tests/scripts/valid_asm_tests.py

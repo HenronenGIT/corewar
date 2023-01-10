@@ -49,7 +49,7 @@ clean:
 	make -C ../libft clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f ../$(NAME)
 	make -C ../libft fclean
 
 re: fclean all

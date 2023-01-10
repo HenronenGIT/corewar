@@ -51,8 +51,11 @@ def main():
 def init_folders():
 	ourPath = 'eval_tests/failed_our'
 	refPath = 'eval_tests/failed_ref'
-	shutil.rmtree(ourPath)
-	shutil.rmtree(refPath)
+	if os.path.exists(ourPath):
+		shutil.rmtree(ourPath)
+
+	if os.path.exists(refPath):
+		shutil.rmtree(refPath)
 	if not os.path.exists(ourPath):
 		os.mkdir(ourPath)
 	if not os.path.exists(refPath):

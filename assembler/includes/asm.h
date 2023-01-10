@@ -177,7 +177,7 @@ static const t_op_tab	g_op_tab[] = {
 {"lldi", 14, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1, 3},
 {"lfork", 15, {T_DIR}, 2, 0, 1},
 {"aff", 16, {T_REG}, 4, 1, 1},
-{NULL, 0, {0}, 0}};
+{NULL, 0, {0}, 0, 0, 0}};
 
 /*---------- Struct for fetching data from op_tab ----------*/
 void	validate_file(char *file_name);

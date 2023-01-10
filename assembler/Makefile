@@ -15,6 +15,7 @@ CEND=\033[0m
 CGREEN=\033[0;32m
 
 NAME = asm
+EXEC_DIR = ../asm
 CC = gcc
 FLAGS = -g -Wall -Wextra -Werror
 
@@ -36,8 +37,7 @@ SRC_FILES = asm.c \
 			argument_type_code.c \
 			labels.c \
 			validate_syntax.c \
-			utils.c \
-			free_struct.c
+			utils.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
@@ -58,7 +58,6 @@ all: $(NAME)
 $(NAME): $(OBJ) $(INC)
 	@echo "$(CYELLOW)Compiling $(NAME) program$(CEND)"
 	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I $(INC) $(LIBFT)
-
 	@echo "$(CGREEN)OK$(CEND)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -72,7 +71,7 @@ clean:
 
 fclean: clean
 	@echo "$(CYELLOW)Removing $(NAME) program$(CEND)"
-	@rm -rf $(NAME)
+	@rm -rf $(EXEC_DIR)
 	@echo "$(CGREEN)OK$(CEND)"
 
 re : fclean all clean
