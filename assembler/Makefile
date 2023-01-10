@@ -16,7 +16,7 @@ CGREEN=\033[0;32m
 
 NAME = asm
 CC = gcc
-FLAGS = -g -Wall #-fsanitize=address#-Wextra #-Werror
+FLAGS = -g -Wall -Wextra -Werror
 
 SRC_DIR = ./src/
 SRC_FILES = asm.c \
@@ -57,10 +57,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
 	@echo "$(CYELLOW)Compiling $(NAME) program$(CEND)"
-#	@$(CC) -o $(NAME) $(FLAGS) $(SRC) -I $(INC) -L. $(LIBFT)
 	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I $(INC) $(LIBFT)
 
-#	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBFT)
 	@echo "$(CGREEN)OK$(CEND)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -77,4 +75,4 @@ fclean: clean
 	@rm -rf $(NAME)
 	@echo "$(CGREEN)OK$(CEND)"
 
-re : fclean all clean all
+re : fclean all clean

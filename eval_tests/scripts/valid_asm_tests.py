@@ -12,8 +12,7 @@
 
 import os
 import subprocess
-import sys
-import logging
+import shutil
 
 class bcolors:
 	HEADER = '\033[95m'
@@ -35,9 +34,7 @@ path_asm_ref = 'eval_tests/asm_ref'
 path = 'eval_tests/tests/valid_files/'
 
 def main():
-
-
-	create_folders()
+	init_folders()
 	#Paths
 	workDir = get_path()
 	asm = f"{workDir}{path_asm}asm"
@@ -51,11 +48,15 @@ def main():
 	for file in filesArr:
 		testFile(file, asm, asm_ref)
 
-def create_folders():
-	if not os.path.exists('eval_tests/failed_our/'):
-		os.mkdir('eval_tests/failed_our/')
-	if not os.path.exists('eval_tests/failed_ref/'):
-		os.mkdir('eval_tests/failed_ref/')
+def init_folders():
+	ourPath = 'eval_tests/failed_our'
+	refPath = 'eval_tests/failed_ref'
+	shutil.rmtree(ourPath)
+	shutil.rmtree(refPath)
+	if not os.path.exists(ourPath):
+		os.mkdir(ourPath)
+	if not os.path.exists(refPath):
+		os.mkdir(refPath)
 
 def get_path():
 	current_dir = os.path.abspath(os.getcwd())
@@ -108,3 +109,5 @@ def runFile(program, testFile, is_refProgram):
 
 if __name__ == "__main__":
 	main()
+	subprocess.run(['rm', 'our.txt'])
+	subprocess.run(['rm', 'ref.txt'])

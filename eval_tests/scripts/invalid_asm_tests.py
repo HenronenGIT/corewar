@@ -25,7 +25,7 @@ class bcolors:
 	BOLD = '\033[1m'
 	UNDERLINE = '\033[4m'
 
-# If file is failed, it is saved to this ibject
+# If file is failed, it is saved to this object
 class failedFile():
     def __init__(self, file, output, exitCode, refOutput):
         self.file = file
@@ -35,7 +35,6 @@ class failedFile():
 SEGFAULT = 244
 
 invalidFiles_path = 'eval_tests/tests/error_files/'
-# invalidFiles_path = 'eval_tests/tests/invalid_files_2/'
 
 # Leave empty if in root of repo
 path_asm = ''
@@ -132,6 +131,7 @@ def save_to_file(failedFiles: list, filename: str):
 			print("----------")
 			i += 1
 		sys.stdout = original_stdout # Reset the standard
+	
 
 if __name__ == "__main__":
 	main()
