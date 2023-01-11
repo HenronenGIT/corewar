@@ -16,5 +16,3 @@ ASM_SRC_FILES = asm.c \
 			labels.c \
 			validate_syntax.c \
 			utils.c
-
-				
