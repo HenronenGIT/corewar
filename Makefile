@@ -38,13 +38,12 @@ VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
 all: $(ASM) $(VM)
 
 $(ASM): $(LIBFT) $(ASM_SRC)
-	echo "$(ASM_SRC)"
 	@make -C $(ASM_DIR) all
-	mv $(ASM_DIR)/asm ./
+	@mv $(ASM_DIR)/asm ./
 
 $(VM): $(LIBFT) $(VM_SRC)
 	@make -C $(VM_DIR) all
-	mv $(VM_DIR)/corewar ./
+	@mv $(VM_DIR)/corewar ./
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR) all
