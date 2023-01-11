@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 static char	*convert_decimals(t_flags *flag, long double argument)
 {
@@ -86,7 +85,6 @@ double	bankers_rounding(double decimals)
 		return ((int)original + 1);
 }
 
-// void	join_decimals(char **arg_str, t_flags *flag, long double decimals)
 char	*join_decimals(char *arg_str, t_flags *flag, long double decimals)
 {
 	char		*decimals_str;
