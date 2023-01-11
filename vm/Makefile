@@ -19,7 +19,7 @@ CGREEN=\033[0;32m
 NAME = corewar
 EXEC_DIR = ../corewar
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=leak
+FLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = ./src/
 

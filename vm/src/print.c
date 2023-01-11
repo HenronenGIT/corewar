@@ -72,8 +72,11 @@ void	print_last_alive(t_data *data)
 	int	i;
 
 	i = data->last_alive_champ;
-	ft_printf("Contestant %d, \"%s\", has won !\n", \
-	i, data->champions[i - 1]->name);
+	ft_putstr("Contestant ");
+	ft_putnbr(i);
+	ft_putstr(" \"");
+	ft_putstr(data->champions[i - 1]->name);
+	ft_putstr("\", has won !\n");
 }
 
 void	print_byte_jumps(t_process *cur_process, t_data *data)

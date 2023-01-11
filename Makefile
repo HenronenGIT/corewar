@@ -35,7 +35,6 @@ LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 ASM_SRC = $(addprefix $(ASM_SRC_DIR), $(ASM_SRC_FILES))
 VM_SRC = $(addprefix $(VM_SRC_DIR), $(VM_SRC_FILES))
 
-# all: $(LIBFT)
 all: $(ASM) $(VM)
 
 $(ASM): $(LIBFT) $(ASM_SRC)
