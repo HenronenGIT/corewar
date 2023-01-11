@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:49:48 by wdonnell          #+#    #+#             */
-/*   Updated: 2023/01/10 14:30:27 by wdonnell         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:52:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	op_lld(t_process *process, t_data *data)
 {
 	t_types	types;
 	int32_t	val;
-	int		idx;
 
 	types.size_t_dir = 4;
 	types.num_args = 2;
@@ -27,8 +26,7 @@ void	op_lld(t_process *process, t_data *data)
 	{
 		if (get_arg_values(data, &types, process))
 		{
-			idx = circular_mem(process->cursor, types.val_arg[0]);
-			val = bytes2int((uint8_t *)data->arena, idx, 4);
+			val = types.val_arg[0];
 			process->registers[types.val_arg[1] - 1] = val;
 			update_carry(process, val);
 			if (data->verbosity & 0x04)

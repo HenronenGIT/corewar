@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:27:48 by wdonnell          #+#    #+#             */
-/*   Updated: 2023/01/10 14:30:24 by wdonnell         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:52:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	op_ld(t_process *process, t_data *data)
 }
 
 static void	ldi_verbose(t_data *data, t_process *process, \
-t_types	*types, int idx)
+t_types	*types)
 {
 	if (data->verbosity & 0x04)
 	{
@@ -44,7 +44,8 @@ t_types	*types, int idx)
 		process->id, types->val_arg[0], types->val_arg[1], types->val_arg[2]);
 		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", \
 		types->val_arg[0], types->val_arg[1], \
-		types->val_arg[0] + types->val_arg[1], idx);
+		types->val_arg[0] + types->val_arg[1], \
+		process->cursor + (types->val_arg[0] + types->val_arg[1]) % IDX_MOD);
 	}
 }
 
@@ -70,7 +71,7 @@ void	op_ldi(t_process *process, t_data *data)
 			idx = circular_mem(process->cursor, change);
 			process->registers[types.val_arg[2] - 1] \
 			= bytes2int((uint8_t *)data->arena, idx, 4);
-			ldi_verbose(data, process, &types, idx);
+			ldi_verbose(data, process, &types);
 		}
 	}
 	print_byte_jumps(process, data);

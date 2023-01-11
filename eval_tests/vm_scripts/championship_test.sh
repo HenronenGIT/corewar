@@ -15,7 +15,7 @@ echo $champ1
 echo $champ2
 echo $champ3
 echo $champ4
-#run
+
 ../../corewar cor_samples_our_asm/$champ1 cor_samples_our_asm/$champ2 cor_samples_our_asm/$champ3 cor_samples_our_asm/$champ4 -v 1 > mytest.txt &
 ../corewar_ref cor_samples_our_asm/$champ1 cor_samples_our_asm/$champ2 cor_samples_our_asm/$champ3 cor_samples_our_asm/$champ4  > origtest.txt &
 wait
