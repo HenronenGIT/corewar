@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:01 by wdonnell          #+#    #+#             */
-/*   Updated: 2023/01/10 14:10:44 by wdonnell         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:22:10 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	print_last_alive(t_data *data)
 	i = data->last_alive_champ;
 	ft_putstr("Contestant ");
 	ft_putnbr(i);
-	ft_putstr(" \"");
+	ft_putstr(", \"");
 	ft_putstr(data->champions[i - 1]->name);
 	ft_putstr("\", has won !\n");
 }

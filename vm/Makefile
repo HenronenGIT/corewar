@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 13:01:30 by hmaronen          #+#    #+#              #
-#    Updated: 2023/01/10 15:11:40 by wdonnell         ###   ########.fr        #
+#    Updated: 2023/01/11 14:34:35 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ clean:
 fclean: clean
 	@echo "$(CYELLOW)Removing $(NAME) program$(CEND)"
 	@rm -rf $(EXEC_DIR)
+	@rm -rf corewar
 	@echo "$(CGREEN)OK$(CEND)"
 
 re : fclean all 

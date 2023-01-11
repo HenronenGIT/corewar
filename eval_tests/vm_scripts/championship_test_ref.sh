@@ -13,8 +13,8 @@ echo $champ2
 echo $champ3
 echo $champ4
 
-leaks -atExit -- ../corewar cor_samples_ref/$champ1 cor_samples_ref/$champ2 cor_samples_ref/$champ3 cor_samples_ref/$champ4 -v 1 -dump 10000
-#leaks -atExit -- ../eval_tests/corewar_ref cor_samples_ref/$champ1 cor_samples_ref/$champ2 cor_samples_ref/$champ3 cor_samples_ref/$champ4 > origtest.txt 
-#wait
+../../corewar cor_samples_ref/$champ1 cor_samples_ref/$champ2 cor_samples_ref/$champ3 cor_samples_ref/$champ4 -v 1 > mytest.txt &
+../corewar_ref cor_samples_ref/$champ1 cor_samples_ref/$champ2 cor_samples_ref/$champ3 cor_samples_ref/$champ4  > origtest.txt &
+wait
 
-#diff mytest.txt origtest.txt
+diff mytest.txt origtest.txt
