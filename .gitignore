@@ -18,4 +18,4 @@ asm
 corewar
 *.txt
 
-errors.sh
+asm_all_valid.sh
