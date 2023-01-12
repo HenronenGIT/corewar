@@ -12,6 +12,24 @@
 
 #include "../includes/asm.h"
 
+char	*decide_destination(t_data *s_data, t_type type)
+{
+	if (type == NAME)
+	{
+		if (s_data->s_header->name_saved == true)
+			error(NAME_COUNT_ERR);
+		s_data->s_header->name_saved = true;
+		return (s_data->s_header->prog_name);
+	}
+	else
+	{
+		if (s_data->s_header->comment_saved == true)
+			error(COMMENT_COUNT_ERR);
+		s_data->s_header->comment_saved = true;
+		return (s_data->s_header->comment);
+	}
+}
+
 int	lookup(const char *string)
 {
 	size_t	i;

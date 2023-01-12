@@ -190,6 +190,8 @@ t_stmnt	*init_values(t_stmnt *element);
 /*---------- Tokenization ----------*/
 void	tokenization(char *input, t_data *s_data);
 void	read_header(int fd, t_data *s_data);
+char	*save_to_buffer(t_data *s_data, char *string, int fd);
+void	save_header(t_data *s_data, char *buffer, t_type type);
 void	lexical_error(t_data *s_data);
 
 /*---------- Syntax Analyzer ----------*/
@@ -232,8 +234,7 @@ void	error(int error_number);
 int		lookup(const char *string);
 int		contains_invalid_characters(t_data *s_data, char *lexeme);
 void	reel_to_end(t_data *s_data, char *string);
-void	free_s_data_cell(t_stmnt *cell);
-void	free_t_vec(t_vec *s_vec);
 void	usage(void);
+char	*decide_destination(t_data *s_data, t_type type);
 
 #endif

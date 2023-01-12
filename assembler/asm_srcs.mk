@@ -15,4 +15,5 @@ ASM_SRC_FILES = asm.c \
 				argument_type_code.c \
 				labels.c \
 				validate_syntax.c \
-				utils.c
+				utils.c \
+				save_name_comment.c

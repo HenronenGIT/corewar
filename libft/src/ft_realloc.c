@@ -24,7 +24,6 @@ void	ft_realloc(char **s1, char const *s2)
 		*s1 = (char *)s2;
 		return ;
 	}
-
 	len = ft_strlen((char *)*s1) + ft_strlen((char *)s2);
 	temp = ft_strdup(*s1);
 	if (temp == NULL)
