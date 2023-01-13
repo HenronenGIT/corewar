@@ -21,6 +21,4 @@ void	validate_file(char *file_name)
 		error(INVALID_FILE_NAME_ERR);
 	if (ft_strncmp(dot, ".s", 3) != 0)
 		error(INVALID_FILE_NAME_ERR);
-	if (file_name[0] == '.')
-		error(INVALID_FILE_NAME_ERR);
 }

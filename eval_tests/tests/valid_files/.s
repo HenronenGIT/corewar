@@ -1,5 +1,5 @@
-.name ""
-.comment "Yes, all of them"
+.name "just dot"
+.comment "dot"
 
 live %1
 
