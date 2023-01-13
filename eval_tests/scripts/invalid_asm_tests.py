@@ -32,7 +32,8 @@ class failedFile():
         self.output = output
         self.exitCode = exitCode
         self.refOutput = refOutput
-SEGFAULT = 244
+SEGFAULT = "segmentation fault"
+SEG = -11
 
 invalidFiles_path = 'eval_tests/tests/error_files/'
 
@@ -91,18 +92,20 @@ def runFiles(program: str, files: list, ref_program: str):
 		print(f"{bcolors.HEADER}TEST FILE:{bcolors.ENDC} [{fileName}] ", end='')
 		output = subprocess.run([program, file], capture_output=True)
 		ref_output = subprocess.run([ref_program, file], capture_output=True)
-		if output.returncode != 0:
-			print(f"{bcolors.OKGREEN}OK{bcolors.ENDC}")
-
-		else:
-			print(f"{bcolors.FAIL}FAIL - file compiled{bcolors.ENDC}")
-				
+		# print(output)
+		if not output.stdout.decode('utf-8') and not output.stderr.decode('utf-8'):
 			failed_files.append(failedFile(
 				file,
 				output.stdout.decode('utf-8'),
 				output.returncode,
 				ref_output.stdout.decode('utf-8')))
-
+		# 	print(f"{bcolors.FAIL}SEGFAULT{bcolors.ENDC}")
+		# elif output.returncode != 0:
+		else:
+			print(f"{bcolors.OKGREEN}OK{bcolors.ENDC}")
+		# else:
+		# 	print(f"{bcolors.FAIL}FAIL - file compiled{bcolors.ENDC}")
+				
 		print(f"{bcolors.HEADER}OUTPUT:{bcolors.ENDC}{output.stdout.decode('utf-8')}")
 		output = subprocess.run([ref_program, file], capture_output=True)
 		print(f"{bcolors.HEADER}REF OUTPUT:{bcolors.ENDC}{output.stdout.decode('utf-8')}")

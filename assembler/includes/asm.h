@@ -28,18 +28,18 @@
 # define LEXICAL_ERROR -8
 # define NAME_COUNT_ERR -9
 # define COMMENT_COUNT_ERR -10
-# define MISSING_COMMA_ERR -11
-# define INVALID_FILE_NAME_ERR -12
-# define MISSING_CHAMP_ERR -19
+# define MISSING_COMMA_ERR -12
+# define INVALID_FILE_NAME_ERR -13
+# define MISSING_CHAMP_ERR -14
 
 /*---------- Syntax errors ----------*/
-# define NO_NL_ERR -13
-# define ARG_COUNT_ERR -14
-# define ARG_ERR -15
-# define UNDEFINED_LABEL_ERR -16
-# define INVALID_TOKEN_ERR -18
+# define NO_NL_ERR -15
+# define ARG_COUNT_ERR -16
+# define ARG_ERR -17
+# define UNDEFINED_LABEL_ERR -18
+# define INVALID_TOKEN_ERR -19
 # define INVALID_EOL_ERR -20
-# define SYNTAX_ERROR -21 //TEMP ERROR
+# define SYNTAX_ERROR -21
 
 /*---------- Header defines ----------*/
 # define NAME_STRING ".name"

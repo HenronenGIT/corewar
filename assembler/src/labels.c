@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+#include <stdio.h>
 
 int	is_label_call(char *current_arg)
 {
@@ -80,4 +81,5 @@ void	find_label_addr(t_stmnt **array, char *curr_label_name, int curr_arg, \
 	}
 	if (!array[i])
 		syntax_error(UNDEFINED_LABEL_ERR, NULL, curr_label_name, NULL);
+		// printf("error=%s\n");
 }
