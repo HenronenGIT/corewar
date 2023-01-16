@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-#include <stdio.h>
-
 
 /*
 Function that iterates trough strubg untils finds ending quote.
@@ -30,14 +28,25 @@ void	save_header(t_data *s_data, char *buffer, t_type type)
 		error(COMMENT_LEN_ERR);
 }
 
-static char	*find_second_quote(t_data *s_data, char *string, int fd)
+static void	append_to_buffer(char **buffer, char *line, int len)
 {
-	char	*result;
-	char	*line;
-	char	*second_quote;
 	char	*temp;
 
-	result = ft_strdup(&string[1]);
+	temp = NULL;
+	temp = ft_strsub(line, 0, len);
+	ft_realloc(buffer, temp);
+	free(temp);
+}
+
+static char	*find_second_quote(t_data *s_data, char *string, int fd)
+{
+	char	*buffer;
+	char	*line;
+	char	*second_quote;
+
+	second_quote = NULL;
+	line = NULL;
+	buffer = ft_strdup(&string[1]);
 	while (get_next_line(fd, &line))
 	{
 		second_quote = ft_strchr(line, STRING_CHAR);
@@ -45,26 +54,22 @@ static char	*find_second_quote(t_data *s_data, char *string, int fd)
 			break ;
 		else if (second_quote)
 		{
-			temp = ft_strsub(line, 0, second_quote - line);
-			ft_realloc(&result, temp);
-			free(temp);
+			append_to_buffer(&buffer, line, second_quote - line);
 			break ;
 		}
 		else
-			ft_realloc(&result, line);
-		free(line);
+			ft_realloc(&buffer, line);
+		ft_strdel(&line);
 	}
-	printf("%s\n", second_quote);
-	exit(1);
 	reel_to_end(s_data, second_quote);
-	// reel_to_end(s_data, second_quote + 1);
-	ft_strdel(&line);
-	return (result);
+	if (line)
+		free(line);
+	return (buffer);
 }
 
 char	*save_to_buffer(t_data *s_data, char *string, int fd)
 {
-	char	*result;
+	char	*buffer;
 	char	*second_quote;
 
 	second_quote = ft_strchr(&string[1], STRING_CHAR);
@@ -74,6 +79,6 @@ char	*save_to_buffer(t_data *s_data, char *string, int fd)
 		return (ft_strsub(string, 1, second_quote - string - 1));
 	}
 	else
-		result = find_second_quote(s_data, string, fd);
-	return (result);
+		buffer = find_second_quote(s_data, string, fd);
+	return (buffer);
 }

@@ -34,7 +34,6 @@ static void	print_stmnt(t_stmnt *data, int fd)
 		write(fd, &temp, data->arg_size[i]);
 		i++;
 	}
-
 }
 
 /*

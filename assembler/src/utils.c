@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-#include <stdio.h>
 
 char	*decide_destination(t_data *s_data, t_type type)
 {
@@ -47,20 +46,17 @@ int	lookup(const char *string)
 
 void	reel_to_end(t_data *s_data, char *string)
 {
-	printf("%s\n", string);
 	if (!string)
 		return ;
 	string += 1;
 	while (*string != '\0')
 	{
-	exit(0);
 		s_data->s_error_log->column += 1;
 		if (*string == COMMENT_CHAR)
 			return ;
 		if (!is_delim(*string))
 			lexical_error(s_data);
 		string += 1;
-		// exit(1);
 	}
 }
 
