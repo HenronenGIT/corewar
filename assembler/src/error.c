@@ -64,11 +64,11 @@ void	syntax_error(int err_nbr, t_error_log *err_log, \
 	int	line;
 	int	column;
 
-	// if (err_log)
-	// {
+	if (err_log)
+	{
 		line = err_log->line;
 		column = err_log->column;
-	// }
+	}
 	if (err_nbr == ARG_COUNT_ERR)
 		ft_printf("Invalid arg count for [%s] at line [%d]\n", str, token->line);
 	if (err_nbr == ARG_ERR)

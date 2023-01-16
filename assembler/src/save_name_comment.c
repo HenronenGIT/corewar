@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+#include <stdio.h>
+
 
 /*
 Function that iterates trough strubg untils finds ending quote.
@@ -52,7 +54,10 @@ static char	*find_second_quote(t_data *s_data, char *string, int fd)
 			ft_realloc(&result, line);
 		free(line);
 	}
-	reel_to_end(s_data, second_quote + 1);
+	printf("%s\n", second_quote);
+	exit(1);
+	reel_to_end(s_data, second_quote);
+	// reel_to_end(s_data, second_quote + 1);
 	ft_strdel(&line);
 	return (result);
 }

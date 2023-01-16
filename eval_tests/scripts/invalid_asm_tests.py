@@ -118,7 +118,8 @@ def print_failed_files(failedFiles: list):
 	if failedFilesCount == 0:
 		print(f"{bcolors.OKGREEN}~~~~~~~~~~~ ALL INVALID FILES PASSED ~~~~~~~~~~~{bcolors.ENDC}")
 	else:
-		print(f'{bcolors.HEADER}FAILED FILES [{failedFilesCount}]:{bcolors.ENDC}')
+		print(f'{bcolors.HEADER}FAILED FILE COUNT:{bcolors.ENDC}')
+		print(failedFilesCount)
 		print_array(failedFiles)
 		print(f"{bcolors.YELLOW}FAILED FILES SAVED TO:{bcolors.ENDC}\ninvalid_file_fails.txt")
 

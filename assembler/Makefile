@@ -19,7 +19,7 @@ CGREEN=\033[0;32m
 NAME = asm
 EXEC_DIR = ../asm
 CC = gcc
-FLAGS = -Wall -Wextra -g
+FLAGS = -Wall -Wextra -g -fsanitize=address
 
 SRC_DIR = ./src/
 
