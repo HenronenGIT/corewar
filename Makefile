@@ -59,9 +59,9 @@ fclean: clean
 	@make -C $(VM_DIR) fclean
 
 valid:
-	@python3 ./eval_tests/scripts/valid_asm_tests.py
+	@python3 ./eval_tests/asm_scripts/valid_asm_tests.py
 
 invalid:
-	@python3 ./eval_tests/scripts/invalid_asm_tests.py
+	@python3 ./eval_tests/asm_scripts/invalid_asm_tests.py
 
 re : fclean all  

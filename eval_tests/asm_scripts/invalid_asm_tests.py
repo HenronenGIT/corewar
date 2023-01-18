@@ -35,7 +35,7 @@ class failedFile():
 SEGFAULT = "segmentation fault"
 SEG = -11
 
-invalidFiles_path = 'eval_tests/tests/error_files/'
+invalidFiles_path = 'eval_tests/champs/error_files/'
 
 # Leave empty if in root of repo
 path_asm = ''

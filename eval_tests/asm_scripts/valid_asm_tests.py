@@ -31,7 +31,7 @@ path_asm = ''
 # 2. Path to Reference program
 path_asm_ref = 'eval_tests/asm_ref'
 # 3. Path to test files
-path = 'eval_tests/tests/valid_files/'
+path = 'eval_tests/champs/valid_files/'
 
 def main():
 	init_folders()
