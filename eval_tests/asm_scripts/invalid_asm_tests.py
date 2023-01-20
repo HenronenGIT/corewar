@@ -16,14 +16,11 @@ import sys
 
 class bcolors:
 	HEADER = '\033[95m'
-	OKBLUE = '\033[94m'
 	OKCYAN = '\033[96m'
 	OKGREEN = '\033[92m'
 	YELLOW = '\033[93m'
 	FAIL = '\033[91m'
 	ENDC = '\033[0m'
-	BOLD = '\033[1m'
-	UNDERLINE = '\033[4m'
 
 # If file is failed, it is saved to this object
 class failedFile():
@@ -32,15 +29,12 @@ class failedFile():
         self.output = output
         self.exitCode = exitCode
         self.refOutput = refOutput
-SEGFAULT = "segmentation fault"
-SEG = -11
 
 invalidFiles_path = 'eval_tests/champs/error_files/'
 
-# Leave empty if in root of repo
+# PATH TO ASM EXECUTABLE, LEAVE EMPTY IF IN ROOT
 path_asm = ''
 path_asm_ref = 'eval_tests/asm_ref'
-# Paths to your invalid files and valid files
 
 def main():
 	#Paths
@@ -50,11 +44,8 @@ def main():
 	asm_ref = f'{workDir}{path_asm_ref}'
 
 	invalidFiles = get_files(path_errors)
-
 	failedFiles = runFiles(asm, invalidFiles, asm_ref)
-
 	print_failed_files(failedFiles)
-
 	save_to_file(failedFiles, "invalid_file_fails.txt")
 
 def get_path():
@@ -92,20 +83,14 @@ def runFiles(program: str, files: list, ref_program: str):
 		print(f"{bcolors.HEADER}TEST FILE:{bcolors.ENDC} [{fileName}] ", end='')
 		output = subprocess.run([program, file], capture_output=True)
 		ref_output = subprocess.run([ref_program, file], capture_output=True)
-		# print(output)
 		if not output.stdout.decode('utf-8') and not output.stderr.decode('utf-8'):
 			failed_files.append(failedFile(
 				file,
 				output.stdout.decode('utf-8'),
 				output.returncode,
 				ref_output.stdout.decode('utf-8')))
-		# 	print(f"{bcolors.FAIL}SEGFAULT{bcolors.ENDC}")
-		# elif output.returncode != 0:
 		else:
 			print(f"{bcolors.OKGREEN}OK{bcolors.ENDC}")
-		# else:
-		# 	print(f"{bcolors.FAIL}FAIL - file compiled{bcolors.ENDC}")
-				
 		print(f"{bcolors.HEADER}OUTPUT:{bcolors.ENDC}{output.stdout.decode('utf-8')}")
 		output = subprocess.run([ref_program, file], capture_output=True)
 		print(f"{bcolors.HEADER}REF OUTPUT:{bcolors.ENDC}{output.stdout.decode('utf-8')}")
@@ -135,7 +120,6 @@ def save_to_file(failedFiles: list, filename: str):
 			print("----------")
 			i += 1
 		sys.stdout = original_stdout # Reset the standard
-	
 
 if __name__ == "__main__":
 	main()
