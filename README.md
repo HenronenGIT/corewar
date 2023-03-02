@@ -24,3 +24,18 @@ The assmebler was worked on by Otto and Henri. The purpose of the Assembler was 
 
 ## Virtual Machine 
 Coming soon...
+
+
+## How to try it out?
+
+1. Clone the repository
+
+2. In the root of the repository do ``make`` or ``make asm`` and ``make vm``
+
+3. First you need to run the assembler to create some files for the VM. Files can be found in eval_tests/champs/valid_files
+
+4. Create 4 different champions by running this command 4 times: ``./asm eval_tests/champs/valid_files/*any file you want*``
+  - this should create 4 different .cor files in the eval_tests/champs/valid_files folder
+  - NOTE: you can also move 4 files from eval_tests/champs/valid_files/ to the root of the repository and just run those 4 files from there with ``./asm file_name.s``. Might be a bit faster.
+  
+5. run the 4 .cor files with the vm using ``./vm eval_tests/champs/valid_files/*file1.cor* eval_tests/champs/valid_files/*file2.cor* eval_tests/champs/valid_files/*file3.cor* eval_tests/champs/valid_files/*file4.cor*``
