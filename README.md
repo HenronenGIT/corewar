@@ -39,3 +39,12 @@ Coming soon...
   - NOTE: you can also move 4 files from eval_tests/champs/valid_files/ to the root of the repository and just run those 4 files from there with ``./asm file_name.s``. Might be a bit faster.
   
 5. run the 4 .cor files with the vm using ``./vm eval_tests/champs/valid_files/*file1.cor* eval_tests/champs/valid_files/*file2.cor* eval_tests/champs/valid_files/*file3.cor* eval_tests/champs/valid_files/*file4.cor*``
+
+
+## Test out some of our scripts:
+
+``make valid``: Uses a reference asm provided to us by Hive to create .cor files and after that creates a .cor file with our assembler from the same source and diffs the 2 .cor files that were produced.
+
+``make invalid``: Runs our assembler with all files from eval_tests/champs/error_files and checks that none seg fault and that they produce an error message.
+
+More coming soon...
